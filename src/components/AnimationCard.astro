@@ -1,5 +1,8 @@
 ---
 const { animation } = Astro.props;
+
+const initialCss = animation.generateCss(animation.defaultDuration, animation.defaultTiming);
+const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS -->\n<style>\n${initialCss}\n</style>`;
 ---
 
 <article
@@ -8,36 +11,38 @@ const { animation } = Astro.props;
   data-category={animation.category}
   data-name={animation.name.toLowerCase()}
   data-id={animation.id}
+  data-default-duration={animation.defaultDuration}
+  data-default-timing={animation.defaultTiming}
 >
   <div class="animation-card__preview">
     <div class="preview-top-meta">
-      <span class="preview-tag preview-tag--duration">{animation.duration}</span>
+      <span class="preview-tag preview-tag--selector" title="Selector CSS utilizado">{animation.targetSelector}</span>
       <span class="preview-tag preview-tag--category">{animation.category}</span>
     </div>
 
     <div class:list={['demo-stage', animation.previewClass]} data-demo-stage aria-hidden="true">
       {animation.id === 'fade-in' && (
-        <div class="preview-toast is-playing" data-motion-target>
+        <div class="toast-card is-playing" data-motion-target>
           <span class="toast-icon">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
           </span>
           <div class="toast-info">
-            <strong>Notificación</strong>
-            <span>Guardado con éxito</span>
+            <strong>Guardado con éxito</strong>
+            <span>Tus cambios han sido sincronizados</span>
           </div>
         </div>
       )}
 
       {animation.id === 'slide-in' && (
-        <div class="preview-chip is-playing" data-motion-target>
+        <div class="nav-chip is-playing" data-motion-target>
           <span class="chip-dot"></span>
           <span class="chip-text">Panel lateral activo</span>
-          <span class="chip-arrow">→</span>
+          <span class="chip-arrow">&rarr;</span>
         </div>
       )}
 
       {animation.id === 'bounce' && (
-        <div class="preview-bell is-playing" data-motion-target>
+        <div class="bell-badge is-playing" data-motion-target>
           <div class="bell-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
           </div>
@@ -46,7 +51,7 @@ const { animation } = Astro.props;
       )}
 
       {animation.id === 'pulse' && (
-        <div class="preview-beacon is-playing" data-motion-target>
+        <div class="status-beacon is-playing" data-motion-target>
           <span class="beacon-ring"></span>
           <span class="beacon-dot"></span>
           <span class="beacon-label">SISTEMA ONLINE</span>
@@ -54,7 +59,7 @@ const { animation } = Astro.props;
       )}
 
       {animation.id === 'shake' && (
-        <div class="preview-alert is-playing" data-motion-target>
+        <div class="input-alert is-playing" data-motion-target>
           <span class="alert-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
           </span>
@@ -63,14 +68,13 @@ const { animation } = Astro.props;
       )}
 
       {animation.id === 'spinner' && (
-        <div class="preview-loader is-playing" data-motion-target>
-          <div class="loader-ring"></div>
-          <div class="loader-inner-glow"></div>
+        <div class="spinner-stage" data-motion-target>
+          <div class="spinner-ring is-playing" role="status" aria-label="Cargando"></div>
         </div>
       )}
 
       {animation.id === 'typing' && (
-        <div class="preview-terminal is-playing" data-motion-target>
+        <div class="terminal-box is-playing" data-motion-target>
           <div class="terminal-bar">
             <span></span><span></span><span></span>
           </div>
@@ -82,7 +86,7 @@ const { animation } = Astro.props;
       )}
 
       {animation.id === 'hover-lift' && (
-        <div class="preview-interactive-card" tabindex="0" data-motion-target>
+        <div class="card-interactive" tabindex="0" data-motion-target>
           <div class="card-glow"></div>
           <span class="card-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
@@ -98,9 +102,52 @@ const { animation } = Astro.props;
     <div class="card-info">
       <div class="card-header-row">
         <h3>{animation.name}</h3>
-        <span class="timing-badge">{animation.timing}</span>
+        <span class={`cost-badge cost-badge--${animation.renderCostType}`} title="Costo en la tubería de renderizado del navegador">
+          {animation.renderCost}
+        </span>
       </div>
       <p>{animation.description}</p>
+      <div class="tech-specs">
+        <span class="tech-spec-label">Propiedades animadas:</span>
+        <code class="tech-spec-code">{animation.properties}</code>
+      </div>
+    </div>
+
+    <!-- Controles de Aprendizaje y Calibración en tiempo real -->
+    <div class="card-tuner">
+      <div class="tuner-heading">
+        <span class="tuner-title">Calibrar parámetros:</span>
+        <button class="tuner-reset-btn" type="button" data-reset-tuning aria-label={`Restablecer parámetros de ${animation.name}`}>
+          Restablecer
+        </button>
+      </div>
+
+      <div class="tuner-row">
+        <label class="tuner-field">
+          <span class="tuner-label">
+            Duración: <strong data-duration-value>{animation.defaultDuration}s</strong>
+          </span>
+          <input
+            type="range"
+            class="tuner-range"
+            min="0.2"
+            max="3.0"
+            step="0.05"
+            value={animation.defaultDuration}
+            data-duration-input
+            aria-label={`Duración en segundos para ${animation.name}`}
+          />
+        </label>
+
+        <label class="tuner-field">
+          <span class="tuner-label">Curva (timing):</span>
+          <select class="tuner-select" data-timing-select aria-label={`Curva de aceleración para ${animation.name}`}>
+            {animation.timingOptions.map((opt) => (
+              <option value={opt} selected={opt === animation.defaultTiming}>{opt}</option>
+            ))}
+          </select>
+        </label>
+      </div>
     </div>
 
     <div class="animation-card__actions">
@@ -108,8 +155,20 @@ const { animation } = Astro.props;
         <span class="replay-icon" aria-hidden="true">↻</span>
         <span>Reproducir</span>
       </button>
-      <button class="button button--code" type="button" data-toggle-code aria-expanded="false">
-        <span>Ver código</span>
+
+      <button
+        class="button button--copy-full"
+        type="button"
+        data-copy-full
+        title="Copiar HTML y CSS coordinados con las mismas clases para pegar y usar de inmediato"
+        aria-label={`Copiar ejemplo completo de ${animation.name}`}
+      >
+        <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        <span data-copy-full-text>Copiar ejemplo completo</span>
+      </button>
+
+      <button class="button button--code" type="button" data-toggle-code aria-expanded="false" aria-label={`Ver código de ${animation.name}`}>
+        <span>Código</span>
         <span class="chevron-icon" aria-hidden="true">⌄</span>
       </button>
     </div>
@@ -119,18 +178,22 @@ const { animation } = Astro.props;
         <div class="tab-buttons" role="tablist">
           <button class="tab-btn is-active" type="button" data-tab="css" role="tab" aria-selected="true">CSS</button>
           <button class="tab-btn" type="button" data-tab="html" role="tab" aria-selected="false">HTML</button>
+          <button class="tab-btn" type="button" data-tab="full" role="tab" aria-selected="false">Completo (HTML + CSS)</button>
         </div>
-        <button class="copy-button" type="button" data-copy aria-label="Copiar código al portapapeles">
+        <button class="copy-button" type="button" data-copy aria-label="Copiar código actual al portapapeles">
           <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
           <span data-copy-text>Copiar</span>
         </button>
       </div>
 
       <div class="code-view" data-code-view="css">
-        <pre><code>{animation.code}</code></pre>
+        <pre><code data-code-css>{initialCss}</code></pre>
       </div>
       <div class="code-view" data-code-view="html" hidden>
-        <pre><code>{animation.htmlSnippet}</code></pre>
+        <pre><code data-code-html>{animation.htmlSnippet}</code></pre>
+      </div>
+      <div class="code-view" data-code-view="full" hidden>
+        <pre><code data-code-full>{initialFullExample}</code></pre>
       </div>
 
       <p class="copy-status" data-copy-status aria-live="polite"></p>

@@ -1,49 +1,57 @@
 # CSS Motion Lab
 
-Catálogo interactivo moderno para consultar, probar, calibrar y copiar animaciones CSS puras listas para producción en proyectos web.
+Catálogo interactivo y laboratorio de aprendizaje para consultar, calibrar, probar y copiar animaciones CSS puras con código HTML y CSS 100% coordinado.
 
 - **Demo en vivo en GitHub Pages**: [https://hugoadama.github.io/CSS_Motion_Lab/](https://hugoadama.github.io/CSS_Motion_Lab/)
 - **Repositorio**: [https://github.com/HugoAdama/CSS_Motion_Lab](https://github.com/HugoAdama/CSS_Motion_Lab)
 
 ---
 
-## Características y Mejoras Implementadas
+## Características Principales
 
-- **8 Efectos de Animación Prácticos**:
-  - `Fade in`: Notificación flotante con aumento suave de opacidad y elevación.
-  - `Slide in`: Chip de navegación lateral con amortiguación natural.
-  - `Bounce`: Notificación badge con rebote elástico.
-  - `Pulse`: Baliza de estado en vivo con anillo de radar continuo.
-  - `Shake`: Alerta de error con vibración horizontal de validación.
-  - `Spinner`: Cargador con gradiente cónico y resplandor central.
-  - `Typing`: Terminal de comandos con efecto de escritura y cursor parpadeante.
-  - `Hover lift`: Tarjeta 3D interactiva con elevación y sombra expandida.
-- **Doble Snippet de Código**: Pestañas para copiar tanto el **CSS** (`@keyframes`) como el **HTML** correspondiente.
-- **Portapapeles con 1 Clic**: Botón de copiado con confirmación visual y anuncio accesible (`aria-live`).
-- **Tema Oscuro y Claro**: Alternador con persistencia en `localStorage` y detección automática de `prefers-color-scheme`.
-- **Filtros por Categoría y Búsqueda en Tiempo Real**: Filtrado reactivo con conteo dinámico y atajo de teclado (`/` para buscar, `Esc` para limpiar).
-- **Control de Reproducción**: Botón individual "Reproducir" y botón global "Reproducir visibles".
-- **Accesibilidad y Movimiento Reducido**: Botón para alternar reducción de movimiento en la interfaz y soporte nativo para `@media (prefers-reduced-motion: reduce)`.
-- **Despliegue Automatizado**: GitHub Actions optimizado (`.github/workflows/deploy.yml`) para GitHub Pages.
+### 1. HTML y CSS Coordinados
+Cada animación comparte exactamente la misma clase entre el HTML y el CSS:
+- `Fade in`: `.toast-card`
+- `Slide in`: `.nav-chip`
+- `Bounce`: `.bell-badge`
+- `Pulse`: `.status-beacon`
+- `Shake`: `.input-alert`
+- `Spinner`: `.spinner-ring`
+- `Typing`: `.typing-text`
+- `Hover lift`: `.card-interactive`
+
+Incluye la opción **"Copiar ejemplo completo"**, que copia el fragmento HTML y CSS listo para pegar en cualquier proyecto o entorno (CodePen, Astro, React, etc.) sin tener que ajustar clases manualmente.
+
+### 2. Métricas Verificables y Rigor Técnico
+En lugar de afirmaciones genéricas de rendimiento, el catálogo detalla:
+- **Propiedad animada** de cada efecto (`transform`, `opacity`, `width`, `box-shadow`).
+- **Impacto en el pipeline de renderizado**:
+  - `Composición (GPU)`: Animaciones en `transform` y `opacity` ejecutadas en el hilo compositor sin forzar recalculo de diseño.
+  - `Layout / Reflow`: Animaciones que alteran la geometría del elemento (como `width` en el efecto typing).
+  - `Repintado (Paint)`: Efectos como `box-shadow` que exigen rasterizado adicional.
+
+### 3. Herramienta de Aprendizaje y Calibración en Vivo
+- Controles interactivos en cada tarjeta para calibrar la **duración** (slider de 0.2s a 3.0s) y la **curva de aceleración** (`ease-out`, `ease-in-out`, `linear`, `cubic-bezier(...)`, etc.).
+- La vista previa responde al instante y el bloque de código CSS se actualiza dinámicamente con los valores seleccionados.
+
+### 4. Accesibilidad y Navegación Universal
+- Foco visible accesible (`:focus-visible`) en todos los controles interactivos, pestañas, selectores y tarjetas.
+- Modo de **movimiento reducido** (`prefers-reduced-motion: reduce` y botón manual "Movimiento") que detiene completamente todos los efectos, incluidos los bucles continuos (spinner y baliza).
+- Diseño adaptable a dispositivos móviles (hasta 320px de ancho).
 
 ---
 
 ## Tecnologías
 
 - **Astro 5** (Generador de sitios estáticos).
-- **HTML5 Semántico** y accesible (ARIA roles y estados).
-- **CSS Nativo Moderno** (variables CSS, flexbox, CSS grid, backdrop-filter, animaciones por GPU).
-- **JavaScript Vanilla** (sin librerías pesadas, ejecución ágil y ligera).
+- **HTML5 Semántico** y accesible (roles ARIA, estados `aria-pressed`, `aria-expanded`).
+- **CSS Nativo** (Variables CSS, Flexbox, Grid, keyframes acelerados por compositor).
+- **JavaScript Vanilla** (Cero dependencias pesadas, reactividad ligera nativa).
 
 ---
 
 ## Ejecutar en Local
 
-### Requisitos previos
-- Node.js 22.12 o superior
-- npm
-
-### Pasos
 ```bash
 # 1. Instalar dependencias
 npm install
@@ -51,8 +59,6 @@ npm install
 # 2. Iniciar servidor de desarrollo
 npm run dev
 ```
-
-Abre en tu navegador la dirección indicada en la consola (usualmente `http://localhost:4321/CSS_Motion_Lab/`).
 
 ### Compilar para Producción
 ```bash
@@ -64,27 +70,4 @@ npm run preview
 
 ## Despliegue en GitHub Pages
 
-1. En el repositorio de GitHub, ve a **Settings -> Pages**.
-2. En **Build and deployment > Source**, selecciona **GitHub Actions**.
-3. Al hacer `push` a la rama `main`, el workflow configurado en `.github/workflows/deploy.yml` compilará y publicará la web automáticamente.
-
----
-
-## Cómo agregar nuevas animaciones
-
-1. Agrega el nuevo elemento a `src/data/animations.js`:
-   ```javascript
-   {
-     id: 'mi-animacion',
-     name: 'Nombre de la animación',
-     category: 'Entrada', // 'Entrada' | 'Énfasis' | 'Carga' | 'Texto' | 'Interacción'
-     duration: '500ms',
-     timing: 'ease-out',
-     description: 'Descripción breve de cuándo utilizarla.',
-     previewClass: 'shape--mi-animacion',
-     htmlSnippet: `<div class="mi-clase">Demo</div>`,
-     code: `.mi-clase { animation: miAnimacion 500ms ease-out; }`
-   }
-   ```
-2. Diseña la vista previa en `src/components/AnimationCard.astro` y las reglas `@keyframes` en `src/styles/global.css`.
-3. Ejecuta `npm run build` para validar la compilación.
+El proyecto se despliega automáticamente mediante GitHub Actions configurado en `.github/workflows/deploy.yml` con Node.js 22 al hacer push a la rama `main`.
