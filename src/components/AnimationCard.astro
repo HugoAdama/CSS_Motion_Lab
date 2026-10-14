@@ -154,6 +154,93 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
           </div>
         </div>
       )}
+
+      {/* 13. Modal Dialog Backdrop & Pop */}
+      {animation.id === 'modal-backdrop' && (
+        <div class="dialog-overlay is-playing" data-motion-target>
+          <div class="dialog-surface" role="dialog" aria-modal="true" aria-labelledby="dialog-title-preview">
+            <div class="dialog-header">
+              <span class="dialog-title" id="dialog-title-preview">Confirmar cambios</span>
+              <span class="dialog-badge">Producción</span>
+            </div>
+            <p class="dialog-desc">¿Deseas desplegar la nueva versión al servidor público?</p>
+            <div class="dialog-actions">
+              <button class="dialog-btn dialog-btn--ghost" type="button">Cancelar</button>
+              <button class="dialog-btn dialog-btn--primary" type="button">Confirmar</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 14. Bottom Sheet */}
+      {animation.id === 'bottom-sheet' && (
+        <div class="sheet-container" data-motion-target>
+          <div class="sheet-drawer is-playing">
+            <div class="sheet-handle"></div>
+            <div class="sheet-header">
+              <strong>Opciones del recurso</strong>
+              <span class="sheet-meta">3 acciones disponibles</span>
+            </div>
+            <div class="sheet-options">
+              <div class="sheet-option">
+                <span class="sheet-icon">1</span>
+                <span>Compartir enlace</span>
+              </div>
+              <div class="sheet-option">
+                <span class="sheet-icon">2</span>
+                <span>Duplicar configuración</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 15. Radiant Conic Beam */}
+      {animation.id === 'border-beam' && (
+        <div class="radiant-card is-playing" data-motion-target>
+          <div class="radiant-beam"></div>
+          <div class="radiant-body">
+            <span class="radiant-badge">DESTACADO</span>
+            <strong>Plan Ilimitado</strong>
+            <p>Rendimiento acelerado y soporte técnico.</p>
+          </div>
+        </div>
+      )}
+
+      {/* 16. Progress Ring SVG */}
+      {animation.id === 'progress-ring' && (
+        <div class="progress-ring-card is-playing" data-motion-target>
+          <div class="ring-wrapper">
+            <svg class="ring-svg" width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">
+              <circle class="ring-bg" cx="32" cy="32" r="26"></circle>
+              <circle class="ring-progress-circle" cx="32" cy="32" r="26"></circle>
+            </svg>
+            <span class="ring-percent">80%</span>
+          </div>
+          <div class="ring-info">
+            <strong>Sincronizando</strong>
+            <p>Descargando paquetes...</p>
+          </div>
+        </div>
+      )}
+
+      {/* 17. 3D Flip Card */}
+      {animation.id === 'flip-card' && (
+        <div class="flip-wrapper" tabindex="0" data-motion-target data-flip-card-widget>
+          <div class="flip-inner is-playing">
+            <div class="flip-face flip-front">
+              <span class="flip-tag">Frente</span>
+              <strong>Pase Digital</strong>
+              <small>Pasa el cursor o presiona Tab</small>
+            </div>
+            <div class="flip-face flip-back">
+              <span class="flip-tag flip-tag--alt">Reverso</span>
+              <strong>Código de Acceso</strong>
+              <code class="flip-code">#CSS-8902</code>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   </div>
 
@@ -236,6 +323,12 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
       {animation.id === 'accordion' && (
         <button class="button button--toggle-accordion" type="button" data-toggle-accordion-demo aria-label="Abrir o cerrar acordeón de prueba">
           <span>Alternar abrir/cerrar</span>
+        </button>
+      )}
+
+      {animation.id === 'flip-card' && (
+        <button class="button button--toggle-flip" type="button" data-toggle-flip-demo aria-label="Alternar giro 3D de la tarjeta">
+          <span>Girar tarjeta 3D</span>
         </button>
       )}
 

@@ -562,6 +562,322 @@ export const animations = [
   }
 }`,
   },
+  {
+    id: 'modal-backdrop',
+    name: 'Modal con Desenfoque y Pop',
+    category: 'Patrones UI',
+    defaultDuration: 0.4,
+    defaultTiming: 'cubic-bezier(0.16, 1, 0.3, 1)',
+    timingOptions: ['cubic-bezier(0.16, 1, 0.3, 1)', 'ease-out', 'ease-in-out', 'linear'],
+    properties: 'opacity, transform, backdrop-filter',
+    renderCost: 'Favorables para composición',
+    renderCostType: 'composite',
+    costExplanation: 'Combina desvanecimiento en el overlay y escala con transform en el diálogo, delegando la animación al hilo compositor.',
+    description: 'Apertura de ventana modal con fondo oscurecido, desenfoque progresivo y entrada por escala con rebote contenido.',
+    targetSelector: '.dialog-surface',
+    previewClass: 'shape--modal',
+    htmlSnippet: `<div class="dialog-overlay">
+  <div class="dialog-surface" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+    <div class="dialog-header">
+      <span class="dialog-title" id="dialog-title">Confirmar cambios</span>
+      <span class="dialog-badge">Producción</span>
+    </div>
+    <p class="dialog-desc">¿Deseas desplegar la nueva versión al servidor público?</p>
+    <div class="dialog-actions">
+      <button class="dialog-btn dialog-btn--ghost" type="button">Cancelar</button>
+      <button class="dialog-btn dialog-btn--primary" type="button">Confirmar</button>
+    </div>
+  </div>
+</div>`,
+    generateCss: (dur, timing) => `.dialog-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 9, 15, 0.6);
+  backdrop-filter: blur(4px);
+  animation: overlayFade ${dur}s ${timing} both;
+}
+
+.dialog-surface {
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.25);
+  border-radius: 16px;
+  animation: dialogPop ${dur}s ${timing} both;
+}
+
+@keyframes overlayFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dialogPop {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog-overlay,
+  .dialog-surface {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}`,
+  },
+  {
+    id: 'bottom-sheet',
+    name: 'Bottom Sheet Móvil',
+    category: 'Patrones UI',
+    defaultDuration: 0.45,
+    defaultTiming: 'cubic-bezier(0.16, 1, 0.3, 1)',
+    timingOptions: ['cubic-bezier(0.16, 1, 0.3, 1)', 'ease-out', 'ease-in-out'],
+    properties: 'transform, opacity',
+    renderCost: 'Favorables para composición',
+    renderCostType: 'composite',
+    costExplanation: 'El panel asciende desde el borde inferior de la pantalla utilizando translateY(), manteniendo la fluidez a 60 fps en móviles.',
+    description: 'Hoja de acciones contextual deslizante desde la parte inferior, con tirador táctil y opciones rápidas.',
+    targetSelector: '.sheet-drawer',
+    previewClass: 'shape--bottom-sheet',
+    htmlSnippet: `<div class="sheet-container">
+  <div class="sheet-drawer">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <strong>Opciones del recurso</strong>
+      <span class="sheet-meta">3 acciones disponibles</span>
+    </div>
+    <div class="sheet-options">
+      <div class="sheet-option">
+        <span class="sheet-icon">1</span>
+        <span>Compartir enlace</span>
+      </div>
+      <div class="sheet-option">
+        <span class="sheet-icon">2</span>
+        <span>Duplicar configuración</span>
+      </div>
+    </div>
+  </div>
+</div>`,
+    generateCss: (dur, timing) => `.sheet-drawer {
+  width: 100%;
+  border-radius: 16px 16px 0 0;
+  animation: slideUpSheet ${dur}s ${timing} both;
+}
+
+@keyframes slideUpSheet {
+  from {
+    transform: translateY(100%);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet-drawer {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}`,
+  },
+  {
+    id: 'border-beam',
+    name: 'Borde Radiante (Conic Beam)',
+    category: 'Énfasis',
+    defaultDuration: 3.0,
+    defaultTiming: 'linear',
+    timingOptions: ['linear', 'ease-in-out', 'ease-out'],
+    properties: 'transform (rotate)',
+    renderCost: 'Favorables para composición',
+    renderCostType: 'composite',
+    costExplanation: 'Gira un plano degradado cónico mediante rotate() detrás de una máscara interior, generando el haz de luz sin repintar bordes.',
+    description: 'Haz luminoso continuo que recorre el perímetro de la tarjeta para destacar elementos premium o planes destacados.',
+    targetSelector: '.radiant-card',
+    previewClass: 'shape--border-beam',
+    htmlSnippet: `<div class="radiant-card">
+  <div class="radiant-beam"></div>
+  <div class="radiant-body">
+    <span class="radiant-badge">DESTACADO</span>
+    <strong>Plan Ilimitado</strong>
+    <p>Rendimiento acelerado y soporte técnico.</p>
+  </div>
+</div>`,
+    generateCss: (dur, timing) => `.radiant-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  padding: 1px;
+}
+
+.radiant-beam {
+  position: absolute;
+  inset: -150%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 280deg,
+    #7b6ef6 320deg,
+    #3ddda8 360deg
+  );
+  animation: rotateBeam ${dur}s ${timing} infinite;
+}
+
+.radiant-body {
+  position: relative;
+  background: #10111d;
+  border-radius: 13px;
+  padding: 14px 18px;
+  z-index: 1;
+}
+
+@keyframes rotateBeam {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .radiant-beam {
+    animation: none !important;
+    transform: none !important;
+  }
+}`,
+  },
+  {
+    id: 'progress-ring',
+    name: 'Anillo de Progreso SVG',
+    category: 'Carga',
+    defaultDuration: 1.5,
+    defaultTiming: 'cubic-bezier(0.16, 1, 0.3, 1)',
+    timingOptions: ['cubic-bezier(0.16, 1, 0.3, 1)', 'ease-out', 'ease-in-out', 'linear'],
+    properties: 'stroke-dashoffset',
+    renderCost: 'Repintado / Paint (SVG)',
+    renderCostType: 'paint',
+    costExplanation: 'Actualiza el desfase del trazo perimétrico en el espacio vectorial SVG. Ideal para indicadores de carga cuantificables.',
+    description: 'Círculo de progreso animado que se llena fluidamente hasta el 80% con indicador de porcentaje central.',
+    targetSelector: '.ring-progress-circle',
+    previewClass: 'shape--progress-ring',
+    htmlSnippet: `<div class="progress-ring-card">
+  <div class="ring-wrapper">
+    <svg class="ring-svg" width="64" height="64" viewBox="0 0 64 64">
+      <circle class="ring-bg" cx="32" cy="32" r="26"></circle>
+      <circle class="ring-progress-circle" cx="32" cy="32" r="26"></circle>
+    </svg>
+    <span class="ring-percent">80%</span>
+  </div>
+  <div class="ring-info">
+    <strong>Sincronizando</strong>
+    <p>Descargando paquetes...</p>
+  </div>
+</div>`,
+    generateCss: (dur, timing) => `.ring-progress-circle {
+  fill: none;
+  stroke: #7b6ef6;
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-dasharray: 163.36; /* 2 * PI * 26 */
+  stroke-dashoffset: 163.36;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  animation: fillRing ${dur}s ${timing} both;
+}
+
+@keyframes fillRing {
+  from { stroke-dashoffset: 163.36; }
+  to { stroke-dashoffset: 32.67; } /* 80% */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring-progress-circle {
+    animation: none !important;
+    stroke-dashoffset: 32.67 !important;
+  }
+}`,
+  },
+  {
+    id: 'flip-card',
+    name: 'Tarjeta 3D Flip',
+    category: 'Interacción',
+    defaultDuration: 0.6,
+    defaultTiming: 'cubic-bezier(0.16, 1, 0.3, 1)',
+    timingOptions: ['cubic-bezier(0.16, 1, 0.3, 1)', 'ease-out', 'ease-in-out'],
+    properties: 'transform (rotateY)',
+    renderCost: 'Favorables para composición',
+    renderCostType: 'composite',
+    costExplanation: 'Utiliza perspective: 1000px y rotateY(180deg) con transform-style: preserve-3d para realizar una rotación espacial fluida.',
+    description: 'Giro tridimensional que revela información adicional en el reverso al pasar el cursor, presionar Tab o hacer clic.',
+    targetSelector: '.flip-inner',
+    previewClass: 'shape--flip-card',
+    htmlSnippet: `<div class="flip-wrapper" tabindex="0">
+  <div class="flip-inner">
+    <div class="flip-face flip-front">
+      <span class="flip-tag">Frente</span>
+      <strong>Pase Digital</strong>
+      <small>Pasa el cursor o presiona Tab</small>
+    </div>
+    <div class="flip-face flip-back">
+      <span class="flip-tag flip-tag--alt">Reverso</span>
+      <strong>Código de Acceso</strong>
+      <code class="flip-code">#CSS-8902</code>
+    </div>
+  </div>
+</div>`,
+    generateCss: (dur, timing) => `.flip-wrapper {
+  perspective: 1000px;
+  width: 220px;
+  height: 110px;
+  cursor: pointer;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform ${dur}s ${timing};
+  transform-style: preserve-3d;
+}
+
+.flip-wrapper:hover .flip-inner,
+.flip-wrapper:focus-visible .flip-inner,
+.flip-wrapper.is-flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.flip-front {
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.3);
+}
+
+.flip-back {
+  background: #101a2b;
+  border: 1px solid rgba(61, 221, 168, 0.3);
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-inner {
+    transition: none !important;
+  }
+}`,
+  },
 ];
 
 export const categories = ['Todas', 'Patrones UI', 'Entrada', 'Énfasis', 'Carga', 'Texto', 'Interacción'];

@@ -1473,6 +1473,448 @@ h2 {
   color: var(--violet);
 }
 
+/* 13. Modal Dialog Backdrop & Pop */
+.shape--modal .demo-stage {
+  padding: 10px;
+}
+
+.dialog-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 290px;
+  padding: 8px;
+  background: rgba(8, 9, 15, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 16px;
+  border: 1px solid var(--line);
+}
+
+.shape--modal .dialog-overlay.is-playing {
+  animation: overlayFadeIn 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.dialog-surface {
+  background: var(--surface-card);
+  border: 1px solid var(--line-highlight);
+  border-radius: 14px;
+  padding: 12px 14px;
+  width: 100%;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+}
+
+.shape--modal .dialog-overlay.is-playing .dialog-surface {
+  animation: modalPop 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.dialog-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.dialog-badge {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(123, 110, 246, 0.15);
+  color: var(--violet);
+  border: 1px solid rgba(123, 110, 246, 0.3);
+}
+
+.dialog-desc {
+  margin: 0 0 10px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.dialog-btn {
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.dialog-btn--ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.dialog-btn--ghost:hover {
+  background: var(--surface-hover);
+  color: var(--ink);
+}
+
+.dialog-btn--primary {
+  background: var(--violet);
+  color: #fff;
+}
+
+.dialog-btn--primary:hover {
+  background: #6858f7;
+  transform: translateY(-1px);
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalPop {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* 14. Bottom Sheet */
+.sheet-container {
+  width: 100%;
+  max-width: 270px;
+  height: 125px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px dashed var(--line);
+}
+
+.sheet-drawer {
+  width: 100%;
+  background: var(--surface-card);
+  border: 1px solid var(--line-highlight);
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
+  padding: 8px 12px 10px;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.shape--bottom-sheet .sheet-drawer.is-playing {
+  animation: slideUpSheet 450ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.sheet-handle {
+  width: 28px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--line-highlight);
+  margin: 0 auto 8px;
+}
+
+.sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.sheet-header strong {
+  font-size: 11px;
+  color: var(--ink);
+}
+
+.sheet-meta {
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+.sheet-options {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sheet-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--surface-hover);
+}
+
+.sheet-icon {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--violet);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+
+@keyframes slideUpSheet {
+  from {
+    transform: translateY(100%);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 15. Radiant Conic Beam */
+.radiant-card {
+  position: relative;
+  width: 100%;
+  max-width: 240px;
+  border-radius: 14px;
+  overflow: hidden;
+  padding: 1.5px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.radiant-beam {
+  position: absolute;
+  inset: -150%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 280deg,
+    #7b6ef6 320deg,
+    #3ddda8 360deg
+  );
+}
+
+.shape--border-beam .radiant-card.is-playing .radiant-beam {
+  animation: rotateBeam 3s linear infinite;
+}
+
+.radiant-body {
+  position: relative;
+  background: var(--surface-card);
+  border-radius: 13px;
+  padding: 12px 16px;
+  z-index: 1;
+  text-align: left;
+}
+
+.radiant-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(61, 221, 168, 0.15);
+  color: var(--mint);
+  margin-bottom: 4px;
+}
+
+.radiant-body strong {
+  display: block;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.radiant-body p {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+@keyframes rotateBeam {
+  to { transform: rotate(360deg); }
+}
+
+/* 16. Progress Ring SVG */
+.progress-ring-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.ring-wrapper {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+}
+
+.ring-svg {
+  width: 64px;
+  height: 64px;
+}
+
+.ring-bg {
+  fill: none;
+  stroke: rgba(123, 110, 246, 0.15);
+  stroke-width: 5;
+}
+
+.ring-progress-circle {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 163.36;
+  stroke-dashoffset: 163.36;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.shape--progress-ring .progress-ring-card.is-playing .ring-progress-circle {
+  animation: fillRing 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.ring-percent {
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.ring-info strong {
+  display: block;
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.ring-info p {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+@keyframes fillRing {
+  from { stroke-dashoffset: 163.36; }
+  to { stroke-dashoffset: 32.67; }
+}
+
+/* 17. 3D Flip Card */
+.flip-wrapper {
+  perspective: 1000px;
+  width: 220px;
+  height: 110px;
+  cursor: pointer;
+  outline: none;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-wrapper:hover .flip-inner,
+.flip-wrapper:focus-visible .flip-inner,
+.flip-wrapper.is-flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  text-align: center;
+}
+
+.flip-front {
+  background: var(--surface-card);
+  border: 1px solid var(--line-highlight);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.flip-back {
+  background: linear-gradient(135deg, rgba(61, 221, 168, 0.12), var(--surface-card));
+  border: 1px solid rgba(61, 221, 168, 0.35);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: rotateY(180deg);
+}
+
+.flip-tag {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(123, 110, 246, 0.15);
+  color: var(--violet);
+  margin-bottom: 4px;
+}
+
+.flip-tag--alt {
+  background: rgba(61, 221, 168, 0.15);
+  color: var(--mint);
+}
+
+.flip-face strong {
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.flip-face small {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.flip-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--mint);
+  margin-top: 4px;
+}
+
+.button--toggle-flip {
+  background: var(--page);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.button--toggle-flip:hover {
+  background: var(--surface-hover);
+  border-color: var(--line-highlight);
+  color: var(--mint);
+}
+
 /* =========================================
    Cuerpo de la Tarjeta y Metadatos Técnicos
    ========================================= */

@@ -88,12 +88,12 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
               </div>
               <div class="stat-divider"></div>
               <div class="stat-item">
-                <strong>4</strong>
+                <strong>{animations.filter(a => a.category === 'Patrones UI').length}</strong>
                 <span>Patrones UI</span>
               </div>
               <div class="stat-divider"></div>
               <div class="stat-item">
-                <strong>8</strong>
+                <strong>{animations.filter(a => a.category !== 'Patrones UI').length}</strong>
                 <span>Efectos atómicos</span>
               </div>
               <div class="stat-divider"></div>
@@ -235,7 +235,12 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
         'staggered-reveal': (d, t, stagger = '0.1') => `.stagger-list {\n  --stagger-delay: ${stagger}s;\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n}\n\n.stagger-item {\n  animation: staggerFadeIn ${d}s ${t} both;\n  animation-delay: calc(var(--stagger-index, 0) * var(--stagger-delay, 0.1s));\n}\n\n@keyframes staggerFadeIn {\n  from {\n    opacity: 0;\n    transform: translateY(14px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .stagger-item {\n    animation: none !important;\n    opacity: 1 !important;\n    transform: none !important;\n  }\n}`,
         'toast-lifecycle': (d, t) => `.toast-banner {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  animation: toastCycle ${d}s ${t} both;\n}\n\n@keyframes toastCycle {\n  0% {\n    opacity: 0;\n    transform: translateY(24px) scale(0.95);\n  }\n  14%, 82% {\n    opacity: 1;\n    transform: translateY(0) scale(1);\n  }\n  100% {\n    opacity: 0;\n    transform: translateY(-16px) scale(0.98);\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .toast-banner {\n    animation: none !important;\n    opacity: 1 !important;\n    transform: none !important;\n  }\n}`,
         'skeleton-shimmer': (d, t) => `.skeleton-card .skeleton-avatar,\n.skeleton-card .skeleton-line {\n  background: linear-gradient(\n    90deg,\n    rgba(255, 255, 255, 0.05) 0%,\n    rgba(255, 255, 255, 0.18) 50%,\n    rgba(255, 255, 255, 0.05) 100%\n  );\n  background-size: 200% 100%;\n  animation: shimmer ${d}s ${t} infinite;\n}\n\n@keyframes shimmer {\n  0% { background-position: 200% 0; }\n  100% { background-position: -200% 0; }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .skeleton-card .skeleton-avatar,\n  .skeleton-card .skeleton-line {\n    animation: none !important;\n    background: rgba(255, 255, 255, 0.08) !important;\n  }\n}`,
-        'accordion': (d, t) => `.accordion-item {\n  border-radius: 12px;\n  overflow: hidden;\n}\n\n.accordion-trigger {\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 12px 16px;\n}\n\n.accordion-arrow {\n  transition: transform ${d}s ${t};\n}\n\n.accordion-item.is-open .accordion-arrow {\n  transform: rotate(180deg);\n}\n\n.accordion-content {\n  display: grid;\n  grid-template-rows: 0fr;\n  transition: grid-template-rows ${d}s ${t};\n}\n\n.accordion-item.is-open .accordion-content {\n  grid-template-rows: 1fr;\n}\n\n.accordion-inner {\n  overflow: hidden;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .accordion-arrow,\n  .accordion-content {\n    transition: none !important;\n  }\n}`
+        'accordion': (d, t) => `.accordion-item {\n  border-radius: 12px;\n  overflow: hidden;\n}\n\n.accordion-trigger {\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 12px 16px;\n}\n\n.accordion-arrow {\n  transition: transform ${d}s ${t};\n}\n\n.accordion-item.is-open .accordion-arrow {\n  transform: rotate(180deg);\n}\n\n.accordion-content {\n  display: grid;\n  grid-template-rows: 0fr;\n  transition: grid-template-rows ${d}s ${t};\n}\n\n.accordion-item.is-open .accordion-content {\n  grid-template-rows: 1fr;\n}\n\n.accordion-inner {\n  overflow: hidden;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .accordion-arrow,\n  .accordion-content {\n    transition: none !important;\n  }\n}`,
+        'modal-backdrop': (d, t) => `.dialog-overlay {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: rgba(8, 9, 15, 0.6);\n  backdrop-filter: blur(4px);\n  animation: overlayFade ${d}s ${t} both;\n}\n\n.dialog-surface {\n  background: #141523;\n  border: 1px solid rgba(123, 110, 246, 0.25);\n  border-radius: 16px;\n  animation: dialogPop ${d}s ${t} both;\n}\n\n@keyframes overlayFade {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}\n\n@keyframes dialogPop {\n  from {\n    opacity: 0;\n    transform: scale(0.92) translateY(10px);\n  }\n  to {\n    opacity: 1;\n    transform: scale(1) translateY(0);\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .dialog-overlay,\n  .dialog-surface {\n    animation: none !important;\n    opacity: 1 !important;\n    transform: none !important;\n  }\n}`,
+        'bottom-sheet': (d, t) => `.sheet-drawer {\n  width: 100%;\n  border-radius: 16px 16px 0 0;\n  animation: slideUpSheet ${d}s ${t} both;\n}\n\n@keyframes slideUpSheet {\n  from {\n    transform: translateY(100%);\n    opacity: 0.4;\n  }\n  to {\n    transform: translateY(0);\n    opacity: 1;\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .sheet-drawer {\n    animation: none !important;\n    transform: none !important;\n    opacity: 1 !important;\n  }\n}`,
+        'border-beam': (d, t) => `.radiant-card {\n  position: relative;\n  border-radius: 14px;\n  overflow: hidden;\n  padding: 1px;\n}\n\n.radiant-beam {\n  position: absolute;\n  inset: -150%;\n  background: conic-gradient(\n    from 0deg,\n    transparent 0deg,\n    transparent 280deg,\n    #7b6ef6 320deg,\n    #3ddda8 360deg\n  );\n  animation: rotateBeam ${d}s ${t} infinite;\n}\n\n.radiant-body {\n  position: relative;\n  background: #10111d;\n  border-radius: 13px;\n  padding: 14px 18px;\n  z-index: 1;\n}\n\n@keyframes rotateBeam {\n  to { transform: rotate(360deg); }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .radiant-beam {\n    animation: none !important;\n    transform: none !important;\n  }\n}`,
+        'progress-ring': (d, t) => `.ring-progress-circle {\n  fill: none;\n  stroke: #7b6ef6;\n  stroke-width: 4.5;\n  stroke-linecap: round;\n  stroke-dasharray: 163.36;\n  stroke-dashoffset: 163.36;\n  transform: rotate(-90deg);\n  transform-origin: 50% 50%;\n  animation: fillRing ${d}s ${t} both;\n}\n\n@keyframes fillRing {\n  from { stroke-dashoffset: 163.36; }\n  to { stroke-dashoffset: 32.67; }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .ring-progress-circle {\n    animation: none !important;\n    stroke-dashoffset: 32.67 !important;\n  }\n}`,
+        'flip-card': (d, t) => `.flip-wrapper {\n  perspective: 1000px;\n  width: 220px;\n  height: 110px;\n  cursor: pointer;\n}\n\n.flip-inner {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  transition: transform ${d}s ${t};\n  transform-style: preserve-3d;\n}\n\n.flip-wrapper:hover .flip-inner,\n.flip-wrapper:focus-visible .flip-inner,\n.flip-wrapper.is-flipped .flip-inner {\n  transform: rotateY(180deg);\n}\n\n.flip-face {\n  position: absolute;\n  inset: 0;\n  backface-visibility: hidden;\n  border-radius: 14px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 12px;\n}\n\n.flip-front {\n  background: #141523;\n  border: 1px solid rgba(123, 110, 246, 0.3);\n}\n\n.flip-back {\n  background: #101a2b;\n  border: 1px solid rgba(61, 221, 168, 0.3);\n  transform: rotateY(180deg);\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .flip-inner {\n    transition: none !important;\n  }\n}`
       };
 
       const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-animation-card]'));
@@ -274,8 +279,8 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
         void target.offsetWidth; // Reflow controlado para reiniciar keyframe
         target.classList.add('is-playing');
 
-        // Para stagger list
-        const items = target.querySelectorAll<HTMLElement>('.stagger-item');
+        // Para elementos internos animados
+        const items = target.querySelectorAll<HTMLElement>('.stagger-item, .dialog-surface, .sheet-drawer, .radiant-beam, .ring-progress-circle, .flip-inner');
         items.forEach((item) => {
           item.style.animation = 'none';
           void item.offsetWidth;
@@ -324,7 +329,7 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
           });
         }
 
-        const subAnimated = target.querySelector<HTMLElement>('.typing-text, .spinner-ring, .beacon-ring, .toast-banner, .skeleton-avatar, .skeleton-line, .accordion-arrow, .accordion-content');
+        const subAnimated = target.querySelector<HTMLElement>('.typing-text, .spinner-ring, .beacon-ring, .toast-banner, .skeleton-avatar, .skeleton-line, .accordion-arrow, .accordion-content, .dialog-surface, .sheet-drawer, .radiant-beam, .ring-progress-circle, .flip-inner');
         if (subAnimated) {
           subAnimated.style.animationDuration = `${duration}s`;
           subAnimated.style.animationTimingFunction = timing;
@@ -479,6 +484,17 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
             accordion.classList.toggle('is-open', !isOpen);
             const trigger = accordion.querySelector<HTMLElement>('.accordion-trigger');
             if (trigger) trigger.setAttribute('aria-expanded', String(!isOpen));
+          }
+          return;
+        }
+
+        // Interacción de giro de la tarjeta 3D Flip
+        const flipTrigger = target.closest<HTMLElement>('.flip-wrapper, [data-toggle-flip-demo]');
+        if (flipTrigger) {
+          const card = flipTrigger.closest<HTMLElement>('[data-animation-card]');
+          const flipWidget = card?.querySelector<HTMLElement>('[data-flip-card-widget]');
+          if (flipWidget) {
+            flipWidget.classList.toggle('is-flipped');
           }
           return;
         }
