@@ -18,10 +18,12 @@ const { animation } = Astro.props;
     <div class:list={['demo-stage', animation.previewClass]} data-demo-stage aria-hidden="true">
       {animation.id === 'fade-in' && (
         <div class="preview-toast is-playing" data-motion-target>
-          <span class="toast-icon">✓</span>
+          <span class="toast-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </span>
           <div class="toast-info">
             <strong>Notificación</strong>
-            <span>¡Guardado con éxito!</span>
+            <span>Guardado con éxito</span>
           </div>
         </div>
       )}
@@ -36,7 +38,9 @@ const { animation } = Astro.props;
 
       {animation.id === 'bounce' && (
         <div class="preview-bell is-playing" data-motion-target>
-          <div class="bell-icon">🔔</div>
+          <div class="bell-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          </div>
           <span class="bell-count">3</span>
         </div>
       )}
@@ -51,7 +55,9 @@ const { animation } = Astro.props;
 
       {animation.id === 'shake' && (
         <div class="preview-alert is-playing" data-motion-target>
-          <span class="alert-icon">⚠️</span>
+          <span class="alert-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          </span>
           <span class="alert-text">Error de acceso</span>
         </div>
       )}
@@ -78,7 +84,9 @@ const { animation } = Astro.props;
       {animation.id === 'hover-lift' && (
         <div class="preview-interactive-card" tabindex="0" data-motion-target>
           <div class="card-glow"></div>
-          <span class="card-icon">✦</span>
+          <span class="card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </span>
           <strong>Pasa el cursor</strong>
           <small>o presiona Tab</small>
         </div>

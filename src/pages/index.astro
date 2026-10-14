@@ -34,7 +34,7 @@ const categoryCounts = categories.reduce((acc, cat) => {
 
       <div class="topbar-actions">
         <button class="icon-toggle-btn" type="button" data-motion-toggle aria-label="Alternar reducción de movimiento" title="Alternar modo de movimiento reducido">
-          <span class="motion-icon" aria-hidden="true">⚡</span>
+          <svg class="motion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
           <span class="btn-label-desktop">Movimiento</span>
         </button>
 
@@ -160,9 +160,10 @@ const categoryCounts = categories.reduce((acc, cat) => {
           <div class="search-wrapper">
             <label class="search-box">
               <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              <span class="visually-hidden">Buscar animación</span>
               <input type="search" placeholder="Buscar animación..." data-search autocomplete="off" spellcheck="false" />
-              <button class="clear-search-btn" type="button" data-clear-search hidden aria-label="Limpiar búsqueda">✕</button>
+              <button class="clear-search-btn" type="button" data-clear-search hidden aria-label="Limpiar búsqueda">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </button>
               <kbd class="search-kbd" title="Presiona la tecla / para buscar">/</kbd>
             </label>
           </div>
@@ -173,7 +174,9 @@ const categoryCounts = categories.reduce((acc, cat) => {
         </div>
 
         <div class="empty-state" data-empty-state hidden>
-          <div class="empty-state-icon">🔍</div>
+          <div class="empty-state-icon" aria-hidden="true">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
           <h3>No se encontraron animaciones</h3>
           <p>No hay resultados que coincidan con tus criterios de búsqueda o filtro.</p>
           <button class="hero-btn hero-btn--secondary" type="button" data-reset-filters>
@@ -206,7 +209,9 @@ const categoryCounts = categories.reduce((acc, cat) => {
 
     <!-- Toast de copiado global -->
     <div class="copy-toast" data-global-toast aria-live="polite" hidden>
-      <span class="toast-check">✓</span>
+      <span class="toast-check">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </span>
       <span data-toast-msg>Código copiado al portapapeles</span>
     </div>
 
@@ -385,7 +390,7 @@ const categoryCounts = categories.reduce((acc, cat) => {
               if (copyLabel) copyLabel.textContent = '¡Copiado!';
               copyButton.classList.add('is-copied');
               if (status) status.textContent = 'Código copiado al portapapeles.';
-              showToast('¡Código copiado al portapapeles!');
+              showToast('Código copiado al portapapeles');
             } catch {
               if (copyLabel) copyLabel.textContent = 'Error';
               if (status) status.textContent = 'No se pudo copiar automáticamente.';

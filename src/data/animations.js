@@ -7,7 +7,7 @@ export const animations = [
     timing: 'ease-out',
     description: 'Aparición suave con aumento progresivo de opacidad y una leve elevación vertical.',
     previewClass: 'shape--fade-in',
-    htmlSnippet: `<div class="toast-card">\n  <span class="icon">✓</span>\n  <div class="content">\n    <strong>¡Guardado con éxito!</strong>\n    <p>Tus cambios han sido sincronizados.</p>\n  </div>\n</div>`,
+    htmlSnippet: `<div class="toast-card">\n  <span class="icon">OK</span>\n  <div class="content">\n    <strong>Guardado con éxito</strong>\n    <p>Tus cambios han sido sincronizados.</p>\n  </div>\n</div>`,
     code: `/* Animación Fade In */
 .elemento {
   animation: fadeIn 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -57,7 +57,7 @@ export const animations = [
     timing: 'cubic-bezier(0.28, 0.84, 0.42, 1)',
     description: 'Rebote elástico y enérgico, ideal para destacar alertas, notificaciones o botones de acción.',
     previewClass: 'shape--bounce',
-    htmlSnippet: `<div class="bell-badge">\n  <span class="bell-icon">🔔</span>\n  <span class="counter">+3</span>\n</div>`,
+    htmlSnippet: `<div class="bell-badge">\n  <span class="counter">+3</span>\n  <span>Notificaciones</span>\n</div>`,
     code: `/* Animación Bounce */
 .elemento {
   animation: bounce 850ms cubic-bezier(0.28, 0.84, 0.42, 1) both;
@@ -105,7 +105,7 @@ export const animations = [
     timing: 'ease-in-out',
     description: 'Sacudida horizontal rápida para indicar validación fallida, contraseñas erróneas o restricciones.',
     previewClass: 'shape--shake',
-    htmlSnippet: `<div class="input-alert">\n  <span class="icon">⚠️</span>\n  <span>Acceso denegado</span>\n</div>`,
+    htmlSnippet: `<div class="input-alert">\n  <span class="icon">!</span>\n  <span>Acceso denegado</span>\n</div>`,
     code: `/* Animación Shake */
 .elemento.error {
   animation: shake 500ms ease-in-out both;

@@ -1,13 +1,13 @@
-# CSS Motion Lab 🚀
+# CSS Motion Lab
 
 Catálogo interactivo moderno para consultar, probar, calibrar y copiar animaciones CSS puras listas para producción en proyectos web.
 
-🌐 **Demo en vivo en GitHub Pages**: [https://hugoadama.github.io/CSS_Motion_Lab/](https://hugoadama.github.io/CSS_Motion_Lab/)  
-📦 **Repositorio**: [https://github.com/HugoAdama/CSS_Motion_Lab](https://github.com/HugoAdama/CSS_Motion_Lab)
+- **Demo en vivo en GitHub Pages**: [https://hugoadama.github.io/CSS_Motion_Lab/](https://hugoadama.github.io/CSS_Motion_Lab/)
+- **Repositorio**: [https://github.com/HugoAdama/CSS_Motion_Lab](https://github.com/HugoAdama/CSS_Motion_Lab)
 
 ---
 
-## ✨ Características y Mejoras Implementadas
+## Características y Mejoras Implementadas
 
 - **8 Efectos de Animación Prácticos**:
   - `Fade in`: Notificación flotante con aumento suave de opacidad y elevación.
@@ -28,16 +28,16 @@ Catálogo interactivo moderno para consultar, probar, calibrar y copiar animacio
 
 ---
 
-## 🛠️ Tecnologías
+## Tecnologías
 
-- **Astro 5** (Generador de sitios estáticos ultrarrápido).
+- **Astro 5** (Generador de sitios estáticos).
 - **HTML5 Semántico** y accesible (ARIA roles y estados).
 - **CSS Nativo Moderno** (variables CSS, flexbox, CSS grid, backdrop-filter, animaciones por GPU).
 - **JavaScript Vanilla** (sin librerías pesadas, ejecución ágil y ligera).
 
 ---
 
-## 🚀 Ejecutar en Local
+## Ejecutar en Local
 
 ### Requisitos previos
 - Node.js 22.12 o superior
@@ -62,15 +62,15 @@ npm run preview
 
 ---
 
-## 📦 Despliegue en GitHub Pages
+## Despliegue en GitHub Pages
 
-1. En el repositorio de GitHub, ve a **Settings → Pages**.
+1. En el repositorio de GitHub, ve a **Settings -> Pages**.
 2. En **Build and deployment > Source**, selecciona **GitHub Actions**.
 3. Al hacer `push` a la rama `main`, el workflow configurado en `.github/workflows/deploy.yml` compilará y publicará la web automáticamente.
 
 ---
 
-## 💡 Cómo agregar nuevas animaciones
+## Cómo agregar nuevas animaciones
 
 1. Agrega el nuevo elemento a `src/data/animations.js`:
    ```javascript
