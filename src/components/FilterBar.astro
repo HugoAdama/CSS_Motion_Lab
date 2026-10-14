@@ -30,7 +30,7 @@ const { categories, categoryCounts, totalCount } = Astro.props;
   <div class="filter-pills" role="group" aria-label="Filtrar por categoría">
     {categories.map((category, index) => (
       <button
-        class="filter-pill"
+        class:list={['filter-pill', index === 0 && 'is-active']}
         type="button"
         data-filter={category}
         aria-pressed={index === 0 ? 'true' : 'false'}
