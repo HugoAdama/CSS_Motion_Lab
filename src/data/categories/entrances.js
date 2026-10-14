@@ -398,4 +398,418 @@ export const entrancesAnimations = [
   .drop-card { animation: none !important; opacity: 1 !important; transform: none !important; }
 }`
   },
+  {
+    id: "zoom-in-down",
+    name: "Zoom In Down / Descenso Proyectado",
+    category: "Entrada",
+    defaultDuration: 0.6,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Combina translateY(-50px) y scale(0.45) delegados al procesador gráfico.",
+    description: "Aparición proyectada desde el fondo superior con aumento de escala y amortiguación frontal.",
+    targetSelector: ".zoom-down-card",
+    previewClass: "shape--zoom-in-down",
+    htmlSnippet: "<div class=\"zoom-down-card\">\n  <span class=\"zoom-icon\">&darr;</span>\n  <strong>Descarga completada</strong>\n</div>",
+    previewHtml: "<div class=\"zoom-down-card is-playing\" data-motion-target>\n  <span class=\"zoom-icon\">&darr;</span>\n  <strong>Descarga completada</strong>\n</div>",
+    generateCss: (dur, timing) => `.zoom-down-card {
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.35);
+  animation: zoomInDown ${dur}s ${timing} both;
+}
+
+@keyframes zoomInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.45);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(8px) scale(1.05);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom-down-card { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "slide-in-right",
+    name: "Slide In Right / Entrada Lateral Derecha",
+    category: "Entrada",
+    defaultDuration: 0.55,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Usa translateX() sin alterar el flujo de maquetación ni disparar recálculos de geometría.",
+    description: "Desplazamiento horizontal fluido desde el margen derecho con desaceleración natural.",
+    targetSelector: ".slide-right-card",
+    previewClass: "shape--slide-in-right",
+    htmlSnippet: "<div class=\"slide-right-card\">\n  <span class=\"slide-right-indicator\"></span>\n  <span>Notificación entrante</span>\n</div>",
+    previewHtml: "<div class=\"slide-right-card is-playing\" data-motion-target>\n  <span class=\"slide-right-indicator\"></span>\n  <span>Notificación entrante</span>\n</div>",
+    generateCss: (dur, timing) => `.slide-right-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(61, 221, 168, 0.3);
+  animation: slideInRight ${dur}s ${timing} both;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(45px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-right-card { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "expand-horizontally",
+    name: "Apertura Expansiva Horizontal (Iris Reveal)",
+    category: "Entrada",
+    defaultDuration: 0.5,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "clip-path",
+    renderCost: "Repintado / Paint",
+    renderCostType: "paint",
+    costExplanation: "Transición de recorte geométrico con inset(0 50% 0 50%) a inset(0 0 0 0) sin reflow.",
+    description: "Revelado en telón horizontal desde el centro hacia los extremos como un diafragma cinematográfico.",
+    targetSelector: ".iris-banner",
+    previewClass: "shape--expand-horizontally",
+    htmlSnippet: "<div class=\"iris-banner\">\n  <strong>CONFIRMACIÓN OFICIAL</strong>\n</div>",
+    previewHtml: "<div class=\"iris-banner is-playing\" data-motion-target>\n  <strong>CONFIRMACIÓN OFICIAL</strong>\n</div>",
+    generateCss: (dur, timing) => `.iris-banner {
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #7b6ef6, #3ddda8);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  animation: irisExpand ${dur}s ${timing} both;
+}
+
+@keyframes irisExpand {
+  from {
+    clip-path: inset(0 50% 0 50% round 12px);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 12px);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iris-banner { animation: none !important; clip-path: none !important; opacity: 1 !important; }
+}`
+  },
+  {
+    id: "flip-in-y",
+    name: "Giro 3D en Eje Y (Flip In Y)",
+    category: "Entrada",
+    defaultDuration: 0.65,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (rotateY), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Rotación en perspectiva espacial sobre rotateY() ejecutada en hardware 3D.",
+    description: "Volteo vertical tridimensional similar al giro de una tarjeta de presentación física.",
+    targetSelector: ".flip-y-card",
+    previewClass: "shape--flip-in-y",
+    htmlSnippet: "<div class=\"flip-y-card\">\n  <span class=\"flip-badge\">3D</span>\n  <strong>Tarjeta Virtual</strong>\n</div>",
+    previewHtml: "<div class=\"flip-y-card is-playing\" data-motion-target>\n  <span class=\"flip-badge\">3D</span>\n  <strong>Tarjeta Virtual</strong>\n</div>",
+    generateCss: (dur, timing) => `.flip-y-card {
+  perspective: 600px;
+  padding: 14px 22px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.35);
+  animation: flipInY ${dur}s ${timing} both;
+}
+
+@keyframes flipInY {
+  from {
+    opacity: 0;
+    transform: perspective(600px) rotateY(-80deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(600px) rotateY(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-y-card { animation: none !important; transform: none !important; opacity: 1 !important; }
+}`
+  },
+  {
+    id: "roll-in",
+    name: "Rodamiento Dinámico (Roll In)",
+    category: "Entrada",
+    defaultDuration: 0.6,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Sincroniza translateX(-100%) con rotate(-120deg) directamente en el hilo compositor.",
+    description: "Rodamiento elástico desde el lateral izquierdo con giro dinámico de rueda de engranaje.",
+    targetSelector: ".roll-pill",
+    previewClass: "shape--roll-in",
+    htmlSnippet: "<div class=\"roll-pill\">\n  <span class=\"roll-icon\">&sect;</span>\n  <span>Modo Activo</span>\n</div>",
+    previewHtml: "<div class=\"roll-pill is-playing\" data-motion-target>\n  <span class=\"roll-icon\">&sect;</span>\n  <span>Modo Activo</span>\n</div>",
+    generateCss: (dur, timing) => `.roll-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #141523;
+  border: 1px solid rgba(61, 221, 168, 0.4);
+  animation: rollIn ${dur}s ${timing} both;
+}
+
+@keyframes rollIn {
+  from {
+    opacity: 0;
+    transform: translateX(-60px) rotate(-120deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roll-pill { animation: none !important; transform: none !important; opacity: 1 !important; }
+}`
+  },
+  {
+    id: "spiral-in",
+    name: "Entrada en Espiral (Spiral Twist)",
+    category: "Entrada",
+    defaultDuration: 0.7,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Giro centrípeto continuo con rotación combinada y escala progresiva de 0.2 a 1.",
+    description: "Entrada arremolinada con giro de 180° y expansión centrada para elementos emblemáticos.",
+    targetSelector: ".spiral-box",
+    previewClass: "shape--spiral-in",
+    htmlSnippet: "<div class=\"spiral-box\">\n  <div class=\"spiral-core\">NUEVO</div>\n</div>",
+    previewHtml: "<div class=\"spiral-box is-playing\" data-motion-target>\n  <div class=\"spiral-core\">NUEVO</div>\n</div>",
+    generateCss: (dur, timing) => `.spiral-box {
+  display: grid;
+  place-items: center;
+  animation: spiralIn ${dur}s ${timing} both;
+}
+
+@keyframes spiralIn {
+  from {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spiral-box { animation: none !important; transform: none !important; opacity: 1 !important; }
+}`
+  },
+  {
+    id: "swirl-in",
+    name: "Remolino con Desenfoque (Swirl Blur)",
+    category: "Entrada",
+    defaultDuration: 0.65,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity, filter",
+    renderCost: "Composición y Repintado",
+    renderCostType: "paint",
+    costExplanation: "Transición coordinada de filter: blur() y rotación con escalado sobre la capa gráfica.",
+    description: "Vórtice visual con desenfoque que se disipa con nitidez al estabilizar la orientación final.",
+    targetSelector: ".swirl-card",
+    previewClass: "shape--swirl-in",
+    htmlSnippet: "<div class=\"swirl-card\">\n  <span class=\"swirl-tag\">LAB</span>\n  <strong>Efecto Vórtice</strong>\n</div>",
+    previewHtml: "<div class=\"swirl-card is-playing\" data-motion-target>\n  <span class=\"swirl-tag\">LAB</span>\n  <strong>Efecto Vórtice</strong>\n</div>",
+    generateCss: (dur, timing) => `.swirl-card {
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.3);
+  animation: swirlIn ${dur}s ${timing} both;
+}
+
+@keyframes swirlIn {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: rotate(35deg) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swirl-card { animation: none !important; filter: none !important; transform: none !important; opacity: 1 !important; }
+}`
+  },
+  {
+    id: "fold-in",
+    name: "Despliegue 3D Origami (Fold In Top)",
+    category: "Entrada",
+    defaultDuration: 0.55,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (rotateX), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Anclaje en top center con rotación negativa en rotateX() simulando una bisagra superior.",
+    description: "Despliegue hacia abajo en perspectiva como una página doblada o marquesina abatible.",
+    targetSelector: ".fold-panel",
+    previewClass: "shape--fold-in",
+    htmlSnippet: "<div class=\"fold-panel\">\n  <strong>Aviso Importante</strong>\n  <p>Actualización en curso</p>\n</div>",
+    previewHtml: "<div class=\"fold-panel is-playing\" data-motion-target>\n  <strong>Aviso Importante</strong>\n  <p>Actualización en curso</p>\n</div>",
+    generateCss: (dur, timing) => `.fold-panel {
+  transform-origin: top center;
+  perspective: 700px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(255, 189, 46, 0.4);
+  animation: foldIn ${dur}s ${timing} both;
+}
+
+@keyframes foldIn {
+  from {
+    opacity: 0;
+    transform: perspective(700px) rotateX(-90deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(700px) rotateX(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fold-panel { animation: none !important; transform: none !important; opacity: 1 !important; }
+}`
+  },
+  {
+    id: "stamp-in",
+    name: "Impacto Sello (Stamp Slam)",
+    category: "Entrada",
+    defaultDuration: 0.45,
+    defaultTiming: "cubic-bezier(0.2, 0.8, 0.2, 1)",
+    timingOptions: ["cubic-bezier(0.2, 0.8, 0.2, 1)","ease-out","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Contracción violenta de escala (1.8 a 1.0) con giro leve de 4 grados que simula un cuño de tinta.",
+    description: "Golpe contundente desde el frente con inclinación orgánica para sellos de estado o aprobación.",
+    targetSelector: ".stamp-box",
+    previewClass: "shape--stamp-in",
+    htmlSnippet: "<div class=\"stamp-box\">\n  <span>APROBADO</span>\n</div>",
+    previewHtml: "<div class=\"stamp-box is-playing\" data-motion-target>\n  <span>APROBADO</span>\n</div>",
+    generateCss: (dur, timing) => `.stamp-box {
+  display: inline-block;
+  padding: 8px 18px;
+  border: 2px solid #3ddda8;
+  border-radius: 8px;
+  color: #3ddda8;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  animation: stampImpact ${dur}s ${timing} both;
+}
+
+@keyframes stampImpact {
+  0% {
+    opacity: 0;
+    transform: scale(1.9) rotate(-10deg);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.95) rotate(-3deg);
+  }
+  100% {
+    transform: scale(1) rotate(-4deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-box { animation: none !important; transform: rotate(-4deg) !important; opacity: 1 !important; }
+}`
+  },
+  {
+    id: "pop-spring",
+    name: "Salto Elástico (Overshoot Spring Pop)",
+    category: "Entrada",
+    defaultDuration: 0.5,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Ecuación de rebote elástico mediante curva Bezier con rebasamiento superior (1.56).",
+    description: "Aparición instantánea y elástica que supera su tamaño natural antes de reposar suavemente.",
+    targetSelector: ".spring-chip",
+    previewClass: "shape--pop-spring",
+    htmlSnippet: "<div class=\"spring-chip\">\n  <span class=\"spring-dot\"></span>\n  <strong>Elemento Activo</strong>\n</div>",
+    previewHtml: "<div class=\"spring-chip is-playing\" data-motion-target>\n  <span class=\"spring-dot\"></span>\n  <strong>Elemento Activo</strong>\n</div>",
+    generateCss: (dur, timing) => `.spring-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #7b6ef6;
+  color: #fff;
+  animation: springPop ${dur}s ${timing} both;
+}
+
+@keyframes springPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spring-chip { animation: none !important; transform: scale(1) !important; opacity: 1 !important; }
+}`
+  }
 ];
+

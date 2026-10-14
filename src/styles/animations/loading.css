@@ -251,3 +251,263 @@
   0% { transform: rotate(0deg); }
   50%, 100% { transform: rotate(180deg); }
 }
+
+/* 11. Bouncing Cubes */
+.cubes-loader {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.cube-item {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--violet);
+  animation: cubeBounce 1.2s ease-in-out infinite;
+  animation-delay: calc(var(--cube-idx, 0) * 0.16s);
+}
+@keyframes cubeBounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+  40% { transform: translateY(-16px); opacity: 1; background: var(--mint); }
+}
+
+/* 12. Circular Dash */
+.circular-dash-box {
+  display: grid;
+  place-items: center;
+}
+.dash-svg {
+  width: 44px;
+  height: 44px;
+  animation: dashRotate 1.6s linear infinite;
+}
+.dash-track {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+.dash-circle {
+  stroke: var(--violet);
+  stroke-linecap: round;
+  stroke-dasharray: 90, 150;
+  stroke-dashoffset: 0;
+  animation: dashExpand 1.6s ease-in-out infinite;
+}
+@keyframes dashRotate { 100% { transform: rotate(360deg); } }
+@keyframes dashExpand {
+  0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+  50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+  100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
+}
+
+/* 13. Infinity Loop */
+.infinity-loader {
+  display: grid;
+  place-items: center;
+}
+.infinity-glyph {
+  font-size: 38px;
+  line-height: 1;
+  color: var(--violet);
+  animation: infinityPulse 1.5s ease-in-out infinite;
+}
+@keyframes infinityPulse {
+  0%, 100% {
+    transform: scale(0.9) rotate(0deg);
+    opacity: 0.6;
+    filter: drop-shadow(0 0 4px rgba(123, 110, 246, 0.4));
+  }
+  50% {
+    transform: scale(1.15) rotate(5deg);
+    opacity: 1;
+    color: var(--mint);
+    filter: drop-shadow(0 0 16px rgba(61, 221, 168, 0.8));
+  }
+}
+
+/* 14. Battery Charging */
+.battery-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+.battery-shell {
+  width: 48px;
+  height: 24px;
+  border: 2px solid var(--violet);
+  border-radius: 6px;
+  padding: 2px;
+}
+.battery-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--mint);
+  animation: batteryCharge 2s steps(4, end) infinite;
+}
+.battery-terminal {
+  width: 4px;
+  height: 10px;
+  background: var(--violet);
+  border-radius: 0 2px 2px 0;
+}
+@keyframes batteryCharge {
+  0% { width: 0%; background: var(--coral); }
+  50% { background: #ffbd2e; }
+  100% { width: 100%; background: var(--mint); }
+}
+
+/* 15. Flip Cube */
+.flip-cube {
+  width: 32px;
+  height: 32px;
+  background: var(--violet-gradient);
+  border-radius: 6px;
+  animation: flipCube 1.2s ease-in-out infinite;
+  box-shadow: 0 4px 16px rgba(123, 110, 246, 0.35);
+}
+@keyframes flipCube {
+  0% { transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+  50% { transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+  100% { transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); }
+}
+
+/* 16. Ripple Rings */
+.ripple-stage {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+.ripple-ring {
+  position: absolute;
+  inset: 0;
+  border: 3px solid var(--violet);
+  border-radius: 50%;
+  animation: rippleGrow 1.6s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.ripple-ring--2 {
+  animation-delay: -0.8s;
+  border-color: var(--mint);
+}
+@keyframes rippleGrow {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+/* 17. Chase Spinner */
+.chase-stage {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  animation: chaseRotate 2.2s linear infinite;
+}
+.chase-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--violet);
+  animation: chaseScale 1.2s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i, 1) * -0.3s);
+}
+.chase-dot:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+.chase-dot:nth-child(2) { top: 50%; right: 0; transform: translateY(-50%); background: var(--mint); }
+.chase-dot:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); }
+.chase-dot:nth-child(4) { top: 50%; left: 0; transform: translateY(-50%); background: var(--mint); }
+@keyframes chaseRotate { to { transform: rotate(360deg); } }
+@keyframes chaseScale { from { transform: scale(0.6); } to { transform: scale(1.3); } }
+
+/* 18. DNA Helix */
+.helix-loader {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 40px;
+}
+.helix-pair {
+  position: relative;
+  width: 10px;
+  height: 36px;
+}
+.helix-pair i:nth-child(1) {
+  position: absolute;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--violet);
+  animation: helixMove1 1.4s ease-in-out infinite;
+  animation-delay: calc(var(--h, 0) * 0.2s);
+}
+.helix-pair i:nth-child(2) {
+  position: absolute;
+  bottom: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mint);
+  animation: helixMove2 1.4s ease-in-out infinite;
+  animation-delay: calc(var(--h, 0) * 0.2s);
+}
+@keyframes helixMove1 {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(28px) scale(0.6); }
+}
+@keyframes helixMove2 {
+  0%, 100% { transform: translateY(0) scale(0.6); }
+  50% { transform: translateY(-28px) scale(1); }
+}
+
+/* 19. Liquid Fill Tank */
+.liquid-tank {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--surface-card);
+  border: 2px solid var(--violet);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.liquid-wave {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(61, 221, 168, 0.4);
+  border-radius: 40%;
+  top: -45px;
+  animation: liquidSpin 2.5s linear infinite;
+}
+.liquid-percent {
+  position: relative;
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+  z-index: 1;
+}
+@keyframes liquidSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 20. Typing Dots Bubble */
+.typing-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--surface-card);
+  border: 1px solid var(--line-highlight);
+}
+.dot-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--violet);
+  animation: dotJump 1.2s ease-in-out infinite;
+  animation-delay: calc(var(--d, 0) * 0.18s);
+}
+@keyframes dotJump {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-7px); opacity: 1; background: var(--mint); }
+}
+

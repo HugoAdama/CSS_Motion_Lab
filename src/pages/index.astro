@@ -85,7 +85,42 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
     <!-- 4. Notificación flotante accesible -->
     <Toast />
 
-    <!-- 5. Script cliente empaquetado por Vite -->
+    <!-- 5. Barra flotante del Creador de Paquete Personalizado (Custom Bundle Dock) -->
+    <aside class="bundle-dock" data-bundle-dock hidden aria-label="Paquete CSS personalizado">
+      <div class="bundle-dock-inner">
+        <div class="bundle-dock-info">
+          <div class="bundle-dock-badge">
+            <span class="bundle-counter-pill" data-bundle-count>0</span>
+          </div>
+          <div class="bundle-dock-text">
+            <strong>Mi Selección de Animaciones</strong>
+            <span>Genera un archivo CSS único con tus animaciones</span>
+          </div>
+        </div>
+        <div class="bundle-dock-actions">
+          <button class="bundle-action-btn bundle-action-btn--primary" type="button" data-bundle-download title="Descargar paquete como archivo .css">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Descargar .CSS</span>
+          </button>
+          <button class="bundle-action-btn bundle-action-btn--secondary" type="button" data-bundle-copy title="Copiar todo el CSS unificado al portapapeles">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Copiar Todo</span>
+          </button>
+          <button class="bundle-action-btn bundle-action-btn--ghost" type="button" data-bundle-clear title="Vaciar selección">
+            <span>Limpiar</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 6. Script cliente empaquetado por Vite -->
     <script src="../scripts/main.ts"></script>
   </body>
 </html>

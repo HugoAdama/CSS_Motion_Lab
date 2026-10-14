@@ -1,5 +1,5 @@
 ---
-// FilterBar.astro — Cabecera de galería, botón de repetición, píldoras de filtrado y buscador interactivo
+// FilterBar.astro — Cabecera de galería, botón de repetición, píldoras de categoría, filtro de pipeline y buscador
 interface Props {
   categories: string[];
   categoryCounts: Record<string, number>;
@@ -13,7 +13,7 @@ const { categories, categoryCounts, totalCount } = Astro.props;
   <div>
     <div class="section-badge">CATÁLOGO INTERACTIVO</div>
     <h2 id="library-title">Galería de Efectos y Patrones UI</h2>
-    <p class="section-subtitle">Calibra duración, curvas y retrasos escalonados. Inspecciona el impacto en la composición del navegador y copia el ejemplo completo con un clic.</p>
+    <p class="section-subtitle">Calibra duración, curvas Bézier y retrasos escalonados. Inspecciona el impacto en la composición del navegador, ábrelas en CodePen y exporta paquetes personalizados.</p>
   </div>
   <div class="heading-controls">
     <button class="btn-replay-all" type="button" data-replay-all title="Reiniciar todas las animaciones visibles">
@@ -56,5 +56,33 @@ const { categories, categoryCounts, totalCount } = Astro.props;
       </button>
       <kbd class="search-kbd" title="Presiona la tecla / para enfocar el buscador">/</kbd>
     </label>
+  </div>
+</div>
+
+<!-- Filtro avanzado por pipeline de renderizado (GPU / Paint / Layout) -->
+<div class="pipeline-filter-bar">
+  <div class="pipeline-filter-label">
+    <svg class="pipeline-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+    </svg>
+    <span>Pipeline de Renderizado:</span>
+  </div>
+  <div class="pipeline-pills" role="group" aria-label="Filtrar por costo en el navegador">
+    <button class="pipeline-pill is-active" type="button" data-cost-filter="all" aria-pressed="true">
+      <span>Todos los costos</span>
+    </button>
+    <button class="pipeline-pill" type="button" data-cost-filter="composite" aria-pressed="false" title="Animaciones en transform y opacity ejecutadas en GPU">
+      <span class="pipeline-indicator pipeline-indicator--composite"></span>
+      <span>Solo GPU (Composición)</span>
+    </button>
+    <button class="pipeline-pill" type="button" data-cost-filter="paint" aria-pressed="false" title="Animaciones que involucran rasterizado de sombras o filtros">
+      <span class="pipeline-indicator pipeline-indicator--paint"></span>
+      <span>Repintado (Paint)</span>
+    </button>
+    <button class="pipeline-pill" type="button" data-cost-filter="layout" aria-pressed="false" title="Animaciones que alteran la geometría del DOM">
+      <span class="pipeline-indicator pipeline-indicator--layout"></span>
+      <span>Maquetación (Layout)</span>
+    </button>
   </div>
 </div>

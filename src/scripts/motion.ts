@@ -1,5 +1,6 @@
 // motion.ts — Control de reproducción de animaciones y modo de movimiento reducido accesible
 import { showToast } from './toast';
+import { eventBus } from './events';
 
 export function replayCard(card: HTMLElement): void {
   const target = card.querySelector<HTMLElement>('[data-motion-target]');
@@ -18,6 +19,14 @@ export function replayCard(card: HTMLElement): void {
     void item.offsetWidth;
     item.style.animation = prev;
     item.classList.add('is-playing');
+  });
+}
+
+export function replayAllVisibleCards(cards: HTMLElement[]): void {
+  cards.forEach((card) => {
+    if (!card.hidden) {
+      replayCard(card);
+    }
   });
 }
 
@@ -49,13 +58,13 @@ export function initMotionControls(cards: HTMLElement[]): void {
         window.setTimeout(() => icon.classList.remove('is-spinning'), 600);
       }
 
-      cards.forEach((card) => {
-        if (!card.hidden) {
-          replayCard(card);
-        }
-      });
-
+      replayAllVisibleCards(cards);
       showToast('Animaciones reiniciadas');
     });
+  });
+
+  // Escuchar evento desacoplado
+  eventBus.on('motion:replay-all', () => {
+    replayAllVisibleCards(cards);
   });
 }

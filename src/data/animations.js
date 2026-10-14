@@ -1,5 +1,5 @@
 // Catálogo principal unificado de animaciones y patrones UI
-// 10 animaciones por categoría (Total: 60 animaciones)
+// 20 animaciones por categoría (Total: 120 animaciones)
 
 import { patternsAnimations } from './categories/patterns.js';
 import { entrancesAnimations } from './categories/entrances.js';

@@ -401,4 +401,432 @@ export const emphasisAnimations = [
   .floating-orb { animation: none !important; transform: none !important; }
 }`
   },
+  {
+    id: "tada",
+    name: "Celebración / Tada Fanfare",
+    category: "Énfasis",
+    defaultDuration: 0.85,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","ease-out","linear"],
+    properties: "transform (scale, rotate)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Oscilación angular rápida combinada con pulsos de escala ejecutados enteramente en el hilo compositor.",
+    description: "Sacudida festiva que combina escala y rotación alternante para comunicar logros o premios.",
+    targetSelector: ".tada-badge",
+    previewClass: "shape--tada",
+    htmlSnippet: "<div class=\"tada-badge\">\n  <span class=\"tada-icon\">&#127881;</span>\n  <strong>¡Nivel Completado!</strong>\n</div>",
+    previewHtml: "<div class=\"tada-badge is-playing\" data-motion-target>\n  <span class=\"tada-icon\">&#127881;</span>\n  <strong>¡Nivel Completado!</strong>\n</div>",
+    generateCss: (dur, timing) => `.tada-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #141523;
+  border: 1px solid #ffbd2e;
+  color: #ffbd2e;
+  animation: tada ${dur}s ${timing} infinite;
+}
+
+@keyframes tada {
+  0% { transform: scale(1); }
+  10%, 20% { transform: scale(0.9) rotate(-3deg); }
+  30%, 50%, 70%, 90% { transform: scale(1.1) rotate(3deg); }
+  40%, 60%, 80% { transform: scale(1.1) rotate(-3deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tada-badge { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "swing",
+    name: "Péndulo Oscilante / Swing Pendulum",
+    category: "Énfasis",
+    defaultDuration: 1.2,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","ease-out","linear"],
+    properties: "transform (rotate)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Rotación pendular anclada en top center con decremento progresivo sin causar reflujo de maquetación.",
+    description: "Oscilación gravitatoria que imita el balanceo natural de un letrero colgante.",
+    targetSelector: ".swing-tag",
+    previewClass: "shape--swing",
+    htmlSnippet: "<div class=\"swing-tag\">\n  <span class=\"swing-pin\"></span>\n  <span>En Venta</span>\n</div>",
+    previewHtml: "<div class=\"swing-tag is-playing\" data-motion-target>\n  <span class=\"swing-pin\"></span>\n  <span>En Venta</span>\n</div>",
+    generateCss: (dur, timing) => `.swing-tag {
+  transform-origin: top center;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.4);
+  color: #fff;
+  animation: swing ${dur}s ${timing} infinite;
+}
+
+@keyframes swing {
+  20% { transform: rotate(15deg); }
+  40% { transform: rotate(-10deg); }
+  60% { transform: rotate(5deg); }
+  80% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swing-tag { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "wobble",
+    name: "Bamboleo Combinado / Wobble Tilt",
+    category: "Énfasis",
+    defaultDuration: 1,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","ease-out","linear"],
+    properties: "transform",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Combina desplazamiento en translateX() y rotación contraria en GPU de alto rendimiento.",
+    description: "Movimiento de vaivén desequilibrado para llamar la atención en botones de acción o carritos.",
+    targetSelector: ".wobble-card",
+    previewClass: "shape--wobble",
+    htmlSnippet: "<div class=\"wobble-card\">\n  <span>&iexcl;Revisa tu carrito!</span>\n</div>",
+    previewHtml: "<div class=\"wobble-card is-playing\" data-motion-target>\n  <span>&iexcl;Revisa tu carrito!</span>\n</div>",
+    generateCss: (dur, timing) => `.wobble-card {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(255, 110, 101, 0.4);
+  color: #ff6e65;
+  font-weight: 700;
+  animation: wobble ${dur}s ${timing} infinite;
+}
+
+@keyframes wobble {
+  0%, 100% { transform: translateX(0%); }
+  15% { transform: translateX(-15%) rotate(-5deg); }
+  30% { transform: translateX(12%) rotate(3deg); }
+  45% { transform: translateX(-8%) rotate(-3deg); }
+  60% { transform: translateX(5%) rotate(2deg); }
+  75% { transform: translateX(-2%) rotate(-1deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wobble-card { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "vibrate",
+    name: "Micro-vibración Háptica (Haptic Buzz)",
+    category: "Énfasis",
+    defaultDuration: 0.3,
+    defaultTiming: "linear",
+    timingOptions: ["linear","ease-in-out"],
+    properties: "transform",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Oscilación microscópica rápida de 2px en el hilo del compositor gráfico.",
+    description: "Vibración de alta frecuencia que simula el motor háptico de un teléfono o aviso crítico.",
+    targetSelector: ".vibrate-pill",
+    previewClass: "shape--vibrate",
+    htmlSnippet: "<div class=\"vibrate-pill\">\n  <span class=\"vibrate-dot\"></span>\n  <strong>Alarma Silenciosa</strong>\n</div>",
+    previewHtml: "<div class=\"vibrate-pill is-playing\" data-motion-target>\n  <span class=\"vibrate-dot\"></span>\n  <strong>Alarma Silenciosa</strong>\n</div>",
+    generateCss: (dur, timing) => `.vibrate-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #141523;
+  border: 1px solid rgba(255, 110, 101, 0.5);
+  color: #ff6e65;
+  animation: vibrateBuzz ${dur}s ${timing} infinite;
+}
+
+@keyframes vibrateBuzz {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vibrate-pill { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "glitch-shake",
+    name: "Sacudida Glitch Cyberpunk (Digital Glitch)",
+    category: "Énfasis",
+    defaultDuration: 0.8,
+    defaultTiming: "steps(2, start)",
+    timingOptions: ["steps(2, start)","linear","ease-in-out"],
+    properties: "transform, clip-path",
+    renderCost: "Repintado / Paint",
+    renderCostType: "paint",
+    costExplanation: "Saltos discretos con steps() alterando clip-path y desplazamientos horizontales súbitos.",
+    description: "Distorsión tecnológica digital abrupta que evoca pantallas CRT o anomalías del sistema.",
+    targetSelector: ".glitch-box",
+    previewClass: "shape--glitch-shake",
+    htmlSnippet: "<div class=\"glitch-box\">\n  <span class=\"glitch-core\">SYSTEM_ERR</span>\n</div>",
+    previewHtml: "<div class=\"glitch-box is-playing\" data-motion-target>\n  <span class=\"glitch-core\">SYSTEM_ERR</span>\n</div>",
+    generateCss: (dur, timing) => `.glitch-box {
+  display: inline-block;
+  padding: 8px 18px;
+  background: #0f101a;
+  border: 1px solid #3ddda8;
+  color: #3ddda8;
+  font-family: monospace;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  animation: glitchShake ${dur}s ${timing} infinite;
+}
+
+@keyframes glitchShake {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-3px, 1px); }
+  40% { transform: translate(3px, -1px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 1px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch-box { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "breathing-glow",
+    name: "Respiración Lumínica Suave (Ambient Breathing)",
+    category: "Énfasis",
+    defaultDuration: 2.8,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","ease-out"],
+    properties: "box-shadow, transform",
+    renderCost: "Composición y Repintado",
+    renderCostType: "paint",
+    costExplanation: "Expansión sinusoidal suave de resplandor difuso con escala mínima para no estresar el navegador.",
+    description: "Ritmo respiratorio zen que infunde vida ambiental a chips de estado o tarjetas de meditación.",
+    targetSelector: ".breathing-pill",
+    previewClass: "shape--breathing-glow",
+    htmlSnippet: "<div class=\"breathing-pill\">\n  <span class=\"breathing-dot\"></span>\n  <span>Modo Enfoque</span>\n</div>",
+    previewHtml: "<div class=\"breathing-pill is-playing\" data-motion-target>\n  <span class=\"breathing-dot\"></span>\n  <span>Modo Enfoque</span>\n</div>",
+    generateCss: (dur, timing) => `.breathing-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #141523;
+  border: 1px solid rgba(61, 221, 168, 0.4);
+  color: #3ddda8;
+  animation: breathingGlow ${dur}s ${timing} infinite;
+}
+
+@keyframes breathingGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(61, 221, 168, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(61, 221, 168, 0.6);
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breathing-pill { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "ring-ping",
+    name: "Onda Sonar Concéntrica (Sonar Ping)",
+    category: "Énfasis",
+    defaultDuration: 1.8,
+    defaultTiming: "cubic-bezier(0, 0, 0.2, 1)",
+    timingOptions: ["cubic-bezier(0, 0, 0.2, 1)","ease-out","linear"],
+    properties: "transform (scale), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Expansión del pseudo-anillo en transform: scale(2.2) y desvanecimiento a opacity: 0 en GPU.",
+    description: "Pulso de sonar náutico expansivo para balizas en vivo, coordenadas o puntos de interés en mapas.",
+    targetSelector: ".sonar-node",
+    previewClass: "shape--ring-ping",
+    htmlSnippet: "<div class=\"sonar-node\">\n  <span class=\"sonar-wave\"></span>\n  <span class=\"sonar-dot\"></span>\n</div>",
+    previewHtml: "<div class=\"sonar-node is-playing\" data-motion-target>\n  <span class=\"sonar-wave\"></span>\n  <span class=\"sonar-dot\"></span>\n</div>",
+    generateCss: (dur, timing) => `.sonar-node {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+}
+
+.sonar-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ff6e65;
+}
+
+.sonar-wave {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 110, 101, 0.6);
+  animation: sonarPing ${dur}s ${timing} infinite;
+}
+
+@keyframes sonarPing {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sonar-wave { animation: none !important; }
+}`
+  },
+  {
+    id: "jelly-bounce",
+    name: "Gelatina Elástica (Jelly Squash)",
+    category: "Énfasis",
+    defaultDuration: 0.9,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","ease-out","linear"],
+    properties: "transform (scaleX, scaleY)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Deformación asimétrica coordinando scaleX y scaleY conservando el volumen visual total.",
+    description: "Efecto gomoso cómico que aplasta y estira el componente como si fuera gelatina o caucho suave.",
+    targetSelector: ".jelly-pill",
+    previewClass: "shape--jelly-bounce",
+    htmlSnippet: "<div class=\"jelly-pill\">\n  <span>&iexcl;Presióname!</span>\n</div>",
+    previewHtml: "<div class=\"jelly-pill is-playing\" data-motion-target>\n  <span>&iexcl;Presióname!</span>\n</div>",
+    generateCss: (dur, timing) => `.jelly-pill {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: #7b6ef6;
+  color: #fff;
+  font-weight: 700;
+  animation: jellySquash ${dur}s ${timing} infinite;
+  transform-origin: center center;
+}
+
+@keyframes jellySquash {
+  0%, 100% { transform: scale(1, 1); }
+  25% { transform: scale(1.25, 0.75); }
+  50% { transform: scale(0.75, 1.25); }
+  75% { transform: scale(1.1, 0.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jelly-pill { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "beacon-radar",
+    name: "Faro Giratorio (Sweeping Beacon)",
+    category: "Énfasis",
+    defaultDuration: 2.2,
+    defaultTiming: "linear",
+    timingOptions: ["linear","ease-in-out"],
+    properties: "transform (rotate)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Giro continuo de un gradiente cónico angular sobre el compositor sin repintado de píxeles.",
+    description: "Haz de luz rotatorio de 360 grados como una torre de control o faro de navegación costero.",
+    targetSelector: ".beacon-orb",
+    previewClass: "shape--beacon-radar",
+    htmlSnippet: "<div class=\"beacon-orb\">\n  <div class=\"beacon-sweep\"></div>\n  <div class=\"beacon-core-dot\"></div>\n</div>",
+    previewHtml: "<div class=\"beacon-orb is-playing\" data-motion-target>\n  <div class=\"beacon-sweep\"></div>\n  <div class=\"beacon-core-dot\"></div>\n</div>",
+    generateCss: (dur, timing) => `.beacon-orb {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #10111d;
+  border: 1px solid rgba(123, 110, 246, 0.3);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.beacon-sweep {
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(123, 110, 246, 0.8) 360deg);
+  animation: beaconRotate ${dur}s ${timing} infinite;
+}
+
+.beacon-core-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3ddda8;
+  z-index: 1;
+}
+
+@keyframes beaconRotate {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beacon-sweep { animation: none !important; }
+}`
+  },
+  {
+    id: "spotlight-sweep",
+    name: "Barrido de Reflector (Spotlight Scan)",
+    category: "Énfasis",
+    defaultDuration: 2.4,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","ease-out"],
+    properties: "transform (translateX)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Capa diagonal semitransparente que se traslada sobre transform: translateX() en GPU.",
+    description: "Haz de luz diagonal que barre periódicamente el componente para evocar novedad o exclusividad.",
+    targetSelector: ".spotlight-card",
+    previewClass: "shape--spotlight-sweep",
+    htmlSnippet: "<div class=\"spotlight-card\">\n  <div class=\"spotlight-beam\"></div>\n  <strong>EDICIÓN ESPECIAL</strong>\n</div>",
+    previewHtml: "<div class=\"spotlight-card is-playing\" data-motion-target>\n  <div class=\"spotlight-beam\"></div>\n  <strong>EDICIÓN ESPECIAL</strong>\n</div>",
+    generateCss: (dur, timing) => `.spotlight-card {
+  position: relative;
+  padding: 14px 24px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.spotlight-beam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-25deg);
+  animation: spotSweep ${dur}s ${timing} infinite;
+}
+
+@keyframes spotSweep {
+  0% { transform: translateX(-150px) skewX(-25deg); }
+  50%, 100% { transform: translateX(250px) skewX(-25deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-beam { animation: none !important; }
+}`
+  }
 ];
+

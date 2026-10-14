@@ -1,4 +1,10 @@
 ---
+import type { AnimationDefinition } from '../types';
+
+interface Props {
+  animation: AnimationDefinition;
+}
+
 const { animation } = Astro.props;
 
 const initialCss = animation.generateCss(animation.defaultDuration, animation.defaultTiming, animation.defaultStaggerDelay || 0.1);
@@ -9,6 +15,7 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
   class="animation-card"
   data-animation-card
   data-category={animation.category}
+  data-cost-type={animation.renderCostType}
   data-name={animation.name.toLowerCase()}
   data-id={animation.id}
   data-default-duration={animation.defaultDuration}
@@ -76,6 +83,32 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
           </select>
         </label>
 
+        <!-- Visualizador interactivo de Curva Bézier en vivo -->
+        <div class="tuner-curve-box" data-curve-container title="Curva Bézier de aceleración">
+          <div class="curve-graph-wrap">
+            <svg class="curve-svg" viewBox="0 0 100 60" aria-hidden="true">
+              <!-- Rejilla y ejes -->
+              <line x1="10" y1="50" x2="90" y2="50" class="curve-axis" />
+              <line x1="10" y1="50" x2="10" y2="10" class="curve-axis" />
+              <line x1="10" y1="10" x2="90" y2="10" class="curve-grid-line" />
+              <line x1="90" y1="50" x2="90" y2="10" class="curve-grid-line" />
+              <!-- Líneas tangentes -->
+              <path class="curve-tangent" data-curve-tangent d="" />
+              <!-- Curva Bézier cúbica -->
+              <path class="curve-path" data-curve-path d="M 10 50 C 26 10, 40 10, 90 10" />
+              <!-- Puntos de control -->
+              <circle class="curve-cp" data-curve-cp1 cx="26" cy="10" r="2.5" />
+              <circle class="curve-cp" data-curve-cp2 cx="40" cy="10" r="2.5" />
+              <!-- Bolita animada sobre el eje -->
+              <circle class="curve-dot" data-curve-dot cx="10" cy="50" r="3.5" />
+            </svg>
+          </div>
+          <div class="curve-caption">
+            <span class="curve-badge">Curva Bézier:</span>
+            <code class="curve-val" data-curve-name>{animation.defaultTiming}</code>
+          </div>
+        </div>
+
         {animation.hasStaggerControl && (
           <label class="tuner-field tuner-field--full">
             <span class="tuner-label">
@@ -122,7 +155,37 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
         aria-label={`Copiar ejemplo completo de ${animation.name}`}
       >
         <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-        <span data-copy-full-text>Copiar ejemplo completo</span>
+        <span data-copy-full-text>Copiar</span>
+      </button>
+
+      <!-- Botón 1-clic: Abrir en CodePen -->
+      <button
+        class="button button--codepen"
+        type="button"
+        data-open-codepen
+        title="Abrir este ejemplo coordinado en CodePen listo para experimentar"
+        aria-label={`Abrir ${animation.name} en CodePen`}
+      >
+        <svg class="codepen-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
+          <line x1="12" y1="22" x2="12" y2="15.5"></line>
+          <polyline points="22 8.5 12 15.5 2 8.5"></polyline>
+          <polyline points="2 15.5 12 8.5 22 15.5"></polyline>
+          <line x1="12" y1="2" x2="12" y2="8.5"></line>
+        </svg>
+        <span>CodePen</span>
+      </button>
+
+      <!-- Botón Colección / Bundle Builder -->
+      <button
+        class="button button--bundle"
+        type="button"
+        data-bundle-toggle
+        title="Añadir a mi paquete CSS personalizado"
+        aria-label={`Añadir ${animation.name} a mi paquete`}
+      >
+        <span class="bundle-check-icon" aria-hidden="true">+</span>
+        <span class="bundle-btn-text">Paquete</span>
       </button>
 
       <button class="button button--code" type="button" data-toggle-code aria-expanded="false" aria-label={`Ver código de ${animation.name}`}>

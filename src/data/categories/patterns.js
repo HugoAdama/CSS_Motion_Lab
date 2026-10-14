@@ -485,4 +485,439 @@ export const patternsAnimations = [
   }
 }`
   },
+  {
+    id: "drawer-sidebar",
+    name: "Panel Lateral Deslizable (Off-canvas Drawer)",
+    category: "Patrones UI",
+    defaultDuration: 0.45,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "El panel utiliza transform: translateX() y el telón de fondo usa opacity, manteniendo 60fps constantes en GPU.",
+    description: "Panel de navegación lateral que emerge desde el borde con oscurecimiento sincronizado del fondo.",
+    targetSelector: ".drawer-preview",
+    previewClass: "shape--drawer-sidebar",
+    htmlSnippet: "<div class=\"drawer-preview\">\n  <div class=\"drawer-backdrop\"></div>\n  <aside class=\"drawer-panel\">\n    <div class=\"drawer-header\">\n      <strong>Navegación</strong>\n      <span class=\"drawer-chip\">Activo</span>\n    </div>\n    <ul class=\"drawer-menu\">\n      <li><span>Resumen</span></li>\n      <li><span>Proyectos</span></li>\n      <li><span>Ajustes</span></li>\n    </ul>\n  </aside>\n</div>",
+    previewHtml: "<div class=\"drawer-preview is-playing\" data-motion-target>\n  <div class=\"drawer-backdrop\"></div>\n  <aside class=\"drawer-panel\">\n    <div class=\"drawer-header\">\n      <strong>Navegación</strong>\n      <span class=\"drawer-chip\">Pro</span>\n    </div>\n    <ul class=\"drawer-menu\">\n      <li><span>Resumen</span></li>\n      <li><span>Proyectos</span></li>\n      <li><span>Ajustes</span></li>\n    </ul>\n  </aside>\n</div>",
+    generateCss: (dur, timing) => `.drawer-preview {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  animation: drawerBackdrop ${dur}s ${timing} both;
+}
+
+.drawer-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 70%;
+  background: #141523;
+  border-right: 1px solid rgba(123, 110, 246, 0.3);
+  padding: 10px;
+  animation: drawerSlide ${dur}s ${timing} both;
+}
+
+@keyframes drawerSlide {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes drawerBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer-panel, .drawer-backdrop { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "tooltip-anchor",
+    name: "Tooltip con Anclaje y Despegue Elástico",
+    category: "Patrones UI",
+    defaultDuration: 0.35,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Aparición de globo con escala elástica (scale y translateY) sin recalcular dimensiones físicas.",
+    description: "Burbuja de ayuda contextual con anclaje superior, flecha direccional y efecto de amortiguación viva.",
+    targetSelector: ".tooltip-container",
+    previewClass: "shape--tooltip-anchor",
+    htmlSnippet: "<div class=\"tooltip-container\">\n  <div class=\"tooltip-bubble\">\n    <span>Guardado en la nube</span>\n    <div class=\"tooltip-arrow\"></div>\n  </div>\n  <button class=\"tooltip-trigger-btn\" type=\"button\">Ver estado</button>\n</div>",
+    previewHtml: "<div class=\"tooltip-container is-playing\" data-motion-target>\n  <div class=\"tooltip-bubble\">\n    <span>Guardado en la nube</span>\n    <div class=\"tooltip-arrow\"></div>\n  </div>\n  <button class=\"tooltip-trigger-btn\" type=\"button\">Ver estado</button>\n</div>",
+    generateCss: (dur, timing) => `.tooltip-bubble {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform-origin: bottom center;
+  background: #7b6ef6;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(123, 110, 246, 0.35);
+  animation: tooltipSpring ${dur}s ${timing} both;
+}
+
+@keyframes tooltipSpring {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(6px) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tooltip-bubble { animation: none !important; opacity: 1 !important; transform: translateX(-50%) !important; }
+}`
+  },
+  {
+    id: "badge-counter",
+    name: "Contador Pop con Rebote Dinámico",
+    category: "Patrones UI",
+    defaultDuration: 0.5,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Rebote con resorte (overshoot) directamente sobre transform: scale(), manteniendo la animación en GPU.",
+    description: "Insignia circular de notificaciones no leídas con salto elástico para capturar atención inmediata.",
+    targetSelector: ".badge-box",
+    previewClass: "shape--badge-counter",
+    htmlSnippet: "<div class=\"badge-box\">\n  <div class=\"badge-base-icon\">Bandeja de entrada</div>\n  <span class=\"badge-ping-pill\">+9</span>\n</div>",
+    previewHtml: "<div class=\"badge-box is-playing\" data-motion-target>\n  <div class=\"badge-base-icon\">Bandeja de entrada</div>\n  <span class=\"badge-ping-pill\">+9</span>\n</div>",
+    generateCss: (dur, timing) => `.badge-ping-pill {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #ff6e65;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  border: 2px solid #0f101a;
+  animation: badgePop ${dur}s ${timing} both;
+}
+
+@keyframes badgePop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-ping-pill { animation: none !important; opacity: 1 !important; transform: scale(1) !important; }
+}`
+  },
+  {
+    id: "segmented-control",
+    name: "Selector Segmentado con Pastilla Deslizante",
+    category: "Patrones UI",
+    defaultDuration: 0.4,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "La pastilla indicadora se desplaza horizontalmente con translateX() detrás de las etiquetas de opción.",
+    description: "Interruptor multidireccional donde una pastilla luminosa se desliza suavemente al segmento seleccionado.",
+    targetSelector: ".segmented-bar",
+    previewClass: "shape--segmented-control",
+    htmlSnippet: "<div class=\"segmented-bar\">\n  <div class=\"segment-pill\"></div>\n  <button class=\"segment-item\" type=\"button\">Día</button>\n  <button class=\"segment-item is-active\" type=\"button\">Semana</button>\n  <button class=\"segment-item\" type=\"button\">Mes</button>\n</div>",
+    previewHtml: "<div class=\"segmented-bar is-playing\" data-motion-target>\n  <div class=\"segment-pill\"></div>\n  <button class=\"segment-item\" type=\"button\">Día</button>\n  <button class=\"segment-item is-active\" type=\"button\">Semana</button>\n  <button class=\"segment-item\" type=\"button\">Mes</button>\n</div>",
+    generateCss: (dur, timing) => `.segmented-bar {
+  position: relative;
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.segment-pill {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(33.333% - 2.6px);
+  background: #7b6ef6;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(123, 110, 246, 0.3);
+  animation: slidePill ${dur}s ${timing} both;
+}
+
+@keyframes slidePill {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); } /* Hacia 'Semana' */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .segment-pill { animation: none !important; transform: translateX(100%) !important; }
+}`
+  },
+  {
+    id: "collapsible-card",
+    name: "Tarjeta Colapsable con Despliegue Suave",
+    category: "Patrones UI",
+    defaultDuration: 0.4,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "grid-template-rows, opacity",
+    renderCost: "Diseño por filas CSS Grid",
+    renderCostType: "layout",
+    costExplanation: "Transición nativa de 0fr a 1fr en grid-template-rows para animar altura dinámica sin valores fijos.",
+    description: "Contenedor de información con cabecera interactiva y despliegue elástico de detalles interiores.",
+    targetSelector: ".collapsible-card",
+    previewClass: "shape--collapsible-card",
+    htmlSnippet: "<div class=\"collapsible-card\">\n  <div class=\"collapsible-head\">\n    <span>Detalles del plan</span>\n    <span class=\"collapsible-arrow\">&darr;</span>\n  </div>\n  <div class=\"collapsible-body\">\n    <div class=\"collapsible-content\">\n      <p>Almacenamiento SSD 500GB con respaldo diario continuo.</p>\n    </div>\n  </div>\n</div>",
+    previewHtml: "<div class=\"collapsible-card is-playing\" data-motion-target>\n  <div class=\"collapsible-head\">\n    <span>Detalles del plan</span>\n    <span class=\"collapsible-arrow\">&darr;</span>\n  </div>\n  <div class=\"collapsible-body\">\n    <div class=\"collapsible-content\">\n      <p>Almacenamiento SSD 500GB con respaldo diario continuo.</p>\n    </div>\n  </div>\n</div>",
+    generateCss: (dur, timing) => `.collapsible-card {
+  width: 100%;
+  max-width: 250px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.25);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.collapsible-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  animation: expandGrid ${dur}s ${timing} both;
+}
+
+.collapsible-content {
+  overflow: hidden;
+}
+
+@keyframes expandGrid {
+  from { grid-template-rows: 0fr; opacity: 0; }
+  to { grid-template-rows: 1fr; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collapsible-body { animation: none !important; grid-template-rows: 1fr !important; opacity: 1 !important; }
+}`
+  },
+  {
+    id: "floating-action-menu",
+    name: "Menú Flotante Radial (Speed Dial FAB)",
+    category: "Patrones UI",
+    defaultDuration: 0.45,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Cada botón secundario se proyecta en translateY con retardo y escalado sobre capas compositadas.",
+    description: "Botón circular principal que despliega en abanico vertical acciones secundarias con rotación de icono.",
+    targetSelector: ".speed-dial-box",
+    previewClass: "shape--floating-action-menu",
+    htmlSnippet: "<div class=\"speed-dial-box\">\n  <div class=\"speed-items\">\n    <button class=\"speed-mini-btn\" style=\"--i: 2;\" type=\"button\" aria-label=\"Mensaje\">M</button>\n    <button class=\"speed-mini-btn\" style=\"--i: 1;\" type=\"button\" aria-label=\"Adjuntar\">A</button>\n  </div>\n  <button class=\"speed-main-btn\" type=\"button\" aria-label=\"Acciones\">+</button>\n</div>",
+    previewHtml: "<div class=\"speed-dial-box is-playing\" data-motion-target>\n  <div class=\"speed-items\">\n    <button class=\"speed-mini-btn\" style=\"--i: 2;\" type=\"button\" aria-label=\"Mensaje\">M</button>\n    <button class=\"speed-mini-btn\" style=\"--i: 1;\" type=\"button\" aria-label=\"Adjuntar\">A</button>\n  </div>\n  <button class=\"speed-main-btn\" type=\"button\" aria-label=\"Acciones\">+</button>\n</div>",
+    generateCss: (dur, timing) => `.speed-mini-btn {
+  animation: popItem ${dur}s ${timing} both;
+  animation-delay: calc(var(--i, 1) * 0.08s);
+}
+
+.speed-main-btn {
+  animation: rotateFab ${dur}s ${timing} both;
+}
+
+@keyframes popItem {
+  from { opacity: 0; transform: translateY(16px) scale(0.6); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes rotateFab {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(45deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .speed-mini-btn, .speed-main-btn { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "drag-drop-zone",
+    name: "Zona de Carga con Pulso Magnético (Dropzone)",
+    category: "Patrones UI",
+    defaultDuration: 1.6,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","ease-out","linear"],
+    properties: "border-color, box-shadow, transform",
+    renderCost: "Composición y Repintado",
+    renderCostType: "paint",
+    costExplanation: "Pulso rítmico en box-shadow y resplandor de borde discontinuo para invitar al arrastre de archivos.",
+    description: "Contenedor de carga de archivos que respira magnéticamente comunicando interactividad receptiva.",
+    targetSelector: ".dropzone-box",
+    previewClass: "shape--drag-drop-zone",
+    htmlSnippet: "<div class=\"dropzone-box\">\n  <div class=\"dropzone-icon\">&uarr;</div>\n  <strong>Arrastra tus archivos aquí</strong>\n  <span>o examina desde tu dispositivo</span>\n</div>",
+    previewHtml: "<div class=\"dropzone-box is-playing\" data-motion-target>\n  <div class=\"dropzone-icon\">&uarr;</div>\n  <strong>Arrastra tus archivos aquí</strong>\n  <span>o examina desde tu dispositivo</span>\n</div>",
+    generateCss: (dur, timing) => `.dropzone-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 2px dashed rgba(123, 110, 246, 0.4);
+  background: rgba(123, 110, 246, 0.04);
+  animation: dropzoneGlow ${dur}s ${timing} infinite;
+}
+
+@keyframes dropzoneGlow {
+  0%, 100% {
+    border-color: rgba(123, 110, 246, 0.35);
+    box-shadow: 0 0 0 0 rgba(123, 110, 246, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    border-color: rgba(61, 221, 168, 0.8);
+    box-shadow: 0 0 18px rgba(61, 221, 168, 0.25);
+    transform: scale(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dropzone-box { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "dock-magnification",
+    name: "Barra Flotante con Magnificación (Dock)",
+    category: "Patrones UI",
+    defaultDuration: 0.35,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Escala fluida mediante transform: scale() e inclinación leve en GPU con anclaje visual inferior.",
+    description: "Bandeja flotante de accesos directos estilo dock donde los iconos se magnifican ordenadamente.",
+    targetSelector: ".dock-shelf",
+    previewClass: "shape--dock-magnification",
+    htmlSnippet: "<div class=\"dock-shelf\">\n  <div class=\"dock-app-icon\" style=\"--bg: #7b6ef6;\">A</div>\n  <div class=\"dock-app-icon is-focused\" style=\"--bg: #3ddda8;\">B</div>\n  <div class=\"dock-app-icon\" style=\"--bg: #ff6e65;\">C</div>\n  <div class=\"dock-app-icon\" style=\"--bg: #ffbd2e;\">D</div>\n</div>",
+    previewHtml: "<div class=\"dock-shelf is-playing\" data-motion-target>\n  <div class=\"dock-app-icon\" style=\"--bg: #7b6ef6;\">A</div>\n  <div class=\"dock-app-icon is-focused\" style=\"--bg: #3ddda8;\">B</div>\n  <div class=\"dock-app-icon\" style=\"--bg: #ff6e65;\">C</div>\n  <div class=\"dock-app-icon\" style=\"--bg: #ffbd2e;\">D</div>\n</div>",
+    generateCss: (dur, timing) => `.dock-shelf {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: rgba(20, 21, 35, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dock-app-icon.is-focused {
+  animation: dockZoom ${dur}s ${timing} both;
+}
+
+@keyframes dockZoom {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-8px) scale(1.3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-app-icon.is-focused { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "command-palette",
+    name: "Paleta de Comandos (Spotlight Modal)",
+    category: "Patrones UI",
+    defaultDuration: 0.3,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity, filter",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Aparición instantánea de diálogo flotante con scale() y desvanecimiento de desenfoque.",
+    description: "Buscador global rápido con barra de búsqueda, atajo de teclado ⌘K y resultados indexados.",
+    targetSelector: ".cmd-dialog",
+    previewClass: "shape--command-palette",
+    htmlSnippet: "<div class=\"cmd-dialog\">\n  <div class=\"cmd-bar\">\n    <span class=\"cmd-icon\">&sect;</span>\n    <input type=\"text\" placeholder=\"Buscar comando...\" value=\"Cambiar tema\" readonly />\n    <kbd>ESC</kbd>\n  </div>\n  <div class=\"cmd-row is-active\">\n    <span>Alternar modo oscuro</span>\n    <span class=\"cmd-arrow\">&crarr;</span>\n  </div>\n</div>",
+    previewHtml: "<div class=\"cmd-dialog is-playing\" data-motion-target>\n  <div class=\"cmd-bar\">\n    <span class=\"cmd-icon\">&sect;</span>\n    <input type=\"text\" placeholder=\"Buscar comando...\" value=\"Cambiar tema\" readonly />\n    <kbd>ESC</kbd>\n  </div>\n  <div class=\"cmd-row is-active\">\n    <span>Alternar modo oscuro</span>\n    <span class=\"cmd-arrow\">&crarr;</span>\n  </div>\n</div>",
+    generateCss: (dur, timing) => `.cmd-dialog {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 14px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.35);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  animation: cmdAppear ${dur}s ${timing} both;
+}
+
+@keyframes cmdAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmd-dialog { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "rating-stars",
+    name: "Calificación Estelar en Cascada (Rating Stars)",
+    category: "Patrones UI",
+    defaultDuration: 0.5,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Cada estrella se infla elásticamente con retardo escalonado mediante calc(var(--star-idx) * delay).",
+    description: "Secuencia jubilosa de estrellas doradas que caen y botan al confirmar una puntuación o reseña.",
+    targetSelector: ".star-rating",
+    previewClass: "shape--rating-stars",
+    htmlSnippet: "<div class=\"star-rating\">\n  <span class=\"star-glyph\" style=\"--star-idx: 0;\">&#9733;</span>\n  <span class=\"star-glyph\" style=\"--star-idx: 1;\">&#9733;</span>\n  <span class=\"star-glyph\" style=\"--star-idx: 2;\">&#9733;</span>\n  <span class=\"star-glyph\" style=\"--star-idx: 3;\">&#9733;</span>\n  <span class=\"star-glyph\" style=\"--star-idx: 4;\">&#9733;</span>\n</div>",
+    previewHtml: "<div class=\"star-rating is-playing\" data-motion-target>\n  <span class=\"star-glyph\" style=\"--star-idx: 0;\">&#9733;</span>\n  <span class=\"star-glyph\" style=\"--star-idx: 1;\">&#9733;</span>\n  <span class=\"star-glyph\" style=\"--star-idx: 2;\">&#9733;</span>\n  <span class=\"star-glyph\" style=\"--star-idx: 3;\">&#9733;</span>\n  <span class=\"star-glyph\" style=\"--star-idx: 4;\">&#9733;</span>\n</div>",
+    generateCss: (dur, timing) => `.star-glyph {
+  display: inline-block;
+  color: #ffbd2e;
+  font-size: 20px;
+  animation: starPop ${dur}s ${timing} both;
+  animation-delay: calc(var(--star-idx, 0) * 0.08s);
+}
+
+@keyframes starPop {
+  0% { transform: scale(0.2); opacity: 0; }
+  60% { transform: scale(1.35); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-glyph { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  }
 ];
+

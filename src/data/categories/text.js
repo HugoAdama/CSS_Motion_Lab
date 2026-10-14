@@ -433,4 +433,387 @@ export const textAnimations = [
   .ticker-digits { animation: none !important; transform: translateY(-192px) !important; }
 }`
   },
+  {
+    id: "kinetic-stagger",
+    name: "Caída Tipográfica Cinética (Kinetic Fall)",
+    category: "Texto",
+    defaultDuration: 0.6,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Cada glifo desciende con retraso escalonado en transform: translateY() y rebote elástico en GPU.",
+    description: "Letras individuales que caen y se estabilizan con efecto elástico para titulares de impacto.",
+    targetSelector: ".kinetic-text",
+    previewClass: "shape--kinetic-stagger",
+    htmlSnippet: "<div class=\"kinetic-text\">\n  <span style=\"--l: 0;\">M</span>\n  <span style=\"--l: 1;\">O</span>\n  <span style=\"--l: 2;\">T</span>\n  <span style=\"--l: 3;\">I</span>\n  <span style=\"--l: 4;\">O</span>\n  <span style=\"--l: 5;\">N</span>\n</div>",
+    previewHtml: "<div class=\"kinetic-text is-playing\" data-motion-target>\n  <span style=\"--l: 0;\">M</span>\n  <span style=\"--l: 1;\">O</span>\n  <span style=\"--l: 2;\">T</span>\n  <span style=\"--l: 3;\">I</span>\n  <span style=\"--l: 4;\">O</span>\n  <span style=\"--l: 5;\">N</span>\n</div>",
+    generateCss: (dur, timing) => `.kinetic-text {
+  display: inline-flex;
+  gap: 2px;
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.kinetic-text span {
+  display: inline-block;
+  animation: kineticDrop ${dur}s ${timing} both;
+  animation-delay: calc(var(--l, 0) * 0.08s);
+}
+
+@keyframes kineticDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) rotate(-15deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kinetic-text span { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "neon-flicker",
+    name: "Rótulo de Neón Parpadeante (Neon Sign)",
+    category: "Texto",
+    defaultDuration: 1.8,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear"],
+    properties: "text-shadow, opacity",
+    renderCost: "Repintado / Paint (text-shadow)",
+    renderCostType: "paint",
+    costExplanation: "Oscilación intermitente de resplandores múltiples superpuestos con text-shadow.",
+    description: "Letrero de gas neón nocturno con chispas de encendido y luminosidad cian/violeta.",
+    targetSelector: ".neon-sign",
+    previewClass: "shape--neon-flicker",
+    htmlSnippet: "<div class=\"neon-sign\">\n  <span>OPEN 24/7</span>\n</div>",
+    previewHtml: "<div class=\"neon-sign is-playing\" data-motion-target>\n  <span>OPEN 24/7</span>\n</div>",
+    generateCss: (dur, timing) => `.neon-sign {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: #fff;
+  text-shadow: 0 0 7px #7b6ef6, 0 0 10px #7b6ef6, 0 0 21px #7b6ef6, 0 0 42px #3ddda8;
+  animation: neonFlicker ${dur}s ${timing} infinite;
+}
+
+@keyframes neonFlicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 0 0 7px #7b6ef6, 0 0 10px #7b6ef6, 0 0 21px #7b6ef6, 0 0 42px #3ddda8;
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+    opacity: 0.3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-sign { animation: none !important; opacity: 1 !important; }
+}`
+  },
+  {
+    id: "text-mask-slide",
+    name: "Revelado con Máscara Inferior (Mask Slide Up)",
+    category: "Texto",
+    defaultDuration: 0.5,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (translateY)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Texto ascendiendo en translateY() dentro de un contenedor con overflow: hidden.",
+    description: "Aparición limpia de texto que emerge desde una ranura inferior oculta.",
+    targetSelector: ".mask-slide-box",
+    previewClass: "shape--text-mask-slide",
+    htmlSnippet: "<div class=\"mask-slide-box\">\n  <span class=\"mask-slide-text\">Diseño de Interacción</span>\n</div>",
+    previewHtml: "<div class=\"mask-slide-box is-playing\" data-motion-target>\n  <span class=\"mask-slide-text\">Diseño de Interacción</span>\n</div>",
+    generateCss: (dur, timing) => `.mask-slide-box {
+  overflow: hidden;
+  display: inline-block;
+  padding: 4px 0;
+}
+
+.mask-slide-text {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 700;
+  color: #3ddda8;
+  animation: maskSlideUp ${dur}s ${timing} both;
+}
+
+@keyframes maskSlideUp {
+  from { transform: translateY(105%); }
+  to { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mask-slide-text { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "blur-fade-words",
+    name: "Enfoque Progresivo de Texto (Blur to Sharp)",
+    category: "Texto",
+    defaultDuration: 0.7,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "filter (blur), opacity, letter-spacing",
+    renderCost: "Composición y Repintado",
+    renderCostType: "paint",
+    costExplanation: "Transición de desenfoque de 12px a 0 con contracción simultánea de interletrado.",
+    description: "Texto que se materializa desde una niebla borrosa hasta alcanzar definición perfecta.",
+    targetSelector: ".blur-focus-text",
+    previewClass: "shape--blur-fade-words",
+    htmlSnippet: "<div class=\"blur-focus-text\">\n  <span>Sincronizando...</span>\n</div>",
+    previewHtml: "<div class=\"blur-focus-text is-playing\" data-motion-target>\n  <span>Sincronizando...</span>\n</div>",
+    generateCss: (dur, timing) => `.blur-focus-text {
+  font-size: 18px;
+  font-weight: 800;
+  color: #7b6ef6;
+  letter-spacing: 2px;
+  animation: blurToSharp ${dur}s ${timing} both;
+}
+
+@keyframes blurToSharp {
+  from {
+    filter: blur(14px);
+    opacity: 0;
+    letter-spacing: 10px;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    letter-spacing: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blur-focus-text { animation: none !important; filter: none !important; opacity: 1 !important; letter-spacing: 2px !important; }
+}`
+  },
+  {
+    id: "retro-arcade-text",
+    name: "Texto Arcade Retro 3D (Arcade Pop)",
+    category: "Texto",
+    defaultDuration: 1.2,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","ease-out"],
+    properties: "transform, text-shadow",
+    renderCost: "Composición y Repintado",
+    renderCostType: "paint",
+    costExplanation: "Sombras duras en capas y saltos rítmicos que evocan estética de 8 bits sin reflujo.",
+    description: "Tipografía retro de videojuego arcade con extrusión 3D escalonada en colores vibrantes.",
+    targetSelector: ".arcade-text",
+    previewClass: "shape--retro-arcade-text",
+    htmlSnippet: "<div class=\"arcade-text\">\n  <span>INSERT COIN</span>\n</div>",
+    previewHtml: "<div class=\"arcade-text is-playing\" data-motion-target>\n  <span>INSERT COIN</span>\n</div>",
+    generateCss: (dur, timing) => `.arcade-text {
+  font-family: monospace;
+  font-size: 20px;
+  font-weight: 900;
+  color: #ffbd2e;
+  text-shadow: 2px 2px 0px #ff6e65, 4px 4px 0px #7b6ef6;
+  animation: arcadeBounce ${dur}s ${timing} infinite;
+}
+
+@keyframes arcadeBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); text-shadow: 2px 6px 0px #ff6e65, 4px 10px 0px #7b6ef6; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arcade-text { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "tracking-expand",
+    name: "Expansión Cinematográfica (Tracking Spread)",
+    category: "Texto",
+    defaultDuration: 1.4,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "letter-spacing, opacity",
+    renderCost: "Repintado / Paint",
+    renderCostType: "paint",
+    costExplanation: "Apertura suave del espaciado entre letras desde 0px hasta 8px con incremento de opacidad.",
+    description: "Efecto de título cinematográfico donde los caracteres se separan lentamente con aura elegante.",
+    targetSelector: ".tracking-text",
+    previewClass: "shape--tracking-expand",
+    htmlSnippet: "<div class=\"tracking-text\">\n  <span>CINEMATIC</span>\n</div>",
+    previewHtml: "<div class=\"tracking-text is-playing\" data-motion-target>\n  <span>CINEMATIC</span>\n</div>",
+    generateCss: (dur, timing) => `.tracking-text {
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  animation: trackSpread ${dur}s ${timing} both;
+}
+
+@keyframes trackSpread {
+  from {
+    letter-spacing: -2px;
+    opacity: 0;
+  }
+  to {
+    letter-spacing: 8px;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tracking-text { animation: none !important; opacity: 1 !important; letter-spacing: 8px !important; }
+}`
+  },
+  {
+    id: "cipher-decode",
+    name: "Decodificación de Matriz (Cipher Text)",
+    category: "Texto",
+    defaultDuration: 1.5,
+    defaultTiming: "steps(6, end)",
+    timingOptions: ["steps(6, end)","linear"],
+    properties: "opacity, filter",
+    renderCost: "Repintado / Paint",
+    renderCostType: "paint",
+    costExplanation: "Animación de parpadeo escalonado en código binario o terminal de seguridad.",
+    description: "Texto que simula el descifrado secuencial de caracteres en una consola de ciberseguridad.",
+    targetSelector: ".cipher-text",
+    previewClass: "shape--cipher-decode",
+    htmlSnippet: "<div class=\"cipher-text\">\n  <span class=\"cipher-prefix\">&gt;</span>\n  <span class=\"cipher-code\">ACCESS_GRANTED</span>\n</div>",
+    previewHtml: "<div class=\"cipher-text is-playing\" data-motion-target>\n  <span class=\"cipher-prefix\">&gt;</span>\n  <span class=\"cipher-code\">ACCESS_GRANTED</span>\n</div>",
+    generateCss: (dur, timing) => `.cipher-text {
+  font-family: monospace;
+  font-size: 15px;
+  font-weight: 700;
+  color: #3ddda8;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.cipher-code {
+  animation: cipherReveal ${dur}s ${timing} both;
+}
+
+@keyframes cipherReveal {
+  0% { opacity: 0.2; filter: blur(4px); }
+  50% { opacity: 0.7; filter: blur(2px); }
+  100% { opacity: 1; filter: blur(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cipher-code { animation: none !important; opacity: 1 !important; filter: none !important; }
+}`
+  },
+  {
+    id: "highlight-brush",
+    name: "Subrayado Rotulador (Marker Sweep)",
+    category: "Texto",
+    defaultDuration: 0.6,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "background-size",
+    renderCost: "Repintado / Paint",
+    renderCostType: "paint",
+    costExplanation: "Expansión horizontal de background-size de 0% a 100% como un trazo de rotulador fluorescente.",
+    description: "Trazo de marcador de texto que recorre la palabra enfatizando la idea principal.",
+    targetSelector: ".marker-highlight",
+    previewClass: "shape--highlight-brush",
+    htmlSnippet: "<p class=\"marker-paragraph\">Aprende <span class=\"marker-highlight\">CSS Motion</span> profesional.</p>",
+    previewHtml: "<p class=\"marker-paragraph is-playing\" data-motion-target>Aprende <span class=\"marker-highlight\">CSS Motion</span> profesional.</p>",
+    generateCss: (dur, timing) => `.marker-highlight {
+  background-image: linear-gradient(120deg, rgba(123, 110, 246, 0.45) 0%, rgba(61, 221, 168, 0.45) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 40%;
+  background-position: 0 88%;
+  animation: sweepMarker ${dur}s ${timing} both;
+}
+
+@keyframes sweepMarker {
+  from { background-size: 0% 40%; }
+  to { background-size: 100% 40%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker-highlight { animation: none !important; background-size: 100% 40% !important; }
+}`
+  },
+  {
+    id: "stamp-press-text",
+    name: "Presión Tipográfica (Letterpress Stamp)",
+    category: "Texto",
+    defaultDuration: 0.45,
+    defaultTiming: "cubic-bezier(0.2, 0.8, 0.2, 1)",
+    timingOptions: ["cubic-bezier(0.2, 0.8, 0.2, 1)","ease-out"],
+    properties: "transform (scale), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Impacto frontal con compresión en escala (1.4 a 1.0) y rotación mínima simulando un grabado manual.",
+    description: "Letras que se hunden con firmeza comunicando solidez editorial o marca registrada.",
+    targetSelector: ".stamp-text",
+    previewClass: "shape--stamp-press-text",
+    htmlSnippet: "<div class=\"stamp-text\">\n  <span>ORIGINAL</span>\n</div>",
+    previewHtml: "<div class=\"stamp-text is-playing\" data-motion-target>\n  <span>ORIGINAL</span>\n</div>",
+    generateCss: (dur, timing) => `.stamp-text {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: #ff6e65;
+  animation: stampPress ${dur}s ${timing} both;
+}
+
+@keyframes stampPress {
+  from {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-text { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "floating-words",
+    name: "Palabras en Levitación Zen (Floating Words)",
+    category: "Texto",
+    defaultDuration: 3,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear"],
+    properties: "transform (translateY)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Oscilación sinusoidal en translateY() sin interferir con otros elementos.",
+    description: "Balanceo relajante y fluido de texto que transmite ligereza y concentración mental.",
+    targetSelector: ".floating-text",
+    previewClass: "shape--floating-words",
+    htmlSnippet: "<div class=\"floating-text\">\n  <span>Armonía & Flujo</span>\n</div>",
+    previewHtml: "<div class=\"floating-text is-playing\" data-motion-target>\n  <span>Armonía & Flujo</span>\n</div>",
+    generateCss: (dur, timing) => `.floating-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f8f9fe;
+  animation: floatZen ${dur}s ${timing} infinite;
+}
+
+@keyframes floatZen {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); color: #3ddda8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-text { animation: none !important; transform: none !important; }
+}`
+  }
 ];
+

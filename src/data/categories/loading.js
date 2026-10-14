@@ -442,4 +442,483 @@ export const loadingAnimations = [
   .sand-hourglass { animation: none !important; }
 }`
   },
+  {
+    id: "bouncing-cubes",
+    name: "Cubos Saltarines (Bouncing Cubes)",
+    category: "Carga",
+    defaultDuration: 1.2,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","ease-out"],
+    properties: "transform (translateY), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Tres cubos sincronizados con calc(var(--cube-idx) * delay) desplazándose en translateY.",
+    description: "Trío de cubos geométricos que rebotan en secuencia ondulada para pantallas de espera modernas.",
+    targetSelector: ".cubes-loader",
+    previewClass: "shape--bouncing-cubes",
+    htmlSnippet: "<div class=\"cubes-loader\">\n  <span class=\"cube-item\" style=\"--cube-idx: 0;\"></span>\n  <span class=\"cube-item\" style=\"--cube-idx: 1;\"></span>\n  <span class=\"cube-item\" style=\"--cube-idx: 2;\"></span>\n</div>",
+    previewHtml: "<div class=\"cubes-loader is-playing\" data-motion-target>\n  <span class=\"cube-item\" style=\"--cube-idx: 0;\"></span>\n  <span class=\"cube-item\" style=\"--cube-idx: 1;\"></span>\n  <span class=\"cube-item\" style=\"--cube-idx: 2;\"></span>\n</div>",
+    generateCss: (dur, timing) => `.cubes-loader {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.cube-item {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: #7b6ef6;
+  animation: cubeBounce ${dur}s ${timing} infinite;
+  animation-delay: calc(var(--cube-idx, 0) * 0.16s);
+}
+
+@keyframes cubeBounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translateY(-16px);
+    opacity: 1;
+    background: #3ddda8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cube-item { animation: none !important; transform: none !important; opacity: 1 !important; }
+}`
+  },
+  {
+    id: "circular-dash",
+    name: "Anillo Vectorial (Circular Dash)",
+    category: "Carga",
+    defaultDuration: 1.6,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","cubic-bezier(0.4, 0, 0.2, 1)"],
+    properties: "stroke-dashoffset, transform",
+    renderCost: "Composición y Repintado",
+    renderCostType: "paint",
+    costExplanation: "Modulación continua de stroke-dashoffset y rotación 360° sin disparar reflujo.",
+    description: "Anillo circular SVG de trazo elástico continuo similar al indicador de carga de Android.",
+    targetSelector: ".circular-dash-box",
+    previewClass: "shape--circular-dash",
+    htmlSnippet: "<div class=\"circular-dash-box\">\n  <svg class=\"dash-svg\" viewBox=\"0 0 50 50\">\n    <circle class=\"dash-track\" cx=\"25\" cy=\"25\" r=\"20\" fill=\"none\" stroke-width=\"4\" />\n    <circle class=\"dash-circle\" cx=\"25\" cy=\"25\" r=\"20\" fill=\"none\" stroke-width=\"4\" />\n  </svg>\n</div>",
+    previewHtml: "<div class=\"circular-dash-box is-playing\" data-motion-target>\n  <svg class=\"dash-svg\" viewBox=\"0 0 50 50\">\n    <circle class=\"dash-track\" cx=\"25\" cy=\"25\" r=\"20\" fill=\"none\" stroke-width=\"4\" />\n    <circle class=\"dash-circle\" cx=\"25\" cy=\"25\" r=\"20\" fill=\"none\" stroke-width=\"4\" />\n  </svg>\n</div>",
+    generateCss: (dur, timing) => `.dash-svg {
+  width: 44px;
+  height: 44px;
+  animation: dashRotate ${dur}s linear infinite;
+}
+
+.dash-circle {
+  stroke: #7b6ef6;
+  stroke-linecap: round;
+  stroke-dasharray: 90, 150;
+  stroke-dashoffset: 0;
+  animation: dashExpand ${dur}s ${timing} infinite;
+}
+
+@keyframes dashRotate {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes dashExpand {
+  0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+  50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+  100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dash-svg, .dash-circle { animation: none !important; }
+}`
+  },
+  {
+    id: "infinity-loop",
+    name: "Bucle Infinito (Infinity Pulse)",
+    category: "Carga",
+    defaultDuration: 1.5,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","ease-out"],
+    properties: "transform, opacity, filter",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Respiración lumínica y rotación oscilante mínima sobre el símbolo de infinito.",
+    description: "Símbolo de infinito pulsante con brillo neón para procesos perpetuos o sincronización continua.",
+    targetSelector: ".infinity-loader",
+    previewClass: "shape--infinity-loop",
+    htmlSnippet: "<div class=\"infinity-loader\">\n  <span class=\"infinity-glyph\">&infin;</span>\n</div>",
+    previewHtml: "<div class=\"infinity-loader is-playing\" data-motion-target>\n  <span class=\"infinity-glyph\">&infin;</span>\n</div>",
+    generateCss: (dur, timing) => `.infinity-loader {
+  display: grid;
+  place-items: center;
+}
+
+.infinity-glyph {
+  font-size: 38px;
+  line-height: 1;
+  color: #7b6ef6;
+  animation: infinityPulse ${dur}s ${timing} infinite;
+}
+
+@keyframes infinityPulse {
+  0%, 100% {
+    transform: scale(0.9) rotate(0deg);
+    opacity: 0.6;
+    filter: drop-shadow(0 0 4px rgba(123, 110, 246, 0.4));
+  }
+  50% {
+    transform: scale(1.15) rotate(5deg);
+    opacity: 1;
+    color: #3ddda8;
+    filter: drop-shadow(0 0 16px rgba(61, 221, 168, 0.8));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .infinity-glyph { animation: none !important; transform: none !important; opacity: 1 !important; }
+}`
+  },
+  {
+    id: "battery-charging",
+    name: "Carga de Batería (Battery Flow)",
+    category: "Carga",
+    defaultDuration: 2,
+    defaultTiming: "steps(4, end)",
+    timingOptions: ["steps(4, end)","linear","ease-in-out"],
+    properties: "width, background-color",
+    renderCost: "Repintado / Paint",
+    renderCostType: "paint",
+    costExplanation: "Incremento escalonado de 4 bloques con steps(4) simulando celdas de batería.",
+    description: "Carga progresiva de batería en 4 niveles para indicar subida de archivos o energía del sistema.",
+    targetSelector: ".battery-box",
+    previewClass: "shape--battery-charging",
+    htmlSnippet: "<div class=\"battery-box\">\n  <div class=\"battery-shell\">\n    <div class=\"battery-fill\"></div>\n  </div>\n  <div class=\"battery-terminal\"></div>\n</div>",
+    previewHtml: "<div class=\"battery-box is-playing\" data-motion-target>\n  <div class=\"battery-shell\">\n    <div class=\"battery-fill\"></div>\n  </div>\n  <div class=\"battery-terminal\"></div>\n</div>",
+    generateCss: (dur, timing) => `.battery-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.battery-shell {
+  width: 48px;
+  height: 24px;
+  border: 2px solid #7b6ef6;
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.battery-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: #3ddda8;
+  animation: batteryCharge ${dur}s ${timing} infinite;
+}
+
+.battery-terminal {
+  width: 4px;
+  height: 10px;
+  background: #7b6ef6;
+  border-radius: 0 2px 2px 0;
+}
+
+@keyframes batteryCharge {
+  0% { width: 0%; background: #ff6e65; }
+  50% { background: #ffbd2e; }
+  100% { width: 100%; background: #3ddda8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .battery-fill { animation: none !important; width: 100% !important; background: #3ddda8 !important; }
+}`
+  },
+  {
+    id: "flip-box",
+    name: "Caja Cúbica Giratoria (3D Flip Cube)",
+    category: "Carga",
+    defaultDuration: 1.2,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "transform (rotateX, rotateY)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Volteo tridimensional en rotateX y rotateY delegado a la GPU sin recalcular dimensiones.",
+    description: "Prisma cuadrado minimalista que rota en el espacio 3D para estados de carga elegantes.",
+    targetSelector: ".flip-cube",
+    previewClass: "shape--flip-box",
+    htmlSnippet: "<div class=\"flip-cube\"></div>",
+    previewHtml: "<div class=\"flip-cube is-playing\" data-motion-target></div>",
+    generateCss: (dur, timing) => `.flip-cube {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #7b6ef6, #3ddda8);
+  border-radius: 6px;
+  animation: flipCube ${dur}s ${timing} infinite;
+}
+
+@keyframes flipCube {
+  0% { transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+  50% { transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+  100% { transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-cube { animation: none !important; }
+}`
+  },
+  {
+    id: "ripple-loader",
+    name: "Ondas Acuáticas Concéntricas (Ripple Rings)",
+    category: "Carga",
+    defaultDuration: 1.6,
+    defaultTiming: "cubic-bezier(0, 0.2, 0.8, 1)",
+    timingOptions: ["cubic-bezier(0, 0.2, 0.8, 1)","ease-out","linear"],
+    properties: "transform (scale), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Dos ondas en contrafase escalando de 0 a 1 con disminución gradual de opacidad.",
+    description: "Efecto de gotas cayendo en agua cristalina con anillos transparentes que se propagan.",
+    targetSelector: ".ripple-stage",
+    previewClass: "shape--ripple-loader",
+    htmlSnippet: "<div class=\"ripple-stage\">\n  <div class=\"ripple-ring ripple-ring--1\"></div>\n  <div class=\"ripple-ring ripple-ring--2\"></div>\n</div>",
+    previewHtml: "<div class=\"ripple-stage is-playing\" data-motion-target>\n  <div class=\"ripple-ring ripple-ring--1\"></div>\n  <div class=\"ripple-ring ripple-ring--2\"></div>\n</div>",
+    generateCss: (dur, timing) => `.ripple-stage {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.ripple-ring {
+  position: absolute;
+  inset: 0;
+  border: 3px solid #7b6ef6;
+  border-radius: 50%;
+  animation: rippleGrow ${dur}s ${timing} infinite;
+}
+
+.ripple-ring--2 {
+  animation-delay: -0.8s;
+  border-color: #3ddda8;
+}
+
+@keyframes rippleGrow {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ripple-ring { animation: none !important; opacity: 0.5 !important; }
+}`
+  },
+  {
+    id: "chase-spinner",
+    name: "Puntos en Persecución (Chase Spinner)",
+    category: "Carga",
+    defaultDuration: 2.2,
+    defaultTiming: "linear",
+    timingOptions: ["linear","ease-in-out"],
+    properties: "transform (rotate)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Rotación compuesta con puntos orbitando a velocidades desfasadas sobre capas compositadas.",
+    description: "Cuatro esferas luminosas que se persiguen rítmicamente en una pista orbital circular.",
+    targetSelector: ".chase-stage",
+    previewClass: "shape--chase-spinner",
+    htmlSnippet: "<div class=\"chase-stage\">\n  <div class=\"chase-dot\" style=\"--i: 1;\"></div>\n  <div class=\"chase-dot\" style=\"--i: 2;\"></div>\n  <div class=\"chase-dot\" style=\"--i: 3;\"></div>\n  <div class=\"chase-dot\" style=\"--i: 4;\"></div>\n</div>",
+    previewHtml: "<div class=\"chase-stage is-playing\" data-motion-target>\n  <div class=\"chase-dot\" style=\"--i: 1;\"></div>\n  <div class=\"chase-dot\" style=\"--i: 2;\"></div>\n  <div class=\"chase-dot\" style=\"--i: 3;\"></div>\n  <div class=\"chase-dot\" style=\"--i: 4;\"></div>\n</div>",
+    generateCss: (dur, timing) => `.chase-stage {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  animation: chaseRotate ${dur}s ${timing} infinite;
+}
+
+.chase-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7b6ef6;
+  animation: chaseScale 1.2s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i, 1) * -0.3s);
+}
+
+.chase-dot:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+.chase-dot:nth-child(2) { top: 50%; right: 0; transform: translateY(-50%); background: #3ddda8; }
+.chase-dot:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); }
+.chase-dot:nth-child(4) { top: 50%; left: 0; transform: translateY(-50%); background: #3ddda8; }
+
+@keyframes chaseRotate { to { transform: rotate(360deg); } }
+@keyframes chaseScale { from { transform: scale(0.6); } to { transform: scale(1.3); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .chase-stage, .chase-dot { animation: none !important; }
+}`
+  },
+  {
+    id: "dna-helix",
+    name: "Hélice de ADN (DNA Helix Loader)",
+    category: "Carga",
+    defaultDuration: 1.4,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear"],
+    properties: "transform (translateY, scale)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Pares de puntos que se cruzan verticalmente en oposición de fase simulando doble hélice.",
+    description: "Movimiento helicoidal molecular relajante para cálculos científicos o procesamiento bioinformático.",
+    targetSelector: ".helix-loader",
+    previewClass: "shape--dna-helix",
+    htmlSnippet: "<div class=\"helix-loader\">\n  <div class=\"helix-pair\" style=\"--h: 0;\"><i></i><i></i></div>\n  <div class=\"helix-pair\" style=\"--h: 1;\"><i></i><i></i></div>\n  <div class=\"helix-pair\" style=\"--h: 2;\"><i></i><i></i></div>\n</div>",
+    previewHtml: "<div class=\"helix-loader is-playing\" data-motion-target>\n  <div class=\"helix-pair\" style=\"--h: 0;\"><i></i><i></i></div>\n  <div class=\"helix-pair\" style=\"--h: 1;\"><i></i><i></i></div>\n  <div class=\"helix-pair\" style=\"--h: 2;\"><i></i><i></i></div>\n</div>",
+    generateCss: (dur, timing) => `.helix-loader {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 40px;
+}
+
+.helix-pair {
+  position: relative;
+  width: 10px;
+  height: 36px;
+}
+
+.helix-pair i:nth-child(1) {
+  position: absolute;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7b6ef6;
+  animation: helixMove1 ${dur}s ${timing} infinite;
+  animation-delay: calc(var(--h, 0) * 0.2s);
+}
+
+.helix-pair i:nth-child(2) {
+  position: absolute;
+  bottom: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3ddda8;
+  animation: helixMove2 ${dur}s ${timing} infinite;
+  animation-delay: calc(var(--h, 0) * 0.2s);
+}
+
+@keyframes helixMove1 {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(28px) scale(0.6); }
+}
+
+@keyframes helixMove2 {
+  0%, 100% { transform: translateY(0) scale(0.6); }
+  50% { transform: translateY(-28px) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .helix-pair i { animation: none !important; }
+}`
+  },
+  {
+    id: "liquid-fill",
+    name: "Nivel Líquido Ondulante (Wave Fill)",
+    category: "Carga",
+    defaultDuration: 2.5,
+    defaultTiming: "linear",
+    timingOptions: ["linear","ease-in-out"],
+    properties: "transform (rotate)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Cuadrado redondeado rotando dentro de un contenedor esférico con overflow: hidden.",
+    description: "Depósito circular con superficie líquida que oscila y simula el llenado de un tanque.",
+    targetSelector: ".liquid-tank",
+    previewClass: "shape--liquid-fill",
+    htmlSnippet: "<div class=\"liquid-tank\">\n  <div class=\"liquid-wave\"></div>\n  <span class=\"liquid-percent\">75%</span>\n</div>",
+    previewHtml: "<div class=\"liquid-tank is-playing\" data-motion-target>\n  <div class=\"liquid-wave\"></div>\n  <span class=\"liquid-percent\">75%</span>\n</div>",
+    generateCss: (dur, timing) => `.liquid-tank {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #141523;
+  border: 2px solid #7b6ef6;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.liquid-wave {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(61, 221, 168, 0.4);
+  border-radius: 40%;
+  top: -45px;
+  animation: liquidSpin ${dur}s ${timing} infinite;
+}
+
+.liquid-percent {
+  position: relative;
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+  z-index: 1;
+}
+
+@keyframes liquidSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-wave { animation: none !important; }
+}`
+  },
+  {
+    id: "typing-dots",
+    name: "Puntos de Escritura Activa (Typing Bubble)",
+    category: "Carga",
+    defaultDuration: 1.2,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear"],
+    properties: "transform (translateY), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Tres esferas en burbuja de chat con translateY() desfasadas mediante calc().",
+    description: "Burbuja de mensajería con puntos elásticos que indican que un participante o IA está escribiendo.",
+    targetSelector: ".typing-bubble",
+    previewClass: "shape--typing-dots",
+    htmlSnippet: "<div class=\"typing-bubble\">\n  <span class=\"dot-pulse\" style=\"--d: 0;\"></span>\n  <span class=\"dot-pulse\" style=\"--d: 1;\"></span>\n  <span class=\"dot-pulse\" style=\"--d: 2;\"></span>\n</div>",
+    previewHtml: "<div class=\"typing-bubble is-playing\" data-motion-target>\n  <span class=\"dot-pulse\" style=\"--d: 0;\"></span>\n  <span class=\"dot-pulse\" style=\"--d: 1;\"></span>\n  <span class=\"dot-pulse\" style=\"--d: 2;\"></span>\n</div>",
+    generateCss: (dur, timing) => `.typing-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.3);
+}
+
+.dot-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #7b6ef6;
+  animation: dotJump ${dur}s ${timing} infinite;
+  animation-delay: calc(var(--d, 0) * 0.18s);
+}
+
+@keyframes dotJump {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-7px); opacity: 1; background: #3ddda8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot-pulse { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  }
 ];
+

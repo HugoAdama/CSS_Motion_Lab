@@ -231,3 +231,166 @@
   from { transform: translateY(0); }
   to { transform: translateY(-192px); }
 }
+
+/* 11. Kinetic Stagger */
+.kinetic-text {
+  display: inline-flex;
+  gap: 3px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+}
+.kinetic-text span {
+  display: inline-block;
+  animation: kineticDrop 600ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: calc(var(--l, 0) * 0.08s);
+}
+@keyframes kineticDrop {
+  from { opacity: 0; transform: translateY(-30px) rotate(-15deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+/* 12. Neon Flicker */
+.neon-sign {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: #fff;
+  text-shadow: 0 0 7px var(--violet), 0 0 10px var(--violet), 0 0 21px var(--violet), 0 0 42px var(--mint);
+  animation: neonFlicker 1.8s ease-in-out infinite;
+}
+@keyframes neonFlicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 0 0 7px var(--violet), 0 0 10px var(--violet), 0 0 21px var(--violet), 0 0 42px var(--mint);
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+    opacity: 0.3;
+  }
+}
+
+/* 13. Text Mask Slide */
+.mask-slide-box {
+  overflow: hidden;
+  display: inline-block;
+  padding: 4px 0;
+}
+.mask-slide-text {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--mint);
+  animation: maskSlideUp 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes maskSlideUp {
+  from { transform: translateY(105%); }
+  to { transform: translateY(0); }
+}
+
+/* 14. Blur to Sharp */
+.blur-focus-text {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--violet);
+  letter-spacing: 2px;
+  animation: blurToSharp 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes blurToSharp {
+  from { filter: blur(14px); opacity: 0; letter-spacing: 10px; }
+  to { filter: blur(0); opacity: 1; letter-spacing: 2px; }
+}
+
+/* 15. Arcade Pop */
+.arcade-text {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 900;
+  color: #ffbd2e;
+  text-shadow: 2px 2px 0px var(--coral), 4px 4px 0px var(--violet);
+  animation: arcadeBounce 1.2s ease-in-out infinite;
+}
+@keyframes arcadeBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); text-shadow: 2px 6px 0px var(--coral), 4px 10px 0px var(--violet); }
+}
+
+/* 16. Tracking Spread */
+.tracking-text {
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  animation: trackSpread 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes trackSpread {
+  from { letter-spacing: -2px; opacity: 0; }
+  to { letter-spacing: 7px; opacity: 1; }
+}
+
+/* 17. Cipher Matrix */
+.cipher-text {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mint);
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+.cipher-prefix { color: var(--text-muted); }
+.cipher-code {
+  animation: cipherReveal 1.5s steps(6, end) both;
+}
+@keyframes cipherReveal {
+  0% { opacity: 0.2; filter: blur(4px); }
+  50% { opacity: 0.7; filter: blur(2px); }
+  100% { opacity: 1; filter: blur(0); }
+}
+
+/* 18. Marker Highlight */
+.marker-paragraph {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+.marker-highlight {
+  color: var(--ink);
+  font-weight: 800;
+  background-image: linear-gradient(120deg, rgba(123, 110, 246, 0.45) 0%, rgba(61, 221, 168, 0.45) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 40%;
+  background-position: 0 88%;
+  animation: sweepMarker 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes sweepMarker {
+  from { background-size: 0% 40%; }
+  to { background-size: 100% 40%; }
+}
+
+/* 19. Stamp Press Text */
+.stamp-text {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--coral);
+  animation: stampPress 450ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes stampPress {
+  from { transform: scale(1.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* 20. Floating Zen Text */
+.floating-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  animation: floatZen 3s ease-in-out infinite;
+}
+@keyframes floatZen {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); color: var(--mint); }
+}
+

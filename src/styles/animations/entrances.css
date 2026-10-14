@@ -216,3 +216,242 @@
   from { opacity: 0; transform: translateY(-44px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* 11. Zoom In Down */
+.zoom-down-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--line-highlight);
+  animation: zoomInDown 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.zoom-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--violet);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+.zoom-down-card strong { font-size: 12px; color: var(--ink); }
+@keyframes zoomInDown {
+  0% { opacity: 0; transform: translateY(-50px) scale(0.45); }
+  60% { opacity: 1; transform: translateY(8px) scale(1.05); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* 12. Slide In Right */
+.slide-right-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid rgba(61, 221, 168, 0.3);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  animation: slideInRight 550ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.slide-right-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 8px var(--mint);
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(45px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* 13. Expand Horizontally (Iris) */
+.iris-banner {
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: var(--violet-gradient);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  box-shadow: 0 8px 24px rgba(123, 110, 246, 0.35);
+  animation: irisExpand 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes irisExpand {
+  from { clip-path: inset(0 50% 0 50% round 12px); opacity: 0; }
+  to { clip-path: inset(0 0 0 0 round 12px); opacity: 1; }
+}
+
+/* 14. Flip In Y */
+.flip-y-card {
+  perspective: 600px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--line-highlight);
+  font-size: 12px;
+  color: var(--ink);
+  animation: flipInY 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.flip-badge {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--violet);
+  color: #fff;
+}
+@keyframes flipInY {
+  from { opacity: 0; transform: perspective(600px) rotateY(-80deg); }
+  to { opacity: 1; transform: perspective(600px) rotateY(0deg); }
+}
+
+/* 15. Roll In */
+.roll-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--surface-card);
+  border: 1px solid rgba(61, 221, 168, 0.4);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--mint);
+  animation: rollIn 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.roll-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--mint);
+  color: #08090f;
+  font-size: 10px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+@keyframes rollIn {
+  from { opacity: 0; transform: translateX(-60px) rotate(-120deg); }
+  to { opacity: 1; transform: translateX(0) rotate(0deg); }
+}
+
+/* 16. Spiral In */
+.spiral-box {
+  display: grid;
+  place-items: center;
+  animation: spiralIn 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.spiral-core {
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--violet);
+  color: var(--violet);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  box-shadow: 0 0 20px rgba(123, 110, 246, 0.25);
+}
+@keyframes spiralIn {
+  from { opacity: 0; transform: rotate(-180deg) scale(0.2); }
+  to { opacity: 1; transform: rotate(0deg) scale(1); }
+}
+
+/* 17. Swirl In */
+.swirl-card {
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--line-highlight);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  animation: swirlIn 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.swirl-tag {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(123, 110, 246, 0.2);
+  color: var(--violet);
+}
+.swirl-card strong { font-size: 12px; color: var(--ink); }
+@keyframes swirlIn {
+  from { opacity: 0; filter: blur(10px); transform: rotate(35deg) scale(0.7); }
+  to { opacity: 1; filter: blur(0); transform: rotate(0deg) scale(1); }
+}
+
+/* 18. Fold In */
+.fold-panel {
+  transform-origin: top center;
+  perspective: 700px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid rgba(255, 189, 46, 0.4);
+  text-align: center;
+  animation: foldIn 550ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.fold-panel strong { display: block; font-size: 12px; color: #ffbd2e; margin-bottom: 2px; }
+.fold-panel p { margin: 0; font-size: 11px; color: var(--text-secondary); }
+@keyframes foldIn {
+  from { opacity: 0; transform: perspective(700px) rotateX(-90deg); }
+  to { opacity: 1; transform: perspective(700px) rotateX(0deg); }
+}
+
+/* 19. Stamp In */
+.stamp-box {
+  display: inline-block;
+  padding: 8px 18px;
+  border: 2px solid var(--mint);
+  border-radius: 8px;
+  color: var(--mint);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  transform: rotate(-4deg);
+  animation: stampImpact 450ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes stampImpact {
+  0% { opacity: 0; transform: scale(1.9) rotate(-10deg); }
+  70% { opacity: 1; transform: scale(0.95) rotate(-3deg); }
+  100% { transform: scale(1) rotate(-4deg); }
+}
+
+/* 20. Pop Spring */
+.spring-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--violet);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(123, 110, 246, 0.35);
+  animation: springPop 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.spring-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mint);
+}
+@keyframes springPop {
+  0% { opacity: 0; transform: scale(0.3); }
+  100% { opacity: 1; transform: scale(1); }
+}
+

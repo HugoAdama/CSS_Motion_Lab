@@ -1,11 +1,14 @@
-// filters.ts — Filtros de categoría, buscador en vivo y paginación de 6 elementos por vista
+// filters.ts — Filtros de categoría, costo de renderizado (pipeline), buscador en vivo y paginación
+import { eventBus } from './events';
 
 export function initFilters(cards: HTMLElement[]): void {
   const ITEMS_PER_PAGE = 6;
   let currentPage = 1;
   let activeCategory = 'Todas';
+  let activeCost = 'all';
 
   const filterButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+  const costButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-cost-filter]'));
   const searchInput = document.querySelector<HTMLInputElement>('[data-search]');
   const clearSearchBtn = document.querySelector<HTMLButtonElement>('[data-clear-search]');
   const resultCount = document.querySelector<HTMLElement>('[data-result-count]');
@@ -81,14 +84,16 @@ export function initFilters(cards: HTMLElement[]): void {
       clearSearchBtn.hidden = query.length === 0;
     }
 
-    // 1. Filtrar las tarjetas que coinciden con categoría y búsqueda
+    // 1. Filtrar las tarjetas que coinciden con categoría, costo y búsqueda
     const matchingCards = cards.filter((card) => {
       const category = card.dataset.category || '';
       const name = card.dataset.name || '';
       const id = card.dataset.id || '';
+      const costType = card.dataset.costType || '';
       const specs = card.querySelector('.tech-spec-code')?.textContent?.toLowerCase() || '';
 
       const matchesCategory = activeCategory === 'Todas' || category === activeCategory;
+      const matchesCost = activeCost === 'all' || costType === activeCost;
       const matchesSearch =
         query === '' ||
         name.includes(query) ||
@@ -96,7 +101,7 @@ export function initFilters(cards: HTMLElement[]): void {
         id.includes(query) ||
         specs.includes(query);
 
-      return matchesCategory && matchesSearch;
+      return matchesCategory && matchesCost && matchesSearch;
     });
 
     const totalItems = matchingCards.length;
@@ -121,9 +126,16 @@ export function initFilters(cards: HTMLElement[]): void {
       card.hidden = !isVisible;
     });
 
-    // 4. Actualizar estado de botones de filtro
+    // 4. Actualizar estado de botones de filtro de categoría
     filterButtons.forEach((btn) => {
       const isSelected = btn.dataset.filter === activeCategory;
+      btn.setAttribute('aria-pressed', String(isSelected));
+      btn.classList.toggle('is-active', isSelected);
+    });
+
+    // 4b. Actualizar estado de botones de filtro de pipeline
+    costButtons.forEach((btn) => {
+      const isSelected = btn.dataset.costFilter === activeCost;
       btn.setAttribute('aria-pressed', String(isSelected));
       btn.classList.toggle('is-active', isSelected);
     });
@@ -164,6 +176,14 @@ export function initFilters(cards: HTMLElement[]): void {
       }
     }
 
+    eventBus.emit('filter:change', {
+      category: activeCategory,
+      costType: activeCost as any,
+      searchQuery: query,
+      currentPage,
+      pageSize: ITEMS_PER_PAGE,
+    });
+
     if (shouldScroll) {
       scrollToGalleryTop();
     }
@@ -173,6 +193,15 @@ export function initFilters(cards: HTMLElement[]): void {
   filterButtons.forEach((button) => {
     button.addEventListener('click', () => {
       activeCategory = button.dataset.filter || 'Todas';
+      currentPage = 1;
+      updateGallery(false);
+    });
+  });
+
+  // Eventos de botones de pipeline (costo)
+  costButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      activeCost = button.dataset.costFilter || 'all';
       currentPage = 1;
       updateGallery(false);
     });
@@ -200,6 +229,7 @@ export function initFilters(cards: HTMLElement[]): void {
   if (resetFiltersBtn && searchInput) {
     resetFiltersBtn.addEventListener('click', () => {
       activeCategory = 'Todas';
+      activeCost = 'all';
       searchInput.value = '';
       currentPage = 1;
       updateGallery(false);
@@ -218,29 +248,45 @@ export function initFilters(cards: HTMLElement[]): void {
 
   if (nextBtn) {
     nextBtn.addEventListener('click', () => {
-      currentPage++;
-      updateGallery(true);
+      const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+      const matchingCount = cards.filter((card) => {
+        const cat = card.dataset.category || '';
+        const name = card.dataset.name || '';
+        const id = card.dataset.id || '';
+        const cost = card.dataset.costType || '';
+        const specs = card.querySelector('.tech-spec-code')?.textContent?.toLowerCase() || '';
+        return (
+          (activeCategory === 'Todas' || cat === activeCategory) &&
+          (activeCost === 'all' || cost === activeCost) &&
+          (query === '' || name.includes(query) || cat.toLowerCase().includes(query) || id.includes(query) || specs.includes(query))
+        );
+      }).length;
+      const totalPages = Math.max(1, Math.ceil(matchingCount / ITEMS_PER_PAGE));
+
+      if (currentPage < totalPages) {
+        currentPage++;
+        updateGallery(true);
+      }
     });
   }
 
-  // Atajos de teclado: '/' enfoca el buscador, 'Escape' lo limpia
-  document.addEventListener('keydown', (event) => {
-    if (
-      event.key === '/' &&
-      document.activeElement !== searchInput &&
-      !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName || '')
-    ) {
-      event.preventDefault();
-      searchInput?.focus();
+  // Acceso directo con teclado: pulsar '/' para enfocar buscador
+  window.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== searchInput) {
+      const activeTag = document.activeElement?.tagName.toLowerCase();
+      if (activeTag !== 'input' && activeTag !== 'textarea') {
+        e.preventDefault();
+        searchInput?.focus();
+      }
     }
-    if (event.key === 'Escape' && document.activeElement === searchInput && searchInput) {
-      searchInput.value = '';
-      searchInput.blur();
+    if (e.key === 'Escape' && document.activeElement === searchInput) {
+      if (searchInput) searchInput.value = '';
       currentPage = 1;
       updateGallery(false);
+      searchInput?.blur();
     }
   });
 
-  // Ejecución inicial para establecer la primera página de 6
+  // Inicializar estado de la galería
   updateGallery(false);
 }

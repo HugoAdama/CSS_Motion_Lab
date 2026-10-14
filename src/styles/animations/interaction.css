@@ -324,3 +324,287 @@
 .trace-card:focus-visible .trace-line {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
+
+/* 11. Interactive Glow Card */
+.glow-interactive-card {
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 350ms cubic-bezier(0.16, 1, 0.3, 1), border-color 350ms;
+}
+.glow-card-chip {
+  align-self: flex-start;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(123, 110, 246, 0.2);
+  color: var(--violet);
+}
+.glow-interactive-card strong { font-size: 12px; color: var(--ink); }
+.glow-interactive-card p { margin: 0; font-size: 10px; color: var(--text-secondary); }
+.glow-interactive-card:hover,
+.glow-interactive-card.is-playing {
+  transform: translateY(-6px);
+  border-color: rgba(123, 110, 246, 0.6);
+  box-shadow: 0 12px 30px rgba(123, 110, 246, 0.25), 0 0 15px rgba(61, 221, 168, 0.2);
+}
+
+/* 12. 3D Push Button */
+.press-3d-btn {
+  padding: 10px 22px;
+  border-radius: 12px;
+  background: var(--violet);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #4f3ee0, 0 10px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 150ms;
+}
+.press-3d-btn:active,
+.press-3d-btn.is-playing {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #4f3ee0, 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 13. Bouncy Checkbox */
+.checkbox-interactive {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.checkbox-interactive input { display: none; }
+.check-box-surface {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--violet);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 12px rgba(123, 110, 246, 0.35);
+  animation: checkBounce 350ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.check-box-surface svg {
+  width: 12px;
+  height: 10px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 16;
+  stroke-dashoffset: 0;
+  animation: checkDraw 350ms ease-out both;
+}
+.check-label { font-size: 12px; font-weight: 600; color: var(--ink); }
+@keyframes checkBounce {
+  0% { transform: scale(0.6); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+@keyframes checkDraw {
+  from { stroke-dashoffset: 16; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* 14. Floating Label Input */
+.floating-input-group {
+  position: relative;
+  width: 200px;
+  padding-top: 16px;
+}
+.float-input {
+  width: 100%;
+  padding: 6px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 12px;
+  outline: none;
+}
+.float-label {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  color: var(--violet);
+  font-size: 10px;
+  font-weight: 700;
+  transform-origin: left top;
+  transform: translateY(-18px) scale(0.85);
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.float-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--mint);
+}
+
+/* 15. Day-Night Morph Switch */
+.morph-switch {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.morph-track {
+  display: block;
+  width: 50px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--surface-card);
+  border: 1px solid var(--violet);
+  position: relative;
+  transition: background-color 450ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.morph-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffbd2e;
+  box-shadow: 0 0 10px #ffbd2e;
+  transform: translateX(24px);
+  transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 16. Swipe Dismiss Card */
+.swipe-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid rgba(61, 221, 168, 0.4);
+  color: var(--mint);
+  font-size: 12px;
+  font-weight: 700;
+  animation: swipeOut 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.swipe-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(61, 221, 168, 0.2);
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+}
+@keyframes swipeOut {
+  0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateX(90px) rotate(8deg); opacity: 0; }
+}
+
+/* 17. Bookmark Ribbon Drop */
+.ribbon-box {
+  position: relative;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  overflow: hidden;
+}
+.ribbon-flag {
+  position: absolute;
+  top: 0;
+  right: 14px;
+  width: 14px;
+  height: 22px;
+  background: var(--coral);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%);
+  transform-origin: top center;
+  animation: ribbonDrop 400ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes ribbonDrop {
+  from { transform: translateY(-100%) scaleY(0.5); }
+  to { transform: translateY(0) scaleY(1); }
+}
+
+/* 18. Chrome Sheen Button */
+.sheen-btn {
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: var(--violet);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(123, 110, 246, 0.35);
+}
+.sheen-light {
+  position: absolute;
+  top: -50%;
+  bottom: -50%;
+  width: 28px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: rotate(25deg);
+  animation: sheenSweep 600ms ease-in-out infinite;
+}
+@keyframes sheenSweep {
+  0% { transform: translateX(-120px) rotate(25deg); }
+  100% { transform: translateX(200px) rotate(25deg); }
+}
+
+/* 19. Selectable Pill Chip */
+.chip-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(61, 221, 168, 0.15);
+  border: 1px solid var(--mint);
+  color: var(--mint);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  animation: chipBounce 350ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.chip-check { font-weight: 900; }
+@keyframes chipBounce {
+  0% { transform: scale(0.85); }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* 20. Copy State Morph */
+.copy-morph-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 10px;
+  background: rgba(61, 221, 168, 0.15);
+  border: 1px solid var(--mint);
+  color: var(--mint);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  animation: copyPulse 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes copyPulse {
+  0% { transform: scale(0.92); }
+  50% { transform: scale(1.08); background: rgba(61, 221, 168, 0.3); }
+  100% { transform: scale(1); }
+}
+

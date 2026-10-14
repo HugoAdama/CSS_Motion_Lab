@@ -79,6 +79,45 @@ export function initInteractions(): void {
       return;
     }
 
+    // 5b. Botón "Abrir en CodePen" (1 Clic)
+    const codepenBtn = target.closest<HTMLButtonElement>('[data-open-codepen]');
+    if (codepenBtn) {
+      const card = codepenBtn.closest<HTMLElement>('[data-animation-card]');
+      if (card) {
+        const title = card.querySelector('h3')?.textContent || 'CSS Motion Animation';
+        const codeCss = card.querySelector<HTMLElement>('[data-code-css]')?.textContent || '';
+        const codeHtml = card.querySelector<HTMLElement>('[data-code-html]')?.textContent || '';
+        const category = card.dataset.category || 'Animación';
+
+        const data = {
+          title: `CSS Motion Lab — ${title}`,
+          description: `Ejemplo de animación CSS coordinada para "${title}" (${category}).`,
+          html: codeHtml,
+          css: codeCss,
+          editors: '110',
+          tags: ['css', 'motion', 'animation', 'css-motion-lab']
+        };
+
+        const form = document.createElement('form');
+        form.action = 'https://codepen.io/pen/define';
+        form.method = 'POST';
+        form.target = '_blank';
+
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'data';
+        input.value = JSON.stringify(data);
+
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+        form.remove();
+
+        showToast(`¡Abriendo "${title}" en CodePen!`);
+      }
+      return;
+    }
+
     // 6. Alternar vista de panel de código
     const toggleButton = target.closest<HTMLButtonElement>('[data-toggle-code]');
     if (toggleButton) {

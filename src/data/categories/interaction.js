@@ -487,4 +487,456 @@ export const interactionAnimations = [
   .trace-line { transition: none !important; }
 }`
   },
+  {
+    id: "glow-card-hover",
+    name: "Tarjeta con Resplandor Reactivo (Interactive Glow)",
+    category: "Interacción",
+    defaultDuration: 0.35,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, box-shadow, border-color",
+    renderCost: "Composición y Repintado",
+    renderCostType: "paint",
+    costExplanation: "Elevación en translateY() combinada con halo radial en box-shadow sin causar reflujo de página.",
+    description: "Tarjeta interactiva que se eleva y proyecta un halo luminoso perimetral al posar el cursor.",
+    targetSelector: ".glow-interactive-card",
+    previewClass: "shape--glow-card-hover",
+    htmlSnippet: "<div class=\"glow-interactive-card\" tabindex=\"0\">\n  <span class=\"glow-card-chip\">PRO</span>\n  <strong>Componente Activo</strong>\n  <p>Pasa el cursor para ver el halo</p>\n</div>",
+    previewHtml: "<div class=\"glow-interactive-card is-playing\" tabindex=\"0\" data-motion-target>\n  <span class=\"glow-card-chip\">PRO</span>\n  <strong>Componente Activo</strong>\n  <p>Pasa el cursor para ver el halo</p>\n</div>",
+    generateCss: (dur, timing) => `.glow-interactive-card {
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: #141523;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: transform ${dur}s ${timing}, box-shadow ${dur}s ${timing}, border-color ${dur}s ${timing};
+}
+
+.glow-interactive-card:hover,
+.glow-interactive-card:focus-visible,
+.glow-interactive-card.is-playing {
+  transform: translateY(-6px);
+  border-color: rgba(123, 110, 246, 0.6);
+  box-shadow: 0 12px 30px rgba(123, 110, 246, 0.25), 0 0 15px rgba(61, 221, 168, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-interactive-card { transition: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "press-rebound",
+    name: "Botón Táctil con Profundidad 3D (3D Push Button)",
+    category: "Interacción",
+    defaultDuration: 0.15,
+    defaultTiming: "cubic-bezier(0.2, 0.8, 0.2, 1)",
+    timingOptions: ["cubic-bezier(0.2, 0.8, 0.2, 1)","ease-out"],
+    properties: "transform, box-shadow",
+    renderCost: "Composición y Repintado",
+    renderCostType: "paint",
+    costExplanation: "Desplazamiento vertical de 4px con reducción simultánea de sombra dura inferior.",
+    description: "Botón físico que se comprime mecánicamente contra su base al hacer clic y rebota instantáneamente.",
+    targetSelector: ".press-3d-btn",
+    previewClass: "shape--press-rebound",
+    htmlSnippet: "<button class=\"press-3d-btn\" type=\"button\">\n  <span>Presionar Acción</span>\n</button>",
+    previewHtml: "<button class=\"press-3d-btn is-playing\" type=\"button\" data-motion-target>\n  <span>Presionar Acción</span>\n</button>",
+    generateCss: (dur, timing) => `.press-3d-btn {
+  padding: 10px 22px;
+  border-radius: 12px;
+  background: #7b6ef6;
+  color: #fff;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #5444dc, 0 10px 20px rgba(0, 0, 0, 0.4);
+  transition: transform ${dur}s ${timing}, box-shadow ${dur}s ${timing};
+}
+
+.press-3d-btn:active,
+.press-3d-btn.is-playing {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #5444dc, 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press-3d-btn { transition: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "checkbox-bounce",
+    name: "Casilla con Check Animado (Bouncy Checkbox)",
+    category: "Interacción",
+    defaultDuration: 0.35,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out"],
+    properties: "transform, stroke-dashoffset",
+    renderCost: "Composición y Repintado",
+    renderCostType: "paint",
+    costExplanation: "Rebote elástico del marco exterior con dibujado sincronizado del trazado vectorial SVG.",
+    description: "Casilla de verificación interactiva con salto elástico y trazo dinámico al activarse.",
+    targetSelector: ".checkbox-interactive",
+    previewClass: "shape--checkbox-bounce",
+    htmlSnippet: "<label class=\"checkbox-interactive\">\n  <input type=\"checkbox\" checked readonly />\n  <span class=\"check-box-surface\">\n    <svg viewBox=\"0 0 12 10\">\n      <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\n    </svg>\n  </span>\n  <span class=\"check-label\">Aceptar términos</span>\n</label>",
+    previewHtml: "<label class=\"checkbox-interactive is-playing\" data-motion-target>\n  <input type=\"checkbox\" checked readonly />\n  <span class=\"check-box-surface\">\n    <svg viewBox=\"0 0 12 10\">\n      <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\n    </svg>\n  </span>\n  <span class=\"check-label\">Aceptar términos</span>\n</label>",
+    generateCss: (dur, timing) => `.checkbox-interactive {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.check-box-surface {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #7b6ef6;
+  display: grid;
+  place-items: center;
+  animation: checkBounce ${dur}s ${timing} both;
+}
+
+.check-box-surface svg {
+  width: 12px;
+  height: 10px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 16;
+  stroke-dashoffset: 0;
+  animation: checkDraw ${dur}s ease-out both;
+}
+
+@keyframes checkBounce {
+  0% { transform: scale(0.6); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes checkDraw {
+  from { stroke-dashoffset: 16; }
+  to { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .check-box-surface, .check-box-surface svg { animation: none !important; }
+}`
+  },
+  {
+    id: "input-floating-label",
+    name: "Campo con Etiqueta Flotante (Floating Label)",
+    category: "Interacción",
+    defaultDuration: 0.25,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, color, font-size",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "La etiqueta se traslada en translateY(-22px) y scale(0.85) sobre GPU sin redibujar el input.",
+    description: "Entrada de formulario con etiqueta flotante que asciende automáticamente al enfocar o escribir.",
+    targetSelector: ".floating-input-group",
+    previewClass: "shape--input-floating-label",
+    htmlSnippet: "<div class=\"floating-input-group\">\n  <input type=\"text\" class=\"float-input\" value=\"usuario@dominio.com\" readonly />\n  <label class=\"float-label\">Correo Electrónico</label>\n  <span class=\"float-bar\"></span>\n</div>",
+    previewHtml: "<div class=\"floating-input-group is-playing\" data-motion-target>\n  <input type=\"text\" class=\"float-input\" value=\"usuario@dominio.com\" readonly />\n  <label class=\"float-label\">Correo Electrónico</label>\n  <span class=\"float-bar\"></span>\n</div>",
+    generateCss: (dur, timing) => `.floating-input-group {
+  position: relative;
+  width: 220px;
+  padding-top: 16px;
+}
+
+.float-input {
+  width: 100%;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f8f9fe;
+  font-size: 13px;
+  outline: none;
+}
+
+.float-label {
+  position: absolute;
+  top: 22px;
+  left: 0;
+  color: #7b6ef6;
+  font-size: 11px;
+  font-weight: 700;
+  transform-origin: left top;
+  transform: translateY(-20px) scale(0.85);
+  transition: transform ${dur}s ${timing};
+}
+
+.float-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #3ddda8;
+  transform: scaleX(1);
+  transition: transform ${dur}s ${timing};
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-label, .float-bar { transition: none !important; }
+}`
+  },
+  {
+    id: "switch-morph",
+    name: "Interruptor Día/Noche Morfológico (Day-Night)",
+    category: "Interacción",
+    defaultDuration: 0.45,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, background-color, box-shadow",
+    renderCost: "Composición y Repintado",
+    renderCostType: "paint",
+    costExplanation: "Desplazamiento horizontal con cambio de paleta cromática de cielo nocturno a diurno.",
+    description: "Conmutador de tema interactivo donde el dial se traslada y transmuta entre un sol y una luna.",
+    targetSelector: ".morph-switch",
+    previewClass: "shape--switch-morph",
+    htmlSnippet: "<button class=\"morph-switch is-checked\" type=\"button\" aria-label=\"Cambiar tema\">\n  <span class=\"morph-track\">\n    <span class=\"morph-thumb\"></span>\n  </span>\n</button>",
+    previewHtml: "<button class=\"morph-switch is-checked is-playing\" type=\"button\" aria-label=\"Cambiar tema\" data-motion-target>\n  <span class=\"morph-track\">\n    <span class=\"morph-thumb\"></span>\n  </span>\n</button>",
+    generateCss: (dur, timing) => `.morph-track {
+  display: block;
+  width: 52px;
+  height: 28px;
+  border-radius: 999px;
+  background: #141523;
+  border: 1px solid #7b6ef6;
+  position: relative;
+  transition: background-color ${dur}s ${timing};
+}
+
+.morph-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffbd2e;
+  box-shadow: 0 0 10px #ffbd2e;
+  transform: translateX(24px);
+  transition: transform ${dur}s ${timing}, background-color ${dur}s ${timing};
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .morph-track, .morph-thumb { transition: none !important; }
+}`
+  },
+  {
+    id: "swipe-dismiss",
+    name: "Descarte Lateral Deslizable (Swipe Dismiss)",
+    category: "Interacción",
+    defaultDuration: 0.5,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Desplazamiento en translateX(120%) con inclinación angular leve en el eje Z sin reflow.",
+    description: "Gesto de deslizamiento rápido que expulsa y descarta un elemento de la lista con rotación ligera.",
+    targetSelector: ".swipe-card",
+    previewClass: "shape--swipe-dismiss",
+    htmlSnippet: "<div class=\"swipe-card\">\n  <span class=\"swipe-icon\">&check;</span>\n  <span>Tarea completada</span>\n</div>",
+    previewHtml: "<div class=\"swipe-card is-playing\" data-motion-target>\n  <span class=\"swipe-icon\">&check;</span>\n  <span>Tarea completada</span>\n</div>",
+    generateCss: (dur, timing) => `.swipe-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(61, 221, 168, 0.4);
+  color: #3ddda8;
+  font-weight: 700;
+  animation: swipeOut ${dur}s ${timing} both;
+}
+
+@keyframes swipeOut {
+  0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateX(90px) rotate(8deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swipe-card { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "bookmark-ribbon",
+    name: "Cinta de Marcador (Bookmark Ribbon)",
+    category: "Interacción",
+    defaultDuration: 0.4,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out"],
+    properties: "transform (translateY, scaleY)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Descenso con anclaje superior de translateY(-100%) a 0 y rebote elástico en scaleY.",
+    description: "Cinta de favorito que cae y se fija firmemente con punta cortada al guardar un artículo.",
+    targetSelector: ".ribbon-box",
+    previewClass: "shape--bookmark-ribbon",
+    htmlSnippet: "<div class=\"ribbon-box\">\n  <div class=\"ribbon-flag\"></div>\n  <span>Guardar artículo</span>\n</div>",
+    previewHtml: "<div class=\"ribbon-box is-playing\" data-motion-target>\n  <div class=\"ribbon-flag\"></div>\n  <span>Guardar artículo</span>\n</div>",
+    generateCss: (dur, timing) => `.ribbon-box {
+  position: relative;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.ribbon-flag {
+  position: absolute;
+  top: 0;
+  right: 14px;
+  width: 14px;
+  height: 22px;
+  background: #ff6e65;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%);
+  transform-origin: top center;
+  animation: ribbonDrop ${dur}s ${timing} both;
+}
+
+@keyframes ribbonDrop {
+  from { transform: translateY(-100%) scaleY(0.5); }
+  to { transform: translateY(0) scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-flag { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "shine-hover-btn",
+    name: "Reflejo Cromado al Cursor (Chrome Sheen)",
+    category: "Interacción",
+    defaultDuration: 0.6,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","ease-out"],
+    properties: "transform (translateX)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Franja con gradiente traslúcido desplazada de -100% a 200% sobre capas aceleradas.",
+    description: "Botón premium con destello diagonal plateado que lo cruza suavemente al interactuar.",
+    targetSelector: ".sheen-btn",
+    previewClass: "shape--shine-hover-btn",
+    htmlSnippet: "<button class=\"sheen-btn\" type=\"button\">\n  <span class=\"sheen-light\"></span>\n  <span>Desbloquear Acceso</span>\n</button>",
+    previewHtml: "<button class=\"sheen-btn is-playing\" type=\"button\" data-motion-target>\n  <span class=\"sheen-light\"></span>\n  <span>Desbloquear Acceso</span>\n</button>",
+    generateCss: (dur, timing) => `.sheen-btn {
+  position: relative;
+  padding: 10px 22px;
+  border-radius: 12px;
+  background: #7b6ef6;
+  color: #fff;
+  font-weight: 800;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.sheen-light {
+  position: absolute;
+  top: -50%;
+  bottom: -50%;
+  width: 30px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: rotate(25deg);
+  animation: sheenSweep ${dur}s ${timing} infinite;
+}
+
+@keyframes sheenSweep {
+  0% { transform: translateX(-120px) rotate(25deg); }
+  100% { transform: translateX(200px) rotate(25deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheen-light { animation: none !important; }
+}`
+  },
+  {
+    id: "chip-toggle",
+    name: "Pill Seleccionable Elástica (Selectable Chip)",
+    category: "Interacción",
+    defaultDuration: 0.35,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out"],
+    properties: "transform, background-color, border-color",
+    renderCost: "Composición y Repintado",
+    renderCostType: "paint",
+    costExplanation: "Salto elástico con scale(1.1) y transición de paleta a color activo.",
+    description: "Etiqueta interactiva de filtrado que salta elásticamente al alternar su selección.",
+    targetSelector: ".chip-selector",
+    previewClass: "shape--chip-toggle",
+    htmlSnippet: "<button class=\"chip-selector is-active\" type=\"button\">\n  <span class=\"chip-check\">&check;</span>\n  <span>Filtro Activo</span>\n</button>",
+    previewHtml: "<button class=\"chip-selector is-active is-playing\" type=\"button\" data-motion-target>\n  <span class=\"chip-check\">&check;</span>\n  <span>Filtro Activo</span>\n</button>",
+    generateCss: (dur, timing) => `.chip-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(61, 221, 168, 0.15);
+  border: 1px solid #3ddda8;
+  color: #3ddda8;
+  font-weight: 700;
+  cursor: pointer;
+  animation: chipBounce ${dur}s ${timing} both;
+}
+
+@keyframes chipBounce {
+  0% { transform: scale(0.85); }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip-selector { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "copy-feedback",
+    name: "Botón Copiar con Metamorfosis (Copy State Morph)",
+    category: "Interacción",
+    defaultDuration: 0.4,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, background-color, color",
+    renderCost: "Composición y Repintado",
+    renderCostType: "paint",
+    costExplanation: "Transición instantánea de color a verde menta con pulso de escala confirmando la copia al portapapeles.",
+    description: "Confirmación visual inmediata que transforma el botón 'Copiar' en '¡Copiado!' con destello esmeralda.",
+    targetSelector: ".copy-morph-btn",
+    previewClass: "shape--copy-feedback",
+    htmlSnippet: "<button class=\"copy-morph-btn\" type=\"button\">\n  <span class=\"copy-icon\">&check;</span>\n  <span class=\"copy-text\">&iexcl;Copiado!</span>\n</button>",
+    previewHtml: "<button class=\"copy-morph-btn is-playing\" type=\"button\" data-motion-target>\n  <span class=\"copy-icon\">&check;</span>\n  <span class=\"copy-text\">&iexcl;Copiado!</span>\n</button>",
+    generateCss: (dur, timing) => `.copy-morph-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 10px;
+  background: rgba(61, 221, 168, 0.15);
+  border: 1px solid #3ddda8;
+  color: #3ddda8;
+  font-weight: 800;
+  cursor: pointer;
+  animation: copyPulse ${dur}s ${timing} both;
+}
+
+@keyframes copyPulse {
+  0% { transform: scale(0.92); }
+  50% { transform: scale(1.08); background: rgba(61, 221, 168, 0.3); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy-morph-btn { animation: none !important; transform: none !important; }
+}`
+  }
 ];
+
