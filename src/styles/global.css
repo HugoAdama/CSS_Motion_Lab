@@ -158,6 +158,7 @@ select:focus-visible,
   font-weight: 800;
   background: var(--violet-gradient);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -341,6 +342,7 @@ h1 {
 .gradient-text {
   background: linear-gradient(135deg, #a79bfd 0%, #6858f7 50%, #44dbc3 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
