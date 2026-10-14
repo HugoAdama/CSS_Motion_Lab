@@ -1,0 +1,443 @@
+---
+import AnimationCard from '../components/AnimationCard.astro';
+import { animations, categories } from '../data/animations.js';
+import '../styles/global.css';
+
+const categoryCounts = categories.reduce((acc, cat) => {
+  acc[cat] = cat === 'Todas' ? animations.length : animations.filter(a => a.category === cat).length;
+  return acc;
+}, {});
+---
+
+<!doctype html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="CSS Motion Lab — Biblioteca interactiva para consultar, probar, calibrar y copiar animaciones CSS modernas para tus proyectos web." />
+    <meta name="theme-color" content="#0d0e17" />
+    <title>CSS Motion Lab — Catálogo Interactivo de Animaciones CSS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="CSS Motion Lab, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <i class="bar-1"></i>
+          <i class="bar-2"></i>
+          <i class="bar-3"></i>
+        </span>
+        <span class="brand-text">CSS <strong>Motion Lab</strong></span>
+      </a>
+
+      <div class="topbar-actions">
+        <button class="icon-toggle-btn" type="button" data-motion-toggle aria-label="Alternar reducción de movimiento" title="Alternar modo de movimiento reducido">
+          <span class="motion-icon" aria-hidden="true">⚡</span>
+          <span class="btn-label-desktop">Movimiento</span>
+        </button>
+
+        <button class="icon-toggle-btn" type="button" data-theme-toggle aria-label="Alternar tema claro y oscuro" title="Alternar tema">
+          <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <a class="github-link" href="https://github.com/HugoAdama/CSS_Motion_Lab" target="_blank" rel="noreferrer" aria-label="Ver repositorio en GitHub">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+          <span class="btn-label-desktop">GitHub</span>
+          <span class="arrow-ext" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="inicio">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-bg-glow"></div>
+        <div class="hero-grid-pattern"></div>
+
+        <div class="hero-content">
+          <div class="hero-copy">
+            <div class="eyebrow-chip">
+              <span class="eyebrow-ping"></span>
+              <span>CATÁLOGO DINÁMICO &middot; CSS NATIVO</span>
+            </div>
+            <h1 id="page-title">
+              Haz visible el <span class="gradient-text">movimiento.</span>
+            </h1>
+            <p class="hero-description">
+              Explora, experimenta y copia animaciones CSS optimizadas por aceleración de hardware. Diseñadas para enriquecer la experiencia de usuario sin penalizar el rendimiento.
+            </p>
+
+            <div class="hero-actions">
+              <a class="hero-btn hero-btn--primary" href="#biblioteca">
+                <span>Explorar animaciones</span>
+                <span class="btn-arrow" aria-hidden="true">↓</span>
+              </a>
+              <button class="hero-btn hero-btn--secondary" type="button" data-replay-all-hero>
+                <span aria-hidden="true">↻</span>
+                <span>Reproducir todas</span>
+              </button>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat-item">
+                <strong>8</strong>
+                <span>Animaciones</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <strong>0</strong>
+                <span>Dependencias</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <strong>60 FPS</strong>
+                <span>GPU Ready</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="hero-stage">
+              <div class="orbit orbit--outer"></div>
+              <div class="orbit orbit--inner"></div>
+              <div class="hero-core-card">
+                <div class="core-card-header">
+                  <span class="core-dot red"></span>
+                  <span class="core-dot yellow"></span>
+                  <span class="core-dot green"></span>
+                </div>
+                <div class="core-card-body">
+                  <span class="core-badge">@keyframes</span>
+                  <span class="core-title">CSS Motion</span>
+                  <div class="core-wave">
+                    <i></i><i></i><i></i><i></i><i></i>
+                  </div>
+                </div>
+              </div>
+              <div class="floating-badge badge--one">cubic-bezier</div>
+              <div class="floating-badge badge--two">60 fps</div>
+              <div class="floating-badge badge--three">transform</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="library-section" id="biblioteca" aria-labelledby="library-title">
+        <div class="section-heading">
+          <div>
+            <div class="section-badge">CATÁLOGO COMPLETO</div>
+            <h2 id="library-title">Galería de Efectos</h2>
+            <p class="section-subtitle">Filtra por categoría, prueba la interacción y copia el CSS con un clic.</p>
+          </div>
+          <div class="heading-controls">
+            <button class="btn-replay-all" type="button" data-replay-all title="Reproducir todas las animaciones visibles">
+              <span class="replay-icon" aria-hidden="true">↻</span>
+              <span>Reproducir visibles</span>
+            </button>
+            <p class="result-count">
+              Mostrando <strong data-result-count>{animations.length}</strong> de {animations.length}
+            </p>
+          </div>
+        </div>
+
+        <div class="library-controls-bar">
+          <div class="filter-pills" role="group" aria-label="Filtrar por categoría">
+            {categories.map((category, index) => (
+              <button
+                class="filter-pill"
+                type="button"
+                data-filter={category}
+                aria-pressed={index === 0 ? 'true' : 'false'}
+              >
+                <span>{category}</span>
+                <span class="pill-count">{categoryCounts[category]}</span>
+              </button>
+            ))}
+          </div>
+
+          <div class="search-wrapper">
+            <label class="search-box">
+              <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <span class="visually-hidden">Buscar animación</span>
+              <input type="search" placeholder="Buscar animación..." data-search autocomplete="off" spellcheck="false" />
+              <button class="clear-search-btn" type="button" data-clear-search hidden aria-label="Limpiar búsqueda">✕</button>
+              <kbd class="search-kbd" title="Presiona la tecla / para buscar">/</kbd>
+            </label>
+          </div>
+        </div>
+
+        <div class="animation-grid" data-animation-grid>
+          {animations.map((animation) => <AnimationCard animation={animation} />)}
+        </div>
+
+        <div class="empty-state" data-empty-state hidden>
+          <div class="empty-state-icon">🔍</div>
+          <h3>No se encontraron animaciones</h3>
+          <p>No hay resultados que coincidan con tus criterios de búsqueda o filtro.</p>
+          <button class="hero-btn hero-btn--secondary" type="button" data-reset-filters>
+            Restablecer filtros
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <a class="brand brand--footer" href="#inicio">
+          <span class="brand-mark" aria-hidden="true">
+            <i class="bar-1"></i>
+            <i class="bar-2"></i>
+            <i class="bar-3"></i>
+          </span>
+          <span class="brand-text">CSS <strong>Motion Lab</strong></span>
+        </a>
+        <p class="footer-copy">
+          Desarrollado para experimentar, aprender y elevar interfaces web con CSS puro.
+        </p>
+        <div class="footer-links">
+          <a href="https://github.com/HugoAdama/CSS_Motion_Lab" target="_blank" rel="noreferrer">GitHub</a>
+          <span class="footer-dot">&middot;</span>
+          <a href="#inicio">Volver arriba ↑</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast de copiado global -->
+    <div class="copy-toast" data-global-toast aria-live="polite" hidden>
+      <span class="toast-check">✓</span>
+      <span data-toast-msg>Código copiado al portapapeles</span>
+    </div>
+
+    <script>
+      // Selección de elementos
+      const cards = Array.from(document.querySelectorAll('[data-animation-card]'));
+      const filterButtons = Array.from(document.querySelectorAll('[data-filter]'));
+      const searchInput = document.querySelector('[data-search]');
+      const clearSearchBtn = document.querySelector('[data-clear-search]');
+      const resultCount = document.querySelector('[data-result-count]');
+      const emptyState = document.querySelector('[data-empty-state]');
+      const resetFiltersBtn = document.querySelector('[data-reset-filters]');
+      const replayAllBtns = document.querySelectorAll('[data-replay-all], [data-replay-all-hero]');
+      const themeToggleBtn = document.querySelector('[data-theme-toggle]');
+      const motionToggleBtn = document.querySelector('[data-motion-toggle]');
+      const globalToast = document.querySelector('[data-global-toast]');
+      const toastMsg = document.querySelector('[data-toast-msg]');
+
+      let activeCategory = 'Todas';
+      let toastTimeout;
+
+      function showToast(message) {
+        if (!globalToast) return;
+        toastMsg.textContent = message;
+        globalToast.hidden = false;
+        globalToast.classList.add('is-visible');
+        clearTimeout(toastTimeout);
+        toastTimeout = window.setTimeout(() => {
+          globalToast.classList.remove('is-visible');
+          window.setTimeout(() => { globalToast.hidden = true; }, 300);
+        }, 2200);
+      }
+
+      // Filtrado y búsqueda
+      function updateCards() {
+        const query = searchInput.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        if (clearSearchBtn) {
+          clearSearchBtn.hidden = query.length === 0;
+        }
+
+        for (const card of cards) {
+          const category = card.dataset.category || '';
+          const name = card.dataset.name || '';
+          const id = card.dataset.id || '';
+
+          const matchesCategory = activeCategory === 'Todas' || category === activeCategory;
+          const matchesSearch = query === '' || name.includes(query) || category.toLowerCase().includes(query) || id.includes(query);
+
+          const visible = matchesCategory && matchesSearch;
+          card.hidden = !visible;
+          if (visible) visibleCount++;
+        }
+
+        if (resultCount) resultCount.textContent = String(visibleCount);
+        if (emptyState) emptyState.hidden = visibleCount !== 0;
+      }
+
+      filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          activeCategory = button.dataset.filter;
+          filterButtons.forEach((btn) => {
+            btn.setAttribute('aria-pressed', String(btn === button));
+          });
+          updateCards();
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', updateCards);
+      }
+
+      if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          updateCards();
+          searchInput.focus();
+        });
+      }
+
+      if (resetFiltersBtn) {
+        resetFiltersBtn.addEventListener('click', () => {
+          activeCategory = 'Todas';
+          filterButtons.forEach((btn) => {
+            btn.setAttribute('aria-pressed', String(btn.dataset.filter === 'Todas'));
+          });
+          searchInput.value = '';
+          updateCards();
+        });
+      }
+
+      // Replay individual de animación
+      function replayCard(card) {
+        const target = card.querySelector('[data-motion-target]');
+        if (!target) return;
+        target.classList.remove('is-playing');
+        void target.offsetWidth; // Reflow forzoso para reiniciar keyframe
+        target.classList.add('is-playing');
+      }
+
+      // Replay todas
+      replayAllBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const icon = btn.querySelector('.replay-icon') || btn.querySelector('span');
+          if (icon) {
+            icon.classList.add('is-spinning');
+            window.setTimeout(() => icon.classList.remove('is-spinning'), 600);
+          }
+          cards.forEach((card) => {
+            if (!card.hidden) replayCard(card);
+          });
+          showToast('Animaciones reiniciadas');
+        });
+      });
+
+      // Delegación de eventos para clicks
+      document.addEventListener('click', async (event) => {
+        // Botón reproducir individual
+        const replayButton = event.target.closest('[data-replay]');
+        if (replayButton) {
+          const card = replayButton.closest('[data-animation-card]');
+          const icon = replayButton.querySelector('.replay-icon');
+          if (icon) {
+            icon.classList.add('is-spinning');
+            window.setTimeout(() => icon.classList.remove('is-spinning'), 600);
+          }
+          replayCard(card);
+          return;
+        }
+
+        // Alternar vista de código
+        const toggleButton = event.target.closest('[data-toggle-code]');
+        if (toggleButton) {
+          const card = toggleButton.closest('[data-animation-card]');
+          const panel = card.querySelector('[data-code-panel]');
+          const isHidden = panel.hidden;
+          panel.hidden = !isHidden;
+          toggleButton.setAttribute('aria-expanded', String(isHidden));
+          toggleButton.classList.toggle('is-open', isHidden);
+          const chevron = toggleButton.querySelector('.chevron-icon');
+          if (chevron) chevron.textContent = isHidden ? '⌃' : '⌄';
+          const label = toggleButton.querySelector('span:first-child');
+          if (label) label.textContent = isHidden ? 'Ocultar código' : 'Ver código';
+          return;
+        }
+
+        // Pestañas CSS / HTML
+        const tabBtn = event.target.closest('[data-tab]');
+        if (tabBtn) {
+          const panel = tabBtn.closest('[data-code-panel]');
+          const tab = tabBtn.dataset.tab;
+          panel.querySelectorAll('[data-tab]').forEach((b) => {
+            b.classList.toggle('is-active', b === tabBtn);
+            b.setAttribute('aria-selected', String(b === tabBtn));
+          });
+          panel.querySelectorAll('[data-code-view]').forEach((view) => {
+            view.hidden = view.dataset.codeView !== tab;
+          });
+          return;
+        }
+
+        // Botón copiar código
+        const copyButton = event.target.closest('[data-copy]');
+        if (copyButton) {
+          const panel = copyButton.closest('[data-code-panel]');
+          const activeView = panel.querySelector('[data-code-view]:not([hidden])');
+          const codeEl = activeView ? activeView.querySelector('code') : null;
+          const status = panel.querySelector('[data-copy-status]');
+          const copyLabel = copyButton.querySelector('[data-copy-text]');
+
+          if (codeEl) {
+            const textToCopy = codeEl.textContent;
+            try {
+              await navigator.clipboard.writeText(textToCopy);
+              if (copyLabel) copyLabel.textContent = '¡Copiado!';
+              copyButton.classList.add('is-copied');
+              if (status) status.textContent = 'Código copiado al portapapeles.';
+              showToast('¡Código copiado al portapapeles!');
+            } catch {
+              if (copyLabel) copyLabel.textContent = 'Error';
+              if (status) status.textContent = 'No se pudo copiar automáticamente.';
+            }
+
+            window.setTimeout(() => {
+              if (copyLabel) copyLabel.textContent = 'Copiar';
+              copyButton.classList.remove('is-copied');
+              if (status) status.textContent = '';
+            }, 1800);
+          }
+          return;
+        }
+      });
+
+      // Atajos de teclado: '/' enfoca el buscador, 'Escape' lo limpia
+      document.addEventListener('keydown', (event) => {
+        if (event.key === '/' && document.activeElement !== searchInput && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+          event.preventDefault();
+          searchInput?.focus();
+        }
+        if (event.key === 'Escape' && document.activeElement === searchInput) {
+          searchInput.value = '';
+          searchInput.blur();
+          updateCards();
+        }
+      });
+
+      // Sistema de tema Dark / Light
+      const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', savedTheme);
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+          const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+          showToast(`Tema cambiado a ${newTheme === 'dark' ? 'oscuro' : 'claro'}`);
+        });
+      }
+
+      // Reducción de movimiento accesible
+      let reducedMotionActive = false;
+      if (motionToggleBtn) {
+        motionToggleBtn.addEventListener('click', () => {
+          reducedMotionActive = !reducedMotionActive;
+          document.documentElement.classList.toggle('reduce-motion-forced', reducedMotionActive);
+          motionToggleBtn.classList.toggle('is-active', reducedMotionActive);
+          showToast(reducedMotionActive ? 'Movimiento reducido activado' : 'Movimiento normal restaurado');
+        });
+      }
+    </script>
+  </body>
+</html>

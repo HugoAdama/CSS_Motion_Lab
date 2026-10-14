@@ -1,0 +1,131 @@
+---
+const { animation } = Astro.props;
+---
+
+<article
+  class="animation-card"
+  data-animation-card
+  data-category={animation.category}
+  data-name={animation.name.toLowerCase()}
+  data-id={animation.id}
+>
+  <div class="animation-card__preview">
+    <div class="preview-top-meta">
+      <span class="preview-tag preview-tag--duration">{animation.duration}</span>
+      <span class="preview-tag preview-tag--category">{animation.category}</span>
+    </div>
+
+    <div class:list={['demo-stage', animation.previewClass]} data-demo-stage aria-hidden="true">
+      {animation.id === 'fade-in' && (
+        <div class="preview-toast is-playing" data-motion-target>
+          <span class="toast-icon">✓</span>
+          <div class="toast-info">
+            <strong>Notificación</strong>
+            <span>¡Guardado con éxito!</span>
+          </div>
+        </div>
+      )}
+
+      {animation.id === 'slide-in' && (
+        <div class="preview-chip is-playing" data-motion-target>
+          <span class="chip-dot"></span>
+          <span class="chip-text">Panel lateral activo</span>
+          <span class="chip-arrow">→</span>
+        </div>
+      )}
+
+      {animation.id === 'bounce' && (
+        <div class="preview-bell is-playing" data-motion-target>
+          <div class="bell-icon">🔔</div>
+          <span class="bell-count">3</span>
+        </div>
+      )}
+
+      {animation.id === 'pulse' && (
+        <div class="preview-beacon is-playing" data-motion-target>
+          <span class="beacon-ring"></span>
+          <span class="beacon-dot"></span>
+          <span class="beacon-label">SISTEMA ONLINE</span>
+        </div>
+      )}
+
+      {animation.id === 'shake' && (
+        <div class="preview-alert is-playing" data-motion-target>
+          <span class="alert-icon">⚠️</span>
+          <span class="alert-text">Error de acceso</span>
+        </div>
+      )}
+
+      {animation.id === 'spinner' && (
+        <div class="preview-loader is-playing" data-motion-target>
+          <div class="loader-ring"></div>
+          <div class="loader-inner-glow"></div>
+        </div>
+      )}
+
+      {animation.id === 'typing' && (
+        <div class="preview-terminal is-playing" data-motion-target>
+          <div class="terminal-bar">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="terminal-body">
+            <span class="terminal-prompt">$</span>
+            <span class="typing-text">console.log("Motion!");</span>
+          </div>
+        </div>
+      )}
+
+      {animation.id === 'hover-lift' && (
+        <div class="preview-interactive-card" tabindex="0" data-motion-target>
+          <div class="card-glow"></div>
+          <span class="card-icon">✦</span>
+          <strong>Pasa el cursor</strong>
+          <small>o presiona Tab</small>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <div class="animation-card__body">
+    <div class="card-info">
+      <div class="card-header-row">
+        <h3>{animation.name}</h3>
+        <span class="timing-badge">{animation.timing}</span>
+      </div>
+      <p>{animation.description}</p>
+    </div>
+
+    <div class="animation-card__actions">
+      <button class="button button--quiet" type="button" data-replay aria-label={`Reproducir animación ${animation.name}`}>
+        <span class="replay-icon" aria-hidden="true">↻</span>
+        <span>Reproducir</span>
+      </button>
+      <button class="button button--code" type="button" data-toggle-code aria-expanded="false">
+        <span>Ver código</span>
+        <span class="chevron-icon" aria-hidden="true">⌄</span>
+      </button>
+    </div>
+
+    <div class="code-panel" data-code-panel hidden>
+      <div class="code-panel__tabs">
+        <div class="tab-buttons" role="tablist">
+          <button class="tab-btn is-active" type="button" data-tab="css" role="tab" aria-selected="true">CSS</button>
+          <button class="tab-btn" type="button" data-tab="html" role="tab" aria-selected="false">HTML</button>
+        </div>
+        <button class="copy-button" type="button" data-copy aria-label="Copiar código al portapapeles">
+          <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span data-copy-text>Copiar</span>
+        </button>
+      </div>
+
+      <div class="code-view" data-code-view="css">
+        <pre><code>{animation.code}</code></pre>
+      </div>
+      <div class="code-view" data-code-view="html" hidden>
+        <pre><code>{animation.htmlSnippet}</code></pre>
+      </div>
+
+      <p class="copy-status" data-copy-status aria-live="polite"></p>
+    </div>
+  </div>
+</article>
