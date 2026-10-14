@@ -1,0 +1,253 @@
+/* =========================================================================
+   ESTILOS Y KEYFRAMES: CARGA (10 ANIMACIONES)
+   ========================================================================= */
+
+/* 1. Spinner Ring */
+.spinner-stage {
+  display: grid;
+  place-items: center;
+}
+.spinner-ring {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 4px solid rgba(123, 110, 246, 0.18);
+  border-top-color: #695cf5;
+  animation: spin 900ms linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 2. Progress Ring SVG */
+.progress-ring-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+.ring-wrapper {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+}
+.ring-svg { width: 64px; height: 64px; }
+.ring-bg {
+  fill: none;
+  stroke: rgba(123, 110, 246, 0.15);
+  stroke-width: 5;
+}
+.ring-progress-circle {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 163.36;
+  stroke-dashoffset: 163.36;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  animation: fillRing 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.ring-percent {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.ring-info strong { display: block; font-size: 12px; color: var(--ink); }
+.ring-info p { margin: 2px 0 0; font-size: 11px; color: var(--text-secondary); }
+@keyframes fillRing {
+  from { stroke-dashoffset: 163.36; }
+  to { stroke-dashoffset: 32.67; }
+}
+
+/* 3. Dots Wave */
+.dots-container {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 12px 18px;
+  background: var(--surface-card);
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+.dot-bubble {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--violet);
+  animation: dotWave 1.2s ease-in-out infinite;
+}
+.dot-bubble--2 { animation-delay: 0.18s; }
+.dot-bubble--3 { animation-delay: 0.36s; }
+@keyframes dotWave {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+  40% { transform: translateY(-10px); opacity: 1; }
+}
+
+/* 4. Pulse Bars */
+.equalizer-box {
+  display: inline-flex;
+  gap: 5px;
+  align-items: flex-end;
+  height: 32px;
+  padding: 6px 14px;
+  background: var(--surface-card);
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+.eq-bar {
+  width: 5px;
+  height: 100%;
+  background: var(--mint);
+  border-radius: 3px;
+  transform-origin: bottom center;
+  animation: eqPulse 1s ease-in-out infinite;
+}
+.eq-bar--1 { animation-delay: 0.1s; }
+.eq-bar--2 { animation-delay: 0.3s; }
+.eq-bar--3 { animation-delay: 0.15s; }
+.eq-bar--4 { animation-delay: 0.45s; }
+@keyframes eqPulse {
+  0%, 100% { transform: scaleY(0.2); }
+  50% { transform: scaleY(1); }
+}
+
+/* 5. Indeterminate Progress Bar */
+.indeterminate-track {
+  width: 200px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  position: relative;
+}
+.indeterminate-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 45%;
+  background: var(--violet);
+  border-radius: 999px;
+  animation: indetProgress 1.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes indetProgress {
+  0% { transform: translateX(-100%) scaleX(0.4); }
+  50% { transform: translateX(100%) scaleX(1); }
+  100% { transform: translateX(300%) scaleX(0.4); }
+}
+
+/* 6. Radar Sweep */
+.radar-dish {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 1px solid rgba(61, 221, 168, 0.3);
+  background: rgba(61, 221, 168, 0.05);
+  overflow: hidden;
+}
+.radar-beam {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(61, 221, 168, 0.4) 0deg, transparent 60deg, transparent 360deg);
+  animation: radarSpin 2.2s linear infinite;
+}
+.radar-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mint);
+  transform: translate(-50%, -50%);
+}
+@keyframes radarSpin { to { transform: rotate(360deg); } }
+
+/* 7. Dual Ring */
+.dual-ring-wrap {
+  position: relative;
+  width: 46px;
+  height: 46px;
+}
+.dual-ring-outer {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: var(--violet);
+  border-bottom-color: var(--violet);
+  animation: spinOuter 1.2s linear infinite;
+}
+.dual-ring-inner {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-left-color: var(--mint);
+  border-right-color: var(--mint);
+  animation: spinInner 0.9s linear infinite reverse;
+}
+
+/* 8. Shimmer Box */
+.shimmer-thumb {
+  width: 180px;
+  height: 60px;
+  border-radius: 12px;
+  background: linear-gradient(110deg, rgba(255, 255, 255, 0.04) 30%, rgba(255, 255, 255, 0.16) 50%, rgba(255, 255, 255, 0.04) 70%);
+  background-size: 200% 100%;
+  animation: boxShimmer 1.6s ease-in-out infinite;
+}
+@keyframes boxShimmer { to { background-position: -200% 0; } }
+
+/* 9. Orbit Dots */
+.orbit-stage {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  animation: orbitRotate 1.8s linear infinite;
+}
+.orbit-center {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--violet);
+}
+.orbit-sat {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mint);
+}
+.orbit-sat--1 { top: 0; }
+.orbit-sat--2 { bottom: 0; }
+@keyframes orbitRotate { to { transform: rotate(360deg); } }
+
+/* 10. Sand Hourglass */
+.sand-hourglass {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--line-highlight);
+  font-size: 18px;
+  color: var(--violet);
+  animation: sandFlip 1.4s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+@keyframes sandFlip {
+  0% { transform: rotate(0deg); }
+  50%, 100% { transform: rotate(180deg); }
+}

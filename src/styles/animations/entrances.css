@@ -1,0 +1,218 @@
+/* =========================================================================
+   ESTILOS Y KEYFRAMES: ENTRADA (10 ANIMACIONES)
+   ========================================================================= */
+
+/* 1. Fade In -> Toast Card */
+.toast-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.toast-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(61, 221, 168, 0.15);
+  color: var(--mint);
+  display: grid;
+  place-items: center;
+}
+.toast-info strong { display: block; font-size: 13px; color: var(--ink); }
+.toast-info span { font-size: 11px; color: var(--text-secondary); }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 2. Slide In -> Nav Chip */
+.nav-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--surface-card);
+  border: 1px solid var(--line-highlight);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  animation: slideIn 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--violet);
+  box-shadow: 0 0 8px var(--violet);
+}
+.chip-arrow { color: var(--text-muted); }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-36px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* 3. Scale Up -> Pop Badge */
+.pop-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--surface-card);
+  border: 1px solid rgba(61, 221, 168, 0.4);
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--ink);
+  animation: scaleUp 450ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.pop-icon { color: var(--mint); font-weight: 900; }
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.65); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 4. Rotate In -> Reward Badge */
+.reward-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: rgba(123, 110, 246, 0.15);
+  border: 1px solid rgba(123, 110, 246, 0.4);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  animation: rotateIn 550ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.reward-star { color: #ffbd2e; font-size: 14px; }
+@keyframes rotateIn {
+  from { opacity: 0; transform: rotate(-15deg) scale(0.8); }
+  to { opacity: 1; transform: rotate(0deg) scale(1); }
+}
+
+/* 5. Flip In X -> KPI Card */
+.kpi-card {
+  perspective: 600px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--line-highlight);
+  text-align: center;
+  animation: flipInX 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.kpi-label { display: block; font-size: 10px; color: var(--text-muted); }
+.kpi-value { display: block; font-size: 18px; font-weight: 800; color: var(--mint); }
+@keyframes flipInX {
+  from { opacity: 0; transform: perspective(600px) rotateX(-70deg); }
+  to { opacity: 1; transform: perspective(600px) rotateX(0deg); }
+}
+
+/* 6. Slide Up -> Action Pill */
+.action-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--surface-card);
+  border: 1px solid rgba(61, 221, 168, 0.3);
+  font-size: 12px;
+  color: var(--ink);
+  animation: slideUp 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 8px var(--mint);
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 7. Blur In -> Glass Quote */
+.glass-quote {
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ink);
+  animation: blurIn 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes blurIn {
+  from { opacity: 0; filter: blur(14px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+/* 8. Curtain Reveal -> Curtain Panel */
+.curtain-panel {
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--line-highlight);
+  font-size: 12px;
+  animation: curtain 550ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.curtain-panel strong { display: block; color: var(--ink); }
+.curtain-panel span { font-size: 10px; color: var(--text-muted); }
+@keyframes curtain {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* 9. Bounce In -> Bounce In Box */
+.bounce-in-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid rgba(255, 110, 101, 0.4);
+  font-size: 12px;
+  color: var(--ink);
+  animation: bounceIn 700ms cubic-bezier(0.28, 0.84, 0.42, 1) both;
+}
+.badge-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--coral);
+  color: #fff;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+}
+@keyframes bounceIn {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.08); }
+  70% { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+
+/* 10. Drop In -> Drop Card */
+.drop-card {
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--line-highlight);
+  text-align: center;
+  animation: dropIn 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.drop-card strong { display: block; font-size: 12px; color: var(--ink); }
+.drop-card small { font-size: 10px; color: var(--mint); }
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-44px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,35 @@
+/* =========================================================================
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION & FORCED REDUCED MOTION MODE
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .orbit,
+  .brand-mark i,
+  .core-wave i {
+    animation: none !important;
+  }
+}
+
+html.reduce-motion-forced *,
+html.reduce-motion-forced *::before,
+html.reduce-motion-forced *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+html.reduce-motion-forced .stagger-item,
+html.reduce-motion-forced .dialog-surface,
+html.reduce-motion-forced .sheet-drawer {
+  opacity: 1 !important;
+  transform: none !important;
+}

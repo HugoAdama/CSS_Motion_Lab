@@ -1,0 +1,272 @@
+/* =========================================================================
+   ESTILOS Y KEYFRAMES: ÉNFASIS (10 ANIMACIONES)
+   ========================================================================= */
+
+/* 1. Bounce -> Bell Badge */
+.bell-badge {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  animation: bounce 850ms cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+  transform-origin: center bottom;
+}
+.bell-icon { color: var(--violet); }
+.bell-count {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--coral);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-22px) scaleY(1.05); }
+  50% { transform: translateY(0) scaleY(0.95); }
+  75% { transform: translateY(-9px) scaleY(1.02); }
+  100% { transform: translateY(0); }
+}
+
+/* 2. Pulse -> Status Beacon */
+.status-beacon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: rgba(123, 110, 246, 0.1);
+  border: 1px solid rgba(123, 110, 246, 0.3);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.beacon-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--mint);
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 10px var(--mint);
+}
+.beacon-ring {
+  position: absolute;
+  left: 20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--mint);
+  opacity: 0.6;
+  z-index: 1;
+  animation: pulseRing 1.6s ease-out infinite;
+}
+.beacon-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--mint);
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(123, 110, 246, 0.4); }
+  50% { transform: scale(1.06); box-shadow: 0 0 0 14px rgba(123, 110, 246, 0); }
+}
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+
+/* 3. Shake -> Input Alert */
+.input-alert {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 11px;
+  background: rgba(255, 110, 101, 0.1);
+  border: 1px solid rgba(255, 110, 101, 0.4);
+  color: var(--coral);
+  box-shadow: 0 4px 16px rgba(255, 110, 101, 0.15);
+  animation: shake 500ms ease-in-out infinite;
+}
+.alert-text { font-size: 13px; font-weight: 700; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+
+/* 4. Border Beam -> Radiant Card */
+.radiant-card {
+  position: relative;
+  width: 100%;
+  max-width: 240px;
+  border-radius: 14px;
+  overflow: hidden;
+  padding: 1.5px;
+  background: rgba(255, 255, 255, 0.06);
+}
+.radiant-beam {
+  position: absolute;
+  inset: -150%;
+  background: conic-gradient(from 0deg, transparent 0deg, transparent 280deg, #7b6ef6 320deg, #3ddda8 360deg);
+  animation: rotateBeam 3s linear infinite;
+}
+.radiant-body {
+  position: relative;
+  background: var(--surface-card);
+  border-radius: 13px;
+  padding: 12px 16px;
+  z-index: 1;
+  text-align: left;
+}
+.radiant-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(61, 221, 168, 0.15);
+  color: var(--mint);
+  margin-bottom: 4px;
+}
+.radiant-body strong { display: block; font-size: 13px; color: var(--ink); }
+.radiant-body p { margin: 2px 0 0; font-size: 11px; color: var(--text-secondary); }
+@keyframes rotateBeam { to { transform: rotate(360deg); } }
+
+/* 5. Heartbeat */
+.heart-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255, 110, 101, 0.12);
+  border: 1px solid rgba(255, 110, 101, 0.4);
+  color: var(--coral);
+  font-size: 12px;
+  font-weight: 700;
+  animation: heartbeat 1.3s ease-in-out infinite;
+}
+.heart-icon { font-size: 16px; }
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.18); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.14); }
+  70% { transform: scale(1); }
+}
+
+/* 6. Flash */
+.flash-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--surface-card);
+  border: 1px solid rgba(255, 189, 46, 0.4);
+  color: #ffbd2e;
+  font-size: 12px;
+  font-weight: 700;
+  animation: flash 900ms ease-out infinite;
+}
+.flash-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffbd2e;
+  box-shadow: 0 0 8px #ffbd2e;
+}
+@keyframes flash {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.2; }
+}
+
+/* 7. Wobble / Jiggle */
+.wobble-item {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: rgba(123, 110, 246, 0.15);
+  border: 1px solid rgba(123, 110, 246, 0.4);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  animation: jiggle 800ms ease-in-out infinite;
+}
+@keyframes jiggle {
+  0%, 100% { transform: rotate(0deg) skew(0deg); }
+  20% { transform: rotate(-5deg) skew(-3deg); }
+  40% { transform: rotate(4deg) skew(2deg); }
+  60% { transform: rotate(-3deg) skew(-1deg); }
+  80% { transform: rotate(2deg) skew(1deg); }
+}
+
+/* 8. Glow Pulse */
+.glow-btn {
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: var(--violet);
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(123, 110, 246, 0.4); }
+  50% { box-shadow: 0 0 30px rgba(123, 110, 246, 0.85), 0 0 10px rgba(61, 221, 168, 0.5); }
+}
+
+/* 9. Rubber Band */
+.elastic-tag {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--surface-card);
+  border: 1px solid var(--violet);
+  color: var(--violet);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  animation: rubberBand 900ms ease-out infinite;
+}
+@keyframes rubberBand {
+  0% { transform: scale3d(1, 1, 1); }
+  30% { transform: scale3d(1.25, 0.75, 1); }
+  40% { transform: scale3d(0.75, 1.25, 1); }
+  50% { transform: scale3d(1.15, 0.85, 1); }
+  65% { transform: scale3d(0.95, 1.05, 1); }
+  75% { transform: scale3d(1.05, 0.95, 1); }
+  100% { transform: scale3d(1, 1, 1); }
+}
+
+/* 10. Soft Float */
+.floating-orb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--line-highlight);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  animation: float 3s ease-in-out infinite;
+}
+.orb-icon { color: var(--mint); font-size: 14px; }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}

@@ -1,0 +1,233 @@
+/* =========================================================================
+   ESTILOS Y KEYFRAMES: TEXTO (10 ANIMACIONES)
+   ========================================================================= */
+
+/* 1. Typing -> Terminal Box */
+.terminal-box {
+  width: 250px;
+  border-radius: 12px;
+  background: #090a12;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+.terminal-bar {
+  display: flex;
+  gap: 5px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--line);
+}
+.terminal-bar span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.terminal-bar span:nth-child(1) { background: #ff5f56; }
+.terminal-bar span:nth-child(2) { background: #ffbd2e; }
+.terminal-bar span:nth-child(3) { background: #27c93f; }
+.terminal-body {
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.terminal-prompt { color: var(--mint); font-weight: 700; }
+.typing-text {
+  display: inline-block;
+  color: #f1f2fa;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--violet);
+  animation: typing 2.4s steps(22, end) both, blinkCaret 750ms step-end infinite;
+}
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes blinkCaret { 50% { border-color: transparent; } }
+
+/* 2. Text Shimmer */
+.shimmer-headline {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #7b6ef6 0%, #ffffff 50%, #7b6ef6 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  animation: textShine 2.2s linear infinite;
+}
+@keyframes textShine { to { background-position: -200% center; } }
+
+/* 3. Word Rotator */
+.word-rotator-frame {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.word-roller-mask {
+  height: 22px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+}
+.word-roller {
+  display: flex;
+  flex-direction: column;
+  animation: rollWords 3.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+.word-roller strong { height: 22px; line-height: 22px; color: var(--mint); }
+@keyframes rollWords {
+  0%, 25% { transform: translateY(0); }
+  33%, 58% { transform: translateY(-22px); }
+  66%, 92% { transform: translateY(-44px); }
+  100% { transform: translateY(0); }
+}
+
+/* 4. Cyber Glitch */
+.glitch-title {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 2px;
+}
+.glitch-title::before,
+.glitch-title::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.glitch-title::before {
+  color: #ff5f56;
+  clip-path: inset(0 0 50% 0);
+  animation: glitchTop 1.5s ease-in-out infinite;
+}
+.glitch-title::after {
+  color: var(--mint);
+  clip-path: inset(50% 0 0 0);
+  animation: glitchBottom 1.5s ease-in-out infinite;
+}
+@keyframes glitchTop {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-3px, -2px); }
+  40% { transform: translate(3px, 1px); }
+}
+@keyframes glitchBottom {
+  0%, 100% { transform: translate(0); }
+  25% { transform: translate(2px, 2px); }
+  45% { transform: translate(-2px, -1px); }
+}
+
+/* 5. Neon Text */
+.neon-text {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 2px;
+  animation: neonFlicker 1.8s ease-in-out infinite;
+}
+@keyframes neonFlicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow: 0 0 6px #7b6ef6, 0 0 16px #7b6ef6, 0 0 26px #7b6ef6;
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+    opacity: 0.4;
+  }
+}
+
+/* 6. Gradient Flow */
+.gradient-flow-text {
+  font-size: 16px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #a79bfd 0%, #3ddda8 33%, #ff6e65 66%, #a79bfd 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: flowGradient 4s linear infinite;
+}
+@keyframes flowGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 7. Wavy Letters */
+.wave-text-wrap {
+  display: inline-flex;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--violet);
+}
+.wave-text-wrap span {
+  display: inline-block;
+  animation: letterWave 1.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+@keyframes letterWave {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* 8. Split Reveal */
+.mask-line-container {
+  overflow: hidden;
+  display: inline-block;
+}
+.mask-line-inner {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  animation: revealLine 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes revealLine {
+  from { transform: translateY(110%); }
+  to { transform: translateY(0); }
+}
+
+/* 9. Focus Blur In */
+.focus-in-heading {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mint);
+  animation: focusIn 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes focusIn {
+  from { filter: blur(12px); opacity: 0; letter-spacing: 6px; }
+  to { filter: blur(0); opacity: 1; letter-spacing: 1px; }
+}
+
+/* 10. Odometer Ticker */
+.odometer-ticker {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+}
+.ticker-column-mask { height: 24px; overflow: hidden; }
+.ticker-digits {
+  display: flex;
+  flex-direction: column;
+  animation: rollDigits 1.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.ticker-digits span { height: 24px; line-height: 24px; text-align: center; }
+@keyframes rollDigits {
+  from { transform: translateY(0); }
+  to { transform: translateY(-192px); }
+}

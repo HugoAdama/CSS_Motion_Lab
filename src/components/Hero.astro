@@ -1,0 +1,88 @@
+---
+// Hero.astro — Sección de bienvenida, métricas técnicas verificables y visual interactivo de órbitas CSS
+interface Props {
+  totalCount: number;
+  patternsCount: number;
+  atomicCount: number;
+}
+
+const { totalCount, patternsCount, atomicCount } = Astro.props;
+---
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-grid-pattern"></div>
+
+  <div class="hero-content">
+    <div class="hero-copy">
+      <div class="eyebrow-chip">
+        <span class="eyebrow-ping"></span>
+        <span>CATÁLOGO TÉCNICO &middot; CSS NATIVO</span>
+      </div>
+      <h1 id="page-title">
+        Haz visible el <span class="gradient-text">movimiento.</span>
+      </h1>
+      <p class="hero-description">
+        Explora efectos atómicos y patrones compuestos de interfaz (staggered lists, toasts, skeletons y acordeones) con selectores coordinados en HTML y CSS. Calibra parámetros en vivo y copia ejemplos completos listos para producción.
+      </p>
+
+      <div class="hero-actions">
+        <a class="hero-btn hero-btn--primary" href="#biblioteca">
+          <span>Explorar catálogo</span>
+          <span class="btn-arrow" aria-hidden="true">&darr;</span>
+        </a>
+        <button class="hero-btn hero-btn--secondary" type="button" data-replay-all-hero>
+          <span aria-hidden="true">&#x21bb;</span>
+          <span>Reproducir todas</span>
+        </button>
+      </div>
+
+      <!-- Métricas verificables y transparentes -->
+      <div class="hero-stats" role="region" aria-label="Estadísticas verificables del catálogo">
+        <div class="stat-item">
+          <strong>{totalCount}</strong>
+          <span>Ejemplos totales</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <strong>{patternsCount}</strong>
+          <span>Patrones UI</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <strong>{atomicCount}</strong>
+          <span>Efectos atómicos</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <strong>HTML + CSS</strong>
+          <span>Coordinados</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-stage">
+        <div class="orbit orbit--outer"></div>
+        <div class="orbit orbit--inner"></div>
+        <div class="hero-core-card">
+          <div class="core-card-header">
+            <span class="core-dot red"></span>
+            <span class="core-dot yellow"></span>
+            <span class="core-dot green"></span>
+          </div>
+          <div class="core-card-body">
+            <span class="core-badge">@keyframes</span>
+            <span class="core-title">CSS Motion</span>
+            <div class="core-wave">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+        </div>
+        <div class="floating-badge badge--one">cubic-bezier</div>
+        <div class="floating-badge badge--two">stagger delay</div>
+        <div class="floating-badge badge--three">grid-template-rows</div>
+      </div>
+    </div>
+  </div>
+</section>

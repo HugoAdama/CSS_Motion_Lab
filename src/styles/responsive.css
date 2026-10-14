@@ -1,0 +1,83 @@
+/* =========================================================================
+   RESPONSIVE LAYOUT & MEDIA QUERIES
+   ========================================================================= */
+
+@media (max-width: 960px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hero-visual {
+    min-height: 280px;
+  }
+  .animation-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .topbar {
+    height: 60px;
+    padding: 0 16px;
+  }
+  .btn-label-desktop {
+    display: none;
+  }
+  .hero {
+    padding: 45px 18px 50px;
+  }
+  .hero-visual {
+    display: none;
+  }
+  .hero-stats {
+    gap: 14px;
+  }
+  .stat-divider {
+    display: none;
+  }
+  .stat-item {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .heading-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .library-controls-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .search-box {
+    width: 100%;
+  }
+
+  .animation-grid {
+    grid-template-columns: 1fr;
+  }
+  .tuner-row {
+    grid-template-columns: 1fr;
+  }
+  .animation-card__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .button--quiet,
+  .button--copy-full,
+  .button--code,
+  .button--toggle-accordion,
+  .button--toggle-flip {
+    width: 100%;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}

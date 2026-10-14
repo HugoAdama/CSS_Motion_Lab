@@ -1,0 +1,12 @@
+---
+// Toast.astro — Notificación flotante accesible global para confirmaciones de copiado y ajustes
+---
+
+<div class="copy-toast" data-global-toast aria-live="polite" hidden>
+  <span class="toast-check">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </span>
+  <span data-toast-msg>Código copiado al portapapeles</span>
+</div>

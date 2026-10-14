@@ -1,0 +1,56 @@
+/* =========================================================================
+   DESIGN TOKENS & SYSTEM VARIABLES (DARK & LIGHT THEMES)
+   ========================================================================= */
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Modo Oscuro (Predeterminado) */
+  --page: #08090f;
+  --surface: #0f101a;
+  --surface-card: #141523;
+  --surface-hover: #1b1d2e;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-highlight: rgba(123, 110, 246, 0.3);
+  --ink: #f8f9fe;
+  --text-secondary: #a0a3bd;
+  --text-muted: #6a6d85;
+
+  --violet: #7b6ef6;
+  --violet-glow: rgba(123, 110, 246, 0.35);
+  --violet-gradient: linear-gradient(135deg, #a79bfd 0%, #7b6ef6 100%);
+  --mint: #3ddda8;
+  --coral: #ff6e65;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 16px 36px -10px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px rgba(123, 110, 246, 0.2);
+}
+
+[data-theme="light"] {
+  --page: #f5f6fa;
+  --surface: #ffffff;
+  --surface-card: #ffffff;
+  --surface-hover: #f0f2f8;
+  --line: rgba(0, 0, 0, 0.08);
+  --line-highlight: rgba(105, 92, 245, 0.3);
+  --ink: #111322;
+  --text-secondary: #4a4d68;
+  --text-muted: #82859e;
+
+  --violet: #6253e8;
+  --violet-glow: rgba(98, 83, 232, 0.2);
+  --violet-gradient: linear-gradient(135deg, #7464f7 0%, #4f3ee0 100%);
+  --mint: #0ea674;
+  --coral: #e64539;
+
+  --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 16px 32px -8px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 25px rgba(98, 83, 232, 0.15);
+}

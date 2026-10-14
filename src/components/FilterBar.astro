@@ -1,0 +1,60 @@
+---
+// FilterBar.astro — Cabecera de galería, botón de repetición, píldoras de filtrado y buscador interactivo
+interface Props {
+  categories: string[];
+  categoryCounts: Record<string, number>;
+  totalCount: number;
+}
+
+const { categories, categoryCounts, totalCount } = Astro.props;
+---
+
+<div class="section-heading">
+  <div>
+    <div class="section-badge">CATÁLOGO INTERACTIVO</div>
+    <h2 id="library-title">Galería de Efectos y Patrones UI</h2>
+    <p class="section-subtitle">Calibra duración, curvas y retrasos escalonados. Inspecciona el impacto en la composición del navegador y copia el ejemplo completo con un clic.</p>
+  </div>
+  <div class="heading-controls">
+    <button class="btn-replay-all" type="button" data-replay-all title="Reiniciar todas las animaciones visibles">
+      <span class="replay-icon" aria-hidden="true">&#x21bb;</span>
+      <span>Reproducir visibles</span>
+    </button>
+    <p class="result-count">
+      Mostrando <strong data-result-count>{totalCount}</strong> de {totalCount}
+    </p>
+  </div>
+</div>
+
+<div class="library-controls-bar">
+  <div class="filter-pills" role="group" aria-label="Filtrar por categoría">
+    {categories.map((category, index) => (
+      <button
+        class="filter-pill"
+        type="button"
+        data-filter={category}
+        aria-pressed={index === 0 ? 'true' : 'false'}
+      >
+        <span>{category}</span>
+        <span class="pill-count">{categoryCounts[category]}</span>
+      </button>
+    ))}
+  </div>
+
+  <div class="search-wrapper">
+    <label class="search-box">
+      <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="search" placeholder="Buscar animación o propiedad..." data-search autocomplete="off" spellcheck="false" aria-label="Buscar animación o propiedad animada" />
+      <button class="clear-search-btn" type="button" data-clear-search hidden aria-label="Limpiar búsqueda">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <kbd class="search-kbd" title="Presiona la tecla / para enfocar el buscador">/</kbd>
+    </label>
+  </div>
+</div>
