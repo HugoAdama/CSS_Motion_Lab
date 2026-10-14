@@ -1,7 +1,7 @@
 ---
 const { animation } = Astro.props;
 
-const initialCss = animation.generateCss(animation.defaultDuration, animation.defaultTiming);
+const initialCss = animation.generateCss(animation.defaultDuration, animation.defaultTiming, animation.defaultStaggerDelay || 0.1);
 const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS -->\n<style>\n${initialCss}\n</style>`;
 ---
 
@@ -13,6 +13,7 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
   data-id={animation.id}
   data-default-duration={animation.defaultDuration}
   data-default-timing={animation.defaultTiming}
+  data-default-stagger={animation.defaultStaggerDelay || 0.1}
 >
   <div class="animation-card__preview">
     <div class="preview-top-meta">
@@ -95,6 +96,64 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
           <small>o presiona Tab</small>
         </div>
       )}
+
+      {/* 9. Staggered reveal */}
+      {animation.id === 'staggered-reveal' && (
+        <ul class="stagger-list is-playing" data-motion-target>
+          <li class="stagger-item" style="--stagger-index: 0;">
+            <span class="stagger-bullet">1</span>
+            <span class="stagger-text">Primer elemento cargado</span>
+          </li>
+          <li class="stagger-item" style="--stagger-index: 1;">
+            <span class="stagger-bullet">2</span>
+            <span class="stagger-text">Segundo elemento cargado</span>
+          </li>
+          <li class="stagger-item" style="--stagger-index: 2;">
+            <span class="stagger-bullet">3</span>
+            <span class="stagger-text">Tercer elemento cargado</span>
+          </li>
+        </ul>
+      )}
+
+      {/* 10. Toast Lifecycle */}
+      {animation.id === 'toast-lifecycle' && (
+        <div class="toast-lifecycle-preview" data-motion-target>
+          <div class="toast-banner is-playing">
+            <span class="toast-badge">Info</span>
+            <div class="toast-msg">
+              <strong>Proceso finalizado</strong>
+              <p>El archivo se descargó correctamente.</p>
+            </div>
+            <button class="toast-close-btn" type="button" aria-label="Cerrar notificación">&times;</button>
+          </div>
+        </div>
+      )}
+
+      {/* 11. Skeleton Shimmer */}
+      {animation.id === 'skeleton-shimmer' && (
+        <div class="skeleton-card is-playing" data-motion-target role="status" aria-label="Cargando contenido">
+          <div class="skeleton-avatar"></div>
+          <div class="skeleton-lines">
+            <div class="skeleton-line skeleton-line--title"></div>
+            <div class="skeleton-line skeleton-line--body"></div>
+          </div>
+        </div>
+      )}
+
+      {/* 12. Accordion */}
+      {animation.id === 'accordion' && (
+        <div class="accordion-item is-open" data-motion-target data-accordion-widget>
+          <button class="accordion-trigger" type="button" aria-expanded="true">
+            <span>¿Cómo integrar esta animación?</span>
+            <span class="accordion-arrow">&darr;</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-inner">
+              <p>Copia el bloque completo de HTML y CSS coordinados y pégalo directamente en tu proyecto.</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   </div>
 
@@ -102,13 +161,13 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
     <div class="card-info">
       <div class="card-header-row">
         <h3>{animation.name}</h3>
-        <span class={`cost-badge cost-badge--${animation.renderCostType}`} title="Costo en la tubería de renderizado del navegador">
+        <span class={`cost-badge cost-badge--${animation.renderCostType}`} title={animation.costExplanation}>
           {animation.renderCost}
         </span>
       </div>
       <p>{animation.description}</p>
       <div class="tech-specs">
-        <span class="tech-spec-label">Propiedades animadas:</span>
+        <span class="tech-spec-label">Propiedades:</span>
         <code class="tech-spec-code">{animation.properties}</code>
       </div>
     </div>
@@ -131,7 +190,7 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
             type="range"
             class="tuner-range"
             min="0.2"
-            max="3.0"
+            max={animation.id === 'toast-lifecycle' ? '5.0' : '3.0'}
             step="0.05"
             value={animation.defaultDuration}
             data-duration-input
@@ -147,14 +206,38 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
             ))}
           </select>
         </label>
+
+        {animation.hasStaggerControl && (
+          <label class="tuner-field tuner-field--full">
+            <span class="tuner-label">
+              Retraso escalonado (delay): <strong data-stagger-value>{(animation.defaultStaggerDelay || 0.1) * 1000}ms</strong>
+            </span>
+            <input
+              type="range"
+              class="tuner-range"
+              min="0.04"
+              max="0.30"
+              step="0.02"
+              value={animation.defaultStaggerDelay || 0.1}
+              data-stagger-input
+              aria-label={`Retraso entre elementos para ${animation.name}`}
+            />
+          </label>
+        )}
       </div>
     </div>
 
     <div class="animation-card__actions">
       <button class="button button--quiet" type="button" data-replay aria-label={`Reproducir animación ${animation.name}`}>
-        <span class="replay-icon" aria-hidden="true">↻</span>
+        <span class="replay-icon" aria-hidden="true">&#x21bb;</span>
         <span>Reproducir</span>
       </button>
+
+      {animation.id === 'accordion' && (
+        <button class="button button--toggle-accordion" type="button" data-toggle-accordion-demo aria-label="Abrir o cerrar acordeón de prueba">
+          <span>Alternar abrir/cerrar</span>
+        </button>
+      )}
 
       <button
         class="button button--copy-full"

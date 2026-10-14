@@ -14,7 +14,7 @@ const categoryCounts = categories.reduce((acc, cat) => {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="CSS Motion Lab — Biblioteca interactiva para consultar, calibrar, entender y copiar animaciones CSS con código coordinado listo para producción." />
+    <meta name="description" content="CSS Motion Lab — Biblioteca interactiva para consultar, calibrar, entender y copiar animaciones y patrones compuestos de CSS con código coordinado listo para producción." />
     <meta name="theme-color" content="#0d0e17" />
     <title>CSS Motion Lab — Catálogo y Laboratorio Interactivo de Animaciones CSS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -66,12 +66,12 @@ const categoryCounts = categories.reduce((acc, cat) => {
               Haz visible el <span class="gradient-text">movimiento.</span>
             </h1>
             <p class="hero-description">
-              Explora, calibra y copia animaciones CSS con selectores coordinados en HTML y CSS. Ajusta la duración y la curva de velocidad en tiempo real para entender el impacto en cada propiedad.
+              Explora efectos atómicos y patrones compuestos de interfaz (staggered lists, toasts, skeletons y acordeones) con selectores coordinados en HTML y CSS. Calibra parámetros en vivo y copia ejemplos completos listos para producción.
             </p>
 
             <div class="hero-actions">
               <a class="hero-btn hero-btn--primary" href="#biblioteca">
-                <span>Explorar animaciones</span>
+                <span>Explorar catálogo</span>
                 <span class="btn-arrow" aria-hidden="true">&darr;</span>
               </a>
               <button class="hero-btn hero-btn--secondary" type="button" data-replay-all-hero>
@@ -83,18 +83,18 @@ const categoryCounts = categories.reduce((acc, cat) => {
             <!-- Métricas verificables y transparentes -->
             <div class="hero-stats" role="region" aria-label="Estadísticas verificables del catálogo">
               <div class="stat-item">
+                <strong>{animations.length}</strong>
+                <span>Ejemplos totales</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <strong>4</strong>
+                <span>Patrones UI</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
                 <strong>8</strong>
-                <span>Animaciones</span>
-              </div>
-              <div class="stat-divider"></div>
-              <div class="stat-item">
-                <strong>5</strong>
-                <span>Categorías</span>
-              </div>
-              <div class="stat-divider"></div>
-              <div class="stat-item">
-                <strong>100%</strong>
-                <span>CSS puro</span>
+                <span>Efectos atómicos</span>
               </div>
               <div class="stat-divider"></div>
               <div class="stat-item">
@@ -123,8 +123,8 @@ const categoryCounts = categories.reduce((acc, cat) => {
                 </div>
               </div>
               <div class="floating-badge badge--one">cubic-bezier</div>
-              <div class="floating-badge badge--two">ease-in-out</div>
-              <div class="floating-badge badge--three">transform</div>
+              <div class="floating-badge badge--two">stagger delay</div>
+              <div class="floating-badge badge--three">grid-template-rows</div>
             </div>
           </div>
         </div>
@@ -134,8 +134,8 @@ const categoryCounts = categories.reduce((acc, cat) => {
         <div class="section-heading">
           <div>
             <div class="section-badge">CATÁLOGO INTERACTIVO</div>
-            <h2 id="library-title">Galería de Efectos</h2>
-            <p class="section-subtitle">Calibra parámetros de duración y curva, inspecciona las propiedades afectadas y copia el ejemplo completo con un clic.</p>
+            <h2 id="library-title">Galería de Efectos y Patrones UI</h2>
+            <p class="section-subtitle">Calibra duración, curvas y retrasos escalonados. Inspecciona el impacto en la composición del navegador y copia el ejemplo completo con un clic.</p>
           </div>
           <div class="heading-controls">
             <button class="btn-replay-all" type="button" data-replay-all title="Reiniciar todas las animaciones visibles">
@@ -203,7 +203,7 @@ const categoryCounts = categories.reduce((acc, cat) => {
           <span class="brand-text">CSS <strong>Motion Lab</strong></span>
         </a>
         <p class="footer-copy">
-          Herramienta pedagógica para experimentar, calibrar y reutilizar animaciones CSS nativas.
+          Laboratorio interactivo para experimentar, calibrar y reutilizar animaciones CSS nativas y patrones de UI.
         </p>
         <div class="footer-links">
           <a href="https://github.com/HugoAdama/CSS_Motion_Lab" target="_blank" rel="noreferrer">GitHub</a>
@@ -224,14 +224,18 @@ const categoryCounts = categories.reduce((acc, cat) => {
     <script>
       // Generadores de CSS dinámico para sincronizar la vista previa con el código copiable
       const cssGenerators = {
-        'fade-in': (d, t) => `.toast-card {\n  animation: fadeIn ${d}s ${t} both;\n}\n\n@keyframes fadeIn {\n  from {\n    opacity: 0;\n    transform: translateY(16px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}`,
-        'slide-in': (d, t) => `.nav-chip {\n  animation: slideIn ${d}s ${t} both;\n}\n\n@keyframes slideIn {\n  from {\n    opacity: 0;\n    transform: translateX(-36px);\n  }\n  to {\n    opacity: 1;\n    transform: translateX(0);\n  }\n}`,
-        'bounce': (d, t) => `.bell-badge {\n  display: inline-flex;\n  animation: bounce ${d}s ${t} both;\n  transform-origin: center bottom;\n}\n\n@keyframes bounce {\n  0% { transform: translateY(0); }\n  25% { transform: translateY(-22px) scaleY(1.05); }\n  50% { transform: translateY(0) scaleY(0.95); }\n  75% { transform: translateY(-9px) scaleY(1.02); }\n  100% { transform: translateY(0); }\n}`,
-        'pulse': (d, t) => `.status-beacon {\n  animation: pulse ${d}s ${t} infinite;\n}\n\n@keyframes pulse {\n  0%, 100% {\n    transform: scale(1);\n    box-shadow: 0 0 0 0 rgba(123, 110, 246, 0.4);\n  }\n  50% {\n    transform: scale(1.06);\n    box-shadow: 0 0 0 14px rgba(123, 110, 246, 0);\n  }\n}`,
-        'shake': (d, t) => `.input-alert {\n  animation: shake ${d}s ${t} both;\n}\n\n@keyframes shake {\n  0%, 100% { transform: translateX(0); }\n  20% { transform: translateX(-8px); }\n  40% { transform: translateX(8px); }\n  60% { transform: translateX(-5px); }\n  80% { transform: translateX(5px); }\n}`,
-        'spinner': (d, t) => `.spinner-ring {\n  width: 44px;\n  height: 44px;\n  border-radius: 50%;\n  border: 4px solid rgba(123, 110, 246, 0.18);\n  border-top-color: #695cf5;\n  animation: spin ${d}s ${t} infinite;\n}\n\n@keyframes spin {\n  to {\n    transform: rotate(360deg);\n  }\n}`,
-        'typing': (d, t) => `.typing-text {\n  display: inline-block;\n  overflow: hidden;\n  white-space: nowrap;\n  border-right: 2px solid #7b6ef6;\n  animation:\n    typing ${d}s ${t} both,\n    blinkCaret 750ms step-end infinite;\n}\n\n@keyframes typing {\n  from { width: 0; }\n  to { width: 100%; }\n}\n\n@keyframes blinkCaret {\n  50% { border-color: transparent; }\n}`,
-        'hover-lift': (d, t) => `.card-interactive {\n  transition:\n    transform ${d}s ${t},\n    box-shadow ${d}s ${t};\n}\n\n.card-interactive:hover,\n.card-interactive:focus-visible {\n  transform: translateY(-8px) scale(1.02);\n  box-shadow: 0 20px 35px -8px rgba(123, 110, 246, 0.3);\n}`
+        'fade-in': (d, t) => `.toast-card {\n  animation: fadeIn ${d}s ${t} both;\n}\n\n@keyframes fadeIn {\n  from {\n    opacity: 0;\n    transform: translateY(16px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .toast-card {\n    animation: none !important;\n    opacity: 1 !important;\n    transform: none !important;\n  }\n}`,
+        'slide-in': (d, t) => `.nav-chip {\n  animation: slideIn ${d}s ${t} both;\n}\n\n@keyframes slideIn {\n  from {\n    opacity: 0;\n    transform: translateX(-36px);\n  }\n  to {\n    opacity: 1;\n    transform: translateX(0);\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .nav-chip {\n    animation: none !important;\n    opacity: 1 !important;\n    transform: none !important;\n  }\n}`,
+        'bounce': (d, t) => `.bell-badge {\n  display: inline-flex;\n  animation: bounce ${d}s ${t} both;\n  transform-origin: center bottom;\n}\n\n@keyframes bounce {\n  0% { transform: translateY(0); }\n  25% { transform: translateY(-22px) scaleY(1.05); }\n  50% { transform: translateY(0) scaleY(0.95); }\n  75% { transform: translateY(-9px) scaleY(1.02); }\n  100% { transform: translateY(0); }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .bell-badge {\n    animation: none !important;\n    transform: none !important;\n  }\n}`,
+        'pulse': (d, t) => `.status-beacon {\n  animation: pulse ${d}s ${t} infinite;\n}\n\n@keyframes pulse {\n  0%, 100% {\n    transform: scale(1);\n    box-shadow: 0 0 0 0 rgba(123, 110, 246, 0.4);\n  }\n  50% {\n    transform: scale(1.06);\n    box-shadow: 0 0 0 14px rgba(123, 110, 246, 0);\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .status-beacon {\n    animation: none !important;\n    transform: none !important;\n    box-shadow: 0 0 0 2px rgba(123, 110, 246, 0.5) !important;\n  }\n}`,
+        'shake': (d, t) => `.input-alert {\n  animation: shake ${d}s ${t} both;\n}\n\n@keyframes shake {\n  0%, 100% { transform: translateX(0); }\n  20% { transform: translateX(-8px); }\n  40% { transform: translateX(8px); }\n  60% { transform: translateX(-5px); }\n  80% { transform: translateX(5px); }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .input-alert {\n    animation: none !important;\n    transform: none !important;\n  }\n}`,
+        'spinner': (d, t) => `.spinner-ring {\n  width: 44px;\n  height: 44px;\n  border-radius: 50%;\n  border: 4px solid rgba(123, 110, 246, 0.18);\n  border-top-color: #695cf5;\n  animation: spin ${d}s ${t} infinite;\n}\n\n@keyframes spin {\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .spinner-ring {\n    animation: none !important;\n    opacity: 0.6 !important;\n  }\n}`,
+        'typing': (d, t) => `.typing-text {\n  display: inline-block;\n  overflow: hidden;\n  white-space: nowrap;\n  border-right: 2px solid #7b6ef6;\n  animation:\n    typing ${d}s ${t} both,\n    blinkCaret 750ms step-end infinite;\n}\n\n@keyframes typing {\n  from { width: 0; }\n  to { width: 100%; }\n}\n\n@keyframes blinkCaret {\n  50% { border-color: transparent; }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .typing-text {\n    animation: none !important;\n    width: 100% !important;\n    border-right-color: transparent !important;\n  }\n}`,
+        'hover-lift': (d, t) => `.card-interactive {\n  transition:\n    transform ${d}s ${t},\n    box-shadow ${d}s ${t};\n}\n\n.card-interactive:hover,\n.card-interactive:focus-visible {\n  transform: translateY(-8px) scale(1.02);\n  box-shadow: 0 20px 35px -8px rgba(123, 110, 246, 0.3);\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .card-interactive {\n    transition: none !important;\n    transform: none !important;\n    outline: 2px solid #7b6ef6 !important;\n  }\n}`,
+        'staggered-reveal': (d, t, stagger = 0.1) => `.stagger-list {\n  --stagger-delay: ${stagger}s;\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n}\n\n.stagger-item {\n  animation: staggerFadeIn ${d}s ${t} both;\n  animation-delay: calc(var(--stagger-index, 0) * var(--stagger-delay, 0.1s));\n}\n\n@keyframes staggerFadeIn {\n  from {\n    opacity: 0;\n    transform: translateY(14px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .stagger-item {\n    animation: none !important;\n    opacity: 1 !important;\n    transform: none !important;\n  }\n}`,
+        'toast-lifecycle': (d, t) => `.toast-banner {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  animation: toastCycle ${d}s ${t} both;\n}\n\n@keyframes toastCycle {\n  0% {\n    opacity: 0;\n    transform: translateY(24px) scale(0.95);\n  }\n  14%, 82% {\n    opacity: 1;\n    transform: translateY(0) scale(1);\n  }\n  100% {\n    opacity: 0;\n    transform: translateY(-16px) scale(0.98);\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .toast-banner {\n    animation: none !important;\n    opacity: 1 !important;\n    transform: none !important;\n  }\n}`,
+        'skeleton-shimmer': (d, t) => `.skeleton-card .skeleton-avatar,\n.skeleton-card .skeleton-line {\n  background: linear-gradient(\n    90deg,\n    rgba(255, 255, 255, 0.05) 0%,\n    rgba(255, 255, 255, 0.18) 50%,\n    rgba(255, 255, 255, 0.05) 100%\n  );\n  background-size: 200% 100%;\n  animation: shimmer ${d}s ${t} infinite;\n}\n\n@keyframes shimmer {\n  0% { background-position: 200% 0; }\n  100% { background-position: -200% 0; }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .skeleton-card .skeleton-avatar,\n  .skeleton-card .skeleton-line {\n    animation: none !important;\n    background: rgba(255, 255, 255, 0.08) !important;\n  }\n}`,
+        'accordion': (d, t) => `.accordion-item {\n  border-radius: 12px;\n  overflow: hidden;\n}\n\n.accordion-trigger {\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 12px 16px;\n}\n\n.accordion-arrow {\n  transition: transform ${d}s ${t};\n}\n\n.accordion-item.is-open .accordion-arrow {\n  transform: rotate(180deg);\n}\n\n.accordion-content {\n  display: grid;\n  grid-template-rows: 0fr;\n  transition: grid-template-rows ${d}s ${t};\n}\n\n.accordion-item.is-open .accordion-content {\n  grid-template-rows: 1fr;\n}\n\n.accordion-inner {\n  overflow: hidden;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .accordion-arrow,\n  .accordion-content {\n    transition: none !important;\n  }\n}`
       };
 
       const cards = Array.from(document.querySelectorAll('[data-animation-card]'));
@@ -269,14 +273,24 @@ const categoryCounts = categories.reduce((acc, cat) => {
         target.classList.remove('is-playing');
         void target.offsetWidth; // Reflow controlado para reiniciar keyframe
         target.classList.add('is-playing');
+
+        // Para stagger list
+        const items = target.querySelectorAll('.stagger-item');
+        items.forEach((item) => {
+          item.style.animation = 'none';
+          void item.offsetWidth;
+          item.style.animation = '';
+        });
       }
 
-      // Actualizar parámetros interactivos de una tarjeta (Duración y Timing)
+      // Actualizar parámetros interactivos de una tarjeta (Duración, Timing y Stagger Delay)
       function updateCardParameters(card) {
         const id = card.dataset.id;
         const durationInput = card.querySelector('[data-duration-input]');
         const timingSelect = card.querySelector('[data-timing-select]');
+        const staggerInput = card.querySelector('[data-stagger-input]');
         const durationLabel = card.querySelector('[data-duration-value]');
+        const staggerLabel = card.querySelector('[data-stagger-value]');
         const target = card.querySelector('[data-motion-target]');
         const codeCss = card.querySelector('[data-code-css]');
         const codeHtml = card.querySelector('[data-code-html]');
@@ -286,9 +300,13 @@ const categoryCounts = categories.reduce((acc, cat) => {
 
         const duration = parseFloat(durationInput.value);
         const timing = timingSelect.value;
+        const staggerDelay = staggerInput ? parseFloat(staggerInput.value) : 0.1;
 
         if (durationLabel) {
           durationLabel.textContent = `${duration.toFixed(2)}s`;
+        }
+        if (staggerLabel && staggerInput) {
+          staggerLabel.textContent = `${Math.round(staggerDelay * 1000)}ms`;
         }
 
         // Aplicar a la vista previa en vivo
@@ -297,17 +315,27 @@ const categoryCounts = categories.reduce((acc, cat) => {
         target.style.transitionDuration = `${duration}s`;
         target.style.transitionTimingFunction = timing;
 
-        // Para typing o elementos anidados:
-        const subAnimated = target.querySelector('.typing-text, .spinner-ring, .beacon-ring');
+        if (id === 'staggered-reveal') {
+          target.style.setProperty('--stagger-delay', `${staggerDelay}s`);
+          const items = target.querySelectorAll('.stagger-item');
+          items.forEach((item) => {
+            item.style.animationDuration = `${duration}s`;
+            item.style.animationTimingFunction = timing;
+          });
+        }
+
+        const subAnimated = target.querySelector('.typing-text, .spinner-ring, .beacon-ring, .toast-banner, .skeleton-avatar, .skeleton-line, .accordion-arrow, .accordion-content');
         if (subAnimated) {
           subAnimated.style.animationDuration = `${duration}s`;
           subAnimated.style.animationTimingFunction = timing;
+          subAnimated.style.transitionDuration = `${duration}s`;
+          subAnimated.style.transitionTimingFunction = timing;
         }
 
-        // Regenerar bloques de código si existe generador
+        // Regenerar bloques de código
         const generator = cssGenerators[id];
         if (generator) {
-          const newCss = generator(duration.toFixed(2), timing);
+          const newCss = generator(duration.toFixed(2), timing, staggerDelay.toFixed(2));
           if (codeCss) codeCss.textContent = newCss;
           if (codeFull && codeHtml) {
             codeFull.textContent = `<!-- HTML -->\n${codeHtml.textContent}\n\n<!-- CSS -->\n<style>\n${newCss}\n</style>`;
@@ -321,6 +349,7 @@ const categoryCounts = categories.reduce((acc, cat) => {
       cards.forEach((card) => {
         const durationInput = card.querySelector('[data-duration-input]');
         const timingSelect = card.querySelector('[data-timing-select]');
+        const staggerInput = card.querySelector('[data-stagger-input]');
         const resetBtn = card.querySelector('[data-reset-tuning]');
 
         if (durationInput) {
@@ -329,12 +358,17 @@ const categoryCounts = categories.reduce((acc, cat) => {
         if (timingSelect) {
           timingSelect.addEventListener('change', () => updateCardParameters(card));
         }
+        if (staggerInput) {
+          staggerInput.addEventListener('input', () => updateCardParameters(card));
+        }
         if (resetBtn) {
           resetBtn.addEventListener('click', () => {
             const defDuration = card.dataset.defaultDuration || '0.7';
             const defTiming = card.dataset.defaultTiming || 'ease-out';
+            const defStagger = card.dataset.defaultStagger || '0.1';
             if (durationInput) durationInput.value = defDuration;
             if (timingSelect) timingSelect.value = defTiming;
+            if (staggerInput) staggerInput.value = defStagger;
             updateCardParameters(card);
             showToast('Parámetros restablecidos');
           });
@@ -428,6 +462,31 @@ const categoryCounts = categories.reduce((acc, cat) => {
             window.setTimeout(() => icon.classList.remove('is-spinning'), 600);
           }
           replayCard(card);
+          return;
+        }
+
+        // Interacción del Acordeón en la vista previa
+        const accordionTrigger = event.target.closest('.accordion-trigger, [data-toggle-accordion-demo]');
+        if (accordionTrigger) {
+          const card = accordionTrigger.closest('[data-animation-card]');
+          const accordion = card.querySelector('[data-accordion-widget]');
+          if (accordion) {
+            const isOpen = accordion.classList.contains('is-open');
+            accordion.classList.toggle('is-open', !isOpen);
+            const trigger = accordion.querySelector('.accordion-trigger');
+            if (trigger) trigger.setAttribute('aria-expanded', String(!isOpen));
+          }
+          return;
+        }
+
+        // Cierre interactivo del Toast Lifecycle
+        const toastClose = event.target.closest('.toast-close-btn');
+        if (toastClose) {
+          const banner = toastClose.closest('.toast-banner');
+          if (banner) {
+            banner.style.opacity = '0';
+            banner.style.transform = 'translateY(-18px) scale(0.96)';
+          }
           return;
         }
 
