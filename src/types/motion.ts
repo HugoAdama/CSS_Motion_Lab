@@ -118,4 +118,5 @@ export interface MotionLabEvents {
   'motion:replay-all': void;
   'motion:speed-change': { speed: number };
   'toast:show': { message: string; duration?: number };
+  'lang:change': { lang: 'es' | 'en' };
 }
