@@ -73,9 +73,9 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
           </div>
-          <h3>No se encontraron animaciones</h3>
-          <p>No hay resultados que coincidan con tus criterios de búsqueda o filtro.</p>
-          <button class="hero-btn hero-btn--secondary" type="button" data-reset-filters>
+          <h3 data-i18n="empty.title">No se encontraron animaciones</h3>
+          <p data-i18n="empty.description">No hay resultados que coincidan con tus criterios de búsqueda o filtro.</p>
+          <button class="hero-btn hero-btn--secondary" type="button" data-reset-filters data-i18n="empty.reset_btn">
             Restablecer filtros
           </button>
         </div>
@@ -98,8 +98,8 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
             <span class="bundle-counter-pill" data-bundle-count>0</span>
           </div>
           <div class="bundle-dock-text">
-            <strong>Mi Selección de Animaciones</strong>
-            <span>Genera un archivo CSS único con tus animaciones</span>
+            <strong data-i18n="bundle.title">Mi Selección de Animaciones</strong>
+            <span data-i18n="bundle.subtitle">Genera un archivo CSS único con tus animaciones</span>
           </div>
         </div>
         <div class="bundle-dock-actions">
@@ -109,24 +109,24 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
-            <span>Descargar .CSS</span>
+            <span data-i18n="bundle.download">Descargar .CSS</span>
           </button>
           <button class="bundle-action-btn bundle-action-btn--secondary" type="button" data-bundle-copy title="Copiar todo el CSS unificado al portapapeles">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
             </svg>
-            <span>Copiar Todo</span>
+            <span data-i18n="bundle.copy">Copiar Todo</span>
           </button>
           <button class="bundle-action-btn bundle-action-btn--ghost" type="button" data-bundle-clear title="Vaciar selección">
-            <span>Limpiar</span>
+            <span data-i18n="bundle.clear">Limpiar</span>
           </button>
         </div>
       </div>
     </aside>
 
     <!-- 6. Botón flotante Volver Arriba -->
-    <button class="back-to-top" data-back-to-top type="button" aria-label="Volver arriba de la galería" title="Volver al inicio de la galería">
+    <button class="back-to-top" data-back-to-top type="button" aria-label="Volver arriba de la galería" title="Volver al inicio de la galería" data-i18n-attr="title:back_to_top;aria-label:back_to_top">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <polyline points="18 15 12 9 6 15"></polyline>
       </svg>
@@ -136,36 +136,36 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
     <dialog class="shortcuts-dialog" data-shortcuts-dialog aria-labelledby="shortcuts-modal-title">
       <div class="shortcuts-dialog__content">
         <div class="shortcuts-dialog__header">
-          <h3 id="shortcuts-modal-title">Atajos de Teclado del Laboratorio</h3>
+          <h3 id="shortcuts-modal-title" data-i18n="shortcuts.title">Atajos de Teclado del Laboratorio</h3>
           <button class="shortcuts-close-btn" type="button" data-shortcuts-close aria-label="Cerrar modal">&times;</button>
         </div>
         <div class="shortcuts-list">
           <div class="shortcut-item">
             <kbd class="shortcut-key">R</kbd>
-            <span>Reproducir todas las animaciones visibles</span>
+            <span data-i18n="shortcuts.r">Reproducir todas las animaciones visibles</span>
           </div>
           <div class="shortcut-item">
             <kbd class="shortcut-key">M</kbd>
-            <span>Alternar modo de movimiento reducido (accesibilidad)</span>
+            <span data-i18n="shortcuts.m">Alternar modo de movimiento reducido (accesibilidad)</span>
           </div>
           <div class="shortcut-item">
             <kbd class="shortcut-key">/</kbd>
-            <span>Enfocar el buscador en tiempo real</span>
+            <span data-i18n="shortcuts.slash">Enfocar el buscador en tiempo real</span>
           </div>
           <div class="shortcut-item">
             <div class="shortcut-keys-group">
               <kbd class="shortcut-key">&larr;</kbd>
               <kbd class="shortcut-key">&rarr;</kbd>
             </div>
-            <span>Navegar a la página anterior o siguiente</span>
+            <span data-i18n="shortcuts.arrows">Navegar a la página anterior o siguiente</span>
           </div>
           <div class="shortcut-item">
             <kbd class="shortcut-key">?</kbd>
-            <span>Abrir / cerrar esta guía de atajos rápidos</span>
+            <span data-i18n="shortcuts.question">Abrir / cerrar esta guía de atajos rápidos</span>
           </div>
           <div class="shortcut-item">
             <kbd class="shortcut-key">Esc</kbd>
-            <span>Cerrar paneles de código, modales o limpiar búsqueda</span>
+            <span data-i18n="shortcuts.esc">Cerrar paneles de código, modales o limpiar búsqueda</span>
           </div>
         </div>
       </div>

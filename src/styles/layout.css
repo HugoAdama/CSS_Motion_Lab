@@ -103,6 +103,33 @@
 [data-theme="light"] .sun-icon { display: block; }
 [data-theme="light"] .moon-icon { display: none; }
 
+.lang-toggle-btn {
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.lang-icon {
+  color: var(--violet);
+  flex-shrink: 0;
+}
+
+.lang-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(123, 110, 246, 0.15);
+  color: var(--violet);
+  transition: all 180ms ease;
+}
+
+.lang-toggle-btn:hover .lang-badge {
+  background: var(--violet);
+  color: #ffffff;
+}
+
 .github-link {
   display: inline-flex;
   align-items: center;

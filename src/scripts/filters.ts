@@ -1,6 +1,7 @@
 // filters.ts — Filtros de categoría, costo (pipeline), buscador en vivo, favoritos y paginación avanzada
 import { eventBus } from './events';
 import { showToast } from './toast';
+import { t } from './i18n';
 
 export function initFilters(cards: HTMLElement[]): void {
   // 1. Configuración de Paginación y Preferencias Persistentes
@@ -242,7 +243,8 @@ export function initFilters(cards: HTMLElement[]): void {
 
     // 7. Sincronizar Paginación Superior (Mini-Paginación)
     if (topIndicator) {
-      topIndicator.textContent = totalItems === 0 ? 'Pág. 0 / 0' : `Pág. ${currentPage} / ${totalPages}`;
+      const pageLbl = t('gallery.page');
+      topIndicator.textContent = totalItems === 0 ? `${pageLbl} 0 / 0` : `${pageLbl} ${currentPage} / ${totalPages}`;
     }
     if (topPrevBtn) {
       topPrevBtn.disabled = currentPage <= 1 || totalItems === 0;
@@ -259,7 +261,7 @@ export function initFilters(cards: HTMLElement[]): void {
         paginationBar.hidden = false;
 
         if (paginationInfo) {
-          paginationInfo.textContent = `Página ${currentPage} de ${totalPages} · Mostrando ${startIndex + 1}–${endIndex} de ${totalItems} animaciones`;
+          paginationInfo.textContent = `${t('pagination.page')} ${currentPage} ${t('pagination.of')} ${totalPages} · ${t('pagination.showing')} ${startIndex + 1}–${endIndex} ${t('pagination.of')} ${totalItems} ${t('pagination.animations')}`;
         }
 
         if (prevBtn) {
@@ -476,6 +478,11 @@ export function initFilters(cards: HTMLElement[]): void {
       e.preventDefault();
       goToNextPage();
     }
+  });
+
+  // Reaccionar dinámicamente al cambio de idioma
+  eventBus.on('lang:change', () => {
+    updateGallery(false);
   });
 
   // Inicializar estado de la galería

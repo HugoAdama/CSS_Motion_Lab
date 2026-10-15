@@ -11,24 +11,24 @@ const { categories, categoryCounts, totalCount } = Astro.props;
 
 <div class="section-heading">
   <div class="section-heading-text">
-    <div class="section-badge">CATÁLOGO INTERACTIVO</div>
-    <h2 id="library-title">Galería de Efectos y Patrones UI</h2>
-    <p class="section-subtitle">Calibra duración, curvas Bézier y retrasos escalonados. Inspecciona el impacto en la composición del navegador, ábrelas en CodePen y exporta paquetes personalizados.</p>
+    <div class="section-badge" data-i18n="gallery.badge">CATÁLOGO INTERACTIVO</div>
+    <h2 id="library-title" data-i18n="gallery.title">Galería de Efectos y Patrones UI</h2>
+    <p class="section-subtitle" data-i18n="gallery.subtitle">Calibra duración, curvas Bézier y retrasos escalonados. Inspecciona el impacto en la composición del navegador, ábrelas en CodePen y exporta paquetes personalizados.</p>
   </div>
   <div class="heading-controls">
     <div class="view-mode-toggle" role="group" aria-label="Modo de vista del catálogo">
       <button class="view-mode-btn is-active" type="button" data-view-mode="studio" title="Modo Estudio: Muestra calibradores y curvas Bézier">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-        <span>Estudio</span>
+        <span data-i18n="gallery.mode_studio">Estudio</span>
       </button>
       <button class="view-mode-btn" type="button" data-view-mode="compact" title="Modo Compacto: Exploración rápida del catálogo">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
-        <span>Compacto</span>
+        <span data-i18n="gallery.mode_compact">Compacto</span>
       </button>
     </div>
 
     <div class="speed-toggle" role="group" aria-label="Velocidad de reproducción de animaciones">
-      <span class="speed-label" title="Velocidad de reproducción">
+      <span class="speed-label" title="Velocidad de reproducción" data-i18n-attr="title:gallery.speed_label">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
       </span>
       <button class="speed-btn" type="button" data-speed="0.5" title="Cámara lenta 0.5x">0.5x</button>
@@ -38,7 +38,7 @@ const { categories, categoryCounts, totalCount } = Astro.props;
 
     <button class="btn-replay-all" type="button" data-replay-all title="Reiniciar todas las animaciones visibles (Atajo: tecla R)">
       <span class="replay-icon" aria-hidden="true">&#x21bb;</span>
-      <span>Reproducir</span>
+      <span data-i18n="gallery.replay_btn">Reproducir</span>
       <kbd class="shortcut-badge">R</kbd>
     </button>
   </div>
@@ -52,7 +52,7 @@ const { categories, categoryCounts, totalCount } = Astro.props;
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-        <input type="search" placeholder="Buscar por nombre o propiedad (ej. fade, transform, blur)..." data-search autocomplete="off" spellcheck="false" aria-label="Buscar animación o propiedad animada" />
+        <input type="search" placeholder="Buscar por nombre o propiedad (ej. fade, transform, blur)..." data-i18n-attr="placeholder:gallery.search_placeholder" data-search autocomplete="off" spellcheck="false" aria-label="Buscar animación o propiedad animada" />
         <button class="clear-search-btn" type="button" data-clear-search hidden aria-label="Limpiar búsqueda">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -70,7 +70,7 @@ const { categories, categoryCounts, totalCount } = Astro.props;
         <button class="mini-page-btn" type="button" data-page-next-top title="Página siguiente (→)" aria-label="Página siguiente">&rsaquo;</button>
       </div>
       <p class="result-count">
-        Mostrando <strong data-result-count>{totalCount}</strong> de {totalCount}
+        <span data-i18n="gallery.showing">Mostrando</span> <strong data-result-count>{totalCount}</strong> <span data-i18n="gallery.of">de</span> {totalCount}
       </p>
     </div>
   </div>
@@ -97,7 +97,7 @@ const { categories, categoryCounts, totalCount } = Astro.props;
       <svg class="fav-pill-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
       </svg>
-      <span>Favoritos</span>
+      <span data-i18n="category.favorites">Favoritos</span>
       <span class="pill-count" data-favorites-count>0</span>
     </button>
   </div>
@@ -110,23 +110,23 @@ const { categories, categoryCounts, totalCount } = Astro.props;
       <circle cx="12" cy="12" r="3"></circle>
       <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
     </svg>
-    <span>Pipeline de Renderizado:</span>
+    <span data-i18n="pipeline.label">Pipeline de Renderizado:</span>
   </div>
   <div class="pipeline-pills" role="group" aria-label="Filtrar por costo en el navegador">
     <button class="pipeline-pill is-active" type="button" data-cost-filter="all" aria-pressed="true">
-      <span>Todos los costos</span>
+      <span data-i18n="pipeline.all">Todos los costos</span>
     </button>
     <button class="pipeline-pill" type="button" data-cost-filter="composite" aria-pressed="false" title="Animaciones en transform y opacity ejecutadas en GPU">
       <span class="pipeline-indicator pipeline-indicator--composite"></span>
-      <span>Solo GPU (Composición)</span>
+      <span data-i18n="pipeline.gpu">Solo GPU (Composición)</span>
     </button>
     <button class="pipeline-pill" type="button" data-cost-filter="paint" aria-pressed="false" title="Animaciones que involucran rasterizado de sombras o filtros">
       <span class="pipeline-indicator pipeline-indicator--paint"></span>
-      <span>Repintado (Paint)</span>
+      <span data-i18n="pipeline.paint">Repintado (Paint)</span>
     </button>
     <button class="pipeline-pill" type="button" data-cost-filter="layout" aria-pressed="false" title="Animaciones que alteran la geometría del DOM">
       <span class="pipeline-indicator pipeline-indicator--layout"></span>
-      <span>Maquetación (Layout)</span>
+      <span data-i18n="pipeline.layout">Maquetación (Layout)</span>
     </button>
   </div>
 </div>

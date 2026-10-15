@@ -70,7 +70,7 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
       </div>
       <p class="card-description">{animation.description}</p>
       <div class="tech-specs">
-        <span class="tech-spec-label">Propiedades:</span>
+        <span class="tech-spec-label" data-i18n="card.properties_label">Propiedades:</span>
         <code class="tech-spec-code">{animation.properties}</code>
       </div>
     </div>
@@ -78,8 +78,8 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
     <!-- Controles de Calibración en tiempo real -->
     <div class="card-tuner" data-card-tuner>
       <div class="tuner-heading">
-        <span class="tuner-title">Calibrar parámetros:</span>
-        <button class="tuner-reset-btn" type="button" data-reset-tuning aria-label={`Restablecer parámetros de ${animation.name}`}>
+        <span class="tuner-title" data-i18n="card.calibrate_params">Calibrar parámetros:</span>
+        <button class="tuner-reset-btn" type="button" data-reset-tuning aria-label={`Restablecer parámetros de ${animation.name}`} data-i18n="card.reset_params">
           Restablecer
         </button>
       </div>
@@ -88,7 +88,7 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
         <div class="tuner-inputs-row">
           <label class="tuner-field">
             <span class="tuner-label">
-              Duración: <strong data-duration-value>{animation.defaultDuration}s</strong>
+              <span data-i18n="card.duration_label">Duración:</span> <strong data-duration-value>{animation.defaultDuration}s</strong>
             </span>
             <input
               type="range"
@@ -103,7 +103,7 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
           </label>
 
           <label class="tuner-field">
-            <span class="tuner-label">Curva (timing):</span>
+            <span class="tuner-label" data-i18n="card.curve_label">Curva (timing):</span>
             <select class="tuner-select" data-timing-select aria-label={`Curva de aceleración para ${animation.name}`}>
               {animation.timingOptions.map((opt) => (
                 <option value={opt} selected={opt === animation.defaultTiming}>{opt}</option>
@@ -136,8 +136,8 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
           </div>
           <div class="curve-caption">
             <div class="curve-badge-row">
-              <span class="curve-badge">Curva Bézier:</span>
-              <span class="curve-ref-hint" title="Línea punteada: referencia lineal (linear)">ref. linear</span>
+              <span class="curve-badge" data-i18n="card.bezier_curve">Curva Bézier:</span>
+              <span class="curve-ref-hint" data-i18n="card.ref_linear" title="Línea punteada: referencia lineal (linear)">ref. linear</span>
             </div>
             <code class="curve-val" data-curve-name>{animation.defaultTiming}</code>
           </div>
@@ -146,7 +146,7 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
         {animation.hasStaggerControl && (
           <label class="tuner-field tuner-field--full">
             <span class="tuner-label">
-              Retraso escalonado (delay): <strong data-stagger-value>{(animation.defaultStaggerDelay || 0.1) * 1000}ms</strong>
+              <span data-i18n="card.stagger_label">Retraso escalonado (delay):</span> <strong data-stagger-value>{(animation.defaultStaggerDelay || 0.1) * 1000}ms</strong>
             </span>
             <input
               type="range"
@@ -173,12 +173,12 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
               <polyline points="23 4 23 10 17 10"></polyline>
               <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
             </svg>
-            <span class="replay-label">Reproducir</span>
+            <span class="replay-label" data-i18n="card.play">Reproducir</span>
           </button>
 
           <button class="button button--subtle button--pause" type="button" data-pause-toggle title="Pausar o reanudar animación" aria-label={`Pausar animación ${animation.name}`}>
             <span class="pause-icon" aria-hidden="true">⏸</span>
-            <span class="pause-text sr-only">Pausar</span>
+            <span class="pause-text sr-only" data-i18n="card.pause">Pausar</span>
           </button>
         </div>
 
@@ -202,7 +202,7 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
               <line x1="9" y1="8" x2="15" y2="8"></line>
               <line x1="17" y1="16" x2="23" y2="16"></line>
             </svg>
-            <span>Calibrar</span>
+            <span data-i18n="card.calibrate">Calibrar</span>
           </button>
 
           <button class="button button--code-pill" type="button" data-toggle-code aria-expanded="false" aria-label={`Ver código de ${animation.name}`} title="Ver código CSS, HTML y Tailwind">
@@ -210,7 +210,7 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
               <polyline points="16 18 22 12 16 6"></polyline>
               <polyline points="8 6 2 12 8 18"></polyline>
             </svg>
-            <span>Código</span>
+            <span data-i18n="card.code">Código</span>
             <span class="chevron-icon" aria-hidden="true">⌄</span>
           </button>
         </div>
@@ -246,7 +246,7 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
             <svg class="star-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
             </svg>
-            <span class="sr-only">Favorito</span>
+            <span class="sr-only" data-i18n="card.favorite">Favorito</span>
           </button>
 
           <!-- Botón Copiar Completo -->
@@ -258,7 +258,7 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
             aria-label={`Copiar ejemplo completo de ${animation.name}`}
           >
             <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-            <span class="sr-only" data-copy-full-text>Copiar</span>
+            <span class="sr-only" data-copy-full-text data-i18n="card.copy">Copiar</span>
           </button>
 
           <!-- Botón 1-clic: Abrir en CodePen -->
@@ -288,7 +288,7 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
             aria-label={`Añadir ${animation.name} a mi paquete`}
           >
             <span class="bundle-check-icon" aria-hidden="true">+</span>
-            <span class="sr-only bundle-btn-text">Paquete</span>
+            <span class="sr-only bundle-btn-text" data-i18n="card.bundle_add">Paquete</span>
           </button>
         </div>
       </div>
@@ -298,14 +298,14 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
     <div class="code-panel" data-code-panel hidden>
       <div class="code-panel__tabs">
         <div class="tab-buttons" role="tablist">
-          <button class="tab-btn is-active" type="button" data-tab="css" role="tab" aria-selected="true">CSS</button>
-          <button class="tab-btn" type="button" data-tab="html" role="tab" aria-selected="false">HTML</button>
-          <button class="tab-btn" type="button" data-tab="full" role="tab" aria-selected="false">Completo</button>
-          <button class="tab-btn" type="button" data-tab="tailwind" role="tab" aria-selected="false">Tailwind</button>
+          <button class="tab-btn is-active" type="button" data-tab="css" role="tab" aria-selected="true" data-i18n="card.tab_css">CSS</button>
+          <button class="tab-btn" type="button" data-tab="html" role="tab" aria-selected="false" data-i18n="card.tab_html">HTML</button>
+          <button class="tab-btn" type="button" data-tab="full" role="tab" aria-selected="false" data-i18n="card.tab_full">Completo</button>
+          <button class="tab-btn" type="button" data-tab="tailwind" role="tab" aria-selected="false" data-i18n="card.tab_tailwind">Tailwind</button>
         </div>
         <button class="copy-button" type="button" data-copy aria-label="Copiar código actual al portapapeles">
           <svg class="copy-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-          <span data-copy-text>Copiar</span>
+          <span data-copy-text data-i18n="card.copy">Copiar</span>
         </button>
       </div>
 

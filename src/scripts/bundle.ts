@@ -1,6 +1,7 @@
 // bundle.ts — Gestor del creador y exportador de paquete CSS personalizado (Custom Bundle Builder)
 import { showToast } from './toast';
 import { eventBus } from './events';
+import { t } from './i18n';
 import type { AnimationDefinition } from '../types';
 
 const selectedAnimIds = new Set<string>();
@@ -44,7 +45,7 @@ export function initBundleBuilder(cards: HTMLElement[], animMap: Map<string, Ani
         const icon = btn.querySelector('.bundle-check-icon');
         const text = btn.querySelector('.bundle-btn-text');
         if (icon) icon.textContent = isSelected ? '✓' : '+';
-        if (text) text.textContent = isSelected ? 'En paquete' : 'Colección';
+        if (text) text.textContent = isSelected ? t('card.bundle_in') : t('card.bundle_add');
       }
     });
 
@@ -138,7 +139,12 @@ export function initBundleBuilder(cards: HTMLElement[], animMap: Map<string, Ani
     clearBtn.addEventListener('click', () => {
       selectedAnimIds.clear();
       updateDockUI();
-      showToast('Selección de paquete vaciada');
+      showToast(t('toast.bundle_cleared'));
     });
   }
+
+  // Reaccionar a cambios de idioma
+  eventBus.on('lang:change', () => {
+    updateDockUI();
+  });
 }

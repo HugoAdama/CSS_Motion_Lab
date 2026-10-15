@@ -7,6 +7,7 @@ import { initCardTuning } from './tuner';
 import { initFilters } from './filters';
 import { initInteractions } from './interactions';
 import { initBundleBuilder } from './bundle';
+import { initI18n } from './i18n';
 
 function initApp(): void {
   const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-animation-card]'));
@@ -14,6 +15,7 @@ function initApp(): void {
     animations.map((a: any) => [a.id, a as AnimationDefinition])
   );
 
+  initI18n();
   initTheme();
   initMotionControls(cards);
   initCardTuning(cards, animMap);

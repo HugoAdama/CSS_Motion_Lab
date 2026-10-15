@@ -9,6 +9,7 @@ Bienvenido a la documentación técnica oficial de **CSS Motion Lab**. A continu
 | **[ANIMATIONS_GUIDE.md](./ANIMATIONS_GUIDE.md)** | Manual de creación de animaciones CSS de alta fidelidad, contratos de datos, curvas de aceleración y buenas prácticas de hardware. |
 | **[QUALITY_AUDIT.md](./QUALITY_AUDIT.md)** | Informe exhaustivo de la auditoría de calidad automatizada con matriz de 24 pruebas técnicas y métricas del catálogo. |
 | **[LEARNINGS.md](./LEARNINGS.md)** | Aprendizajes y lecciones técnicas de ingeniería en escalado a 180 animaciones, Core Web Vitals, View Transitions API y diseño de UI. |
+| **[ROADMAP_V2.md](./ROADMAP_V2.md)** | Hoja de ruta para la Version 2.0: Web Animations API (WAAPI), tokens de diseno Figma/Penpot, scroll-driven animations, fisicas de resortes, PWA y CLI headless. |
 
 ---
 

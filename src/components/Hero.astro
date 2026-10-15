@@ -17,23 +17,23 @@ const { totalCount, patternsCount, atomicCount } = Astro.props;
     <div class="hero-copy">
       <div class="eyebrow-chip">
         <span class="eyebrow-ping"></span>
-        <span>CATÁLOGO TÉCNICO &middot; CSS NATIVO</span>
+        <span data-i18n="hero.eyebrow">CATÁLOGO TÉCNICO &middot; CSS NATIVO</span>
       </div>
       <h1 id="page-title">
-        Haz visible el <span class="gradient-text">movimiento.</span>
+        <span data-i18n="hero.title_pre">Haz visible el</span> <span class="gradient-text" data-i18n="hero.title_highlight">movimiento.</span>
       </h1>
-      <p class="hero-description">
+      <p class="hero-description" data-i18n="hero.description">
         Explora efectos atómicos y patrones compuestos de interfaz (staggered lists, toasts, skeletons y acordeones) con selectores coordinados en HTML y CSS. Calibra parámetros en vivo y copia ejemplos completos listos para producción.
       </p>
 
       <div class="hero-actions">
         <a class="hero-btn hero-btn--primary" href="#biblioteca">
-          <span>Explorar catálogo</span>
+          <span data-i18n="hero.explore_btn">Explorar catálogo</span>
           <span class="btn-arrow" aria-hidden="true">&darr;</span>
         </a>
         <button class="hero-btn hero-btn--secondary" type="button" data-replay-all-hero>
           <span aria-hidden="true">&#x21bb;</span>
-          <span>Reproducir todas</span>
+          <span data-i18n="hero.replay_all_btn">Reproducir todas</span>
         </button>
       </div>
 
@@ -41,22 +41,22 @@ const { totalCount, patternsCount, atomicCount } = Astro.props;
       <div class="hero-stats" role="region" aria-label="Estadísticas verificables del catálogo">
         <div class="stat-item">
           <strong>{totalCount}</strong>
-          <span>Ejemplos totales</span>
+          <span data-i18n="hero.stat_total">Ejemplos totales</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
           <strong>{patternsCount}</strong>
-          <span>Patrones UI</span>
+          <span data-i18n="hero.stat_patterns">Patrones UI</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
           <strong>{atomicCount}</strong>
-          <span>Efectos atómicos</span>
+          <span data-i18n="hero.stat_atomic">Efectos atómicos</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
           <strong>HTML + CSS</strong>
-          <span>Coordinados</span>
+          <span data-i18n="hero.stat_coordinated">Coordinados</span>
         </div>
       </div>
     </div>

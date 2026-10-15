@@ -1,6 +1,7 @@
 // interactions.ts — Delegación de eventos interactivos (copiado, pestañas, demos UI y repetición)
 import { replayCard } from './motion';
 import { showToast } from './toast';
+import { t } from './i18n';
 
 export function initInteractions(): void {
   document.addEventListener('click', async (event) => {
@@ -24,7 +25,7 @@ export function initInteractions(): void {
           const pIcon = pauseBtn.querySelector<HTMLElement>('.pause-icon');
           const pText = pauseBtn.querySelector<HTMLElement>('.pause-text');
           if (pIcon) pIcon.textContent = '⏸';
-          if (pText) pText.textContent = 'Pausar';
+          if (pText) pText.textContent = t('card.pause');
         }
         replayCard(card);
       }
@@ -42,7 +43,7 @@ export function initInteractions(): void {
         const pIcon = pauseBtn.querySelector<HTMLElement>('.pause-icon');
         const pText = pauseBtn.querySelector<HTMLElement>('.pause-text');
         if (pIcon) pIcon.textContent = isPaused ? '▶' : '⏸';
-        if (pText) pText.textContent = isPaused ? 'Reanudar' : 'Pausar';
+        if (pText) pText.textContent = isPaused ? t('card.resume') : t('card.pause');
 
         const allAnimated = [motionTarget, ...Array.from(motionTarget.querySelectorAll<HTMLElement>('*'))];
         allAnimated.forEach((el) => {

@@ -13,19 +13,29 @@
   </a>
 
   <div class="topbar-actions">
-    <button class="icon-toggle-btn" type="button" data-shortcuts-toggle aria-label="Ver atajos de teclado" title="Atajos de teclado (tecla ?)">
-      <span class="shortcut-icon-circle" aria-hidden="true">?</span>
-      <span class="btn-label-desktop">Atajos</span>
+    <!-- Selector de idioma ES / EN -->
+    <button class="icon-toggle-btn lang-toggle-btn" type="button" data-lang-toggle aria-label="Cambiar idioma / Switch language" title="Cambiar idioma (ES / EN)" data-i18n-attr="title:header.lang_title">
+      <svg class="lang-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+      </svg>
+      <span class="lang-badge" data-lang-current>ES</span>
     </button>
 
-    <button class="icon-toggle-btn" type="button" data-motion-toggle aria-label="Alternar reducción de movimiento" title="Alternar modo de movimiento reducido">
+    <button class="icon-toggle-btn" type="button" data-shortcuts-toggle aria-label="Ver atajos de teclado" title="Atajos de teclado (tecla ?)" data-i18n-attr="title:header.shortcuts_title">
+      <span class="shortcut-icon-circle" aria-hidden="true">?</span>
+      <span class="btn-label-desktop" data-i18n="header.shortcuts">Atajos</span>
+    </button>
+
+    <button class="icon-toggle-btn" type="button" data-motion-toggle aria-label="Alternar reducción de movimiento" title="Alternar modo de movimiento reducido" data-i18n-attr="title:header.motion_title">
       <svg class="motion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
       </svg>
-      <span class="btn-label-desktop">Movimiento</span>
+      <span class="btn-label-desktop" data-i18n="header.motion">Movimiento</span>
     </button>
 
-    <button class="icon-toggle-btn" type="button" data-theme-toggle aria-label="Alternar tema claro y oscuro" title="Alternar tema">
+    <button class="icon-toggle-btn" type="button" data-theme-toggle aria-label="Alternar tema claro y oscuro" title="Alternar tema" data-i18n-attr="title:header.theme_title">
       <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="5"></circle>
         <line x1="12" y1="1" x2="12" y2="3"></line>
