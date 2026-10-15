@@ -73,15 +73,6 @@ export function updateBezierVisualizer(card: HTMLElement, timing: string, durati
     cp2.setAttribute('cy', plot.cp2.y.toFixed(1));
   }
 
-  if (cp1) {
-    cp1.setAttribute('cx', p1x.toFixed(1));
-    cp1.setAttribute('cy', p1y.toFixed(1));
-  }
-  if (cp2) {
-    cp2.setAttribute('cx', p2x.toFixed(1));
-    cp2.setAttribute('cy', p2y.toFixed(1));
-  }
-
   if (curveName) {
     curveName.textContent = timing;
   }
@@ -147,11 +138,15 @@ export function updateCardParameters(card: HTMLElement, animMap: Map<string, Ani
 
   // Regenerar bloques de código interactivos
   const anim = animMap.get(id);
+  const codeTailwind = card.querySelector<HTMLElement>('[data-code-tailwind]');
   if (anim && anim.generateCss) {
     const newCss = anim.generateCss(parseFloat(duration.toFixed(2)), timing, parseFloat(staggerDelay.toFixed(2)));
     if (codeCss) codeCss.textContent = newCss;
     if (codeFull && codeHtml) {
       codeFull.textContent = `<!-- HTML -->\n${codeHtml.textContent}\n\n<!-- CSS -->\n<style>\n${newCss}\n</style>`;
+    }
+    if (codeTailwind) {
+      codeTailwind.textContent = `// tailwind.config.js — Configuración para ${anim.name}\nmodule.exports = {\n  theme: {\n    extend: {\n      animation: {\n        '${anim.id}': '${anim.id} ${duration.toFixed(2)}s ${timing} infinite',\n      },\n      keyframes: {\n        '${anim.id}': {\n          /* Clases y keyframes coordinados de ${anim.name} */\n        },\n      },\n    },\n  },\n};\n\n<!-- Clases arbitrarias en Tailwind CSS -->\n<div class="animate-[${anim.id}_${duration.toFixed(2)}s_${timing}]">\n  <!-- ${anim.targetSelector} -->\n</div>`;
     }
   }
 

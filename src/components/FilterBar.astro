@@ -27,6 +27,22 @@ const { categories, categoryCounts, totalCount } = Astro.props;
       </button>
     </div>
 
+    <div class="speed-toggle" role="group" aria-label="Velocidad de reproducción de animaciones">
+      <span class="speed-label" title="Velocidad de reproducción">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      </span>
+      <button class="speed-btn" type="button" data-speed="0.5" title="Cámara lenta 0.5x">0.5x</button>
+      <button class="speed-btn is-active" type="button" data-speed="1" title="Velocidad normal 1x">1x</button>
+      <button class="speed-btn" type="button" data-speed="2" title="Velocidad rápida 2x">2x</button>
+    </div>
+
+    <!-- Mini-paginación superior para navegación inmediata sin scroll -->
+    <div class="mini-pagination" data-mini-pagination aria-label="Navegación rápida de páginas">
+      <button class="mini-page-btn" type="button" data-page-prev-top title="Página anterior (←)" disabled aria-label="Página anterior">&lsaquo;</button>
+      <span class="mini-page-indicator" data-page-indicator-top>Pág. 1 / 20</span>
+      <button class="mini-page-btn" type="button" data-page-next-top title="Página siguiente (→)" aria-label="Página siguiente">&rsaquo;</button>
+    </div>
+
     <button class="btn-replay-all" type="button" data-replay-all title="Reiniciar todas las animaciones visibles (Atajo: tecla R)">
       <span class="replay-icon" aria-hidden="true">&#x21bb;</span>
       <span>Reproducir</span>
@@ -51,6 +67,19 @@ const { categories, categoryCounts, totalCount } = Astro.props;
         <span class="pill-count">{categoryCounts[category]}</span>
       </button>
     ))}
+    <button
+      class="filter-pill filter-pill--favorites"
+      type="button"
+      data-filter="Favoritos"
+      aria-pressed="false"
+      title="Mostrar solo animaciones marcadas como favoritas"
+    >
+      <svg class="fav-pill-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+      </svg>
+      <span>Favoritos</span>
+      <span class="pill-count" data-favorites-count>0</span>
+    </button>
   </div>
 
   <div class="search-wrapper">

@@ -16,7 +16,55 @@ export function initInteractions(): void {
         icon.classList.add('is-spinning');
         window.setTimeout(() => icon.classList.remove('is-spinning'), 600);
       }
-      if (card) replayCard(card);
+      if (card) {
+        card.classList.remove('is-paused');
+        const pauseBtn = card.querySelector<HTMLButtonElement>('[data-pause-toggle]');
+        if (pauseBtn) {
+          pauseBtn.classList.remove('is-paused');
+          const pIcon = pauseBtn.querySelector<HTMLElement>('.pause-icon');
+          const pText = pauseBtn.querySelector<HTMLElement>('.pause-text');
+          if (pIcon) pIcon.textContent = '⏸';
+          if (pText) pText.textContent = 'Pausar';
+        }
+        replayCard(card);
+      }
+      return;
+    }
+
+    // 1b. Botón pausar / reanudar individual
+    const pauseBtn = target.closest<HTMLButtonElement>('[data-pause-toggle]');
+    if (pauseBtn) {
+      const card = pauseBtn.closest<HTMLElement>('[data-animation-card]');
+      const motionTarget = card?.querySelector<HTMLElement>('[data-motion-target]');
+      if (card && motionTarget) {
+        const isPaused = card.classList.toggle('is-paused');
+        pauseBtn.classList.toggle('is-paused', isPaused);
+        const pIcon = pauseBtn.querySelector<HTMLElement>('.pause-icon');
+        const pText = pauseBtn.querySelector<HTMLElement>('.pause-text');
+        if (pIcon) pIcon.textContent = isPaused ? '▶' : '⏸';
+        if (pText) pText.textContent = isPaused ? 'Reanudar' : 'Pausar';
+
+        const allAnimated = [motionTarget, ...Array.from(motionTarget.querySelectorAll<HTMLElement>('*'))];
+        allAnimated.forEach((el) => {
+          el.style.animationPlayState = isPaused ? 'paused' : 'running';
+        });
+        showToast(isPaused ? 'Animación pausada' : 'Animación reanudada');
+      }
+      return;
+    }
+
+    // 1c. Diálogo de Atajos de Teclado
+    const shortcutsBtn = target.closest<HTMLButtonElement>('[data-shortcuts-toggle]');
+    const shortcutsDialog = document.querySelector<HTMLDialogElement>('[data-shortcuts-dialog]');
+    if (shortcutsBtn && shortcutsDialog) {
+      if (shortcutsDialog.open) shortcutsDialog.close();
+      else shortcutsDialog.showModal();
+      return;
+    }
+
+    const shortcutsClose = target.closest<HTMLButtonElement>('[data-shortcuts-close]');
+    if (shortcutsClose && shortcutsDialog) {
+      shortcutsDialog.close();
       return;
     }
 
@@ -258,7 +306,18 @@ export function initInteractions(): void {
       event.preventDefault();
       const motionBtn = document.querySelector<HTMLButtonElement>('[data-motion-toggle]');
       motionBtn?.click();
+    } else if (event.key === '?' || (event.shiftKey && event.key === '/')) {
+      event.preventDefault();
+      const shortcutsDialog = document.querySelector<HTMLDialogElement>('[data-shortcuts-dialog]');
+      if (shortcutsDialog) {
+        if (shortcutsDialog.open) shortcutsDialog.close();
+        else shortcutsDialog.showModal();
+      }
     } else if (event.key === 'Escape') {
+      const shortcutsDialog = document.querySelector<HTMLDialogElement>('[data-shortcuts-dialog]');
+      if (shortcutsDialog?.open) {
+        shortcutsDialog.close();
+      }
       // Cerrar paneles de código abiertos y limpiar búsqueda
       document.querySelectorAll<HTMLElement>('[data-code-panel]:not([hidden])').forEach((p) => {
         p.hidden = true;
@@ -271,12 +330,6 @@ export function initInteractions(): void {
         searchInput.value = '';
         searchInput.dispatchEvent(new Event('input'));
       }
-    } else if (event.key === 'ArrowLeft') {
-      const prevBtn = document.querySelector<HTMLButtonElement>('[data-page-prev]:not(:disabled)');
-      prevBtn?.click();
-    } else if (event.key === 'ArrowRight') {
-      const nextBtn = document.querySelector<HTMLButtonElement>('[data-page-next]:not(:disabled)');
-      nextBtn?.click();
     }
   });
 

@@ -3,8 +3,19 @@
 ---
 
 <nav class="pagination-bar" data-pagination-bar aria-label="Navegación de páginas del catálogo">
-  <div class="pagination-info" data-pagination-info aria-live="polite">
-    Mostrando 1–6 de 120 animaciones
+  <div class="pagination-left">
+    <div class="pagination-info" data-pagination-info aria-live="polite">
+      Mostrando 1–6 de 120 animaciones
+    </div>
+    <div class="pagination-size-selector" role="group" aria-label="Animaciones por página">
+      <span class="pagination-size-label">Por página:</span>
+      <div class="pagination-size-pills">
+        <button class="page-size-btn is-active" type="button" data-page-size="6" title="Mostrar 6 animaciones por página">6</button>
+        <button class="page-size-btn" type="button" data-page-size="12" title="Mostrar 12 animaciones por página">12</button>
+        <button class="page-size-btn" type="button" data-page-size="24" title="Mostrar 24 animaciones por página">24</button>
+        <button class="page-size-btn" type="button" data-page-size="all" title="Mostrar todas las animaciones en una sola página">Todas</button>
+      </div>
+    </div>
   </div>
 
   <div class="pagination-controls">

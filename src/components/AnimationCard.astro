@@ -9,6 +9,7 @@ const { animation } = Astro.props;
 
 const initialCss = animation.generateCss(animation.defaultDuration, animation.defaultTiming, animation.defaultStaggerDelay || 0.1);
 const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS -->\n<style>\n${initialCss}\n</style>`;
+const initialTailwind = `// tailwind.config.js — Configuración para ${animation.name}\nmodule.exports = {\n  theme: {\n    extend: {\n      animation: {\n        '${animation.id}': '${animation.id} ${animation.defaultDuration}s ${animation.defaultTiming} infinite',\n      },\n      keyframes: {\n        '${animation.id}': {\n          /* Clases y keyframes coordinados de ${animation.name} */\n        },\n      },\n    },\n  },\n};\n\n<!-- Clases arbitrarias en Tailwind CSS -->\n<div class="animate-[${animation.id}_${animation.defaultDuration}s_${animation.defaultTiming}]">\n  <!-- ${animation.targetSelector} -->\n</div>`;
 ---
 
 <article
@@ -151,6 +152,11 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
           <span>Reproducir</span>
         </button>
 
+        <button class="button button--subtle button--pause" type="button" data-pause-toggle title="Pausar o reanudar animación" aria-label={`Pausar animación ${animation.name}`}>
+          <span class="pause-icon" aria-hidden="true">⏸</span>
+          <span class="pause-text">Pausar</span>
+        </button>
+
         {animation.id === 'accordion' && (
           <button class="button button--subtle button--toggle-accordion" type="button" data-toggle-accordion-demo aria-label="Abrir o cerrar acordeón de prueba">
             <span>Alternar</span>
@@ -169,6 +175,20 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
       </div>
 
       <div class="actions-group-secondary">
+        <!-- Botón Favorito -->
+        <button
+          class="action-icon-btn action-icon-btn--favorite"
+          type="button"
+          data-favorite-toggle
+          title="Guardar en favoritos"
+          aria-label={`Guardar ${animation.name} en favoritos`}
+        >
+          <svg class="star-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span class="sr-only">Favorito</span>
+        </button>
+
         <button
           class="action-icon-btn"
           type="button"
@@ -223,6 +243,7 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
           <button class="tab-btn is-active" type="button" data-tab="css" role="tab" aria-selected="true">CSS</button>
           <button class="tab-btn" type="button" data-tab="html" role="tab" aria-selected="false">HTML</button>
           <button class="tab-btn" type="button" data-tab="full" role="tab" aria-selected="false">Completo (HTML + CSS)</button>
+          <button class="tab-btn" type="button" data-tab="tailwind" role="tab" aria-selected="false">Tailwind CSS</button>
         </div>
         <button class="copy-button" type="button" data-copy aria-label="Copiar código actual al portapapeles">
           <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
@@ -238,6 +259,9 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
       </div>
       <div class="code-view" data-code-view="full" hidden>
         <pre><code data-code-full>{initialFullExample}</code></pre>
+      </div>
+      <div class="code-view" data-code-view="tailwind" hidden>
+        <pre><code data-code-tailwind>{initialTailwind}</code></pre>
       </div>
 
       <p class="copy-status" data-copy-status aria-live="polite"></p>

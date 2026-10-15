@@ -924,6 +924,59 @@ h1 {
   flex-wrap: wrap;
 }
 
+.pagination-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.pagination-size-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination-size-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.pagination-size-pills {
+  display: inline-flex;
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 2px;
+  gap: 2px;
+}
+
+.page-size-btn {
+  height: 26px;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.page-size-btn:hover {
+  color: var(--ink);
+}
+
+.page-size-btn.is-active,
+.page-size-btn[aria-pressed="true"] {
+  background: var(--violet);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(123, 110, 246, 0.4);
+}
+
 .pagination-info {
   font-size: 13px;
   color: var(--text-muted);
@@ -1178,4 +1231,269 @@ h1 {
     font-size: 11px;
   }
 }
+
+/* =========================================================================
+   MINI-PAGINACIÓN SUPERIOR
+   ========================================================================= */
+.mini-pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 36px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.mini-page-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.mini-page-btn:hover:not(:disabled) {
+  background: var(--surface-hover);
+  color: var(--violet);
+}
+
+.mini-page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.mini-page-indicator {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 0 6px;
+  white-space: nowrap;
+}
+
+/* =========================================================================
+   SELECTOR DE VELOCIDAD DE ANIMACIÓN (SLOW-MOTION)
+   ========================================================================= */
+.speed-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 36px;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.speed-label {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-muted);
+  padding: 0 4px;
+}
+
+.speed-btn {
+  height: 26px;
+  padding: 0 8px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.speed-btn:hover {
+  color: var(--ink);
+}
+
+.speed-btn.is-active {
+  background: var(--surface-hover);
+  color: var(--violet);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================================================
+   PÍLDORA DE FAVORITOS
+   ========================================================================= */
+.filter-pill--favorites {
+  border-color: rgba(234, 179, 8, 0.3);
+}
+
+.filter-pill--favorites:hover {
+  border-color: #eab308;
+  color: #eab308;
+}
+
+.filter-pill--favorites.is-active,
+.filter-pill--favorites[aria-pressed="true"] {
+  background: #eab308 !important;
+  border-color: #eab308 !important;
+  color: #0f1017 !important;
+  box-shadow: 0 4px 16px rgba(234, 179, 8, 0.35);
+}
+
+.fav-pill-icon {
+  color: #eab308;
+}
+
+.filter-pill--favorites.is-active .fav-pill-icon {
+  color: #0f1017;
+}
+
+/* =========================================================================
+   BOTÓN VOLVER ARRIBA (BACK TO TOP)
+   ========================================================================= */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line-highlight);
+  color: var(--ink);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 90;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: all 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.back-to-top:hover {
+  background: var(--violet);
+  color: #ffffff;
+  border-color: var(--violet);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(123, 110, 246, 0.4);
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* =========================================================================
+   MODAL DE ATAJOS DE TECLADO (SHORTCUTS DIALOG)
+   ========================================================================= */
+.shortcuts-dialog {
+  border: 1px solid var(--line-highlight);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  color: var(--ink);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  max-width: 460px;
+  width: 90vw;
+  margin: auto;
+}
+
+.shortcuts-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+}
+
+.shortcuts-dialog__content {
+  padding: 24px;
+}
+
+.shortcuts-dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.shortcuts-dialog__header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.shortcuts-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: var(--text-muted);
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.shortcuts-close-btn:hover {
+  color: var(--ink);
+  background: var(--surface-hover);
+}
+
+.shortcuts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.shortcut-keys-group {
+  display: flex;
+  gap: 4px;
+}
+
+.shortcut-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 6px;
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  box-shadow: 0 2px 0 var(--line);
+}
+
+.shortcut-icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+}
+
 
