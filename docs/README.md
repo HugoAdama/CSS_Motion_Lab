@@ -8,6 +8,7 @@ Bienvenido a la documentación técnica oficial de **CSS Motion Lab**. A continu
 | **[MAINTENANCE.md](./MAINTENANCE.md)** | Guía para desarrolladores y mantenedores, principios de desacoplamiento, adición de nuevas animaciones/categorías y presupuesto de rendimiento. |
 | **[ANIMATIONS_GUIDE.md](./ANIMATIONS_GUIDE.md)** | Manual de creación de animaciones CSS de alta fidelidad, contratos de datos, curvas de aceleración y buenas prácticas de hardware. |
 | **[QUALITY_AUDIT.md](./QUALITY_AUDIT.md)** | Informe exhaustivo de la auditoría de calidad automatizada con matriz de 24 pruebas técnicas y métricas del catálogo. |
+| **[LEARNINGS.md](./LEARNINGS.md)** | Aprendizajes y lecciones técnicas de ingeniería en escalado a 180 animaciones, Core Web Vitals, View Transitions API y diseño de UI. |
 
 ---
 
