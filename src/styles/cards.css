@@ -12,6 +12,8 @@
   overflow: hidden;
   box-shadow: var(--shadow-subtle);
   transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), border-color 220ms ease, box-shadow 220ms ease;
+  content-visibility: auto;
+  contain-intrinsic-size: auto none auto 390px;
 }
 
 [data-theme="light"] .animation-card {
@@ -975,6 +977,12 @@
 /* Estado de animación pausada individualmente */
 .animation-card.is-paused [data-motion-target],
 .animation-card.is-paused [data-motion-target] * {
+  animation-play-state: paused !important;
+}
+
+/* Optimización de rendimiento: congelar keyframes fuera del viewport */
+.animation-card.is-offscreen [data-motion-target],
+.animation-card.is-offscreen [data-motion-target] * {
   animation-play-state: paused !important;
 }
 

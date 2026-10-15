@@ -137,6 +137,22 @@ export function initFilters(cards: HTMLElement[]): void {
     });
   }
 
+  // 1b. Índice de búsqueda en memoria para filtrado instantáneo a 0ms (sin layout thrashing ni lecturas DOM)
+  const searchIndex = cards.map((card) => {
+    const category = card.dataset.category || '';
+    const name = card.dataset.name || '';
+    const id = card.dataset.id || '';
+    const costType = card.dataset.costType || '';
+    const specs = card.querySelector('.tech-spec-code')?.textContent?.toLowerCase() || '';
+    return {
+      card,
+      id,
+      category,
+      costType,
+      searchString: `${name} ${category.toLowerCase()} ${id} ${specs}`,
+    };
+  });
+
   function updateGallery(shouldScroll = false): void {
     const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
 
@@ -144,33 +160,24 @@ export function initFilters(cards: HTMLElement[]): void {
       clearSearchBtn.hidden = query.length === 0;
     }
 
-    // 1. Filtrar las tarjetas que coinciden con categoría, favoritos, costo y búsqueda
-    const matchingCards = cards.filter((card) => {
-      const category = card.dataset.category || '';
-      const name = card.dataset.name || '';
-      const id = card.dataset.id || '';
-      const costType = card.dataset.costType || '';
-      const specs = card.querySelector('.tech-spec-code')?.textContent?.toLowerCase() || '';
+    // 1. Filtrar las tarjetas usando el índice en memoria
+    const matchingCards = searchIndex
+      .filter((item) => {
+        let matchesCategory = false;
+        if (activeCategory === 'Todas') {
+          matchesCategory = true;
+        } else if (activeCategory === 'Favoritos') {
+          matchesCategory = favoriteIds.has(item.id);
+        } else {
+          matchesCategory = item.category === activeCategory;
+        }
 
-      let matchesCategory = false;
-      if (activeCategory === 'Todas') {
-        matchesCategory = true;
-      } else if (activeCategory === 'Favoritos') {
-        matchesCategory = favoriteIds.has(id);
-      } else {
-        matchesCategory = category === activeCategory;
-      }
+        const matchesCost = activeCost === 'all' || item.costType === activeCost;
+        const matchesSearch = query === '' || item.searchString.includes(query);
 
-      const matchesCost = activeCost === 'all' || costType === activeCost;
-      const matchesSearch =
-        query === '' ||
-        name.includes(query) ||
-        category.toLowerCase().includes(query) ||
-        id.includes(query) ||
-        specs.includes(query);
-
-      return matchesCategory && matchesCost && matchesSearch;
-    });
+        return matchesCategory && matchesCost && matchesSearch;
+      })
+      .map((item) => item.card);
 
     const totalItems = matchingCards.length;
     const effectivePageSize = itemsPerPage;
@@ -319,11 +326,23 @@ export function initFilters(cards: HTMLElement[]): void {
     });
   });
 
-  // Búsqueda en vivo
+  // Búsqueda en vivo con debounce de 100ms para evitar jank en INP (Interaction to Next Paint)
+  let searchDebounceTimer: number | undefined;
   if (searchInput) {
     searchInput.addEventListener('input', () => {
-      currentPage = 1;
-      updateGallery(false);
+      window.clearTimeout(searchDebounceTimer);
+      searchDebounceTimer = window.setTimeout(() => {
+        currentPage = 1;
+        updateGallery(false);
+      }, 100);
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        window.clearTimeout(searchDebounceTimer);
+        currentPage = 1;
+        updateGallery(false);
+      }
     });
   }
 

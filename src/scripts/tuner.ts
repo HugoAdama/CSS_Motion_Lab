@@ -171,10 +171,17 @@ export function initCardTuning(cards: HTMLElement[], animMap: Map<string, Animat
     const staggerInput = card.querySelector<HTMLInputElement>('[data-stagger-input]');
     const resetBtn = card.querySelector<HTMLButtonElement>('[data-reset-tuning]');
 
-    // Inicializar visualizador Bézier con los valores por defecto
+    // Inicialización de curva Bézier: inmediata para tarjetas visibles, diferida con requestIdleCallback para el resto
     const defDuration = parseFloat(card.dataset.defaultDuration || '0.7');
     const defTiming = card.dataset.defaultTiming || 'ease-out';
-    updateBezierVisualizer(card, defTiming, defDuration);
+
+    if (!card.hidden) {
+      updateBezierVisualizer(card, defTiming, defDuration);
+    } else if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(() => updateBezierVisualizer(card, defTiming, defDuration));
+    } else {
+      window.setTimeout(() => updateBezierVisualizer(card, defTiming, defDuration), 150);
+    }
 
     if (durationInput) {
       durationInput.addEventListener('input', () => updateCardParameters(card, animMap));
