@@ -16,9 +16,21 @@ const { categories, categoryCounts, totalCount } = Astro.props;
     <p class="section-subtitle">Calibra duración, curvas Bézier y retrasos escalonados. Inspecciona el impacto en la composición del navegador, ábrelas en CodePen y exporta paquetes personalizados.</p>
   </div>
   <div class="heading-controls">
-    <button class="btn-replay-all" type="button" data-replay-all title="Reiniciar todas las animaciones visibles">
+    <div class="view-mode-toggle" role="group" aria-label="Modo de vista del catálogo">
+      <button class="view-mode-btn is-active" type="button" data-view-mode="studio" title="Modo Estudio: Muestra calibradores y curvas Bézier">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        <span>Estudio</span>
+      </button>
+      <button class="view-mode-btn" type="button" data-view-mode="compact" title="Modo Compacto: Exploración rápida del catálogo">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+        <span>Compacto</span>
+      </button>
+    </div>
+
+    <button class="btn-replay-all" type="button" data-replay-all title="Reiniciar todas las animaciones visibles (Atajo: tecla R)">
       <span class="replay-icon" aria-hidden="true">&#x21bb;</span>
-      <span>Reproducir visibles</span>
+      <span>Reproducir</span>
+      <kbd class="shortcut-badge">R</kbd>
     </button>
     <p class="result-count">
       Mostrando <strong data-result-count>{totalCount}</strong> de {totalCount}

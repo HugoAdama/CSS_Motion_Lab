@@ -118,7 +118,51 @@ export function initInteractions(): void {
       return;
     }
 
-    // 6. Alternar vista de panel de código
+    // 6. Alternar cuadrícula técnica en el escenario de la tarjeta
+    const gridBtn = target.closest<HTMLButtonElement>('[data-stage-grid-btn]');
+    if (gridBtn) {
+      const card = gridBtn.closest<HTMLElement>('[data-animation-card]');
+      const stage = card?.querySelector<HTMLElement>('[data-demo-stage]');
+      if (stage) {
+        const isPlain = stage.classList.toggle('stage--plain');
+        gridBtn.classList.toggle('is-plain', isPlain);
+        showToast(isPlain ? 'Cuadrícula desactivada' : 'Cuadrícula técnica activada');
+      }
+      return;
+    }
+
+    // 7. Alternar calibrador individual en modo compacto
+    const tunerToggleBtn = target.closest<HTMLButtonElement>('[data-toggle-tuner-card]');
+    if (tunerToggleBtn) {
+      const card = tunerToggleBtn.closest<HTMLElement>('[data-animation-card]');
+      const tuner = card?.querySelector<HTMLElement>('[data-card-tuner]');
+      if (tuner) {
+        tuner.classList.toggle('is-manually-open');
+      }
+      return;
+    }
+
+    // 8. Selector de modo de vista (Estudio vs Compacto)
+    const viewModeBtn = target.closest<HTMLButtonElement>('[data-view-mode]');
+    if (viewModeBtn) {
+      const mode = viewModeBtn.dataset.viewMode;
+      const grid = document.querySelector<HTMLElement>('[data-animation-grid]');
+      if (grid && mode) {
+        document.querySelectorAll<HTMLButtonElement>('[data-view-mode]').forEach((btn) => {
+          const isActive = btn === viewModeBtn;
+          btn.classList.toggle('is-active', isActive);
+          btn.setAttribute('aria-pressed', String(isActive));
+        });
+        grid.classList.toggle('is-compact', mode === 'compact');
+        try {
+          localStorage.setItem('css_motion_view_mode', mode);
+        } catch {}
+        showToast(mode === 'compact' ? 'Modo Compacto activado' : 'Modo Estudio (completo) activado');
+      }
+      return;
+    }
+
+    // 9. Alternar vista de panel de código
     const toggleButton = target.closest<HTMLButtonElement>('[data-toggle-code]');
     if (toggleButton) {
       const card = toggleButton.closest<HTMLElement>('[data-animation-card]');
@@ -134,7 +178,7 @@ export function initInteractions(): void {
       return;
     }
 
-    // 7. Pestañas CSS / HTML / Completo
+    // 10. Pestañas CSS / HTML / Completo
     const tabBtn = target.closest<HTMLButtonElement>('[data-tab]');
     if (tabBtn) {
       const panel = tabBtn.closest<HTMLElement>('[data-code-panel]');
@@ -151,7 +195,7 @@ export function initInteractions(): void {
       return;
     }
 
-    // 8. Botón copiar dentro de la pestaña activa del panel de código
+    // 11. Botón copiar dentro de la pestaña activa del panel de código
     const copyButton = target.closest<HTMLButtonElement>('[data-copy]');
     if (copyButton) {
       const panel = copyButton.closest<HTMLElement>('[data-code-panel]');
@@ -182,4 +226,68 @@ export function initInteractions(): void {
       return;
     }
   });
+
+  // Efecto spotlight en hover sobre las tarjetas
+  document.addEventListener('mousemove', (event) => {
+    const target = event.target as HTMLElement | null;
+    const card = target?.closest<HTMLElement>('[data-animation-card]');
+    if (card) {
+      const rect = card.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    }
+  });
+
+  // Atajos de teclado globales para desarrolladores
+  window.addEventListener('keydown', (event) => {
+    const activeTag = (document.activeElement?.tagName || '').toLowerCase();
+    if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') {
+      if (event.key === 'Escape') {
+        (document.activeElement as HTMLElement)?.blur();
+      }
+      return;
+    }
+
+    if (event.key === 'r' || event.key === 'R') {
+      event.preventDefault();
+      const replayAllBtn = document.querySelector<HTMLButtonElement>('[data-replay-all]');
+      replayAllBtn?.click();
+    } else if (event.key === 'm' || event.key === 'M') {
+      event.preventDefault();
+      const motionBtn = document.querySelector<HTMLButtonElement>('[data-motion-toggle]');
+      motionBtn?.click();
+    } else if (event.key === 'Escape') {
+      // Cerrar paneles de código abiertos y limpiar búsqueda
+      document.querySelectorAll<HTMLElement>('[data-code-panel]:not([hidden])').forEach((p) => {
+        p.hidden = true;
+      });
+      document.querySelectorAll<HTMLButtonElement>('[data-toggle-code].is-open').forEach((b) => {
+        b.classList.remove('is-open');
+      });
+      const searchInput = document.querySelector<HTMLInputElement>('[data-search]');
+      if (searchInput && searchInput.value) {
+        searchInput.value = '';
+        searchInput.dispatchEvent(new Event('input'));
+      }
+    } else if (event.key === 'ArrowLeft') {
+      const prevBtn = document.querySelector<HTMLButtonElement>('[data-page-prev]:not(:disabled)');
+      prevBtn?.click();
+    } else if (event.key === 'ArrowRight') {
+      const nextBtn = document.querySelector<HTMLButtonElement>('[data-page-next]:not(:disabled)');
+      nextBtn?.click();
+    }
+  });
+
+  // Restaurar modo de vista guardado
+  try {
+    const savedMode = localStorage.getItem('css_motion_view_mode');
+    if (savedMode === 'compact') {
+      const compactBtn = document.querySelector<HTMLButtonElement>('[data-view-mode="compact"]');
+      if (compactBtn) {
+        compactBtn.click();
+      }
+    }
+  } catch {}
 }

@@ -25,7 +25,16 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
   <div class="animation-card__preview">
     <div class="preview-top-meta">
       <span class="preview-tag preview-tag--selector" title="Selector CSS utilizado">{animation.targetSelector}</span>
-      <span class="preview-tag preview-tag--category">{animation.category}</span>
+      <div class="preview-meta-right">
+        <button class="stage-grid-btn" type="button" data-stage-grid-btn title="Alternar cuadrícula técnica de fondo" aria-label="Alternar cuadrícula de fondo">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="12" y1="3" x2="12" y2="21"></line>
+          </svg>
+        </button>
+        <span class="preview-tag preview-tag--category">{animation.category}</span>
+      </div>
     </div>
 
     <div class:list={['demo-stage', animation.previewClass]} data-demo-stage aria-hidden="true">
@@ -49,7 +58,7 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
     </div>
 
     <!-- Controles de Aprendizaje y Calibración en tiempo real -->
-    <div class="card-tuner">
+    <div class="card-tuner" data-card-tuner>
       <div class="tuner-heading">
         <span class="tuner-title">Calibrar parámetros:</span>
         <button class="tuner-reset-btn" type="button" data-reset-tuning aria-label={`Restablecer parámetros de ${animation.name}`}>
@@ -83,8 +92,8 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
           </select>
         </label>
 
-        <!-- Visualizador interactivo de Curva Bézier en vivo -->
-        <div class="tuner-curve-box" data-curve-container title="Curva Bézier de aceleración">
+        <!-- Visualizador interactivo de Curva Bézier en vivo con referencia -->
+        <div class="tuner-curve-box" data-curve-container title="Curva Bézier de aceleración vs referencia lineal">
           <div class="curve-graph-wrap">
             <svg class="curve-svg" viewBox="0 0 100 60" aria-hidden="true">
               <!-- Rejilla y ejes -->
@@ -92,9 +101,11 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
               <line x1="10" y1="50" x2="10" y2="10" class="curve-axis" />
               <line x1="10" y1="10" x2="90" y2="10" class="curve-grid-line" />
               <line x1="90" y1="50" x2="90" y2="10" class="curve-grid-line" />
+              <!-- Línea de referencia lineal (comparativa) -->
+              <line x1="10" y1="50" x2="90" y2="10" class="curve-ref-line" />
               <!-- Líneas tangentes -->
               <path class="curve-tangent" data-curve-tangent d="" />
-              <!-- Curva Bézier cúbica -->
+              <!-- Curva Bézier cúbica activa -->
               <path class="curve-path" data-curve-path d="M 10 50 C 26 10, 40 10, 90 10" />
               <!-- Puntos de control -->
               <circle class="curve-cp" data-curve-cp1 cx="26" cy="10" r="2.5" />
@@ -104,7 +115,10 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
             </svg>
           </div>
           <div class="curve-caption">
-            <span class="curve-badge">Curva Bézier:</span>
+            <div class="curve-badge-row">
+              <span class="curve-badge">Curva Bézier:</span>
+              <span class="curve-ref-hint" title="Línea punteada: referencia lineal (linear)">ref. linear</span>
+            </div>
             <code class="curve-val" data-curve-name>{animation.defaultTiming}</code>
           </div>
         </div>
@@ -129,69 +143,78 @@ const initialFullExample = `<!-- HTML -->\n${animation.htmlSnippet}\n\n<!-- CSS 
       </div>
     </div>
 
+    <!-- Barra de acciones unificada y ergonómica -->
     <div class="animation-card__actions">
-      <button class="button button--quiet" type="button" data-replay aria-label={`Reproducir animación ${animation.name}`}>
-        <span class="replay-icon" aria-hidden="true">&#x21bb;</span>
-        <span>Reproducir</span>
-      </button>
-
-      {animation.id === 'accordion' && (
-        <button class="button button--toggle-accordion" type="button" data-toggle-accordion-demo aria-label="Abrir o cerrar acordeón de prueba">
-          <span>Alternar abrir/cerrar</span>
+      <div class="actions-group-primary">
+        <button class="button button--replay button--primary-action" type="button" data-replay aria-label={`Reproducir animación ${animation.name}`}>
+          <span class="replay-icon" aria-hidden="true">&#x21bb;</span>
+          <span>Reproducir</span>
         </button>
-      )}
 
-      {animation.id === 'flip-card' && (
-        <button class="button button--toggle-flip" type="button" data-toggle-flip-demo aria-label="Alternar giro 3D de la tarjeta">
-          <span>Girar tarjeta 3D</span>
+        {animation.id === 'accordion' && (
+          <button class="button button--subtle button--toggle-accordion" type="button" data-toggle-accordion-demo aria-label="Abrir o cerrar acordeón de prueba">
+            <span>Alternar</span>
+          </button>
+        )}
+
+        {animation.id === 'flip-card' && (
+          <button class="button button--subtle button--toggle-flip" type="button" data-toggle-flip-demo aria-label="Alternar giro 3D de la tarjeta">
+            <span>Girar 3D</span>
+          </button>
+        )}
+
+        <button class="button button--subtle button--tuner-toggle" type="button" data-toggle-tuner-card title="Mostrar u ocultar calibrador en modo compacto" aria-label="Alternar calibrador">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
         </button>
-      )}
+      </div>
 
-      <button
-        class="button button--copy-full"
-        type="button"
-        data-copy-full
-        title="Copiar HTML y CSS coordinados con las mismas clases para pegar y usar de inmediato"
-        aria-label={`Copiar ejemplo completo de ${animation.name}`}
-      >
-        <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-        <span data-copy-full-text>Copiar</span>
-      </button>
+      <div class="actions-group-secondary">
+        <button
+          class="action-icon-btn"
+          type="button"
+          data-copy-full
+          title="Copiar HTML y CSS coordinados"
+          aria-label={`Copiar ejemplo completo de ${animation.name}`}
+        >
+          <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span class="sr-only" data-copy-full-text>Copiar</span>
+        </button>
 
-      <!-- Botón 1-clic: Abrir en CodePen -->
-      <button
-        class="button button--codepen"
-        type="button"
-        data-open-codepen
-        title="Abrir este ejemplo coordinado en CodePen listo para experimentar"
-        aria-label={`Abrir ${animation.name} en CodePen`}
-      >
-        <svg class="codepen-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
-          <line x1="12" y1="22" x2="12" y2="15.5"></line>
-          <polyline points="22 8.5 12 15.5 2 8.5"></polyline>
-          <polyline points="2 15.5 12 8.5 22 15.5"></polyline>
-          <line x1="12" y1="2" x2="12" y2="8.5"></line>
-        </svg>
-        <span>CodePen</span>
-      </button>
+        <!-- Botón 1-clic: Abrir en CodePen -->
+        <button
+          class="action-icon-btn"
+          type="button"
+          data-open-codepen
+          title="Abrir este ejemplo en CodePen"
+          aria-label={`Abrir ${animation.name} en CodePen`}
+        >
+          <svg class="codepen-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
+            <line x1="12" y1="22" x2="12" y2="15.5"></line>
+            <polyline points="22 8.5 12 15.5 2 8.5"></polyline>
+            <polyline points="2 15.5 12 8.5 22 15.5"></polyline>
+            <line x1="12" y1="2" x2="12" y2="8.5"></line>
+          </svg>
+          <span class="sr-only">CodePen</span>
+        </button>
 
-      <!-- Botón Colección / Bundle Builder -->
-      <button
-        class="button button--bundle"
-        type="button"
-        data-bundle-toggle
-        title="Añadir a mi paquete CSS personalizado"
-        aria-label={`Añadir ${animation.name} a mi paquete`}
-      >
-        <span class="bundle-check-icon" aria-hidden="true">+</span>
-        <span class="bundle-btn-text">Paquete</span>
-      </button>
+        <!-- Botón Colección / Bundle Builder -->
+        <button
+          class="action-icon-btn action-icon-btn--bundle"
+          type="button"
+          data-bundle-toggle
+          title="Añadir a mi paquete CSS personalizado"
+          aria-label={`Añadir ${animation.name} a mi paquete`}
+        >
+          <span class="bundle-check-icon" aria-hidden="true">+</span>
+          <span class="sr-only bundle-btn-text">Paquete</span>
+        </button>
 
-      <button class="button button--code" type="button" data-toggle-code aria-expanded="false" aria-label={`Ver código de ${animation.name}`}>
-        <span>Código</span>
-        <span class="chevron-icon" aria-hidden="true">⌄</span>
-      </button>
+        <button class="button button--code-pill" type="button" data-toggle-code aria-expanded="false" aria-label={`Ver código de ${animation.name}`}>
+          <span>Código</span>
+          <span class="chevron-icon" aria-hidden="true">⌄</span>
+        </button>
+      </div>
     </div>
 
     <div class="code-panel" data-code-panel hidden>
