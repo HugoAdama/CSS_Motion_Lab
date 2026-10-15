@@ -23,7 +23,7 @@ Cada animacion comparte exactamente la misma clase entre el HTML y el CSS:
 Incluye opciones para copiar el codigo CSS, HTML, el ejemplo completo unificado, o exportar directamente a Tailwind CSS y abrir en CodePen con un solo clic.
 
 ### 2. Paginacion Ergonomica y Navegacion Fluida
-- Paginacion activa por defecto que evita desplazamientos verticales excesivos en el catalogo de 120 animaciones.
+- Paginacion activa por defecto que evita desplazamientos verticales excesivos en el catalogo de 180 animaciones.
 - Selector de cantidad de elementos por pagina: 6, 12, 24 o Todas, con persistencia en almacenamiento local (`localStorage`).
 - Mini-paginacion superior en la cabecera para cambiar de pagina inmediatamente sin descender al pie de la galeria.
 - Controles de navegacion por teclado mediante flechas izquierda y derecha.

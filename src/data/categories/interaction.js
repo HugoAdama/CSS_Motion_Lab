@@ -937,6 +937,357 @@ export const interactionAnimations = [
 @media (prefers-reduced-motion: reduce) {
   .copy-morph-btn { animation: none !important; transform: none !important; }
 }`
+  },
+  {
+    id: "segmented-button-press",
+    name: "Presión Háptica en Botón (Haptic Press)",
+    category: "Interacción",
+    defaultDuration: 0.3,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, box-shadow",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Hundimiento sutil en transform: scale(0.95) y translateY(2px) con retorno elástico.",
+    description: "Sensación de pulsar un interruptor físico con rebote de resistencia al soltar el clic.",
+    targetSelector: ".haptic-press-btn",
+    previewClass: "shape--segmented-button-press",
+    htmlSnippet: "<button class=\"haptic-press-btn\" type=\"button\">\n  <span>Pulsar Botón</span>\n</button>",
+    previewHtml: "<button class=\"haptic-press-btn is-playing\" type=\"button\" data-motion-target>\n  <span>Pulsar Botón</span>\n</button>",
+    generateCss: (dur, timing) => `.haptic-press-btn {
+  padding: 10px 22px;
+  border-radius: 10px;
+  background: #7b6ef6;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 14px rgba(123, 110, 246, 0.4);
+  animation: hapticPulse ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes hapticPulse {
+  0% { transform: scale(1) translateY(0); box-shadow: 0 4px 14px rgba(123, 110, 246, 0.4); }
+  100% { transform: scale(0.95) translateY(2px); box-shadow: 0 1px 4px rgba(123, 110, 246, 0.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .haptic-press-btn { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "pill-tab-elastic",
+    name: "Pestaña Deslizante Elástica (Elastic Tab)",
+    category: "Interacción",
+    defaultDuration: 0.45,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform (scaleX, translateX)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Deformación elástica que estira el ancho antes de fijar la nueva coordenada horizontal.",
+    description: "Indicador de selección que se alarga momentáneamente durante el desplazamiento como una masa elástica.",
+    targetSelector: ".elastic-tab-bar",
+    previewClass: "shape--pill-tab-elastic",
+    htmlSnippet: "<div class=\"elastic-tab-bar\">\n  <div class=\"elastic-pill-indicator\"></div>\n  <span class=\"e-tab is-active\">Diseño</span>\n  <span class=\"e-tab\">Código</span>\n</div>",
+    previewHtml: "<div class=\"elastic-tab-bar is-playing\" data-motion-target>\n  <div class=\"elastic-pill-indicator\"></div>\n  <span class=\"e-tab is-active\">Diseño</span>\n  <span class=\"e-tab\">Código</span>\n</div>",
+    generateCss: (dur, timing) => `.elastic-pill-indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  border-radius: 999px;
+  background: #7b6ef6;
+  animation: elasticTabShift ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes elasticTabShift {
+  0% { transform: translateX(0) scaleX(1); }
+  40% { transform: translateX(40px) scaleX(1.3); }
+  100% { transform: translateX(100%) scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .elastic-pill-indicator { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "radio-ripple-pulse",
+    name: "Onda en Radio Button (Radio Ripple)",
+    category: "Interacción",
+    defaultDuration: 0.5,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (scale), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Expansión concéntrica de halo semitransparente al marcar el estado activo.",
+    description: "Selector de opción circular con efecto de agua que irradia desde el centro hacia afuera.",
+    targetSelector: ".radio-ripple-wrap",
+    previewClass: "shape--radio-ripple-pulse",
+    htmlSnippet: "<div class=\"radio-ripple-wrap\">\n  <div class=\"radio-circle-outer\">\n    <div class=\"radio-dot-inner\"></div>\n    <div class=\"radio-wave-halo\"></div>\n  </div>\n  <span>Opción Seleccionada</span>\n</div>",
+    previewHtml: "<div class=\"radio-ripple-wrap is-playing\" data-motion-target>\n  <div class=\"radio-circle-outer\">\n    <div class=\"radio-dot-inner\"></div>\n    <div class=\"radio-wave-halo\"></div>\n  </div>\n  <span>Opción Seleccionada</span>\n</div>",
+    generateCss: (dur, timing) => `.radio-wave-halo {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: rgba(123, 110, 246, 0.35);
+  animation: radioWave ${dur}s ${timing} infinite;
+}
+
+@keyframes radioWave {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .radio-wave-halo { animation: none !important; opacity: 0 !important; }
+}`
+  },
+  {
+    id: "card-spotlight-border",
+    name: "Borde con Destello de Linterna (Spotlight Border)",
+    category: "Interacción",
+    defaultDuration: 2,
+    defaultTiming: "linear",
+    timingOptions: ["linear","ease-in-out","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "transform (rotate), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Gradiente cónico que rota bajo máscara border-radius sin repintado de textura pesada.",
+    description: "Tarjeta moderna donde el borde cobra vida con un haz de luz giratorio que sigue el contorno.",
+    targetSelector: ".spotlight-border-card",
+    previewClass: "shape--card-spotlight-border",
+    htmlSnippet: "<div class=\"spotlight-border-card\">\n  <div class=\"spotlight-inner-content\">\n    <strong>Efecto Spotlight</strong>\n  </div>\n</div>",
+    previewHtml: "<div class=\"spotlight-border-card is-playing\" data-motion-target>\n  <div class=\"spotlight-inner-content\">\n    <strong>Efecto Spotlight</strong>\n  </div>\n</div>",
+    generateCss: (dur, timing) => `.spotlight-border-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, transparent, #7b6ef6, transparent 40%);
+  animation: spotlightRotate ${dur}s ${timing} infinite;
+}
+
+@keyframes spotlightRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-border-card::before { animation: none !important; }
+}`
+  },
+  {
+    id: "download-progress-btn",
+    name: "Botón de Descarga con Progreso (Download Btn)",
+    category: "Interacción",
+    defaultDuration: 1.8,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "transform (scaleX), background-color",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Transición de barra de llenado en transform: scaleX() con cambio de estado de icono.",
+    description: "Botón interactivo que al ser pulsado se rellena suavemente hasta mostrar el icono de éxito.",
+    targetSelector: ".download-action-btn",
+    previewClass: "shape--download-progress-btn",
+    htmlSnippet: "<div class=\"download-action-btn\">\n  <div class=\"download-fill-meter\"></div>\n  <span class=\"download-btn-label\">&#10515; Descargar Archivo</span>\n</div>",
+    previewHtml: "<div class=\"download-action-btn is-playing\" data-motion-target>\n  <div class=\"download-fill-meter\"></div>\n  <span class=\"download-btn-label\">&#10515; Descargar Archivo</span>\n</div>",
+    generateCss: (dur, timing) => `.download-fill-meter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #3ddda8;
+  transform-origin: left center;
+  animation: downloadFill ${dur}s ${timing} infinite;
+}
+
+@keyframes downloadFill {
+  0% { transform: scaleX(0); }
+  70% { transform: scaleX(1); }
+  100% { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .download-fill-meter { animation: none !important; transform: scaleX(1) !important; }
+}`
+  },
+  {
+    id: "accordion-chevron-rotate",
+    name: "Giro de Flecha en Resorte (Chevron Spring)",
+    category: "Interacción",
+    defaultDuration: 0.45,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform (rotate)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Rotación sobre el centro en rotate(180deg) con ligero sobregiro de muelle.",
+    description: "Icono de flecha para desplegables y acordeones que gira elásticamente al abrir y cerrar.",
+    targetSelector: ".chevron-spring-demo",
+    previewClass: "shape--accordion-chevron-rotate",
+    htmlSnippet: "<div class=\"chevron-spring-demo\">\n  <span>Detalles avanzados</span>\n  <span class=\"chevron-spring-arrow\">&#9662;</span>\n</div>",
+    previewHtml: "<div class=\"chevron-spring-demo is-playing\" data-motion-target>\n  <span>Detalles avanzados</span>\n  <span class=\"chevron-spring-arrow\">&#9662;</span>\n</div>",
+    generateCss: (dur, timing) => `.chevron-spring-arrow {
+  display: inline-block;
+  color: #7b6ef6;
+  font-size: 14px;
+  animation: chevronFlip ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes chevronFlip {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(180deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron-spring-arrow { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "star-burst-favorite",
+    name: "Estallido Estelar de Favorito (Star Burst)",
+    category: "Interacción",
+    defaultDuration: 0.6,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform (scale), color",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Escalado elástico instantáneo de la estrella con anillo de partículas concéntrico.",
+    description: "Confirmación visual gratificante para el guardado de elementos en listas de favoritos.",
+    targetSelector: ".star-burst-btn",
+    previewClass: "shape--star-burst-favorite",
+    htmlSnippet: "<div class=\"star-burst-btn\">\n  <span class=\"burst-star-icon\">&#9733;</span>\n</div>",
+    previewHtml: "<div class=\"star-burst-btn is-playing\" data-motion-target>\n  <span class=\"burst-star-icon\">&#9733;</span>\n</div>",
+    generateCss: (dur, timing) => `.burst-star-icon {
+  font-size: 28px;
+  color: #ffbd2e;
+  display: inline-block;
+  animation: starBurstPop ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes starBurstPop {
+  0% { transform: scale(0.8); opacity: 0.7; }
+  50% { transform: scale(1.4); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burst-star-icon { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "slider-thumb-swell",
+    name: "Tirador Expansivo de Deslizador (Thumb Swell)",
+    category: "Interacción",
+    defaultDuration: 0.4,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (scale), box-shadow",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Expansión de escala del tirador de control con proyección de sombra envolvente.",
+    description: "Efecto táctil donde el cabezal de un control deslizante se infla al tocarlo para facilitar el agarre.",
+    targetSelector: ".slider-mock-track",
+    previewClass: "shape--slider-thumb-swell",
+    htmlSnippet: "<div class=\"slider-mock-track\">\n  <div class=\"slider-mock-progress\"></div>\n  <div class=\"slider-mock-thumb\"></div>\n</div>",
+    previewHtml: "<div class=\"slider-mock-track is-playing\" data-motion-target>\n  <div class=\"slider-mock-progress\"></div>\n  <div class=\"slider-mock-thumb\"></div>\n</div>",
+    generateCss: (dur, timing) => `.slider-mock-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #7b6ef6;
+  box-shadow: 0 0 10px rgba(123, 110, 246, 0.5);
+  animation: thumbSwell ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes thumbSwell {
+  0% { transform: scale(1); box-shadow: 0 0 6px rgba(123, 110, 246, 0.3); }
+  100% { transform: scale(1.35); box-shadow: 0 0 16px rgba(123, 110, 246, 0.7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slider-mock-thumb { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "neumorphic-press-inset",
+    name: "Hundimiento Neumórfico Inset (Neumorphic Inset)",
+    category: "Interacción",
+    defaultDuration: 0.5,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","cubic-bezier(0.16, 1, 0.3, 1)","linear"],
+    properties: "box-shadow, transform",
+    renderCost: "Repintado de sombras",
+    renderCostType: "paint",
+    costExplanation: "Alternancia de sombras proyectadas exteriores a sombras inset de bajo relieve.",
+    description: "Botón de estilo neumórfico que parece tallado en la superficie y se presiona hacia adentro con suavidad.",
+    targetSelector: ".neumorphic-btn-tile",
+    previewClass: "shape--neumorphic-press-inset",
+    htmlSnippet: "<div class=\"neumorphic-btn-tile\">\n  <span>SUPERFICIE</span>\n</div>",
+    previewHtml: "<div class=\"neumorphic-btn-tile is-playing\" data-motion-target>\n  <span>SUPERFICIE</span>\n</div>",
+    generateCss: (dur, timing) => `.neumorphic-btn-tile {
+  padding: 12px 22px;
+  border-radius: 12px;
+  background: #141523;
+  color: #fff;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1px;
+  animation: neumorphicPress ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes neumorphicPress {
+  0% {
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5), -5px -5px 12px rgba(255, 255, 255, 0.05);
+    transform: translateY(0);
+  }
+  100% {
+    box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.6), inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+    transform: translateY(1px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neumorphic-btn-tile { animation: none !important; }
+}`
+  },
+  {
+    id: "swipe-to-reveal-action",
+    name: "Deslizamiento para Revelar Acción (Swipe to Reveal)",
+    category: "Interacción",
+    defaultDuration: 1.4,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (translateX)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Desplazamiento horizontal sobre translateX(-45px) revelando botones inferiores.",
+    description: "Patrón móvil de lista deslizable hacia la izquierda para acceder a acciones rápidas como eliminar o editar.",
+    targetSelector: ".swipe-item-row",
+    previewClass: "shape--swipe-to-reveal-action",
+    htmlSnippet: "<div class=\"swipe-item-wrapper\">\n  <div class=\"swipe-bg-actions\">\n    <span class=\"action-del\">&#128465;</span>\n  </div>\n  <div class=\"swipe-item-row\">\n    <span>Desliza para borrar</span>\n  </div>\n</div>",
+    previewHtml: "<div class=\"swipe-item-wrapper is-playing\" data-motion-target>\n  <div class=\"swipe-bg-actions\">\n    <span class=\"action-del\">&#128465;</span>\n  </div>\n  <div class=\"swipe-item-row\">\n    <span>Desliza para borrar</span>\n  </div>\n</div>",
+    generateCss: (dur, timing) => `.swipe-item-row {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #141523;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: swipeRevealMove ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes swipeRevealMove {
+  0% { transform: translateX(0); }
+  60%, 100% { transform: translateX(-40px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swipe-item-row { animation: none !important; transform: none !important; }
+}`
   }
 ];
-

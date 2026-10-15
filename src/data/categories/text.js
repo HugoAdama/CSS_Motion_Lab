@@ -814,6 +814,365 @@ export const textAnimations = [
 @media (prefers-reduced-motion: reduce) {
   .floating-text { animation: none !important; transform: none !important; }
 }`
+  },
+  {
+    id: "typewriter-blink-caret",
+    name: "Máquina de Escribir con Cursor (Typewriter Caret)",
+    category: "Texto",
+    defaultDuration: 2.2,
+    defaultTiming: "steps(18, end)",
+    timingOptions: ["steps(18, end)","linear","ease-in-out"],
+    properties: "width, border-color",
+    renderCost: "Maquetación y Pintado",
+    renderCostType: "layout",
+    costExplanation: "Incremento escalonado de width con border-right animado simulando el cursor.",
+    description: "Escritura mecánica clásica carácter por carácter con cursor intermitente de fósforo verde.",
+    targetSelector: ".typewriter-frame",
+    previewClass: "shape--typewriter-blink-caret",
+    htmlSnippet: "<div class=\"typewriter-frame\">\n  <span class=\"typewriter-line\">CSS Motion Lab Pro</span>\n</div>",
+    previewHtml: "<div class=\"typewriter-frame is-playing\" data-motion-target>\n  <span class=\"typewriter-line\">CSS Motion Lab Pro</span>\n</div>",
+    generateCss: (dur, timing) => `.typewriter-line {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #3ddda8;
+  font-family: monospace;
+  font-weight: 700;
+  animation: typingWidth ${dur}s ${timing} infinite, caretBlink 0.75s step-end infinite;
+}
+
+@keyframes typingWidth {
+  0% { width: 0; }
+  60%, 100% { width: 100%; }
+}
+
+@keyframes caretBlink {
+  50% { border-color: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-line { animation: none !important; width: 100% !important; border-right: none !important; }
+}`
+  },
+  {
+    id: "letter-bounce-drop",
+    name: "Letras en Caída Saltarína (Letter Bounce)",
+    category: "Texto",
+    defaultDuration: 0.8,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform (translateY), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Retardo escalonado en cada glifo en translateY sin causar relayout de línea.",
+    description: "Cada letra cae desde arriba y rebota elásticamente formando una palabra con dinamismo jovial.",
+    targetSelector: ".bounce-word",
+    previewClass: "shape--letter-bounce-drop",
+    htmlSnippet: "<div class=\"bounce-word\">\n  <span class=\"b-char\" style=\"--c-idx: 0;\">M</span>\n  <span class=\"b-char\" style=\"--c-idx: 1;\">O</span>\n  <span class=\"b-char\" style=\"--c-idx: 2;\">T</span>\n  <span class=\"b-char\" style=\"--c-idx: 3;\">I</span>\n  <span class=\"b-char\" style=\"--c-idx: 4;\">O</span>\n  <span class=\"b-char\" style=\"--c-idx: 5;\">N</span>\n</div>",
+    previewHtml: "<div class=\"bounce-word is-playing\" data-motion-target>\n  <span class=\"b-char\" style=\"--c-idx: 0;\">M</span>\n  <span class=\"b-char\" style=\"--c-idx: 1;\">O</span>\n  <span class=\"b-char\" style=\"--c-idx: 2;\">T</span>\n  <span class=\"b-char\" style=\"--c-idx: 3;\">I</span>\n  <span class=\"b-char\" style=\"--c-idx: 4;\">O</span>\n  <span class=\"b-char\" style=\"--c-idx: 5;\">N</span>\n</div>",
+    generateCss: (dur, timing) => `.b-char {
+  display: inline-block;
+  font-weight: 800;
+  font-size: 24px;
+  color: #7b6ef6;
+  animation: letterDropBounce ${dur}s ${timing} both;
+  animation-delay: calc(var(--c-idx, 0) * 0.08s);
+}
+
+@keyframes letterDropBounce {
+  0% { opacity: 0; transform: translateY(-30px); }
+  60% { transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .b-char { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "text-scramble-decrypt",
+    name: "Decodificación Cibernética (Cipher Decrypt)",
+    category: "Texto",
+    defaultDuration: 1.5,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "filter, opacity, text-shadow",
+    renderCost: "Repintado y Composición",
+    renderCostType: "paint",
+    costExplanation: "Filtro blur y text-shadow parpadeante para simular terminal de desencriptado.",
+    description: "Efecto estilo Matrix donde caracteres encriptados se estabilizan en una palabra nítida.",
+    targetSelector: ".decrypt-string",
+    previewClass: "shape--text-scramble-decrypt",
+    htmlSnippet: "<div class=\"decrypt-string\">\n  <code>[ACCESS_GRANTED]</code>\n</div>",
+    previewHtml: "<div class=\"decrypt-string is-playing\" data-motion-target>\n  <code>[ACCESS_GRANTED]</code>\n</div>",
+    generateCss: (dur, timing) => `.decrypt-string code {
+  color: #3ddda8;
+  font-family: monospace;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  animation: cipherGlow ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes cipherGlow {
+  0% { filter: blur(3px); opacity: 0.5; text-shadow: 0 0 10px #3ddda8; }
+  50% { filter: blur(1px); opacity: 0.8; }
+  100% { filter: blur(0); opacity: 1; text-shadow: 0 0 2px #3ddda8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .decrypt-string code { animation: none !important; filter: none !important; }
+}`
+  },
+  {
+    id: "aurora-text-gradient",
+    name: "Gradiente Fluido en Texto (Aurora Gradient)",
+    category: "Texto",
+    defaultDuration: 3,
+    defaultTiming: "linear",
+    timingOptions: ["linear","ease-in-out","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "background-position",
+    renderCost: "Repintado de píxeles",
+    renderCostType: "paint",
+    costExplanation: "Desplazamiento horizontal continuo en background-position con background-clip: text.",
+    description: "Degradado multicolor etéreo que fluye a través de los glifos tipográficos continuamente.",
+    targetSelector: ".aurora-text-span",
+    previewClass: "shape--aurora-text-gradient",
+    htmlSnippet: "<div class=\"aurora-text-wrapper\">\n  <span class=\"aurora-text-span\">FUTURE MOTION</span>\n</div>",
+    previewHtml: "<div class=\"aurora-text-wrapper is-playing\" data-motion-target>\n  <span class=\"aurora-text-span\">FUTURE MOTION</span>\n</div>",
+    generateCss: (dur, timing) => `.aurora-text-span {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #7b6ef6, #3ddda8, #ff6e65, #7b6ef6);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: auroraFlow ${dur}s ${timing} infinite;
+}
+
+@keyframes auroraFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-text-span { animation: none !important; }
+}`
+  },
+  {
+    id: "3d-text-popout",
+    name: "Texto Extruido en Relieve 3D (Text Popout)",
+    category: "Texto",
+    defaultDuration: 1.2,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","cubic-bezier(0.34, 1.56, 0.64, 1)","linear"],
+    properties: "transform, text-shadow",
+    renderCost: "Repintado y Composición",
+    renderCostType: "paint",
+    costExplanation: "Capas acumulativas de text-shadow para simular profundidad isométrica con scale().",
+    description: "Tipografía de póster retro con volumen físico y sombra proyectada que parece despegarse del fondo.",
+    targetSelector: ".popout-text-title",
+    previewClass: "shape--3d-text-popout",
+    htmlSnippet: "<div class=\"popout-text-container\">\n  <span class=\"popout-text-title\">IMPACT</span>\n</div>",
+    previewHtml: "<div class=\"popout-text-container is-playing\" data-motion-target>\n  <span class=\"popout-text-title\">IMPACT</span>\n</div>",
+    generateCss: (dur, timing) => `.popout-text-title {
+  font-size: 26px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 2px;
+  animation: textPop3D ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes textPop3D {
+  0% {
+    transform: translateY(0);
+    text-shadow: 1px 1px 0 #7b6ef6, 2px 2px 0 #7b6ef6;
+  }
+  100% {
+    transform: translateY(-6px);
+    text-shadow: 1px 1px 0 #7b6ef6, 2px 2px 0 #7b6ef6, 3px 3px 0 #7b6ef6, 4px 4px 0 #7b6ef6, 5px 5px 12px rgba(123, 110, 246, 0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popout-text-title { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "split-flip-text",
+    name: "Marcador de Aeropuerto (Split Flip Text)",
+    category: "Texto",
+    defaultDuration: 0.7,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (rotateX)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Rotación en perspectiva de 90deg sobre la bisagra horizontal media.",
+    description: "Giro mecánico sobre el eje X imitando los paneles de horarios de las estaciones ferroviarias clásicas.",
+    targetSelector: ".split-flip-board",
+    previewClass: "shape--split-flip-text",
+    htmlSnippet: "<div class=\"split-flip-board\">\n  <div class=\"flip-plate\">PARÍS 09:40</div>\n</div>",
+    previewHtml: "<div class=\"split-flip-board is-playing\" data-motion-target>\n  <div class=\"flip-plate\">PARÍS 09:40</div>\n</div>",
+    generateCss: (dur, timing) => `.flip-plate {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: #141523;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffbd2e;
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  animation: splitFlipX ${dur}s ${timing} infinite;
+}
+
+@keyframes splitFlipX {
+  0% { transform: perspective(300px) rotateX(0deg); }
+  50% { transform: perspective(300px) rotateX(-90deg); opacity: 0.5; }
+  100% { transform: perspective(300px) rotateX(0deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-plate { animation: none !important; }
+}`
+  },
+  {
+    id: "text-hologram-flicker",
+    name: "Holograma con Parpadeo (Hologram Flicker)",
+    category: "Texto",
+    defaultDuration: 1.8,
+    defaultTiming: "linear",
+    timingOptions: ["linear","ease-in-out","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "opacity, text-shadow, transform",
+    renderCost: "Repintado y Composición",
+    renderCostType: "paint",
+    costExplanation: "Parpadeo estroboscópico sutil con resplandor cian y desvío mínimo en translateX.",
+    description: "Proyección holográfica de ciencia ficción con líneas de escaneo tenues y micro-aberración cromática.",
+    targetSelector: ".hologram-word",
+    previewClass: "shape--text-hologram-flicker",
+    htmlSnippet: "<div class=\"hologram-word\">\n  <span>TRANSMISIÓN VIVA</span>\n</div>",
+    previewHtml: "<div class=\"hologram-word is-playing\" data-motion-target>\n  <span>TRANSMISIÓN VIVA</span>\n</div>",
+    generateCss: (dur, timing) => `.hologram-word span {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #3ddda8;
+  text-shadow: 0 0 8px rgba(61, 221, 168, 0.7);
+  animation: holoFlicker ${dur}s ${timing} infinite;
+}
+
+@keyframes holoFlicker {
+  0%, 100% { opacity: 0.95; transform: skewX(0); }
+  23% { opacity: 0.75; transform: skewX(-2deg); }
+  24% { opacity: 0.95; transform: skewX(0); }
+  68% { opacity: 0.6; transform: skewX(3deg); }
+  70% { opacity: 0.95; transform: skewX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hologram-word span { animation: none !important; }
+}`
+  },
+  {
+    id: "underline-draw-brush",
+    name: "Subrayado en Trazo de Pincel (Underline Draw)",
+    category: "Texto",
+    defaultDuration: 0.8,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (scaleX)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Línea decorativa con scaleX(0) a scaleX(1) y transform-origin: left.",
+    description: "Efecto de rotulador que dibuja una línea viva debajo del texto importante para guiar la lectura.",
+    targetSelector: ".brush-underline-title",
+    previewClass: "shape--underline-draw-brush",
+    htmlSnippet: "<div class=\"brush-underline-wrap\">\n  <h4 class=\"brush-underline-title\">Diseño de Vanguardia</h4>\n  <div class=\"brush-line\"></div>\n</div>",
+    previewHtml: "<div class=\"brush-underline-wrap is-playing\" data-motion-target>\n  <h4 class=\"brush-underline-title\">Diseño de Vanguardia</h4>\n  <div class=\"brush-line\"></div>\n</div>",
+    generateCss: (dur, timing) => `.brush-line {
+  height: 3px;
+  border-radius: 2px;
+  background: #7b6ef6;
+  transform-origin: left center;
+  animation: lineDraw ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes lineDraw {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brush-line { animation: none !important; transform: scaleX(1) !important; }
+}`
+  },
+  {
+    id: "letter-spread-hover",
+    name: "Espaciado Tipográfico Expansivo (Letter Spread)",
+    category: "Texto",
+    defaultDuration: 1.2,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-in-out","linear"],
+    properties: "letter-spacing, opacity",
+    renderCost: "Maquetación y Pintado",
+    renderCostType: "layout",
+    costExplanation: "Modulación de letter-spacing entre 1px y 8px con interpolación tipográfica suave.",
+    description: "Apertura cinematográfica del interletrado que confiere un aura de majestuosidad y elegancia.",
+    targetSelector: ".letter-spread-box",
+    previewClass: "shape--letter-spread-hover",
+    htmlSnippet: "<div class=\"letter-spread-box\">\n  <span>MINIMALISMO</span>\n</div>",
+    previewHtml: "<div class=\"letter-spread-box is-playing\" data-motion-target>\n  <span>MINIMALISMO</span>\n</div>",
+    generateCss: (dur, timing) => `.letter-spread-box span {
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  animation: spreadLetters ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes spreadLetters {
+  0% { letter-spacing: 1px; }
+  100% { letter-spacing: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .letter-spread-box span { animation: none !important; letter-spacing: 3px !important; }
+}`
+  },
+  {
+    id: "smoke-blur-dissolve",
+    name: "Dispersión en Humo Suave (Smoke Dissolve)",
+    category: "Texto",
+    defaultDuration: 1.5,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "filter, transform, opacity",
+    renderCost: "Repintado y Composición",
+    renderCostType: "paint",
+    costExplanation: "Filtro blur() gradual combinado con scale(1.15) y desvanecimiento de opacidad a cero.",
+    description: "Desvanecimiento etéreo donde la tipografía parece evaporarse como una bocanada de niebla.",
+    targetSelector: ".smoke-dissolve-text",
+    previewClass: "shape--smoke-blur-dissolve",
+    htmlSnippet: "<div class=\"smoke-dissolve-text\">\n  <span>EFÍMERO</span>\n</div>",
+    previewHtml: "<div class=\"smoke-dissolve-text is-playing\" data-motion-target>\n  <span>EFÍMERO</span>\n</div>",
+    generateCss: (dur, timing) => `.smoke-dissolve-text span {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #a79bfd;
+  animation: smokeDissolve ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes smokeDissolve {
+  0% { filter: blur(0); opacity: 1; transform: scale(1); }
+  100% { filter: blur(10px); opacity: 0.15; transform: scale(1.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smoke-dissolve-text span { animation: none !important; filter: none !important; }
+}`
   }
 ];
-

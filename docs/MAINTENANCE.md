@@ -120,7 +120,7 @@ El comando oficial de verificación es:
 npm test
 ```
 Este ejecuta `tests/quality-audit.mjs` y evalúa:
-- Existencia y distribución exacta de las 120 animaciones (20 por cada una de las 6 categorías).
+- Existencia y distribución exacta de las 180 animaciones (30 por cada una de las 6 categorías).
 - Unicidad de los IDs en formato kebab-case.
 - Cumplimiento de la interfaz `AnimationDefinition`.
 - Alineación 100% entre `targetSelector` y `previewHtml`.

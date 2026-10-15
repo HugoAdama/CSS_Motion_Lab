@@ -8,7 +8,7 @@
 
 ## 1. Resumen Ejecutivo
 
-Se ejecuto una auditoria automatizada integral sobre la totalidad de los 120 efectos y patrones interactivos de CSS Motion Lab. La auditoria cubrio integridad de datos, cumplimiento de contratos tipados, coherencia entre marcado HTML y selectores CSS, validez matematica de funciones de aceleracion, soporte de accesibilidad universal y las nuevas capacidades de paginacion ergonomica, favoritos y control de velocidad.
+Se ejecuto una auditoria automatizada integral sobre la totalidad de los 180 efectos y patrones interactivos de CSS Motion Lab. La auditoria cubrio integridad de datos, cumplimiento de contratos tipados, coherencia entre marcado HTML y selectores CSS, validez matematica de funciones de aceleracion, soporte de accesibilidad universal y las nuevas capacidades de paginacion ergonomica, favoritos y control de velocidad.
 
 ---
 
@@ -16,13 +16,13 @@ Se ejecuto una auditoria automatizada integral sobre la totalidad de los 120 efe
 
 | # | Grupo de Prueba | Verificacion Especifica | Resultado |
 | :-: | :--- | :--- | :-: |
-| 1 | **Catalogo** | Total de animaciones igual a 120 | Superado |
-| 2 | **Catalogo** | Categoria "Patrones UI" contiene 20 elementos | Superado |
-| 3 | **Catalogo** | Categoria "Entrada" contiene 20 elementos | Superado |
-| 4 | **Catalogo** | Categoria "Enfasis" contiene 20 elementos | Superado |
-| 5 | **Catalogo** | Categoria "Carga" contiene 20 elementos | Superado |
-| 6 | **Catalogo** | Categoria "Texto" contiene 20 elementos | Superado |
-| 7 | **Catalogo** | Categoria "Interaccion" contiene 20 elementos | Superado |
+| 1 | **Catalogo** | Total de animaciones igual a 180 | Superado |
+| 2 | **Catalogo** | Categoria "Patrones UI" contiene 30 elementos | Superado |
+| 3 | **Catalogo** | Categoria "Entrada" contiene 30 elementos | Superado |
+| 4 | **Catalogo** | Categoria "Enfasis" contiene 30 elementos | Superado |
+| 5 | **Catalogo** | Categoria "Carga" contiene 30 elementos | Superado |
+| 6 | **Catalogo** | Categoria "Texto" contiene 30 elementos | Superado |
+| 7 | **Catalogo** | Categoria "Interaccion" contiene 30 elementos | Superado |
 | 8 | **Identificadores** | Unicidad de IDs (sin duplicados) | Superado |
 | 9 | **Identificadores** | Convencion estricta kebab-case (`^[a-z0-9-]+$`) | Superado |
 | 10 | **Modelo de Datos** | Tipos de costo validos (`composite`, `paint`, `layout`) | Superado |
@@ -34,10 +34,10 @@ Se ejecuto una auditoria automatizada integral sobre la totalidad de los 120 efe
 | 16 | **Accesibilidad** | Cobertura en `accessibility.css` (`prefers-reduced-motion`) | Superado |
 | 17 | **Accesibilidad** | Soporte de clase forzada manual `.reduce-motion-forced` | Superado |
 | 18 | **Compilacion Estatica**| Existencia y validez de `dist/index.html` | Superado |
-| 19 | **Renderizado DOM** | 120 tarjetas de animacion renderizadas en el HTML estatico | Superado |
-| 20 | **Renderizado DOM** | 120 botones interactivos de 1-Click CodePen | Superado |
-| 21 | **Renderizado DOM** | 120 visualizadores SVG dinamicos de Curva Bezier | Superado |
-| 22 | **Renderizado DOM** | 120 botones de coleccion para el creador de paquetes | Superado |
+| 19 | **Renderizado DOM** | 180 tarjetas de animacion renderizadas en el HTML estatico | Superado |
+| 20 | **Renderizado DOM** | 180 botones interactivos de 1-Click CodePen | Superado |
+| 21 | **Renderizado DOM** | 180 visualizadores SVG dinamicos de Curva Bezier | Superado |
+| 22 | **Renderizado DOM** | 180 botones de coleccion para el creador de paquetes | Superado |
 | 23 | **Renderizado DOM** | Barra de filtrado por pipeline de renderizado activa | Superado |
 | 24 | **Renderizado DOM** | Dock flotante de seleccion de paquete presente | Superado |
 
@@ -47,10 +47,10 @@ Se ejecuto una auditoria automatizada integral sobre la totalidad de los 120 efe
 
 | Tipo de Costo | Total Efectos | Porcentaje | Comportamiento en Navegador |
 | :--- | :-: | :-: | :--- |
-| **Solo GPU (Composite)** | **74** | **61.7%** | Procesamiento 100% en GPU mediante `transform` y `opacity`. Cero recalculados de geometria o rasterizado. |
-| **Repintado (Paint)** | **32** | **26.7%** | Efectos visuales de brillo, degradados o desenfoque (`box-shadow`, `filter`, `background-position`). |
-| **Maquetacion (Layout)** | **14** | **11.6%** | Patrones UI que alteran la estructura dimensional (`grid-template-rows`, `max-height`, `clip-path`). |
-| **TOTAL** | **120** | **100%** | **Rendimiento optimo asegurado para produccion web.** |
+| **Solo GPU (Composite)** | **127** | **70.6%** | Procesamiento 100% en GPU mediante `transform` y `opacity`. Cero recalculados de geometria o rasterizado. |
+| **Repintado (Paint)** | **46** | **25.6%** | Efectos visuales de brillo, degradados o desenfoque (`box-shadow`, `filter`, `background-position`). |
+| **Maquetacion (Layout)** | **7** | **3.9%** | Patrones UI que alteran la estructura dimensional (`grid-template-rows`, `max-height`, `clip-path`). |
+| **TOTAL** | **180** | **100%** | **Rendimiento optimo asegurado para produccion web.** |
 
 ---
 

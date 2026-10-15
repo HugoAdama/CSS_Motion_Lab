@@ -810,6 +810,360 @@ export const entrancesAnimations = [
 @media (prefers-reduced-motion: reduce) {
   .spring-chip { animation: none !important; transform: scale(1) !important; opacity: 1 !important; }
 }`
+  },
+  {
+    id: "skew-in-left",
+    name: "Entrada Inclinada en Eje X (Skew In)",
+    category: "Entrada",
+    defaultDuration: 0.5,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (skewX, translateX), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Transformación geométrica sobre skewX(-20deg) y translateX con aceleración GPU.",
+    description: "Aparición dinámica con sesgo angular lateral que se endereza suavemente hasta su posición recta.",
+    targetSelector: ".skew-in-badge",
+    previewClass: "shape--skew-in-left",
+    htmlSnippet: "<div class=\"skew-in-badge\">\n  <span class=\"skew-sym\">&#9889;</span>\n  <strong>Activación Rápida</strong>\n</div>",
+    previewHtml: "<div class=\"skew-in-badge is-playing\" data-motion-target>\n  <span class=\"skew-sym\">&#9889;</span>\n  <strong>Activación Rápida</strong>\n</div>",
+    generateCss: (dur, timing) => `.skew-in-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  background: #7b6ef6;
+  color: #fff;
+  animation: skewInLeft ${dur}s ${timing} both;
+}
+
+@keyframes skewInLeft {
+  from { opacity: 0; transform: translateX(-40px) skewX(-20deg); }
+  to { opacity: 1; transform: translateX(0) skewX(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skew-in-badge { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "zoom-in-rotate",
+    name: "Zoom con Rotación Angular (Zoom In Rotate)",
+    category: "Entrada",
+    defaultDuration: 0.55,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform (scale, rotate), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Combinación de escala y rotación de 45deg ejecutada completamente en el compositor.",
+    description: "Efecto de enfoque dinámico con giro inicial y desaceleración elástica pronunciada.",
+    targetSelector: ".zoom-rotate-card",
+    previewClass: "shape--zoom-in-rotate",
+    htmlSnippet: "<div class=\"zoom-rotate-card\">\n  <div class=\"zoom-icon-box\">&#9670;</div>\n  <span>Insignia Pro</span>\n</div>",
+    previewHtml: "<div class=\"zoom-rotate-card is-playing\" data-motion-target>\n  <div class=\"zoom-icon-box\">&#9670;</div>\n  <span>Insignia Pro</span>\n</div>",
+    generateCss: (dur, timing) => `.zoom-rotate-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.35);
+  animation: zoomInRotate ${dur}s ${timing} both;
+}
+
+@keyframes zoomInRotate {
+  from { opacity: 0; transform: scale(0.3) rotate(-45deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom-rotate-card { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "slide-fade-diag",
+    name: "Entrada Diagonal con Desvanecimiento",
+    category: "Entrada",
+    defaultDuration: 0.45,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (translate), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Desplazamiento bidimensional simultáneo en X e Y optimizado para 60 FPS.",
+    description: "Trayectoria diagonal suave desde la esquina superior izquierda con aumento continuo de opacidad.",
+    targetSelector: ".diag-slide-pill",
+    previewClass: "shape--slide-fade-diag",
+    htmlSnippet: "<div class=\"diag-slide-pill\">\n  <span>Confirmación Diagonal</span>\n</div>",
+    previewHtml: "<div class=\"diag-slide-pill is-playing\" data-motion-target>\n  <span>Confirmación Diagonal</span>\n</div>",
+    generateCss: (dur, timing) => `.diag-slide-pill {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #3ddda8;
+  color: #0b0c14;
+  font-weight: 700;
+  animation: slideFadeDiag ${dur}s ${timing} both;
+}
+
+@keyframes slideFadeDiag {
+  from { opacity: 0; transform: translate(-30px, -30px); }
+  to { opacity: 1; transform: translate(0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diag-slide-pill { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "elastic-snap-in",
+    name: "Enganche Elástico Instantáneo (Elastic Snap)",
+    category: "Entrada",
+    defaultDuration: 0.6,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Ecuación de rebote con sobrepaso de escala 1.25 antes de regresar a la dimensión unitaria.",
+    description: "Aparición tipo muelle que se estira y contrae velozmente hasta fijarse firmemente en el lienzo.",
+    targetSelector: ".elastic-snap-box",
+    previewClass: "shape--elastic-snap-in",
+    htmlSnippet: "<div class=\"elastic-snap-box\">\n  <span class=\"snap-icon\">&#10004;</span>\n  <strong>Completado</strong>\n</div>",
+    previewHtml: "<div class=\"elastic-snap-box is-playing\" data-motion-target>\n  <span class=\"snap-icon\">&#10004;</span>\n  <strong>Completado</strong>\n</div>",
+    generateCss: (dur, timing) => `.elastic-snap-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(61, 221, 168, 0.4);
+  color: #3ddda8;
+  animation: elasticSnapIn ${dur}s ${timing} both;
+}
+
+@keyframes elasticSnapIn {
+  0% { opacity: 0; transform: scale(0.2); }
+  70% { opacity: 1; transform: scale(1.18); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .elastic-snap-box { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "slide-drop-blur",
+    name: "Caída con Desenfoque Cinético (Drop Blur)",
+    category: "Entrada",
+    defaultDuration: 0.5,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, opacity, filter",
+    renderCost: "Repintado y Composición",
+    renderCostType: "paint",
+    costExplanation: "Filtro blur() gradual durante el recorrido vertical en translateY.",
+    description: "Descenso desde la parte superior con desenfoque de velocidad que se disuelve al tocar el suelo.",
+    targetSelector: ".drop-blur-card",
+    previewClass: "shape--slide-drop-blur",
+    htmlSnippet: "<div class=\"drop-blur-card\">\n  <strong>Alerta de Sistema</strong>\n</div>",
+    previewHtml: "<div class=\"drop-blur-card is-playing\" data-motion-target>\n  <strong>Alerta de Sistema</strong>\n</div>",
+    generateCss: (dur, timing) => `.drop-blur-card {
+  padding: 12px 24px;
+  border-radius: 10px;
+  background: #ff6e65;
+  color: #fff;
+  font-weight: 700;
+  animation: dropBlurIn ${dur}s ${timing} both;
+}
+
+@keyframes dropBlurIn {
+  from { opacity: 0; transform: translateY(-40px); filter: blur(8px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drop-blur-card { animation: none !important; filter: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "pivot-down-in",
+    name: "Pivoteo Colgante (Pivot Down In)",
+    category: "Entrada",
+    defaultDuration: 0.65,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (rotate), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Rotación angular con punto de pivote en transform-origin: top left.",
+    description: "Caída angular como un cuadro sostenido de una esquina superior que oscila hasta estabilizarse.",
+    targetSelector: ".pivot-tag-item",
+    previewClass: "shape--pivot-down-in",
+    htmlSnippet: "<div class=\"pivot-tag-item\">\n  <span>Etiqueta Colgante</span>\n</div>",
+    previewHtml: "<div class=\"pivot-tag-item is-playing\" data-motion-target>\n  <span>Etiqueta Colgante</span>\n</div>",
+    generateCss: (dur, timing) => `.pivot-tag-item {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.4);
+  color: #fff;
+  transform-origin: top left;
+  animation: pivotDownIn ${dur}s ${timing} both;
+}
+
+@keyframes pivotDownIn {
+  0% { opacity: 0; transform: rotate(-60deg); }
+  60% { opacity: 1; transform: rotate(12deg); }
+  100% { opacity: 1; transform: rotate(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pivot-tag-item { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "expand-vertical-wipe",
+    name: "Apertura en Cortina Vertical (Vertical Wipe)",
+    category: "Entrada",
+    defaultDuration: 0.5,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "clip-path, opacity",
+    renderCost: "Repintado de máscara",
+    renderCostType: "paint",
+    costExplanation: "Uso de clip-path: inset(0 0 100% 0) progresivo para revelar el elemento de arriba hacia abajo.",
+    description: "Revelado en persiana vertical sin desplazar los elementos adyacentes del flujo DOM.",
+    targetSelector: ".vertical-wipe-card",
+    previewClass: "shape--expand-vertical-wipe",
+    htmlSnippet: "<div class=\"vertical-wipe-card\">\n  <strong>Contenido Revelado</strong>\n</div>",
+    previewHtml: "<div class=\"vertical-wipe-card is-playing\" data-motion-target>\n  <strong>Contenido Revelado</strong>\n</div>",
+    generateCss: (dur, timing) => `.vertical-wipe-card {
+  padding: 14px 24px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #7b6ef6, #ff6e65);
+  color: #fff;
+  font-weight: 700;
+  animation: verticalWipe ${dur}s ${timing} both;
+}
+
+@keyframes verticalWipe {
+  from { clip-path: inset(0 0 100% 0); opacity: 0.4; }
+  to { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vertical-wipe-card { animation: none !important; clip-path: none !important; opacity: 1 !important; }
+}`
+  },
+  {
+    id: "card-deck-deal",
+    name: "Reparto de Baraja (Card Deck Deal)",
+    category: "Entrada",
+    defaultDuration: 0.55,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (translate, rotate), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Deslizamiento desde el lateral derecho combinado con rotate(8deg) hacia la posición cero.",
+    description: "Entrada similar al reparto de una baraja de naipes que desliza y asienta la tarjeta con elegancia.",
+    targetSelector: ".deck-deal-card",
+    previewClass: "shape--card-deck-deal",
+    htmlSnippet: "<div class=\"deck-deal-card\">\n  <div class=\"deck-card-top\">&#9824;</div>\n  <span>Carta de Juego</span>\n</div>",
+    previewHtml: "<div class=\"deck-deal-card is-playing\" data-motion-target>\n  <div class=\"deck-card-top\">&#9824;</div>\n  <span>Carta de Juego</span>\n</div>",
+    generateCss: (dur, timing) => `.deck-deal-card {
+  width: 140px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #141523;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  animation: deckDeal ${dur}s ${timing} both;
+}
+
+@keyframes deckDeal {
+  from { opacity: 0; transform: translate(50px, -20px) rotate(12deg); }
+  to { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck-deal-card { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "puff-in-smoke",
+    name: "Contracción desde Humo (Puff In)",
+    category: "Entrada",
+    defaultDuration: 0.45,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (scale), filter, opacity",
+    renderCost: "Repintado y Composición",
+    renderCostType: "paint",
+    costExplanation: "Contracción de escala de 1.4 a 1.0 combinada con desenfoque decreciente de 6px a 0.",
+    description: "Aparición densa y cinematográfica que condensa el elemento desde un estado expandido y etéreo.",
+    targetSelector: ".puff-in-badge",
+    previewClass: "shape--puff-in-smoke",
+    htmlSnippet: "<div class=\"puff-in-badge\">\n  <span>Aparición Mágica</span>\n</div>",
+    previewHtml: "<div class=\"puff-in-badge is-playing\" data-motion-target>\n  <span>Aparición Mágica</span>\n</div>",
+    generateCss: (dur, timing) => `.puff-in-badge {
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7b6ef6, #a79bfd);
+  color: #fff;
+  font-weight: 700;
+  animation: puffInSmoke ${dur}s ${timing} both;
+}
+
+@keyframes puffInSmoke {
+  from { opacity: 0; transform: scale(1.4); filter: blur(6px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .puff-in-badge { animation: none !important; filter: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "swing-in-top",
+    name: "Descenso Oscilante (Swing In Top)",
+    category: "Entrada",
+    defaultDuration: 0.65,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform (rotateX), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Rotación en perspectiva 3D sobre el eje X con transform-origin: top.",
+    description: "Entrada como trampilla de techo o cartel abatible que cae y oscila armónicamente en su bisagra.",
+    targetSelector: ".swing-in-sign",
+    previewClass: "shape--swing-in-top",
+    htmlSnippet: "<div class=\"swing-in-sign\">\n  <span>Letrero Abatible</span>\n</div>",
+    previewHtml: "<div class=\"swing-in-sign is-playing\" data-motion-target>\n  <span>Letrero Abatible</span>\n</div>",
+    generateCss: (dur, timing) => `.swing-in-sign {
+  padding: 12px 24px;
+  border-radius: 8px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.4);
+  color: #fff;
+  font-weight: 700;
+  transform-origin: top center;
+  animation: swingInTop ${dur}s ${timing} both;
+}
+
+@keyframes swingInTop {
+  0% { opacity: 0; transform: perspective(400px) rotateX(-90deg); }
+  50% { transform: perspective(400px) rotateX(20deg); }
+  100% { opacity: 1; transform: perspective(400px) rotateX(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swing-in-sign { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
   }
 ];
-

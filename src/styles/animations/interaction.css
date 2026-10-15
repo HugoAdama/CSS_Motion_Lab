@@ -608,3 +608,288 @@
   100% { transform: scale(1); }
 }
 
+
+
+/* 21. Segmented Button Press */
+.haptic-press-btn {
+  padding: 10px 22px;
+  border-radius: 10px;
+  background: var(--violet);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 14px rgba(123, 110, 246, 0.4);
+  animation: hapticPulse 300ms cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+}
+@keyframes hapticPulse {
+  0% { transform: scale(1) translateY(0); box-shadow: 0 4px 14px rgba(123, 110, 246, 0.4); }
+  100% { transform: scale(0.95) translateY(2px); box-shadow: 0 1px 4px rgba(123, 110, 246, 0.2); }
+}
+
+/* 22. Pill Tab Elastic */
+.elastic-tab-bar {
+  position: relative;
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  width: 170px;
+}
+.elastic-pill-indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  border-radius: 999px;
+  background: var(--violet);
+  animation: elasticTabShift 450ms cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+}
+.e-tab {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 0;
+  color: var(--text-secondary);
+}
+.e-tab.is-active { color: #fff; }
+@keyframes elasticTabShift {
+  0% { transform: translateX(0) scaleX(1); }
+  40% { transform: translateX(40px) scaleX(1.3); }
+  100% { transform: translateX(100%) scaleX(1); }
+}
+
+/* 23. Radio Ripple Pulse */
+.radio-ripple-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.radio-circle-outer {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--violet);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.radio-dot-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--violet);
+}
+.radio-wave-halo {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: rgba(123, 110, 246, 0.35);
+  animation: radioWave 500ms cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes radioWave {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* 24. Card Spotlight Border */
+.spotlight-border-card {
+  position: relative;
+  border-radius: 12px;
+  padding: 1px;
+  background: transparent;
+  overflow: hidden;
+}
+.spotlight-border-card::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: conic-gradient(from 0deg, transparent, var(--violet), transparent 40%);
+  animation: spotlightRotate 2s linear infinite;
+}
+.spotlight-inner-content {
+  position: relative;
+  z-index: 2;
+  padding: 14px 22px;
+  border-radius: 11px;
+  background: var(--surface-card);
+  color: var(--ink);
+  font-weight: 700;
+}
+@keyframes spotlightRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 25. Download Progress Btn */
+.download-action-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.download-fill-meter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: var(--mint);
+  transform-origin: left center;
+  animation: downloadFill 1.8s ease-in-out infinite;
+}
+.download-btn-label {
+  position: relative;
+  z-index: 2;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+}
+@keyframes downloadFill {
+  0% { transform: scaleX(0); }
+  70% { transform: scaleX(1); }
+  100% { transform: scaleX(1); }
+}
+
+/* 26. Accordion Chevron Rotate */
+.chevron-spring-demo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 600;
+}
+.chevron-spring-arrow {
+  color: var(--violet);
+  font-size: 14px;
+  animation: chevronFlip 450ms cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+}
+@keyframes chevronFlip {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(180deg); }
+}
+
+/* 27. Star Burst Favorite */
+.star-burst-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+.burst-star-icon {
+  font-size: 28px;
+  color: #ffbd2e;
+  display: inline-block;
+  animation: starBurstPop 600ms cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+}
+@keyframes starBurstPop {
+  0% { transform: scale(0.8); opacity: 0.7; }
+  50% { transform: scale(1.4); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* 28. Slider Thumb Swell */
+.slider-mock-track {
+  position: relative;
+  width: 160px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line);
+  display: flex;
+  align-items: center;
+}
+.slider-mock-progress {
+  width: 65%;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--violet);
+}
+.slider-mock-thumb {
+  position: absolute;
+  left: 65%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--violet);
+  box-shadow: 0 0 10px rgba(123, 110, 246, 0.5);
+  animation: thumbSwell 400ms cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+}
+@keyframes thumbSwell {
+  0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 6px rgba(123, 110, 246, 0.3); }
+  100% { transform: translateX(-50%) scale(1.35); box-shadow: 0 0 16px rgba(123, 110, 246, 0.7); }
+}
+
+/* 29. Neumorphic Press Inset */
+.neumorphic-btn-tile {
+  padding: 12px 22px;
+  border-radius: 12px;
+  background: var(--surface-card);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1px;
+  animation: neumorphicPress 500ms ease-in-out infinite alternate;
+}
+@keyframes neumorphicPress {
+  0% {
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4), -4px -4px 10px rgba(255, 255, 255, 0.05);
+    transform: translateY(0);
+  }
+  100% {
+    box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.5), inset -3px -3px 6px rgba(255, 255, 255, 0.05);
+    transform: translateY(1px);
+  }
+}
+
+/* 30. Swipe to Reveal Action */
+.swipe-item-wrapper {
+  position: relative;
+  width: 170px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.swipe-bg-actions {
+  position: absolute;
+  inset: 0;
+  background: var(--coral);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 12px;
+  color: #fff;
+}
+.swipe-item-row {
+  position: relative;
+  z-index: 2;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--surface-card);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  font-size: 11px;
+  font-weight: 600;
+  animation: swipeRevealMove 1.4s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+}
+@keyframes swipeRevealMove {
+  0% { transform: translateX(0); }
+  60%, 100% { transform: translateX(-40px); }
+}
+

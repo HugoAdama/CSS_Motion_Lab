@@ -394,3 +394,187 @@
   50% { transform: translateY(-8px); color: var(--mint); }
 }
 
+
+
+/* 21. Typewriter Blink Caret */
+.typewriter-frame {
+  display: inline-block;
+  padding: 8px 12px;
+  background: var(--surface-card);
+  border-radius: 6px;
+  border: 1px solid var(--line);
+}
+.typewriter-line {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid var(--mint);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  animation: typingWidth 2.2s steps(18, end) infinite, caretBlink 0.75s step-end infinite;
+}
+@keyframes typingWidth {
+  0% { width: 0; }
+  60%, 100% { width: 100%; }
+}
+@keyframes caretBlink {
+  50% { border-color: transparent; }
+}
+
+/* 22. Letter Bounce Drop */
+.bounce-word {
+  display: inline-flex;
+  gap: 2px;
+}
+.b-char {
+  display: inline-block;
+  font-weight: 800;
+  font-size: 24px;
+  color: var(--violet);
+  animation: letterDropBounce 800ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: calc(var(--c-idx, 0) * 0.08s);
+}
+@keyframes letterDropBounce {
+  0% { opacity: 0; transform: translateY(-30px); }
+  60% { transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 23. Text Scramble Decrypt */
+.decrypt-string code {
+  color: var(--mint);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  animation: cipherGlow 1.5s ease-in-out infinite alternate;
+}
+@keyframes cipherGlow {
+  0% { filter: blur(3px); opacity: 0.5; text-shadow: 0 0 10px rgba(61, 221, 168, 0.6); }
+  50% { filter: blur(1px); opacity: 0.8; }
+  100% { filter: blur(0); opacity: 1; text-shadow: 0 0 2px rgba(61, 221, 168, 0.8); }
+}
+
+/* 24. Aurora Text Gradient */
+.aurora-text-span {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, var(--violet), var(--mint), var(--coral), var(--violet));
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: auroraFlow 3s linear infinite;
+}
+@keyframes auroraFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* 25. 3D Text Popout */
+.popout-text-title {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: 2px;
+  animation: textPop3D 1.2s ease-in-out infinite alternate;
+}
+@keyframes textPop3D {
+  0% {
+    transform: translateY(0);
+    text-shadow: 1px 1px 0 var(--violet), 2px 2px 0 var(--violet);
+  }
+  100% {
+    transform: translateY(-6px);
+    text-shadow: 1px 1px 0 var(--violet), 2px 2px 0 var(--violet), 3px 3px 0 var(--violet), 4px 4px 0 var(--violet), 5px 5px 12px rgba(123, 110, 246, 0.6);
+  }
+}
+
+/* 26. Split Flip Text */
+.flip-plate {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  color: var(--coral);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  animation: splitFlipX 700ms cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes splitFlipX {
+  0% { transform: perspective(300px) rotateX(0deg); }
+  50% { transform: perspective(300px) rotateX(-90deg); opacity: 0.5; }
+  100% { transform: perspective(300px) rotateX(0deg); opacity: 1; }
+}
+
+/* 27. Text Hologram Flicker */
+.hologram-word span {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--mint);
+  text-shadow: 0 0 8px rgba(61, 221, 168, 0.7);
+  animation: holoFlicker 1.8s linear infinite;
+}
+@keyframes holoFlicker {
+  0%, 100% { opacity: 0.95; transform: skewX(0); }
+  23% { opacity: 0.75; transform: skewX(-2deg); }
+  24% { opacity: 0.95; transform: skewX(0); }
+  68% { opacity: 0.6; transform: skewX(3deg); }
+  70% { opacity: 0.95; transform: skewX(0); }
+}
+
+/* 28. Underline Draw Brush */
+.brush-underline-wrap {
+  display: inline-flex;
+  flex-direction: column;
+}
+.brush-underline-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.brush-line {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--violet);
+  transform-origin: left center;
+  animation: lineDraw 800ms cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+}
+@keyframes lineDraw {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+/* 29. Letter Spread Hover */
+.letter-spread-box span {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--ink);
+  animation: spreadLetters 1.2s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+}
+@keyframes spreadLetters {
+  0% { letter-spacing: 1px; }
+  100% { letter-spacing: 7px; }
+}
+
+/* 30. Smoke Blur Dissolve */
+.smoke-dissolve-text span {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #a79bfd;
+  animation: smokeDissolve 1.5s ease-in-out infinite alternate;
+}
+@keyframes smokeDissolve {
+  0% { filter: blur(0); opacity: 1; transform: scale(1); }
+  100% { filter: blur(10px); opacity: 0.15; transform: scale(1.2); }
+}
+

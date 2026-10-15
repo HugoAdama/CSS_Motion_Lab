@@ -827,6 +827,373 @@ export const emphasisAnimations = [
 @media (prefers-reduced-motion: reduce) {
   .spotlight-beam { animation: none !important; }
 }`
+  },
+  {
+    id: "radar-ping-triple",
+    name: "Onda de Radar Concéntrica (Radar Ping)",
+    category: "Énfasis",
+    defaultDuration: 1.5,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","linear"],
+    properties: "transform (scale), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Anillos circulares generados con transform: scale() continuo sin recálculo de geometría.",
+    description: "Sonar de triple halo que pulsa suavemente para destacar estados activos o ubicaciones en vivo.",
+    targetSelector: ".radar-ping-cluster",
+    previewClass: "shape--radar-ping-triple",
+    htmlSnippet: "<div class=\"radar-ping-cluster\">\n  <span class=\"radar-ring r1\"></span>\n  <span class=\"radar-ring r2\"></span>\n  <span class=\"radar-core-dot\"></span>\n</div>",
+    previewHtml: "<div class=\"radar-ping-cluster is-playing\" data-motion-target>\n  <span class=\"radar-ring r1\"></span>\n  <span class=\"radar-ring r2\"></span>\n  <span class=\"radar-core-dot\"></span>\n</div>",
+    generateCss: (dur, timing) => `.radar-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid #7b6ef6;
+  animation: radarExpand ${dur}s ${timing} infinite;
+}
+
+.radar-ring.r2 {
+  animation-delay: calc(${dur}s * 0.4);
+}
+
+@keyframes radarExpand {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .radar-ring { animation: none !important; opacity: 0.3 !important; }
+}`
+  },
+  {
+    id: "neon-outline-glow",
+    name: "Resplandor de Neón Pulsante (Neon Glow)",
+    category: "Énfasis",
+    defaultDuration: 1.2,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "box-shadow, border-color, filter",
+    renderCost: "Repintado y Composición",
+    renderCostType: "paint",
+    costExplanation: "Modulación del radio y dispersión de box-shadow con destellos tipo tubo de neón.",
+    description: "Marco fluorescente con parpadeo de voltaje y resplandor cian para destacar elementos VIP.",
+    targetSelector: ".neon-glow-card",
+    previewClass: "shape--neon-outline-glow",
+    htmlSnippet: "<div class=\"neon-glow-card\">\n  <span class=\"neon-glow-text\">NEON PULSE</span>\n</div>",
+    previewHtml: "<div class=\"neon-glow-card is-playing\" data-motion-target>\n  <span class=\"neon-glow-text\">NEON PULSE</span>\n</div>",
+    generateCss: (dur, timing) => `.neon-glow-card {
+  padding: 12px 24px;
+  border-radius: 10px;
+  background: #08090f;
+  border: 1px solid #3ddda8;
+  box-shadow: 0 0 14px rgba(61, 221, 168, 0.6);
+  animation: neonPulse ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes neonPulse {
+  0% { box-shadow: 0 0 8px rgba(61, 221, 168, 0.3); border-color: rgba(61, 221, 168, 0.4); }
+  100% { box-shadow: 0 0 24px rgba(61, 221, 168, 0.8), inset 0 0 10px rgba(61, 221, 168, 0.3); border-color: #3ddda8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-glow-card { animation: none !important; }
+}`
+  },
+  {
+    id: "magnetic-tilt-hover",
+    name: "Inclinación Reactiva (Magnetic Tilt)",
+    category: "Énfasis",
+    defaultDuration: 0.8,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-out","ease-in-out"],
+    properties: "transform, box-shadow",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Inclinación angular tridimensional mediante rotateX y rotateY con desplazamiento de sombra.",
+    description: "Sensación de respuesta táctil en perspectiva simulando atracción magnética.",
+    targetSelector: ".magnetic-tilt-badge",
+    previewClass: "shape--magnetic-tilt-hover",
+    htmlSnippet: "<div class=\"magnetic-tilt-badge\">\n  <strong>Atracción 3D</strong>\n</div>",
+    previewHtml: "<div class=\"magnetic-tilt-badge is-playing\" data-motion-target>\n  <strong>Atracción 3D</strong>\n</div>",
+    generateCss: (dur, timing) => `.magnetic-tilt-badge {
+  padding: 12px 22px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.4);
+  color: #fff;
+  font-weight: 700;
+  animation: magneticWobble ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes magneticWobble {
+  0% { transform: perspective(400px) rotateX(10deg) rotateY(-12deg); }
+  100% { transform: perspective(400px) rotateX(-10deg) rotateY(12deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .magnetic-tilt-badge { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "energy-spark-pulse",
+    name: "Chispazo de Energía (Energy Spark)",
+    category: "Énfasis",
+    defaultDuration: 0.6,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform, filter",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Contracción breve con sobre-expansión instantánea de escala que simula una descarga.",
+    description: "Sacudida enérgica de escala y destello luminoso perfecta para premios, logros o aciertos.",
+    targetSelector: ".energy-spark-pill",
+    previewClass: "shape--energy-spark-pulse",
+    htmlSnippet: "<div class=\"energy-spark-pill\">\n  <span class=\"spark-icon\">&#9733;</span>\n  <strong>¡Nivel Superado!</strong>\n</div>",
+    previewHtml: "<div class=\"energy-spark-pill is-playing\" data-motion-target>\n  <span class=\"spark-icon\">&#9733;</span>\n  <strong>¡Nivel Superado!</strong>\n</div>",
+    generateCss: (dur, timing) => `.energy-spark-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #ffbd2e;
+  color: #08090f;
+  font-weight: 800;
+  animation: energySpark ${dur}s ${timing} infinite;
+}
+
+@keyframes energySpark {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  30% { transform: scale(0.9); filter: brightness(0.9); }
+  50% { transform: scale(1.15); filter: brightness(1.3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .energy-spark-pill { animation: none !important; }
+}`
+  },
+  {
+    id: "pendulum-sway",
+    name: "Oscilación de Péndulo (Pendulum Sway)",
+    category: "Énfasis",
+    defaultDuration: 1.4,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "transform (rotate)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Rotación armónica simple alrededor del anclaje superior con aceleración por gravedad.",
+    description: "Balanceo hipnótico y continuo para insignias colgantes, etiquetas de descuento o campanas.",
+    targetSelector: ".pendulum-sway-badge",
+    previewClass: "shape--pendulum-sway",
+    htmlSnippet: "<div class=\"pendulum-sway-badge\">\n  <span>Oferta Especial</span>\n</div>",
+    previewHtml: "<div class=\"pendulum-sway-badge is-playing\" data-motion-target>\n  <span>Oferta Especial</span>\n</div>",
+    generateCss: (dur, timing) => `.pendulum-sway-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #ff6e65;
+  color: #fff;
+  font-weight: 700;
+  transform-origin: top center;
+  animation: pendulumSway ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes pendulumSway {
+  0% { transform: rotate(14deg); }
+  100% { transform: rotate(-14deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pendulum-sway-badge { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "badge-notification-pop",
+    name: "Rebote de Notificación (Notification Pop)",
+    category: "Énfasis",
+    defaultDuration: 0.7,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Doble ciclo de contracción y expansión elástica sin alterar la cuadrícula.",
+    description: "Efecto de salto gelatinoso para alertar al usuario sobre mensajes nuevos o tareas pendientes.",
+    targetSelector: ".notify-bubble-box",
+    previewClass: "shape--badge-notification-pop",
+    htmlSnippet: "<div class=\"notify-bubble-box\">\n  <span class=\"notify-count-badge\">3</span>\n  <span class=\"notify-label-text\">Mensajes nuevos</span>\n</div>",
+    previewHtml: "<div class=\"notify-bubble-box is-playing\" data-motion-target>\n  <span class=\"notify-count-badge\">3</span>\n  <span class=\"notify-label-text\">Mensajes nuevos</span>\n</div>",
+    generateCss: (dur, timing) => `.notify-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #7b6ef6;
+  color: #fff;
+  font-weight: 800;
+  animation: badgePopPulse ${dur}s ${timing} infinite;
+}
+
+@keyframes badgePopPulse {
+  0%, 100% { transform: scale(1); }
+  40% { transform: scale(1.3); }
+  60% { transform: scale(0.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notify-count-badge { animation: none !important; }
+}`
+  },
+  {
+    id: "outline-travel-beam",
+    name: "Haz Perimetral en Recorrido (Outline Travel)",
+    category: "Énfasis",
+    defaultDuration: 2,
+    defaultTiming: "linear",
+    timingOptions: ["linear","ease-in-out","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "background-position, border-color",
+    renderCost: "Repintado y Composición",
+    renderCostType: "paint",
+    costExplanation: "Gradiente cónico rotado alrededor del borde exterior del contenedor.",
+    description: "Línea luminosa que viaja continuamente alrededor del borde exterior creando un efecto vanguardista.",
+    targetSelector: ".outline-travel-card",
+    previewClass: "shape--outline-travel-beam",
+    htmlSnippet: "<div class=\"outline-travel-card\">\n  <strong>Contorno Dinámico</strong>\n</div>",
+    previewHtml: "<div class=\"outline-travel-card is-playing\" data-motion-target>\n  <strong>Contorno Dinámico</strong>\n</div>",
+    generateCss: (dur, timing) => `.outline-travel-card {
+  position: relative;
+  padding: 14px 24px;
+  border-radius: 12px;
+  background: #141523;
+  color: #fff;
+  font-weight: 700;
+  border: 1px solid transparent;
+  background-image: linear-gradient(#141523, #141523), linear-gradient(90deg, #7b6ef6, #3ddda8, #7b6ef6);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-size: 200% 100%;
+  animation: outlineTravel ${dur}s ${timing} infinite;
+}
+
+@keyframes outlineTravel {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outline-travel-card { animation: none !important; }
+}`
+  },
+  {
+    id: "heartbeat-double-thump",
+    name: "Doble Latido Cardíaco (Double Heartbeat)",
+    category: "Énfasis",
+    defaultDuration: 1.1,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","cubic-bezier(0.34, 1.56, 0.64, 1)","linear"],
+    properties: "transform, filter",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Patrón biológico sístole-diástole mediante scale(1.22) y scale(1.1) con pausa intermedia.",
+    description: "Latido realista con dos pulsos rítmicos sucesivos para iconos de salud, favoritos o me gusta.",
+    targetSelector: ".heartbeat-double-icon",
+    previewClass: "shape--heartbeat-double-thump",
+    htmlSnippet: "<div class=\"heartbeat-double-icon\">\n  <span class=\"heart-glyph\">&#9829;</span>\n</div>",
+    previewHtml: "<div class=\"heartbeat-double-icon is-playing\" data-motion-target>\n  <span class=\"heart-glyph\">&#9829;</span>\n</div>",
+    generateCss: (dur, timing) => `.heart-glyph {
+  display: inline-block;
+  color: #ff6e65;
+  font-size: 32px;
+  animation: doubleHeartbeat ${dur}s ${timing} infinite;
+}
+
+@keyframes doubleHeartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.28); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.18); }
+  70% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heart-glyph { animation: none !important; }
+}`
+  },
+  {
+    id: "wobble-horizontal-spring",
+    name: "Sacudida Horizontal Elástica (Wobble Spring)",
+    category: "Énfasis",
+    defaultDuration: 0.65,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)","ease-out","ease-in-out"],
+    properties: "transform (translateX)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Oscilación amortiguada en translateX de amplitud decreciente.",
+    description: "Vibración horizontal elástica para alertar sobre credenciales incorrectas o campos requeridos.",
+    targetSelector: ".wobble-spring-pill",
+    previewClass: "shape--wobble-horizontal-spring",
+    htmlSnippet: "<div class=\"wobble-spring-pill\">\n  <span>¡Dato Inválido!</span>\n</div>",
+    previewHtml: "<div class=\"wobble-spring-pill is-playing\" data-motion-target>\n  <span>¡Dato Inválido!</span>\n</div>",
+    generateCss: (dur, timing) => `.wobble-spring-pill {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #ff6e65;
+  color: #fff;
+  font-weight: 700;
+  animation: wobbleSpring ${dur}s ${timing} infinite;
+}
+
+@keyframes wobbleSpring {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-10px); }
+  30% { transform: translateX(8px); }
+  45% { transform: translateX(-5px); }
+  60% { transform: translateX(3px); }
+  75% { transform: translateX(-1px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wobble-spring-pill { animation: none !important; }
+}`
+  },
+  {
+    id: "aurora-shimmer-glow",
+    name: "Reflejo Iridiscente Aurora (Aurora Shimmer)",
+    category: "Énfasis",
+    defaultDuration: 2.2,
+    defaultTiming: "linear",
+    timingOptions: ["linear","ease-in-out","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "background-position, filter",
+    renderCost: "Repintado y Composición",
+    renderCostType: "paint",
+    costExplanation: "Desplazamiento horizontal de gradiente multicolor con destello reflectivo.",
+    description: "Efecto de aurora boreal que barre la superficie con tonalidades violetas, turquesas y corales.",
+    targetSelector: ".aurora-glow-box",
+    previewClass: "shape--aurora-shimmer-glow",
+    htmlSnippet: "<div class=\"aurora-glow-box\">\n  <span>AURORA EDITION</span>\n</div>",
+    previewHtml: "<div class=\"aurora-glow-box is-playing\" data-motion-target>\n  <span>AURORA EDITION</span>\n</div>",
+    generateCss: (dur, timing) => `.aurora-glow-box {
+  padding: 12px 24px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  background: linear-gradient(120deg, #7b6ef6, #3ddda8, #ff6e65, #7b6ef6);
+  background-size: 300% 100%;
+  animation: auroraShimmer ${dur}s ${timing} infinite;
+}
+
+@keyframes auroraShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-glow-box { animation: none !important; }
+}`
   }
 ];
-

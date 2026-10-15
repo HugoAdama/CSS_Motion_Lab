@@ -32,8 +32,8 @@ console.log('AUDITORIA PROFUNDA DE CALIDAD Y ARQUITECTURA — CSS MOTION LAB');
 console.log('================================================================\n');
 
 // 1. Integridad del Catálogo
-console.log('1. Integridad del Catalogo (120 Animaciones / 6 Categorias)');
-assert(animations.length === 120, 'Total de animaciones es exactamente 120', `Obtenido: ${animations.length}`);
+console.log('1. Integridad del Catalogo (180 Animaciones / 6 Categorias)');
+assert(animations.length === 180, 'Total de animaciones es exactamente 180', `Obtenido: ${animations.length}`);
 
 const categoryExpected = [
   'Patrones UI',
@@ -46,7 +46,7 @@ const categoryExpected = [
 
 categoryExpected.forEach((cat) => {
   const items = animations.filter((a) => a.category === cat);
-  assert(items.length === 20, `Categoría "${cat}" contiene exactamente 20 elementos`, `Obtenido: ${items.length}`);
+  assert(items.length === 30, `Categoría "${cat}" contiene exactamente 30 elementos`, `Obtenido: ${items.length}`);
 });
 
 // 2. Unicidad de Identificadores
@@ -176,10 +176,10 @@ if (distExists) {
   const hasPipelineBar = html.includes('pipeline-filter-bar');
   const hasBundleDock = html.includes('data-bundle-dock');
 
-  assert(cardCount === 120, 'dist/index.html renderiza las 120 tarjetas de animación', `Renderizadas: ${cardCount}`);
-  assert(codepenCount === 120, '120 botones de exportación a CodePen renderizados', `Renderizados: ${codepenCount}`);
-  assert(bezierCount === 120, '120 visualizadores Bézier interactivos renderizados', `Renderizados: ${bezierCount}`);
-  assert(bundleBtnCount === 120, '120 botones de colección de paquete renderizados', `Renderizados: ${bundleBtnCount}`);
+  assert(cardCount === 180, 'dist/index.html renderiza las 180 tarjetas de animación', `Renderizadas: ${cardCount}`);
+  assert(codepenCount === 180, '180 botones de exportación a CodePen renderizados', `Renderizados: ${codepenCount}`);
+  assert(bezierCount === 180, '180 visualizadores Bézier interactivos renderizados', `Renderizados: ${bezierCount}`);
+  assert(bundleBtnCount === 180, '180 botones de colección de paquete renderizados', `Renderizados: ${bundleBtnCount}`);
   assert(hasPipelineBar, 'Barra de filtro de pipeline (GPU/Paint/Layout) presente en el DOM');
   assert(hasBundleDock, 'Dock flotante de Mi Selección (Bundle Dock) presente en el DOM');
 }

@@ -511,3 +511,201 @@
   40% { transform: translateY(-7px); opacity: 1; background: var(--mint); }
 }
 
+
+
+/* 21. Morphing Blob Loader */
+.morphing-blob-core {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--violet), var(--mint));
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morphBlob 3s ease-in-out infinite alternate;
+}
+@keyframes morphBlob {
+  0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(0deg); }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(360deg); }
+}
+
+/* 22. Gear Spinner Double */
+.gear-assembly {
+  position: relative;
+  width: 60px;
+  height: 40px;
+}
+.gear {
+  position: absolute;
+  color: var(--violet);
+  font-size: 28px;
+  line-height: 1;
+}
+.gear.g-main { left: 4px; top: 2px; animation: gearSpinClockwise 2s linear infinite; }
+.gear.g-sub { left: 26px; top: 12px; font-size: 20px; color: var(--mint); animation: gearSpinCounter 2s linear infinite; }
+@keyframes gearSpinClockwise { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes gearSpinCounter { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+
+/* 23. Square Jelly Box */
+.jelly-box-unit {
+  width: 32px;
+  height: 32px;
+  background: var(--violet);
+  border-radius: 6px;
+  animation: jellyBoxJump 1s ease-in-out infinite;
+}
+@keyframes jellyBoxJump {
+  0% { transform: translateY(0) rotate(0deg) scale(1, 1); }
+  20% { transform: translateY(0) scale(1.3, 0.7); }
+  40% { transform: translateY(-30px) rotate(45deg) scale(0.9, 1.1); }
+  70% { transform: translateY(0) rotate(90deg) scale(1.2, 0.8); }
+  100% { transform: translateY(0) rotate(90deg) scale(1, 1); }
+}
+
+/* 24. Pulsing Concentric Circles */
+.concentric-group {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.c-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid var(--mint);
+  animation: concentricPulse 1.4s ease-in-out infinite;
+}
+.c-ring.c1 { width: 44px; height: 44px; animation-delay: 0s; }
+.c-ring.c2 { width: 30px; height: 30px; animation-delay: 0.2s; }
+.c-ring.c3 { width: 16px; height: 16px; animation-delay: 0.4s; }
+@keyframes concentricPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0.3; }
+}
+
+/* 25. Equalizer Audio Bars */
+.audio-eq-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 32px;
+}
+.eq-col {
+  width: 4px;
+  height: 28px;
+  background: var(--violet);
+  border-radius: 2px;
+  transform-origin: bottom center;
+  animation: eqBounce 800ms ease-in-out infinite alternate;
+  animation-delay: var(--b-delay, 0s);
+}
+@keyframes eqBounce {
+  0% { transform: scaleY(0.2); }
+  100% { transform: scaleY(1); }
+}
+
+/* 26. Progress Pill Stripe */
+.progress-stripe-track {
+  width: 140px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.progress-stripe-fill {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background-image: repeating-linear-gradient(45deg, var(--violet), var(--violet) 10px, #a79bfd 10px, #a79bfd 20px);
+  background-size: 28px 28px;
+  animation: stripeMove 1s linear infinite;
+}
+@keyframes stripeMove {
+  from { background-position: 0 0; }
+  to { background-position: 28px 0; }
+}
+
+/* 27. Dot Matrix Wave */
+.dot-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.m-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mint);
+  animation: matrixDotPulse 1.2s ease-in-out infinite;
+  animation-delay: var(--d-delay, 0s);
+}
+@keyframes matrixDotPulse {
+  0%, 100% { transform: scale(0.4); opacity: 0.3; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+/* 28. Hourglass Flip */
+.hourglass-icon-frame {
+  font-size: 32px;
+  color: var(--coral);
+  display: inline-block;
+  animation: hourglassRotate 1.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes hourglassRotate {
+  0% { transform: rotate(0deg); }
+  40% { transform: rotate(180deg); }
+  100% { transform: rotate(180deg); }
+}
+
+/* 29. Pendulum Cradle */
+.cradle-assembly {
+  display: inline-flex;
+  gap: 2px;
+  padding: 10px;
+}
+.cradle-ball {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--violet);
+}
+.cradle-ball.b-left {
+  animation: cradleLeft 1.2s ease-in-out infinite;
+  transform-origin: 50% -12px;
+}
+.cradle-ball.b-right {
+  animation: cradleRight 1.2s ease-in-out infinite;
+  transform-origin: 50% -12px;
+}
+@keyframes cradleLeft {
+  0%, 50% { transform: rotate(0deg); }
+  25% { transform: rotate(35deg); }
+}
+@keyframes cradleRight {
+  50%, 100% { transform: rotate(0deg); }
+  75% { transform: rotate(-35deg); }
+}
+
+/* 30. Folding Origami Cube */
+.origami-cluster {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+.ori-leaf {
+  width: 16px;
+  height: 16px;
+  background: var(--violet);
+  border-radius: 2px;
+  animation: origamiFold 1.8s ease-in-out infinite both;
+}
+.ori-leaf.l2 { animation-delay: 0.36s; background: var(--mint); }
+.ori-leaf.l3 { animation-delay: 0.72s; background: var(--coral); }
+.ori-leaf.l4 { animation-delay: 1.08s; background: #a79bfd; }
+@keyframes origamiFold {
+  0%, 10% { transform: perspective(140px) rotateX(-180deg); opacity: 0; }
+  25%, 75% { transform: perspective(140px) rotateX(0deg); opacity: 1; }
+  90%, 100% { transform: perspective(140px) rotateY(180deg); opacity: 0; }
+}
+

@@ -918,6 +918,376 @@ export const patternsAnimations = [
 @media (prefers-reduced-motion: reduce) {
   .star-glyph { animation: none !important; opacity: 1 !important; transform: none !important; }
 }`
+  },
+  {
+    id: "expandable-search",
+    name: "Barra de Búsqueda Expansiva (Expandable Search)",
+    category: "Patrones UI",
+    defaultDuration: 0.4,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)", "ease-out", "ease-in-out"],
+    properties: "width, transform, opacity",
+    renderCost: "Maquetación y Composición",
+    renderCostType: "layout",
+    costExplanation: "Transición animada de width con revelado suave de placeholder e icono de limpieza.",
+    description: "Caja de búsqueda compacta que se expande horizontalmente al interactuar facilitando el ingreso de texto.",
+    targetSelector: ".expandable-search-box",
+    previewClass: "shape--expandable-search",
+    htmlSnippet: "<div class=\"expandable-search-box\">\n  <span class=\"search-lead-icon\">&#128269;</span>\n  <input class=\"search-input-field\" type=\"text\" placeholder=\"Buscar componentes...\" />\n  <button class=\"search-close-btn\" type=\"button\">&times;</button>\n</div>",
+    previewHtml: "<div class=\"expandable-search-box is-playing\" data-motion-target>\n  <span class=\"search-lead-icon\">&#128269;</span>\n  <input class=\"search-input-field\" type=\"text\" placeholder=\"Buscar componentes...\" />\n  <button class=\"search-close-btn\" type=\"button\">&times;</button>\n</div>",
+    generateCss: (dur, timing) => `.expandable-search-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.4);
+  animation: searchExpand ${dur}s ${timing} both;
+}
+
+@keyframes searchExpand {
+  from { width: 50px; }
+  to { width: 220px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .expandable-search-box { animation: none !important; width: 220px !important; }
+}`
+  },
+  {
+    id: "otp-verification-field",
+    name: "Celdas de Código OTP (OTP Verification Field)",
+    category: "Patrones UI",
+    defaultDuration: 0.45,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)", "ease-out", "ease-in-out"],
+    properties: "transform, box-shadow, border-color",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Entrada escalonada de 4 casillas con pulso de enfoque en transform y box-shadow.",
+    description: "Conjunto de casillas para autenticación en dos pasos con salto elástico individual y cursor parpadeante.",
+    targetSelector: ".otp-container",
+    previewClass: "shape--otp-field",
+    htmlSnippet: "<div class=\"otp-container\">\n  <span class=\"otp-cell is-filled\" style=\"--cell-idx: 0;\">4</span>\n  <span class=\"otp-cell is-filled\" style=\"--cell-idx: 1;\">8</span>\n  <span class=\"otp-cell is-active\" style=\"--cell-idx: 2;\">|</span>\n  <span class=\"otp-cell\" style=\"--cell-idx: 3;\"></span>\n</div>",
+    previewHtml: "<div class=\"otp-container is-playing\" data-motion-target>\n  <span class=\"otp-cell is-filled\" style=\"--cell-idx: 0;\">4</span>\n  <span class=\"otp-cell is-filled\" style=\"--cell-idx: 1;\">8</span>\n  <span class=\"otp-cell is-active\" style=\"--cell-idx: 2;\">|</span>\n  <span class=\"otp-cell\" style=\"--cell-idx: 3;\"></span>\n</div>",
+    generateCss: (dur, timing) => `.otp-cell {
+  width: 36px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.3);
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  animation: otpPop ${dur}s ${timing} both;
+  animation-delay: calc(var(--cell-idx, 0) * 0.08s);
+}
+
+@keyframes otpPop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .otp-cell { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "segmented-pill-capsule",
+    name: "Cápsula Selectora Segmentada (Pill Capsule)",
+    category: "Patrones UI",
+    defaultDuration: 0.35,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)", "ease-out", "ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Fondo indicador deslizante animado en transform: translateX sin repintado de píxeles.",
+    description: "Selector de modo dual en cápsula con burbuja iluminada que se desliza suavemente entre opciones.",
+    targetSelector: ".capsule-switch",
+    previewClass: "shape--capsule-switch",
+    htmlSnippet: "<div class=\"capsule-switch\">\n  <span class=\"capsule-thumb\"></span>\n  <span class=\"capsule-opt is-active\">Mensual</span>\n  <span class=\"capsule-opt\">Anual -20%</span>\n</div>",
+    previewHtml: "<div class=\"capsule-switch is-playing\" data-motion-target>\n  <span class=\"capsule-thumb\"></span>\n  <span class=\"capsule-opt is-active\">Mensual</span>\n  <span class=\"capsule-opt\">Anual -20%</span>\n</div>",
+    generateCss: (dur, timing) => `.capsule-thumb {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  border-radius: 999px;
+  background: #7b6ef6;
+  box-shadow: 0 2px 8px rgba(123, 110, 246, 0.4);
+  animation: capsuleSlide ${dur}s ${timing} both;
+}
+
+@keyframes capsuleSlide {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capsule-thumb { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "credit-card-3d",
+    name: "Tarjeta Bancaria en Perspectiva 3D (Credit Card 3D)",
+    category: "Patrones UI",
+    defaultDuration: 0.6,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)", "ease-out", "ease-in-out"],
+    properties: "transform, box-shadow",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Giro en perspectiva 3D mediante rotateY y rotateX acelerado en hardware.",
+    description: "Tarjeta de crédito interactiva con brillo metalizado y balanceo suave en tres dimensiones.",
+    targetSelector: ".bank-card-3d",
+    previewClass: "shape--credit-card-3d",
+    htmlSnippet: "<div class=\"bank-card-3d\">\n  <div class=\"card-chip-gold\"></div>\n  <div class=\"card-number-dots\">&bull;&bull;&bull;&bull; 4242</div>\n  <div class=\"card-holder-name\">HUGO ADAMA</div>\n</div>",
+    previewHtml: "<div class=\"bank-card-3d is-playing\" data-motion-target>\n  <div class=\"card-chip-gold\"></div>\n  <div class=\"card-number-dots\">&bull;&bull;&bull;&bull; 4242</div>\n  <div class=\"card-holder-name\">HUGO ADAMA</div>\n</div>",
+    generateCss: (dur, timing) => `.bank-card-3d {
+  width: 170px;
+  height: 105px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1f2138 0%, #0d0e17 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  animation: cardTilt3D ${dur}s ${timing} both;
+}
+
+@keyframes cardTilt3D {
+  0% { transform: perspective(600px) rotateY(-25deg) rotateX(15deg); }
+  50% { transform: perspective(600px) rotateY(15deg) rotateX(-10deg); }
+  100% { transform: perspective(600px) rotateY(0deg) rotateX(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bank-card-3d { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "bottom-nav-dock",
+    name: "Barra de Navegación Móvil (Bottom Nav Dock)",
+    category: "Patrones UI",
+    defaultDuration: 0.4,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)", "ease-out", "ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Salto elástico de la burbuja activa de destino con rebote suave sin recálculo de layout.",
+    description: "Dock de navegación móvil con burbuja circular que salta y acoge al elemento seleccionado.",
+    targetSelector: ".bottom-dock-nav",
+    previewClass: "shape--bottom-nav-dock",
+    htmlSnippet: "<nav class=\"bottom-dock-nav\">\n  <button class=\"dock-tab is-active\" type=\"button\">&#8962;</button>\n  <button class=\"dock-tab\" type=\"button\">&#128269;</button>\n  <button class=\"dock-tab\" type=\"button\">&#9829;</button>\n  <button class=\"dock-tab\" type=\"button\">&#9881;</button>\n</nav>",
+    previewHtml: "<nav class=\"bottom-dock-nav is-playing\" data-motion-target>\n  <button class=\"dock-tab is-active\" type=\"button\">&#8962;</button>\n  <button class=\"dock-tab\" type=\"button\">&#128269;</button>\n  <button class=\"dock-tab\" type=\"button\">&#9829;</button>\n  <button class=\"dock-tab\" type=\"button\">&#9881;</button>\n</nav>",
+    generateCss: (dur, timing) => `.dock-tab.is-active {
+  color: #fff;
+  background: #7b6ef6;
+  border-radius: 50%;
+  animation: dockTabPop ${dur}s ${timing} both;
+}
+
+@keyframes dockTabPop {
+  0% { transform: scale(0.6) translateY(4px); }
+  60% { transform: scale(1.15) translateY(-4px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-tab.is-active { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "split-action-menu",
+    name: "Botón de Acción Dividida (Split Action Menu)",
+    category: "Patrones UI",
+    defaultDuration: 0.35,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)", "ease-out", "ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Despliegue del submenú en escala y traslación vertical con rotación de chevron.",
+    description: "Botón primario emparejado con selector secundario que despliega un menú desplegable coordinado.",
+    targetSelector: ".split-btn-group",
+    previewClass: "shape--split-action-menu",
+    htmlSnippet: "<div class=\"split-btn-group\">\n  <button class=\"split-main-btn\" type=\"button\">Publicar</button>\n  <button class=\"split-toggle-btn\" type=\"button\">&#9662;</button>\n  <div class=\"split-menu-dropdown\">\n    <span class=\"split-item\">Guardar borrador</span>\n    <span class=\"split-item\">Programar</span>\n  </div>\n</div>",
+    previewHtml: "<div class=\"split-btn-group is-playing\" data-motion-target>\n  <button class=\"split-main-btn\" type=\"button\">Publicar</button>\n  <button class=\"split-toggle-btn\" type=\"button\">&#9662;</button>\n  <div class=\"split-menu-dropdown\">\n    <span class=\"split-item\">Guardar borrador</span>\n    <span class=\"split-item\">Programar</span>\n  </div>\n</div>",
+    generateCss: (dur, timing) => `.split-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 140px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.3);
+  border-radius: 8px;
+  padding: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  animation: splitMenuReveal ${dur}s ${timing} both;
+}
+
+@keyframes splitMenuReveal {
+  from { opacity: 0; transform: translateY(-8px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .split-menu-dropdown { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "status-beacon-banner",
+    name: "Banner de Alerta con Faro Lumínico (Status Beacon)",
+    category: "Patrones UI",
+    defaultDuration: 0.5,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)", "ease-out", "ease-in-out"],
+    properties: "transform, opacity, box-shadow",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Deslizamiento superior con pulso continuo de halo concéntrico en GPU.",
+    description: "Cinta informativa de estado de servidor con indicador activo parpadeante y entrada en cortina.",
+    targetSelector: ".beacon-banner-strip",
+    previewClass: "shape--status-beacon-banner",
+    htmlSnippet: "<div class=\"beacon-banner-strip\">\n  <span class=\"beacon-pulse-core\"></span>\n  <span class=\"beacon-text\">Todos los sistemas operativos</span>\n</div>",
+    previewHtml: "<div class=\"beacon-banner-strip is-playing\" data-motion-target>\n  <span class=\"beacon-pulse-core\"></span>\n  <span class=\"beacon-text\">Todos los sistemas operativos</span>\n</div>",
+    generateCss: (dur, timing) => `.beacon-banner-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #4ade80;
+  font-size: 11px;
+  font-weight: 700;
+  animation: bannerSlideIn ${dur}s ${timing} both;
+}
+
+@keyframes bannerSlideIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beacon-banner-strip { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "dialog-surface-pop",
+    name: "Ventana Modal con Rebote de Superficie (Dialog Surface)",
+    category: "Patrones UI",
+    defaultDuration: 0.45,
+    defaultTiming: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    timingOptions: ["cubic-bezier(0.34, 1.56, 0.64, 1)", "ease-out", "ease-in-out"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Escalado elástico con origen centrado ejecutado en capa de composición independiente.",
+    description: "Apertura modal con efecto elástico y ligera inclinación de perspectiva que centra la atención del usuario.",
+    targetSelector: ".dialog-card-surface",
+    previewClass: "shape--dialog-surface-pop",
+    htmlSnippet: "<div class=\"dialog-card-surface\">\n  <div class=\"dialog-head-row\">\n    <strong>¿Confirmar acción?</strong>\n  </div>\n  <p class=\"dialog-msg\">Esta operación sincronizará tu catálogo.</p>\n  <div class=\"dialog-btn-row\">\n    <button class=\"dialog-btn-ok\" type=\"button\">Continuar</button>\n  </div>\n</div>",
+    previewHtml: "<div class=\"dialog-card-surface is-playing\" data-motion-target>\n  <div class=\"dialog-head-row\">\n    <strong>¿Confirmar acción?</strong>\n  </div>\n  <p class=\"dialog-msg\">Esta operación sincronizará tu catálogo.</p>\n  <div class=\"dialog-btn-row\">\n    <button class=\"dialog-btn-ok\" type=\"button\">Continuar</button>\n  </div>\n</div>",
+    generateCss: (dur, timing) => `.dialog-card-surface {
+  width: 190px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #141523;
+  border: 1px solid rgba(123, 110, 246, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  animation: dialogScalePop ${dur}s ${timing} both;
+}
+
+@keyframes dialogScalePop {
+  0% { opacity: 0; transform: scale(0.8) translateY(12px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog-card-surface { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "inline-alert-dismiss",
+    name: "Alerta Contextual con Desvanecimiento (Inline Alert)",
+    category: "Patrones UI",
+    defaultDuration: 0.4,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)", "ease-out", "ease-in-out"],
+    properties: "transform, opacity, max-height",
+    renderCost: "Maquetación y Composición",
+    renderCostType: "layout",
+    costExplanation: "Transición combinada de opacity y max-height para un plegado suave.",
+    description: "Notificación en línea que entra lateralmente y se retrae armónicamente sin alterar el flujo visual.",
+    targetSelector: ".inline-alert-box",
+    previewClass: "shape--inline-alert-dismiss",
+    htmlSnippet: "<div class=\"inline-alert-box\">\n  <span class=\"alert-icon-sym\">&#9888;</span>\n  <div class=\"alert-content-wrap\">\n    <strong>Cambios guardados</strong>\n    <small>Versión 2.4 activa</small>\n  </div>\n  <span class=\"alert-dismiss-x\">&times;</span>\n</div>",
+    previewHtml: "<div class=\"inline-alert-box is-playing\" data-motion-target>\n  <span class=\"alert-icon-sym\">&#9888;</span>\n  <div class=\"alert-content-wrap\">\n    <strong>Cambios guardados</strong>\n    <small>Versión 2.4 activa</small>\n  </div>\n  <span class=\"alert-dismiss-x\">&times;</span>\n</div>",
+    generateCss: (dur, timing) => `.inline-alert-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(234, 179, 8, 0.12);
+  border: 1px solid rgba(234, 179, 8, 0.35);
+  color: #facc15;
+  animation: alertSlideIn ${dur}s ${timing} both;
+}
+
+@keyframes alertSlideIn {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inline-alert-box { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
+  },
+  {
+    id: "progress-stepper-line",
+    name: "Barra de Pasos con Avance Coordinado (Progress Stepper)",
+    category: "Patrones UI",
+    defaultDuration: 0.55,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)", "ease-out", "ease-in-out"],
+    properties: "transform, background-color",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Línea conectora escalada en scaleX(1) con origen en la izquierda y encendido de nodos.",
+    description: "Visualizador de progreso de formulario multipaso con animación secuencial de cableado e hitos.",
+    targetSelector: ".stepper-track-wrap",
+    previewClass: "shape--stepper-progress-line",
+    htmlSnippet: "<div class=\"stepper-track-wrap\">\n  <span class=\"step-circle is-done\">&#10003;</span>\n  <div class=\"step-fill-line\"></div>\n  <span class=\"step-circle is-current\">2</span>\n  <div class=\"step-empty-line\"></div>\n  <span class=\"step-circle\">3</span>\n</div>",
+    previewHtml: "<div class=\"stepper-track-wrap is-playing\" data-motion-target>\n  <span class=\"step-circle is-done\">&#10003;</span>\n  <div class=\"step-fill-line\"></div>\n  <span class=\"step-circle is-current\">2</span>\n  <div class=\"step-empty-line\"></div>\n  <span class=\"step-circle\">3</span>\n</div>",
+    generateCss: (dur, timing) => `.step-fill-line {
+  flex: 1;
+  height: 3px;
+  background: #7b6ef6;
+  transform-origin: left center;
+  animation: stepperLineGrow ${dur}s ${timing} both;
+}
+
+@keyframes stepperLineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-fill-line { animation: none !important; transform: scaleX(1) !important; }
+}`
   }
 ];
-

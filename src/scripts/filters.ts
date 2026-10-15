@@ -5,7 +5,7 @@ import { showToast } from './toast';
 export function initFilters(cards: HTMLElement[]): void {
   // 1. Configuración de Paginación y Preferencias Persistentes
   const savedPageSize = localStorage.getItem('css_motion_page_size');
-  let itemsPerPage = savedPageSize === 'all' ? 120 : parseInt(savedPageSize || '6', 10);
+  let itemsPerPage = savedPageSize === 'all' ? 180 : parseInt(savedPageSize || '6', 10);
   if (isNaN(itemsPerPage) || itemsPerPage <= 0) itemsPerPage = 6;
 
   let currentPage = 1;
@@ -213,7 +213,7 @@ export function initFilters(cards: HTMLElement[]): void {
     pageSizeButtons.forEach((btn) => {
       const sizeVal = btn.dataset.pageSize;
       const isSelected =
-        (sizeVal === 'all' && itemsPerPage >= 120) ||
+        (sizeVal === 'all' && itemsPerPage >= 180) ||
         parseInt(sizeVal || '0', 10) === itemsPerPage;
       btn.classList.toggle('is-active', isSelected);
       btn.setAttribute('aria-pressed', String(isSelected));
@@ -306,7 +306,7 @@ export function initFilters(cards: HTMLElement[]): void {
     button.addEventListener('click', () => {
       const val = button.dataset.pageSize;
       if (val === 'all') {
-        itemsPerPage = 120;
+        itemsPerPage = 180;
         localStorage.setItem('css_motion_page_size', 'all');
       } else {
         const parsed = parseInt(val || '6', 10);

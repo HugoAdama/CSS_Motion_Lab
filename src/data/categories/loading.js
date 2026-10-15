@@ -919,6 +919,363 @@ export const loadingAnimations = [
 @media (prefers-reduced-motion: reduce) {
   .dot-pulse { animation: none !important; opacity: 1 !important; transform: none !important; }
 }`
+  },
+  {
+    id: "morphing-blob-loader",
+    name: "Gota Líquida Amorfa (Morphing Blob)",
+    category: "Carga",
+    defaultDuration: 3,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "border-radius, transform",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Interpolación continua de border-radius orgánico con rotación lenta de 360 grados.",
+    description: "Forma líquida biomórfica en rotación constante que simula una gota flotante en gravedad cero.",
+    targetSelector: ".morphing-blob-core",
+    previewClass: "shape--morphing-blob-loader",
+    htmlSnippet: "<div class=\"morphing-blob-core\"></div>",
+    previewHtml: "<div class=\"morphing-blob-core is-playing\" data-motion-target></div>",
+    generateCss: (dur, timing) => `.morphing-blob-core {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #7b6ef6, #3ddda8);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morphBlob ${dur}s ${timing} infinite alternate;
+}
+
+@keyframes morphBlob {
+  0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(0deg); }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .morphing-blob-core { animation: none !important; border-radius: 50% !important; }
+}`
+  },
+  {
+    id: "gear-spinner-double",
+    name: "Engranajes Mecánicos Duales (Gear Spinner)",
+    category: "Carga",
+    defaultDuration: 2,
+    defaultTiming: "linear",
+    timingOptions: ["linear","ease-in-out","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "transform (rotate)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Rotación coordinada de engranaje primario horario y secundario antihorario sin reflow.",
+    description: "Mecanismo de relojería de precisión con dos ruedas dentadas interconectadas para procesos de fondo.",
+    targetSelector: ".gear-assembly",
+    previewClass: "shape--gear-spinner-double",
+    htmlSnippet: "<div class=\"gear-assembly\">\n  <div class=\"gear g-main\">&#9881;</div>\n  <div class=\"gear g-sub\">&#9881;</div>\n</div>",
+    previewHtml: "<div class=\"gear-assembly is-playing\" data-motion-target>\n  <div class=\"gear g-main\">&#9881;</div>\n  <div class=\"gear g-sub\">&#9881;</div>\n</div>",
+    generateCss: (dur, timing) => `.gear.g-main {
+  animation: gearSpinClockwise ${dur}s ${timing} infinite;
+}
+
+.gear.g-sub {
+  animation: gearSpinCounter ${dur}s ${timing} infinite;
+}
+
+@keyframes gearSpinClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gearSpinCounter {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gear { animation: none !important; }
+}`
+  },
+  {
+    id: "square-jelly-box",
+    name: "Cubo Saltarín Gelatinoso (Jelly Box)",
+    category: "Carga",
+    defaultDuration: 1,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","cubic-bezier(0.34, 1.56, 0.64, 1)","linear"],
+    properties: "transform (translate, rotate, scale)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Simulación de impacto elástico con deformación de escala al tocar el suelo.",
+    description: "Cubo minimalista que salta, gira 90 grados en el aire y se comprime elásticamente al descender.",
+    targetSelector: ".jelly-box-unit",
+    previewClass: "shape--square-jelly-box",
+    htmlSnippet: "<div class=\"jelly-box-unit\"></div>",
+    previewHtml: "<div class=\"jelly-box-unit is-playing\" data-motion-target></div>",
+    generateCss: (dur, timing) => `.jelly-box-unit {
+  width: 32px;
+  height: 32px;
+  background: #7b6ef6;
+  border-radius: 6px;
+  animation: jellyBoxJump ${dur}s ${timing} infinite;
+}
+
+@keyframes jellyBoxJump {
+  0% { transform: translateY(0) rotate(0deg) scale(1, 1); }
+  20% { transform: translateY(0) scale(1.3, 0.7); }
+  40% { transform: translateY(-30px) rotate(45deg) scale(0.9, 1.1); }
+  70% { transform: translateY(0) rotate(90deg) scale(1.2, 0.8); }
+  100% { transform: translateY(0) rotate(90deg) scale(1, 1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jelly-box-unit { animation: none !important; transform: none !important; }
+}`
+  },
+  {
+    id: "pulsing-concentric-circles",
+    name: "Círculos Concéntricos en Fase (Concentric Pulse)",
+    category: "Carga",
+    defaultDuration: 1.4,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "transform (scale), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Ondas circulares con retrasos desfasados de un tercio de ciclo en GPU.",
+    description: "Tres aros concéntricos que respiran en alternancia creando un pulso meditativo de espera.",
+    targetSelector: ".concentric-group",
+    previewClass: "shape--pulsing-concentric-circles",
+    htmlSnippet: "<div class=\"concentric-group\">\n  <span class=\"c-ring c1\"></span>\n  <span class=\"c-ring c2\"></span>\n  <span class=\"c-ring c3\"></span>\n</div>",
+    previewHtml: "<div class=\"concentric-group is-playing\" data-motion-target>\n  <span class=\"c-ring c1\"></span>\n  <span class=\"c-ring c2\"></span>\n  <span class=\"c-ring c3\"></span>\n</div>",
+    generateCss: (dur, timing) => `.c-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid #3ddda8;
+  animation: concentricPulse ${dur}s ${timing} infinite;
+}
+
+.c-ring.c1 { width: 44px; height: 44px; animation-delay: 0s; }
+.c-ring.c2 { width: 30px; height: 30px; animation-delay: 0.2s; }
+.c-ring.c3 { width: 16px; height: 16px; animation-delay: 0.4s; }
+
+@keyframes concentricPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-ring { animation: none !important; }
+}`
+  },
+  {
+    id: "equalizer-audio-bars",
+    name: "Barras de Espectro Acústico (Audio Equalizer)",
+    category: "Carga",
+    defaultDuration: 0.8,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "transform (scaleY)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Escalamiento vertical scaleY() con transform-origin: bottom sin alterar ancho ni posición.",
+    description: "Indicador rítmico de 5 barras con variaciones dinámicas para reproducción o procesamiento de audio.",
+    targetSelector: ".audio-eq-bars",
+    previewClass: "shape--equalizer-audio-bars",
+    htmlSnippet: "<div class=\"audio-eq-bars\">\n  <span class=\"eq-col\" style=\"--b-delay: 0s;\"></span>\n  <span class=\"eq-col\" style=\"--b-delay: 0.2s;\"></span>\n  <span class=\"eq-col\" style=\"--b-delay: 0.4s;\"></span>\n  <span class=\"eq-col\" style=\"--b-delay: 0.1s;\"></span>\n  <span class=\"eq-col\" style=\"--b-delay: 0.3s;\"></span>\n</div>",
+    previewHtml: "<div class=\"audio-eq-bars is-playing\" data-motion-target>\n  <span class=\"eq-col\" style=\"--b-delay: 0s;\"></span>\n  <span class=\"eq-col\" style=\"--b-delay: 0.2s;\"></span>\n  <span class=\"eq-col\" style=\"--b-delay: 0.4s;\"></span>\n  <span class=\"eq-col\" style=\"--b-delay: 0.1s;\"></span>\n  <span class=\"eq-col\" style=\"--b-delay: 0.3s;\"></span>\n</div>",
+    generateCss: (dur, timing) => `.eq-col {
+  width: 4px;
+  height: 28px;
+  background: #7b6ef6;
+  border-radius: 2px;
+  transform-origin: bottom center;
+  animation: eqBounce ${dur}s ${timing} infinite alternate;
+  animation-delay: var(--b-delay, 0s);
+}
+
+@keyframes eqBounce {
+  0% { transform: scaleY(0.2); }
+  100% { transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eq-col { animation: none !important; transform: scaleY(0.6) !important; }
+}`
+  },
+  {
+    id: "progress-pill-stripe",
+    name: "Franja de Progreso Infinita (Stripe Pill)",
+    category: "Carga",
+    defaultDuration: 1,
+    defaultTiming: "linear",
+    timingOptions: ["linear","ease-in-out","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "background-position",
+    renderCost: "Repintado de fondo",
+    renderCostType: "paint",
+    costExplanation: "Desplazamiento horizontal de trama rayada repetitiva en background-position.",
+    description: "Barra de carga tipo píldora con franjas diagonales en desplazamiento continuo hacia la derecha.",
+    targetSelector: ".progress-stripe-track",
+    previewClass: "shape--progress-pill-stripe",
+    htmlSnippet: "<div class=\"progress-stripe-track\">\n  <div class=\"progress-stripe-fill\"></div>\n</div>",
+    previewHtml: "<div class=\"progress-stripe-track is-playing\" data-motion-target>\n  <div class=\"progress-stripe-fill\"></div>\n</div>",
+    generateCss: (dur, timing) => `.progress-stripe-fill {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background-image: repeating-linear-gradient(45deg, #7b6ef6, #7b6ef6 10px, #a79bfd 10px, #a79bfd 20px);
+  background-size: 28px 28px;
+  animation: stripeMove ${dur}s ${timing} infinite;
+}
+
+@keyframes stripeMove {
+  from { background-position: 0 0; }
+  to { background-position: 28px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-stripe-fill { animation: none !important; }
+}`
+  },
+  {
+    id: "dot-matrix-wave",
+    name: "Onda de Matriz de Puntos (Dot Matrix Wave)",
+    category: "Carga",
+    defaultDuration: 1.2,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "transform (scale), opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Ondulación matricial 3x3 sincronizada mediante desfase de índices matriciales.",
+    description: "Rejilla de 9 micro-esferas luminosas que se encienden en una onda sinusoidal fluida.",
+    targetSelector: ".dot-matrix-grid",
+    previewClass: "shape--dot-matrix-wave",
+    htmlSnippet: "<div class=\"dot-matrix-grid\">\n  <span class=\"m-dot\" style=\"--d-delay: 0.1s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.2s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.3s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.2s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.3s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.4s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.3s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.4s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.5s;\"></span>\n</div>",
+    previewHtml: "<div class=\"dot-matrix-grid is-playing\" data-motion-target>\n  <span class=\"m-dot\" style=\"--d-delay: 0.1s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.2s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.3s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.2s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.3s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.4s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.3s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.4s;\"></span>\n  <span class=\"m-dot\" style=\"--d-delay: 0.5s;\"></span>\n</div>",
+    generateCss: (dur, timing) => `.m-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3ddda8;
+  animation: matrixDotPulse ${dur}s ${timing} infinite;
+  animation-delay: var(--d-delay, 0s);
+}
+
+@keyframes matrixDotPulse {
+  0%, 100% { transform: scale(0.4); opacity: 0.3; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m-dot { animation: none !important; opacity: 0.7 !important; }
+}`
+  },
+  {
+    id: "hourglass-flip",
+    name: "Reloj de Arena Geométrico (Hourglass Flip)",
+    category: "Carga",
+    defaultDuration: 1.6,
+    defaultTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+    timingOptions: ["cubic-bezier(0.16, 1, 0.3, 1)","ease-in-out","linear"],
+    properties: "transform (rotate)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Inversión rotacional en 180deg con parada fija en cada semiciclo.",
+    description: "Icono de reloj de arena que rota pausadamente simulando el reinicio del ciclo de tiempo.",
+    targetSelector: ".hourglass-icon-frame",
+    previewClass: "shape--hourglass-flip",
+    htmlSnippet: "<div class=\"hourglass-icon-frame\">&#9203;</div>",
+    previewHtml: "<div class=\"hourglass-icon-frame is-playing\" data-motion-target>&#9203;</div>",
+    generateCss: (dur, timing) => `.hourglass-icon-frame {
+  font-size: 32px;
+  color: #ffbd2e;
+  display: inline-block;
+  animation: hourglassRotate ${dur}s ${timing} infinite;
+}
+
+@keyframes hourglassRotate {
+  0% { transform: rotate(0deg); }
+  40% { transform: rotate(180deg); }
+  100% { transform: rotate(180deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hourglass-icon-frame { animation: none !important; }
+}`
+  },
+  {
+    id: "pendulum-cradle",
+    name: "Péndulo de Newton (Newton Cradle)",
+    category: "Carga",
+    defaultDuration: 1.2,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "transform (rotate)",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Impacto físico entre esferas extremas mediante balanceo desfasado en transform-origin.",
+    description: "Recreación del clásico juguete físico donde las esferas de los bordes rebotan por turnos.",
+    targetSelector: ".cradle-assembly",
+    previewClass: "shape--pendulum-cradle",
+    htmlSnippet: "<div class=\"cradle-assembly\">\n  <span class=\"cradle-ball b-left\"></span>\n  <span class=\"cradle-ball\"></span>\n  <span class=\"cradle-ball\"></span>\n  <span class=\"cradle-ball b-right\"></span>\n</div>",
+    previewHtml: "<div class=\"cradle-assembly is-playing\" data-motion-target>\n  <span class=\"cradle-ball b-left\"></span>\n  <span class=\"cradle-ball\"></span>\n  <span class=\"cradle-ball\"></span>\n  <span class=\"cradle-ball b-right\"></span>\n</div>",
+    generateCss: (dur, timing) => `.cradle-ball.b-left {
+  animation: cradleLeft ${dur}s ${timing} infinite;
+  transform-origin: top center;
+}
+
+.cradle-ball.b-right {
+  animation: cradleRight ${dur}s ${timing} infinite;
+  transform-origin: top center;
+}
+
+@keyframes cradleLeft {
+  0%, 50% { transform: rotate(0deg); }
+  25% { transform: rotate(35deg); }
+}
+
+@keyframes cradleRight {
+  50%, 100% { transform: rotate(0deg); }
+  75% { transform: rotate(-35deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cradle-ball { animation: none !important; }
+}`
+  },
+  {
+    id: "folding-origami-cube",
+    name: "Cubo Plegable Origami (Folding Cube)",
+    category: "Carga",
+    defaultDuration: 1.8,
+    defaultTiming: "ease-in-out",
+    timingOptions: ["ease-in-out","linear","cubic-bezier(0.16, 1, 0.3, 1)"],
+    properties: "transform, opacity",
+    renderCost: "Favorables para composición",
+    renderCostType: "composite",
+    costExplanation: "Plegado de 4 cuadrantes en perspectiva 3D mediante rotateX y rotateY coordinados.",
+    description: "Estructura geométrica cuádruple que colapsa y se despliega como una figura de origami.",
+    targetSelector: ".origami-cluster",
+    previewClass: "shape--folding-origami-cube",
+    htmlSnippet: "<div class=\"origami-cluster\">\n  <span class=\"ori-leaf l1\"></span>\n  <span class=\"ori-leaf l2\"></span>\n  <span class=\"ori-leaf l3\"></span>\n  <span class=\"ori-leaf l4\"></span>\n</div>",
+    previewHtml: "<div class=\"origami-cluster is-playing\" data-motion-target>\n  <span class=\"ori-leaf l1\"></span>\n  <span class=\"ori-leaf l2\"></span>\n  <span class=\"ori-leaf l3\"></span>\n  <span class=\"ori-leaf l4\"></span>\n</div>",
+    generateCss: (dur, timing) => `.ori-leaf {
+  width: 16px;
+  height: 16px;
+  background: #7b6ef6;
+  border-radius: 2px;
+  animation: origamiFold ${dur}s ${timing} infinite both;
+}
+
+.ori-leaf.l2 { animation-delay: calc(${dur}s * 0.2); background: #3ddda8; }
+.ori-leaf.l3 { animation-delay: calc(${dur}s * 0.4); background: #ff6e65; }
+.ori-leaf.l4 { animation-delay: calc(${dur}s * 0.6); background: #a79bfd; }
+
+@keyframes origamiFold {
+  0%, 10% { transform: perspective(140px) rotateX(-180deg); opacity: 0; }
+  25%, 75% { transform: perspective(140px) rotateX(0deg); opacity: 1; }
+  90%, 100% { transform: perspective(140px) rotateY(180deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ori-leaf { animation: none !important; opacity: 1 !important; transform: none !important; }
+}`
   }
 ];
-
