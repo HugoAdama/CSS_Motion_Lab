@@ -73,7 +73,7 @@ export const patternsAnimations = [
   display: flex;
   align-items: center;
   gap: 12px;
-  animation: toastCycle ${dur}s ${timing} both;
+  animation: toastCycle ${dur}s ${timing} infinite;
 }
 
 @keyframes toastCycle {

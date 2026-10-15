@@ -62,7 +62,7 @@
   background: var(--surface-card);
   border: 1px solid var(--line-highlight);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
-  animation: toastCycle 3.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: toastCycle 3.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 .toast-badge {
   font-size: 10px;

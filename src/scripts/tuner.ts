@@ -106,6 +106,14 @@ export function updateCardParameters(card: HTMLElement, animMap: Map<string, Ani
   if (durationLabel) {
     durationLabel.textContent = `${duration.toFixed(2)}s`;
   }
+  const quickDuration = card.querySelector<HTMLElement>('[data-quick-duration]');
+  const quickTiming = card.querySelector<HTMLElement>('[data-quick-timing]');
+  if (quickDuration) {
+    quickDuration.textContent = `${duration.toFixed(2)}s`;
+  }
+  if (quickTiming) {
+    quickTiming.textContent = timing;
+  }
   if (staggerLabel && staggerInput) {
     staggerLabel.textContent = `${Math.round(staggerDelay * 1000)}ms`;
   }

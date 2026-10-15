@@ -184,10 +184,12 @@ export function initInteractions(): void {
     if (tunerToggleBtn) {
       const card = tunerToggleBtn.closest<HTMLElement>('[data-animation-card]');
       const tuner = card?.querySelector<HTMLElement>('[data-card-tuner]');
-      if (tuner) {
+      if (tuner && card) {
         const isOpen = tuner.classList.toggle('is-manually-open');
-        tunerToggleBtn.classList.toggle('is-active', isOpen);
-        tunerToggleBtn.setAttribute('aria-expanded', String(isOpen));
+        card.querySelectorAll<HTMLElement>('[data-toggle-tuner-card]').forEach((btn) => {
+          btn.classList.toggle('is-active', isOpen);
+          btn.setAttribute('aria-expanded', String(isOpen));
+        });
       }
       return;
     }

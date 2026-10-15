@@ -163,108 +163,134 @@ const initialTailwind = `// tailwind.config.js — Configuración para ${animati
       </div>
     </div>
 
-    <!-- Barra de acciones unificada en una sola fila equilibrada -->
+    <!-- Barra de acciones rediseñada en 2 niveles (Modern Studio) -->
     <div class="animation-card__actions">
-      <div class="actions-left">
-        <button class="button button--replay button--primary-action" type="button" data-replay aria-label={`Reproducir animación ${animation.name}`}>
-          <span class="replay-icon" aria-hidden="true">&#x21bb;</span>
-          <span>Reproducir</span>
-        </button>
+      <!-- Fila 1: Reproducción, Calibrador y Código -->
+      <div class="actions-primary-row">
+        <div class="playback-controls">
+          <button class="button button--replay button--primary-action" type="button" data-replay aria-label={`Reproducir animación ${animation.name}`} title="Reproducir animación">
+            <svg class="replay-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            <span class="replay-label">Reproducir</span>
+          </button>
 
-        <button class="button button--subtle button--pause" type="button" data-pause-toggle title="Pausar o reanudar animación" aria-label={`Pausar animación ${animation.name}`}>
-          <span class="pause-icon" aria-hidden="true">⏸</span>
-          <span class="pause-text sr-only">Pausar</span>
-        </button>
+          <button class="button button--subtle button--pause" type="button" data-pause-toggle title="Pausar o reanudar animación" aria-label={`Pausar animación ${animation.name}`}>
+            <span class="pause-icon" aria-hidden="true">⏸</span>
+            <span class="pause-text sr-only">Pausar</span>
+          </button>
+        </div>
+
+        <div class="panel-toggles">
+          <button
+            class="button button--tuner-toggle"
+            type="button"
+            data-toggle-tuner-card
+            title="Ajustar parámetros y curva Bézier"
+            aria-label={`Ajustar parámetros de ${animation.name}`}
+            aria-expanded="false"
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="4" y1="21" x2="4" y2="14"></line>
+              <line x1="4" y1="10" x2="4" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12" y2="3"></line>
+              <line x1="20" y1="21" x2="20" y2="16"></line>
+              <line x1="20" y1="12" x2="20" y2="3"></line>
+              <line x1="1" y1="14" x2="7" y2="14"></line>
+              <line x1="9" y1="8" x2="15" y2="8"></line>
+              <line x1="17" y1="16" x2="23" y2="16"></line>
+            </svg>
+            <span>Calibrar</span>
+          </button>
+
+          <button class="button button--code-pill" type="button" data-toggle-code aria-expanded="false" aria-label={`Ver código de ${animation.name}`} title="Ver código CSS, HTML y Tailwind">
+            <svg class="code-btn-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            <span>Código</span>
+            <span class="chevron-icon" aria-hidden="true">⌄</span>
+          </button>
+        </div>
       </div>
 
-      <div class="actions-right">
-        <!-- Botón Favorito -->
+      <!-- Fila 2: Indicador de timing y herramientas de exportación -->
+      <div class="actions-secondary-row">
         <button
-          class="action-icon-btn action-icon-btn--favorite"
-          type="button"
-          data-favorite-toggle
-          title="Guardar en favoritos"
-          aria-label={`Guardar ${animation.name} en favoritos`}
-        >
-          <svg class="star-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-          </svg>
-          <span class="sr-only">Favorito</span>
-        </button>
-
-        <!-- Botón Copiar Completo -->
-        <button
-          class="action-icon-btn"
-          type="button"
-          data-copy-full
-          title="Copiar HTML y CSS coordinados"
-          aria-label={`Copiar ejemplo completo de ${animation.name}`}
-        >
-          <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-          <span class="sr-only" data-copy-full-text>Copiar</span>
-        </button>
-
-        <!-- Botón 1-clic: Abrir en CodePen -->
-        <button
-          class="action-icon-btn"
-          type="button"
-          data-open-codepen
-          title="Abrir este ejemplo en CodePen"
-          aria-label={`Abrir ${animation.name} en CodePen`}
-        >
-          <svg class="codepen-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
-            <line x1="12" y1="22" x2="12" y2="15.5"></line>
-            <polyline points="22 8.5 12 15.5 2 8.5"></polyline>
-            <polyline points="2 15.5 12 8.5 22 15.5"></polyline>
-            <line x1="12" y1="2" x2="12" y2="8.5"></line>
-          </svg>
-          <span class="sr-only">CodePen</span>
-        </button>
-
-        <!-- Botón Colección / Bundle Builder -->
-        <button
-          class="action-icon-btn action-icon-btn--bundle"
-          type="button"
-          data-bundle-toggle
-          title="Añadir a mi paquete CSS personalizado"
-          aria-label={`Añadir ${animation.name} a mi paquete`}
-        >
-          <span class="bundle-check-icon" aria-hidden="true">+</span>
-          <span class="sr-only bundle-btn-text">Paquete</span>
-        </button>
-
-        <!-- Botón Calibrar parámetros -->
-        <button
-          class="action-icon-btn action-icon-btn--tuner"
+          class="quick-timing-pill"
           type="button"
           data-toggle-tuner-card
-          title="Ajustar parámetros y curva Bézier"
-          aria-label={`Ajustar parámetros de ${animation.name}`}
+          title="Haz clic para calibrar duración y curva Bézier"
+          aria-label={`Calibrar ${animation.name}: ${animation.defaultDuration}s ${animation.defaultTiming}`}
         >
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="4" y1="21" x2="4" y2="14"></line>
-            <line x1="4" y1="10" x2="4" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12" y2="3"></line>
-            <line x1="20" y1="21" x2="20" y2="16"></line>
-            <line x1="20" y1="12" x2="20" y2="3"></line>
-            <line x1="1" y1="14" x2="7" y2="14"></line>
-            <line x1="9" y1="8" x2="15" y2="8"></line>
-            <line x1="17" y1="16" x2="23" y2="16"></line>
+          <svg class="clock-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
           </svg>
-          <span class="sr-only">Calibrar</span>
+          <span class="quick-timing-duration" data-quick-duration>{animation.defaultDuration}s</span>
+          <span class="quick-timing-sep">•</span>
+          <span class="quick-timing-curve" data-quick-timing>{animation.defaultTiming}</span>
         </button>
 
-        <!-- Botón Ver Código -->
-        <button class="button button--code-pill" type="button" data-toggle-code aria-expanded="false" aria-label={`Ver código de ${animation.name}`}>
-          <svg class="code-btn-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="16 18 22 12 16 6"></polyline>
-            <polyline points="8 6 2 12 8 18"></polyline>
-          </svg>
-          <span>Código</span>
-          <span class="chevron-icon" aria-hidden="true">⌄</span>
-        </button>
+        <div class="toolbar-icons">
+          <!-- Botón Favorito -->
+          <button
+            class="action-icon-btn action-icon-btn--favorite"
+            type="button"
+            data-favorite-toggle
+            title="Guardar en favoritos"
+            aria-label={`Guardar ${animation.name} en favoritos`}
+          >
+            <svg class="star-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span class="sr-only">Favorito</span>
+          </button>
+
+          <!-- Botón Copiar Completo -->
+          <button
+            class="action-icon-btn"
+            type="button"
+            data-copy-full
+            title="Copiar HTML y CSS coordinados"
+            aria-label={`Copiar ejemplo completo de ${animation.name}`}
+          >
+            <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span class="sr-only" data-copy-full-text>Copiar</span>
+          </button>
+
+          <!-- Botón 1-clic: Abrir en CodePen -->
+          <button
+            class="action-icon-btn action-icon-btn--codepen"
+            type="button"
+            data-open-codepen
+            title="Abrir este ejemplo en CodePen"
+            aria-label={`Abrir ${animation.name} en CodePen`}
+          >
+            <svg class="codepen-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
+              <line x1="12" y1="22" x2="12" y2="15.5"></line>
+              <polyline points="22 8.5 12 15.5 2 8.5"></polyline>
+              <polyline points="2 15.5 12 8.5 22 15.5"></polyline>
+              <line x1="12" y1="2" x2="12" y2="8.5"></line>
+            </svg>
+            <span class="sr-only">CodePen</span>
+          </button>
+
+          <!-- Botón Colección / Bundle Builder -->
+          <button
+            class="action-icon-btn action-icon-btn--bundle"
+            type="button"
+            data-bundle-toggle
+            title="Añadir a mi paquete CSS personalizado"
+            aria-label={`Añadir ${animation.name} a mi paquete`}
+          >
+            <span class="bundle-check-icon" aria-hidden="true">+</span>
+            <span class="sr-only bundle-btn-text">Paquete</span>
+          </button>
+        </div>
       </div>
     </div>
 
