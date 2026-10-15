@@ -64,15 +64,12 @@
     grid-template-columns: 1fr;
   }
   .animation-card__actions {
-    flex-direction: column;
-    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 8px;
   }
-  .button--quiet,
-  .button--copy-full,
-  .button--code,
-  .button--toggle-accordion,
-  .button--toggle-flip {
-    width: 100%;
+  .actions-left,
+  .actions-right {
+    flex-wrap: wrap;
   }
 
   .footer-inner {

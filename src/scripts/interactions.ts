@@ -179,13 +179,15 @@ export function initInteractions(): void {
       return;
     }
 
-    // 7. Alternar calibrador individual en modo compacto
+    // 7. Alternar calibrador individual
     const tunerToggleBtn = target.closest<HTMLButtonElement>('[data-toggle-tuner-card]');
     if (tunerToggleBtn) {
       const card = tunerToggleBtn.closest<HTMLElement>('[data-animation-card]');
       const tuner = card?.querySelector<HTMLElement>('[data-card-tuner]');
       if (tuner) {
-        tuner.classList.toggle('is-manually-open');
+        const isOpen = tuner.classList.toggle('is-manually-open');
+        tunerToggleBtn.classList.toggle('is-active', isOpen);
+        tunerToggleBtn.setAttribute('aria-expanded', String(isOpen));
       }
       return;
     }
