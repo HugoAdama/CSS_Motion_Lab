@@ -76,9 +76,16 @@
   }
 
   .footer-inner {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .footer-credits-col {
+    justify-content: flex-start;
+  }
+
+  .footer-actions-col {
     align-items: flex-start;
-    gap: 14px;
   }
 
   .pagination-bar {

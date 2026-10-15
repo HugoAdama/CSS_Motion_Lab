@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="cml-g1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3ddda8" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="cml-g2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+    <linearGradient id="cml-g3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+  </defs>
+  <rect x="5" y="10" width="5" height="16" rx="2.5" fill="url(#cml-g1)" />
+  <rect x="13.5" y="4" width="5" height="24" rx="2.5" fill="url(#cml-g2)" />
+  <rect x="22" y="13" width="5" height="13" rx="2.5" fill="url(#cml-g3)" />
+</svg>

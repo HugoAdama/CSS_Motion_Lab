@@ -10,7 +10,7 @@ const { categories, categoryCounts, totalCount } = Astro.props;
 ---
 
 <div class="section-heading">
-  <div>
+  <div class="section-heading-text">
     <div class="section-badge">CATÁLOGO INTERACTIVO</div>
     <h2 id="library-title">Galería de Efectos y Patrones UI</h2>
     <p class="section-subtitle">Calibra duración, curvas Bézier y retrasos escalonados. Inspecciona el impacto en la composición del navegador, ábrelas en CodePen y exporta paquetes personalizados.</p>
@@ -36,25 +36,45 @@ const { categories, categoryCounts, totalCount } = Astro.props;
       <button class="speed-btn" type="button" data-speed="2" title="Velocidad rápida 2x">2x</button>
     </div>
 
-    <!-- Mini-paginación superior para navegación inmediata sin scroll -->
-    <div class="mini-pagination" data-mini-pagination aria-label="Navegación rápida de páginas">
-      <button class="mini-page-btn" type="button" data-page-prev-top title="Página anterior (←)" disabled aria-label="Página anterior">&lsaquo;</button>
-      <span class="mini-page-indicator" data-page-indicator-top>Pág. 1 / 20</span>
-      <button class="mini-page-btn" type="button" data-page-next-top title="Página siguiente (→)" aria-label="Página siguiente">&rsaquo;</button>
-    </div>
-
     <button class="btn-replay-all" type="button" data-replay-all title="Reiniciar todas las animaciones visibles (Atajo: tecla R)">
       <span class="replay-icon" aria-hidden="true">&#x21bb;</span>
       <span>Reproducir</span>
       <kbd class="shortcut-badge">R</kbd>
     </button>
-    <p class="result-count">
-      Mostrando <strong data-result-count>{totalCount}</strong> de {totalCount}
-    </p>
   </div>
 </div>
 
 <div class="library-controls-bar">
+  <div class="search-and-nav-row">
+    <div class="search-wrapper">
+      <label class="search-box">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="search" placeholder="Buscar por nombre o propiedad (ej. fade, transform, blur)..." data-search autocomplete="off" spellcheck="false" aria-label="Buscar animación o propiedad animada" />
+        <button class="clear-search-btn" type="button" data-clear-search hidden aria-label="Limpiar búsqueda">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <kbd class="search-kbd" title="Presiona la tecla / para enfocar el buscador">/</kbd>
+      </label>
+    </div>
+
+    <div class="top-nav-status">
+      <div class="mini-pagination" data-mini-pagination aria-label="Navegación rápida de páginas">
+        <button class="mini-page-btn" type="button" data-page-prev-top title="Página anterior (←)" disabled aria-label="Página anterior">&lsaquo;</button>
+        <span class="mini-page-indicator" data-page-indicator-top>Pág. 1 / 20</span>
+        <button class="mini-page-btn" type="button" data-page-next-top title="Página siguiente (→)" aria-label="Página siguiente">&rsaquo;</button>
+      </div>
+      <p class="result-count">
+        Mostrando <strong data-result-count>{totalCount}</strong> de {totalCount}
+      </p>
+    </div>
+  </div>
+
   <div class="filter-pills" role="group" aria-label="Filtrar por categoría">
     {categories.map((category, index) => (
       <button
@@ -80,23 +100,6 @@ const { categories, categoryCounts, totalCount } = Astro.props;
       <span>Favoritos</span>
       <span class="pill-count" data-favorites-count>0</span>
     </button>
-  </div>
-
-  <div class="search-wrapper">
-    <label class="search-box">
-      <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-      <input type="search" placeholder="Buscar animación o propiedad..." data-search autocomplete="off" spellcheck="false" aria-label="Buscar animación o propiedad animada" />
-      <button class="clear-search-btn" type="button" data-clear-search hidden aria-label="Limpiar búsqueda">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-      <kbd class="search-kbd" title="Presiona la tecla / para enfocar el buscador">/</kbd>
-    </label>
   </div>
 </div>
 

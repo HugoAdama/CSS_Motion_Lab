@@ -103,6 +103,18 @@
   opacity: 0.45;
 }
 
+[data-theme="light"] .stage-grid-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #64748b;
+}
+
+[data-theme="light"] .stage-grid-btn:hover {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: var(--violet);
+}
+
 .preview-tag {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -117,6 +129,17 @@
 
 .preview-tag--selector {
   color: var(--violet);
+}
+
+[data-theme="light"] .preview-tag {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #475569;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .preview-tag--selector {
+  color: #6366f1;
 }
 
 .demo-stage {
@@ -464,14 +487,13 @@
   text-overflow: ellipsis;
 }
 
-/* Acciones de la Tarjeta (Barra unificada y ergonómica) */
+/* Acciones de la Tarjeta (Barra unificada y ergonómica en dos niveles) */
 .animation-card__actions {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 8px;
   margin-top: auto;
-  padding-top: 10px;
+  padding-top: 12px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -479,21 +501,33 @@
   border-top-color: rgba(0, 0, 0, 0.06);
 }
 
-.actions-group-primary {
+.actions-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
 }
 
-.actions-group-secondary {
+.actions-playback-group {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
+}
+
+.quick-tools-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.actions-row--secondary {
+  justify-content: flex-end;
 }
 
 .button--replay {
-  height: 34px;
+  height: 32px;
   padding: 0 12px;
   background: var(--surface);
   border: 1px solid var(--line);
@@ -520,7 +554,7 @@
 }
 
 .button--subtle {
-  height: 34px;
+  height: 32px;
   padding: 0 10px;
   background: var(--surface);
   border: 1px solid var(--line);
@@ -550,7 +584,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
+  width: 32px;
+  height: 32px;
   padding: 0;
 }
 
@@ -558,8 +593,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-sm);
   background: var(--surface);
   border: 1px solid var(--line);
@@ -639,7 +674,7 @@
 }
 
 .button--code-pill {
-  height: 34px;
+  height: 32px;
   padding: 0 10px;
   background: var(--surface);
   border: 1px solid var(--line);
