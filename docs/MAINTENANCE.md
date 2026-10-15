@@ -110,6 +110,9 @@ Para garantizar 60/120 FPS en dispositivos móviles y de gama media:
 4. **Política de Accesibilidad (WCAG 2.2 AA)**:
    - Toda animación debe estar cubierta por `accessibility.css` mediante `@media (prefers-reduced-motion: reduce)`.
    - En modo reducido, las animaciones que impliquen desplazamiento brusco deben reducirse a disolución de opacidad sutil o apagarse inmediatamente.
+5. **Transiciones de Tema a 60–120 FPS**:
+   - El cambio entre modos claro y oscuro se ejecuta mediante `theme.ts` utilizando la View Transitions API (`startViewTransition`) con animación circular por GPU.
+   - Queda estrictamente prohibido aplicar transiciones globales arbitrarias como `* { transition: all ... }`, ya que provocan recálculos masivos de estilo y caídas de cuadros por segundo en catálogos extensos.
 
 ---
 

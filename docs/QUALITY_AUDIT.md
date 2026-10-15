@@ -79,3 +79,14 @@ Se ejecuto una auditoria automatizada integral sobre la totalidad de los 180 efe
    Accion flotante automatica visible a partir de 400px de desplazamiento para retornar al inicio de la galeria de manera fluida.
 5. **Control de Pausa Individual y Favoritos**:
    Permite pausar cualquier animacion en ejecucion (`animation-play-state`) y marcar tarjetas favoritas con persistencia local.
+
+---
+
+## 6. Rendimiento y Transicion de Tema a 60–120 FPS
+
+1. **Transicion de Tema por Hardware (View Transitions API)**:
+   La alternancia entre modo claro y oscuro se ejecuta mediante `document.startViewTransition()` con animacion circular de `clip-path` originada en las coordenadas exactas del clic, ejecutandose directamente en el hilo compositor sin caidas de cuadros.
+2. **Virtualizacion y Pausa Inteligente Off-Screen**:
+   Se aplican directivas de `content-visibility: auto` en las tarjetas y observadores de interseccion (`IntersectionObserver`) que pausan automaticamente las animaciones fuera del campo de vision (`.is-offscreen`).
+3. **Busqueda a 0ms en Memoria y Debounce**:
+   El buscador opera sobre un indice plano precalculado en memoria con debounce de 100ms para mantener el indicador INP (Interaction to Next Paint) en rangos optimos de alta respuesta.

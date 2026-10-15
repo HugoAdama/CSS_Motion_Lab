@@ -177,10 +177,10 @@ export function initCardTuning(cards: HTMLElement[], animMap: Map<string, Animat
 
     if (!card.hidden) {
       updateBezierVisualizer(card, defTiming, defDuration);
-    } else if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+    } else if (typeof window !== 'undefined' && 'requestIdleCallback' in (window as any)) {
       (window as any).requestIdleCallback(() => updateBezierVisualizer(card, defTiming, defDuration));
     } else {
-      window.setTimeout(() => updateBezierVisualizer(card, defTiming, defDuration), 150);
+      setTimeout(() => updateBezierVisualizer(card, defTiming, defDuration), 150);
     }
 
     if (durationInput) {
