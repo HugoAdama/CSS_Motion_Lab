@@ -7,15 +7,17 @@ import AnimationCard from '../components/AnimationCard.astro';
 import Pagination from '../components/Pagination.astro';
 import Footer from '../components/Footer.astro';
 import Toast from '../components/Toast.astro';
+import type { AnimationDefinition } from '../types';
 import { animations, categories } from '../data/animations.js';
 import '../styles/global.css';
 
-const totalCount = animations.length;
-const patternsCount = animations.filter((a) => a.category === 'Patrones UI').length;
-const atomicCount = animations.filter((a) => a.category !== 'Patrones UI').length;
+const typedAnimations = animations as unknown as AnimationDefinition[];
+const totalCount = typedAnimations.length;
+const patternsCount = typedAnimations.filter((a) => a.category === 'Patrones UI').length;
+const atomicCount = typedAnimations.filter((a) => a.category !== 'Patrones UI').length;
 
 const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
-  acc[cat] = cat === 'Todas' ? totalCount : animations.filter((a) => a.category === cat).length;
+  acc[cat] = cat === 'Todas' ? totalCount : typedAnimations.filter((a) => a.category === cat).length;
   return acc;
 }, {});
 ---
@@ -58,7 +60,7 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
         />
 
         <div class="animation-grid" data-animation-grid>
-          {animations.map((animation) => <AnimationCard animation={animation} />)}
+          {typedAnimations.map((animation) => <AnimationCard animation={animation} />)}
         </div>
 
         <div class="empty-state" data-empty-state hidden>

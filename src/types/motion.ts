@@ -116,5 +116,6 @@ export interface MotionLabEvents {
   'bundle:change': { count: number; ids: string[] };
   'tuner:change': { id: string; duration: number; timing: string; stagger?: number };
   'motion:replay-all': void;
+  'motion:speed-change': { speed: number };
   'toast:show': { message: string; duration?: number };
 }
